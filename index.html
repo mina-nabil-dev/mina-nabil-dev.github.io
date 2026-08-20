@@ -25,7 +25,7 @@
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Mina Nabil — Flutter Developer" />
-<meta name="twitter:description" content="Flutter developer building cross-platform mobile applications with Flutter, Dart, Laravel, Firebase, and Supabase." />
+<meta name="twitter:description" content="Flutter developer building cross-platform mobile applications with Flutter, Dart, Firebase, and Supabase." />
 <meta name="twitter:image" content="https://mina-nabil-dev.github.io/og-image.png" />
 
 <script type="application/ld+json">
@@ -132,6 +132,8 @@ body{
   line-height:1.5;
   -webkit-font-smoothing:antialiased;
 }
+
+body.modal-open{ overflow:hidden; }
 
 /* faint blueprint grid, fixed, very low contrast */
 body::before{
@@ -240,9 +242,6 @@ nav.wrap{
 
 /* ============================================
    HERO
-   Thesis: not a claim of seniority, a claim of
-   throughput — idea to Play Store, backed by
-   named, linkable proof immediately below the fold.
    ============================================ */
 .hero{
   padding-top:96px;
@@ -312,6 +311,8 @@ h1.name em{
   align-items:center;
   gap:8px;
   transition:transform .15s, background .15s, border-color .15s;
+  border:none;
+  cursor:pointer;
 }
 
 .btn-solid{
@@ -479,7 +480,6 @@ hr.rule{
 
 /* ============================================
    STACK — grouped by role, not a flat grid.
-   Grouping itself is the information.
    ============================================ */
 .stack-groups{
   display:grid;
@@ -532,92 +532,383 @@ hr.rule{
 }
 
 /* ============================================
-   PUBLISHED APPS
-   Grouped: shared-platform pair first (the real
-   signal — one backend, two branded clients),
-   then the standalone student tools.
+   PUBLISHED WORK — one platform, two deployments
    ============================================ */
-.apps-lead{
-  font-size:14.5px;
-  color:var(--ink-soft);
-  max-width:64ch;
-  margin-bottom:36px;
-  line-height:1.65;
-}
-
-.apps-lead strong{ color:var(--ink); font-weight:600; }
-
-.platform-pair{
+.platform-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:1px;
-  background:var(--line);
+  gap:22px;
+}
+
+.platform-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:border-color .18s, box-shadow .18s;
+  cursor:pointer;
+}
+
+.platform-card:hover{
+  border-color:var(--ink);
+  box-shadow:0 14px 32px -18px rgba(23,23,18,.28);
+}
+
+.platform-top{
+  display:flex;
+  gap:16px;
+  padding:22px 24px 18px;
+  border-bottom:1px solid var(--line-soft);
+}
+
+.platform-media{
+  width:64px; height:64px;
+  border-radius:10px;
+  overflow:hidden;
+  flex-shrink:0;
+  border:1px solid var(--line);
+  background:var(--paper-dim);
+  position:relative;
+}
+
+.platform-media img{
+  width:100%; height:100%;
+  object-fit:cover;
+  transition:opacity .18s ease;
+}
+
+.platform-heading{ flex:1; min-width:0; padding-top:2px; }
+
+.platform-label{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--signal);
+  margin-bottom:4px;
+}
+
+.platform-name{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:19px;
+  letter-spacing:-.005em;
+  transition:opacity .12s ease;
+}
+
+.platform-status{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--live);
+  margin-top:5px;
+}
+
+.platform-status::before{ content:''; width:5px; height:5px; border-radius:50%; background:var(--live); }
+
+.platform-body{
+  padding:18px 24px 22px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+.platform-desc{
+  font-size:13.5px;
+  color:var(--ink-soft);
+  line-height:1.65;
+  margin-bottom:16px;
+}
+
+.platform-desc strong{ color:var(--ink); font-weight:600; }
+
+.platform-features{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:20px;
+}
+
+.platform-feature{
+  font-family:var(--mono);
+  font-size:10.5px;
+  color:var(--ink-soft);
+  background:var(--paper-dim);
+  border:1px solid var(--line-soft);
+  padding:4px 10px;
+  border-radius:100px;
+}
+
+/* variant switch: the ONE thing that actually differs */
+.variant-row{
+  margin-top:auto;
+}
+
+.variant-label{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:8px;
+}
+
+.variant-switch{
+  display:flex;
   border:1px solid var(--line);
   border-radius:8px;
   overflow:hidden;
   margin-bottom:14px;
 }
 
-.app-card{
+.variant-btn{
+  flex:1;
   background:#fff;
-  padding:30px 30px 28px;
-  text-decoration:none;
-  display:block;
-  transition:background .15s;
+  border:none;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.02em;
+  color:var(--ink-soft);
+  padding:10px 8px;
+  cursor:pointer;
+  transition:background .15s, color .15s;
+  position:relative;
 }
 
-.app-card:hover{ background:var(--paper-dim); }
+.variant-btn + .variant-btn{ border-left:1px solid var(--line); }
 
-.app-top{
+.variant-btn:hover{ background:var(--paper-dim); }
+
+.variant-btn.active{
+  background:var(--ink);
+  color:var(--paper);
+}
+
+.variant-actions{
   display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:16px;
-  margin-bottom:14px;
+  gap:10px;
 }
 
-.app-title{
-  font-family:var(--display);
-  font-weight:600;
-  font-size:21px;
-  letter-spacing:-.005em;
-}
-
-.app-pill{
+.platform-store-btn{
+  flex:1;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.02em;
+  color:#fff;
+  background:var(--ink);
+  border:1px solid var(--ink);
+  border-radius:6px;
+  padding:11px 14px;
   display:inline-flex;
   align-items:center;
+  justify-content:center;
   gap:6px;
-  font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:.05em;
-  text-transform:uppercase;
-  padding:4px 11px;
-  border-radius:100px;
-  white-space:nowrap;
-  flex-shrink:0;
+  text-decoration:none;
+  transition:background .15s, border-color .15s, transform .15s;
 }
 
-.p-live{ background:var(--live-bg); color:var(--live); border:1px solid rgba(28,122,77,.25); }
-.p-test{ background:var(--test-bg); color:var(--test); border:1px solid rgba(154,106,18,.25); }
+.platform-store-btn:hover{ background:var(--signal); border-color:var(--signal); transform:translateY(-2px); }
 
-.app-desc{
-  font-size:13.5px;
-  color:var(--ink-soft);
-  line-height:1.6;
-  margin-bottom:16px;
-}
-
-.app-meta{
+.platform-shared-note{
+  grid-column:1 / -1;
   font-family:var(--mono);
   font-size:11.5px;
   color:var(--ink-faint);
   display:flex;
   align-items:center;
-  gap:6px;
+  gap:10px;
+  margin-top:2px;
 }
 
-@media (max-width:860px){
-  .platform-pair{ grid-template-columns:1fr; }
+.platform-shared-note::before{
+  content:'';
+  width:20px; height:1px;
+  background:var(--line);
+  flex-shrink:0;
+}
+
+.apps-lead{
+  font-size:14.5px;
+  color:var(--ink-soft);
+  max-width:64ch;
+  line-height:1.65;
+}
+
+.apps-lead strong{ color:var(--ink); font-weight:600; }
+
+@media (max-width:760px){
+  .platform-grid{ grid-template-columns:1fr; }
+}
+
+/* ---- Detail modal ---- */
+.detail-overlay{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(23,23,18,.46);
+  backdrop-filter:blur(3px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .22s ease;
+}
+
+.detail-overlay.open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.detail-panel{
+  position:relative;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:14px;
+  max-width:640px;
+  width:100%;
+  max-height:88vh;
+  overflow-y:auto;
+  transform:translateY(18px) scale(.98);
+  transition:transform .24s cubic-bezier(.2,.8,.2,1);
+  box-shadow:0 30px 60px -20px rgba(23,23,18,.35);
+}
+
+.detail-overlay.open .detail-panel{ transform:translateY(0) scale(1); }
+
+.detail-top{
+  display:flex;
+  gap:20px;
+  padding:28px 28px 20px;
+  border-bottom:1px solid var(--line);
+}
+
+.detail-media{
+  width:96px; height:96px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  flex-shrink:0;
+  background:var(--paper-dim);
+}
+
+.detail-media img{ width:100%; height:100%; object-fit:cover; }
+
+.detail-heading{ flex:1; min-width:0; }
+
+.detail-title{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:26px;
+  letter-spacing:-.01em;
+  margin-bottom:8px;
+}
+
+.detail-badges{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.detail-badge{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  padding:4px 10px;
+  border-radius:100px;
+  background:var(--paper-dim);
+  color:var(--ink-soft);
+  border:1px solid var(--line);
+}
+
+.detail-badge.b-live{ background:var(--live-bg); color:var(--live); border-color:rgba(28,122,77,.25); }
+
+.detail-close{
+  position:absolute;
+  top:18px; right:18px;
+  width:32px; height:32px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink-soft);
+  font-size:16px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:border-color .15s, color .15s, transform .15s;
+}
+
+.detail-close:hover{ border-color:var(--ink); color:var(--ink); transform:rotate(90deg); }
+
+.detail-body{
+  padding:24px 28px 28px;
+}
+
+.detail-desc{
+  font-size:15px;
+  color:var(--ink-soft);
+  line-height:1.7;
+  margin-bottom:22px;
+}
+
+.detail-features{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:26px;
+}
+
+.detail-feature{
+  font-size:13.5px;
+  color:var(--ink);
+  padding:11px 14px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+}
+
+.detail-feature::before{
+  content:'—';
+  color:var(--signal);
+  flex-shrink:0;
+}
+
+.detail-meta-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--ink-faint);
+  padding:14px 0;
+  border-top:1px solid var(--line-soft);
+  margin-bottom:22px;
+}
+
+.detail-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+@media (max-width:560px){
+  .detail-top{ flex-direction:column; align-items:flex-start; padding:24px 20px 18px; }
+  .detail-body{ padding:20px 20px 24px; }
+  .detail-features{ grid-template-columns:1fr; }
+  .detail-close{ top:14px; right:14px; }
 }
 
 /* ============================================
@@ -784,7 +1075,7 @@ footer .wrap{
 }
 
 /* ============================================
-   MOTION — one reveal pattern, restrained
+   MOTION
    ============================================ */
 .reveal{
   opacity:0;
@@ -892,10 +1183,6 @@ footer .wrap{
           including JWT authentication and encrypted handling for apps that manage sensitive
           user data. I've taken apps through full deployment on the <strong>Google Play Store</strong>.
         </p>
-        <p>
-          Below: two live education platforms built on a shared Laravel backend, and a set
-          of open-source utilities.
-        </p>
       </div>
 
       <div class="credentials reveal">
@@ -976,72 +1263,99 @@ footer .wrap{
   <div class="wrap">
     <div class="section-head reveal">
       <div class="tag">Published work</div>
-      <div class="section-note">4 apps live on Google Play</div>
+      <div class="section-note">2 platforms · 4 live deployments</div>
     </div>
 
-    <h2 class="stitle reveal" style="margin-bottom:20px;">
-      Apps in use by <em>real people</em>
+    <h2 class="stitle reveal" style="margin-bottom:16px;">
+      Build once, <em>ship for two</em>
     </h2>
 
-    <p class="apps-lead reveal">
-      <strong>Yalla Arabi</strong> and <strong>Hawy El-Oloom</strong> run on the same
-      white-label Flutter + Laravel platform, built once and deployed for two independent
-      tutors — proof the architecture holds up across more than one client.
-      <strong>MN – CS1</strong> and <strong>MN – CS2</strong> shipped separately, for
-      first- and second-year Computer Science students at Minia University.
+    <p class="apps-lead reveal" style="margin-bottom:36px;">
+      Each card below is one platform I built — the architecture, features, and backend are
+      written once. The switch inside picks which live deployment of it you're looking at.
     </p>
 
-    <div class="platform-pair reveal">
-      <a href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi" target="_blank" rel="noopener" class="app-card" aria-label="Yalla Arabi on Google Play">
-        <div class="app-top">
-          <span class="app-title">Yalla Arabi</span>
-          <span class="app-pill p-live"><span style="width:5px;height:5px;background:var(--live);border-radius:50%;display:inline-block;"></span>Live</span>
-        </div>
-        <p class="app-desc">
-          Learning-management app for an Arabic-language tutor — QR-code attendance,
-          real-time grades and exam results, and subscription tracking on a Flutter +
-          Laravel backend.
-        </p>
-        <div class="app-meta">play.google.com ↗</div>
-      </a>
+    <div class="platform-grid">
 
-      <a href="https://play.google.com/store/apps/details?id=com.platform.elhawy" target="_blank" rel="noopener" class="app-card" aria-label="Hawy El-Oloom on Google Play">
-        <div class="app-top">
-          <span class="app-title">Hawy El-Oloom</span>
-          <span class="app-pill p-live"><span style="width:5px;height:5px;background:var(--live);border-radius:50%;display:inline-block;"></span>Live</span>
+      <!-- PLATFORM 1: Tutor LMS (Yalla Arabi / Hawy El-Oloom) -->
+      <div class="platform-card reveal" data-platform="lms" tabindex="0" role="button" aria-label="View Yalla Arabi / Hawy El-Oloom details">
+        <div class="platform-top">
+          <div class="platform-media">
+            <img id="lmsImg" src="assets/yalla_final.jpg" alt="Yalla Arabi app icon" loading="lazy" />
+          </div>
+          <div class="platform-heading">
+            <div class="platform-label">Tutor LMS platform</div>
+            <div class="platform-name" id="lmsName">Yalla Arabi</div>
+            <span class="platform-status">Live</span>
+          </div>
         </div>
-        <p class="app-desc">
-          Same platform, built for a science and biology tutor — lessons, timed online
-          exams with instant results, attendance, and subscriptions.
-        </p>
-        <div class="app-meta">play.google.com ↗</div>
-      </a>
-    </div>
 
-    <div class="platform-pair reveal">
-      <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain" target="_blank" rel="noopener" class="app-card" aria-label="MN CS1 on Google Play">
-        <div class="app-top">
-          <span class="app-title">MN – CS1</span>
-          <span class="app-pill p-live"><span style="width:5px;height:5px;background:var(--live);border-radius:50%;display:inline-block;"></span>Live</span>
-        </div>
-        <p class="app-desc">
-          Companion app for first-year CS students at Minia University — course
-          resources in a simple, focused mobile experience.
-        </p>
-        <div class="app-meta">500+ downloads</div>
-      </a>
+        <div class="platform-body">
+          <p class="platform-desc">
+            A white-label learning-management app for private tutors, on <strong>Flutter</strong>
+            with a shared <strong>Laravel</strong> backend. Built once, then re-branded and deployed
+            for two independent tutors teaching different subjects.
+          </p>
 
-      <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year2.learntrain" target="_blank" rel="noopener" class="app-card" aria-label="MN CS2 on Google Play">
-        <div class="app-top">
-          <span class="app-title">MN – CS2</span>
-          <span class="app-pill p-live"><span style="width:5px;height:5px;background:var(--live);border-radius:50%;display:inline-block;"></span>Live</span>
+          <div class="platform-features">
+            <span class="platform-feature">QR-code attendance</span>
+            <span class="platform-feature">Timed online exams</span>
+            <span class="platform-feature">Real-time results</span>
+            <span class="platform-feature">Subscription tracking</span>
+          </div>
+
+          <div class="variant-row">
+            <div class="variant-label">Deployed as</div>
+            <div class="variant-switch" role="tablist" aria-label="Choose deployment">
+              <button class="variant-btn active" role="tab" aria-selected="true" data-variant="yalla" data-target="lms">Yalla Arabi</button>
+              <button class="variant-btn" role="tab" aria-selected="false" data-variant="hawy" data-target="lms">Hawy El-Oloom</button>
+            </div>
+            <div class="variant-actions">
+              <a href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi" target="_blank" rel="noopener" class="platform-store-btn" id="lmsStoreLink" aria-label="Open on Google Play">Open on Google Play ↗</a>
+            </div>
+          </div>
         </div>
-        <p class="app-desc">
-          Second-year continuation, built with Flutter — organizing course material
-          for a straightforward learning experience.
-        </p>
-        <div class="app-meta">100+ downloads</div>
-      </a>
+      </div>
+
+      <!-- PLATFORM 2: MN Learning (CS1 / CS2) -->
+      <div class="platform-card reveal" data-platform="mn" tabindex="0" role="button" aria-label="View MN Learning details">
+        <div class="platform-top">
+          <div class="platform-media">
+            <img id="mnImg" src="assets/mncs_final.jpg" alt="MN Learning app icon" loading="lazy" />
+          </div>
+          <div class="platform-heading">
+            <div class="platform-label">MN Learning platform</div>
+            <div class="platform-name" id="mnName">MN – CS1</div>
+            <span class="platform-status">Live</span>
+          </div>
+        </div>
+
+        <div class="platform-body">
+          <p class="platform-desc">
+            A course-companion app for Computer Science students at <strong>Minia University</strong>,
+            built with Flutter. One codebase, reused each year with that year's course material.
+          </p>
+
+          <div class="platform-features">
+            <span class="platform-feature">Course resource library</span>
+            <span class="platform-feature">Simple, focused navigation</span>
+            <span class="platform-feature">Offline-friendly</span>
+          </div>
+
+          <div class="variant-row">
+            <div class="variant-label">Deployed as</div>
+            <div class="variant-switch" role="tablist" aria-label="Choose deployment">
+              <button class="variant-btn active" role="tab" aria-selected="true" data-variant="cs1" data-target="mn">Year 1 · 500+ dl</button>
+              <button class="variant-btn" role="tab" aria-selected="false" data-variant="cs2" data-target="mn">Year 2 · 100+ dl</button>
+            </div>
+            <div class="variant-actions">
+              <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain" target="_blank" rel="noopener" class="platform-store-btn" id="mnStoreLink" aria-label="Open on Google Play">Open on Google Play ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="platform-shared-note reveal">4 listings live on Google Play, built from these 2 codebases</p>
     </div>
   </div>
 </section>
@@ -1159,6 +1473,32 @@ footer .wrap{
   </div>
 </section>
 
+<!-- App detail modal (was referenced by JS but missing from markup) -->
+<div class="detail-overlay" id="detailOverlay" aria-hidden="true">
+  <div class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <button class="detail-close" id="detailClose" aria-label="Close">✕</button>
+    <div class="detail-top">
+      <div class="detail-media"><img id="detailImg" src="" alt="" /></div>
+      <div class="detail-heading">
+        <h3 class="detail-title" id="detailTitle"></h3>
+        <div class="detail-badges" id="detailBadges"></div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <p class="detail-desc" id="detailDesc"></p>
+      <div class="detail-features" id="detailFeatures"></div>
+      <div class="detail-meta-row">
+        <span id="detailPlatform"></span>
+        <span id="detailStat"></span>
+      </div>
+      <div class="detail-actions">
+        <a href="#" target="_blank" rel="noopener" class="platform-store-btn" id="detailStoreLink" style="flex:none;padding:11px 22px;">Open on Google Play ↗</a>
+        <button class="btn btn-line" id="detailCloseBtn" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </main>
 
 <footer>
@@ -1172,6 +1512,7 @@ footer .wrap{
 </footer>
 
 <script>
+/* reveal-on-scroll */
 const io = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
@@ -1182,6 +1523,171 @@ const io = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ---- App detail data ---- */
+const APP_DATA = {
+  yalla: {
+    title: 'Yalla Arabi',
+    img: 'assets/yalla_final.jpg',
+    status: 'live',
+    platform: 'Shared platform · Build A',
+    stat: 'Arabic-language tutor',
+    desc: 'Learning-management app built for an Arabic-language tutor, on a Flutter front end with a Laravel backend shared across the platform-A build.',
+    features: ['QR-code attendance', 'Real-time grades & results', 'Subscription tracking', 'Push notifications'],
+    store: 'https://play.google.com/store/apps/details?id=com.platform.yallaarabi'
+  },
+  hawy: {
+    title: 'Hawy El-Oloom',
+    img: 'assets/elhawy_final.jpg',
+    status: 'live',
+    platform: 'Shared platform · Build A',
+    stat: 'Science & biology tutor',
+    desc: 'The same platform as Yalla Arabi, rebuilt and rebranded for a science and biology tutor — one backend, two independent clients.',
+    features: ['Lessons library', 'Timed online exams', 'Instant exam results', 'Attendance & subscriptions'],
+    store: 'https://play.google.com/store/apps/details?id=com.platform.elhawy'
+  },
+  cs1: {
+    title: 'MN – CS1',
+    img: 'assets/mncs_final.jpg',
+    status: 'live',
+    platform: 'Standalone build',
+    stat: '500+ downloads',
+    desc: 'Companion app for first-year Computer Science students at Minia University, built with Flutter to organize course resources in one place.',
+    features: ['Course resource library', 'Simple, focused navigation', 'Built for first-year syllabus', 'Lightweight & offline-friendly'],
+    store: 'https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain'
+  },
+  cs2: {
+    title: 'MN – CS2',
+    img: 'assets/mncs_final.jpg',
+    status: 'live',
+    platform: 'Standalone build',
+    stat: '100+ downloads',
+    desc: 'Second-year continuation of the CS1 app, carrying the same interface forward with course material for the next year of the syllabus.',
+    features: ['Course resource library', 'Consistent with CS1 UX', 'Built for second-year syllabus', 'Lightweight & offline-friendly'],
+    store: 'https://play.google.com/store/apps/details?id=com.mnu_app_year2.learntrain'
+  }
+};
+
+/* ---- Variant switch: reads data-variant + data-target off each button,
+   updates the matching card's image/name/store-link, toggles .active.
+   This listener was entirely absent before — the buttons rendered but did nothing. ---- */
+document.querySelectorAll('.variant-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;   // "lms" or "mn"
+    const variant = btn.dataset.variant; // "yalla" | "hawy" | "cs1" | "cs2"
+    const data = APP_DATA[variant];
+    if (!data) return;
+
+    btn.closest('.variant-switch').querySelectorAll('.variant-btn').forEach(b => {
+      b.classList.toggle('active', b === btn);
+      b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+    });
+
+    const img = document.getElementById(target + 'Img');
+    const name = document.getElementById(target + 'Name');
+    const storeLink = document.getElementById(target + 'StoreLink');
+
+    if (img) {
+      img.style.opacity = '0';
+      setTimeout(() => { img.src = data.img; img.alt = data.title + ' app icon'; img.style.opacity = '1'; }, 120);
+    }
+    if (name) {
+      name.style.opacity = '0';
+      setTimeout(() => { name.textContent = data.title; name.style.opacity = '1'; }, 120);
+    }
+    if (storeLink) storeLink.href = data.store;
+  });
+});
+
+const overlay = document.getElementById('detailOverlay');
+const detailImg = document.getElementById('detailImg');
+const detailTitle = document.getElementById('detailTitle');
+const detailBadges = document.getElementById('detailBadges');
+const detailDesc = document.getElementById('detailDesc');
+const detailFeatures = document.getElementById('detailFeatures');
+const detailPlatform = document.getElementById('detailPlatform');
+const detailStat = document.getElementById('detailStat');
+const detailStoreLink = document.getElementById('detailStoreLink');
+
+let lastFocused = null;
+
+function openDetail(key){
+  const app = APP_DATA[key];
+  if (!app) return;
+
+  detailImg.src = app.img;
+  detailImg.alt = app.title + ' app icon';
+  detailTitle.textContent = app.title;
+
+  detailBadges.innerHTML = '';
+  const statusBadge = document.createElement('span');
+  statusBadge.className = 'detail-badge b-live';
+  statusBadge.textContent = 'Live on Play Store';
+  detailBadges.appendChild(statusBadge);
+
+  detailDesc.textContent = app.desc;
+
+  detailFeatures.innerHTML = '';
+  app.features.forEach(f => {
+    const el = document.createElement('div');
+    el.className = 'detail-feature';
+    el.textContent = f;
+    detailFeatures.appendChild(el);
+  });
+
+  detailPlatform.textContent = app.platform;
+  detailStat.textContent = app.stat;
+  detailStoreLink.href = app.store;
+
+  lastFocused = document.activeElement;
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  document.getElementById('detailClose').focus();
+}
+
+function closeDetail(){
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+  if (lastFocused) lastFocused.focus();
+}
+
+function activeVariantKeyFor(card){
+  const activeBtn = card.querySelector('.variant-btn.active');
+  if (activeBtn) return activeBtn.dataset.variant;
+  return card.dataset.platform === 'lms' ? 'yalla' : 'cs1';
+}
+
+document.querySelectorAll('.platform-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    /* let the variant switch and the store link handle their own clicks */
+    if (e.target.closest('.variant-switch') || e.target.closest('.platform-store-btn')) return;
+    openDetail(activeVariantKeyFor(card));
+  });
+  card.addEventListener('keydown', (e) => {
+    if (e.target !== card) return;
+    if (e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      openDetail(activeVariantKeyFor(card));
+    }
+  });
+});
+
+const detailCloseBtnEl = document.getElementById('detailClose');
+const detailCloseBtnFooter = document.getElementById('detailCloseBtn');
+if (detailCloseBtnEl) detailCloseBtnEl.addEventListener('click', closeDetail);
+if (detailCloseBtnFooter) detailCloseBtnFooter.addEventListener('click', closeDetail);
+
+if (overlay) {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeDetail();
+  });
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) closeDetail();
+});
 </script>
 
 </body>
