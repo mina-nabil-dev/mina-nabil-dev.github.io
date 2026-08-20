@@ -98,7 +98,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <style>
 /* ============================================
@@ -115,12 +115,10 @@
   --ink:        #171712;
   --ink-soft:   #57584f;
   --ink-faint:  #6a6b61;
-  --surface:    #fdfbf7;   /* card surface — warm white, not pure #fff */
   --line:       #dcd8cb;
-  --line-strong:#8e8878;   /* interactive borders, WCAG 1.4.11 needs >=3:1 */
   --line-soft:  #e8e5d9;
-  --signal:     #2545e8;
-  --signal-dim: #e6e9fc;
+  --signal:     #1f4fff;
+  --signal-dim: #e5eafe;
   --live:       #1c7a4d;
   --live-bg:    #e4f2ea;
   --test:       #8a5f10;
@@ -338,7 +336,7 @@ h1.name em{
 .btn-line{
   background:transparent;
   color:var(--ink);
-  border:1px solid var(--line-strong);
+  border:1px solid var(--line);
 }
 .btn-line:hover{ border-color:var(--ink); transform:translateY(-2px); }
 
@@ -346,7 +344,7 @@ h1.name em{
 .manifest{
   border:1px solid var(--line);
   border-radius:8px;
-  background:var(--surface);
+  background:#fff;
   overflow:hidden;
 }
 
@@ -505,7 +503,7 @@ hr.rule{
 }
 
 .stack-group{
-  background:var(--surface);
+  background:#fff;
   padding:28px 26px;
 }
 
@@ -554,7 +552,7 @@ hr.rule{
 }
 
 .platform-card{
-  background:var(--surface);
+  background:#fff;
   border:1px solid var(--line);
   border-radius:14px;
   overflow:hidden;
@@ -682,7 +680,7 @@ hr.rule{
 
 .variant-btn{
   flex:1;
-  background:var(--surface);
+  background:#fff;
   border:none;
   font-family:var(--mono);
   font-size:12px;
@@ -850,7 +848,7 @@ hr.rule{
   width:32px; height:32px;
   border-radius:50%;
   border:1px solid var(--line);
-  background:var(--surface);
+  background:#fff;
   color:var(--ink-soft);
   font-size:16px;
   line-height:1;
@@ -885,7 +883,7 @@ hr.rule{
   font-size:13.5px;
   color:var(--ink);
   padding:11px 14px;
-  background:var(--surface);
+  background:#fff;
   border:1px solid var(--line);
   border-radius:8px;
   display:flex;
@@ -931,7 +929,7 @@ hr.rule{
   border:1px solid var(--line);
   border-radius:8px;
   overflow:hidden;
-  background:var(--surface);
+  background:#fff;
 }
 
 .oss-row{
@@ -1013,7 +1011,7 @@ hr.rule{
 }
 
 .c-card{
-  background:var(--surface);
+  background:#fff;
   padding:28px 22px;
   text-decoration:none;
   display:flex;
@@ -1133,65 +1131,6 @@ footer .wrap{
   .shot{ flex:0 0 132px; scroll-snap-align:start; padding:3px; border-radius:12px; }
   .shot img{ border-radius:9px; }
 }
-
-/* ============ Arabic / RTL ============ */
-:root{ --arabic: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, sans-serif; }
-
-html[lang="ar"] body,
-html[lang="ar"] .stitle,
-html[lang="ar"] .name,
-html[lang="ar"] .hero-lede,
-html[lang="ar"] .platform-desc,
-html[lang="ar"] .about-copy p{ font-family:var(--arabic); }
-html[lang="ar"] .stitle em,
-html[lang="ar"] .name em{ font-style:normal; }
-/* keep the monospace character for the manifest widget, latin-only content stays mono */
-html[lang="ar"] .manifest-k,
-html[lang="ar"] .manifest-v,
-html[lang="ar"] .tag,
-html[lang="ar"] .section-note,
-html[lang="ar"] .cred-k,
-html[lang="ar"] .shot-note,
-html[lang="ar"] .platform-shared-note{ font-family:var(--arabic); letter-spacing:0; }
-
-/* physical properties that must flip */
-[dir="rtl"] .manifest-v,
-[dir="rtl"] .section-note,
-[dir="rtl"] .cred-v,
-[dir="rtl"] .stack-item-note{ text-align:left; }
-[dir="rtl"] .variant-btn + .variant-btn{ border-left:0; border-right:1px solid var(--line); }
-[dir="rtl"] .detail-close{ right:auto; left:18px; }
-[dir="rtl"] .oss-tags{ padding-left:0; padding-right:44px; }
-[dir="rtl"] .hero-lede,
-[dir="rtl"] .apps-lead,
-[dir="rtl"] .about-copy p{ text-align:right; }
-/* arrows point the other way when the text does */
-[dir="rtl"] .oss-arr{ transform:scaleX(-1); display:inline-block; }
-
-/* latin runs inside arabic text keep their own direction */
-html[lang="ar"] .c-handle,
-html[lang="ar"] .f-copy{ direction:ltr; unicode-bidi:isolate; }
-[dir="rtl"] .c-handle,
-[dir="rtl"] .f-copy{ text-align:right; }
-
-/* ---- language toggle ---- */
-.lang-toggle{
-  font-family:var(--mono); font-size:12px; letter-spacing:.04em;
-  padding:7px 13px; border-radius:999px; cursor:pointer;
-  background:var(--surface); color:var(--ink-soft);
-  border:1px solid var(--line-strong);
-  transition:background .18s ease, color .18s ease;
-}
-.lang-toggle:hover{ background:var(--signal); border-color:var(--signal); color:#fff; }
-.lang-toggle:focus-visible{ outline:2px solid var(--signal); outline-offset:2px; }
-html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
-@media (max-width:860px){ .avail{ display:none; } }
-
-/* Arabic product names sit inside English copy — give them a face that has
-   the glyphs, since Inter and Fraunces do not. */
-.appname{ font-family:var(--arabic); font-weight:600; }
-.variant-btn .appname{ font-weight:500; }
-.detail-title[lang="ar"]{ font-family:var(--arabic); font-weight:600; }
 </style>
 </head>
 
@@ -1202,17 +1141,15 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
     <span class="brand">mina<span>.</span>dev</span>
 
     <div class="nav-links">
-      <a data-i18n="nav_1" href="#work">Work</a>
-      <a data-i18n="nav_2" href="#about">About</a>
-      <a data-i18n="nav_3" href="#stack">Stack</a>
-      <a data-i18n="nav_4" href="#oss">Projects</a>
-      <a data-i18n="nav_5" href="#contact">Contact</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#stack">Stack</a>
+      <a href="#oss">Projects</a>
+      <a href="#contact">Contact</a>
     </div>
 
-    <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">العربية</button>
-
-    <div class="avail" aria-label="Availability status" data-i18n="avail_1">
-      <span class="avail-dot" ></span>
+    <div class="avail" aria-label="Availability status">
+      <span class="avail-dot"></span>
       Available for freelance
     </div>
   </nav>
@@ -1223,11 +1160,11 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 <!-- HERO -->
 <section class="hero wrap" aria-label="Introduction">
   <div>
-    <p class="eyebrow reveal" data-i18n="eyebrow_1">Flutter Developer · Minya, Egypt · Open to Remote</p>
+    <p class="eyebrow reveal">Flutter Developer · Minya, Egypt · Open to Remote</p>
 
     <h1 class="name reveal">Mina<br><em>Nabil</em></h1>
 
-    <p class="hero-lede reveal" data-i18n="hero_lede_1">
+    <p class="hero-lede reveal">
       I build <strong>cross-platform mobile apps</strong> with Flutter — from the interface
       down to the backend that runs it. My work spans <strong>Firebase</strong>,
       <strong>Supabase</strong>, and custom <strong>Laravel APIs</strong>, structured with
@@ -1236,18 +1173,18 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
     </p>
 
     <div class="hero-cta reveal">
-      <a href="#work" class="btn btn-solid" data-i18n="btn_solid_1">View my work ↓</a>
-      <a href="https://github.com/mina-nabil-dev" target="_blank" rel="noopener" class="btn btn-line" data-i18n="btn_line_1">GitHub ↗</a>
-      <a href="https://linkedin.com/in/mina-nabil-97bb1b300" target="_blank" rel="noopener" class="btn btn-line" data-i18n="btn_line_2">LinkedIn ↗</a>
+      <a href="#work" class="btn btn-solid">View my work ↓</a>
+      <a href="https://github.com/mina-nabil-dev" target="_blank" rel="noopener" class="btn btn-line">GitHub ↗</a>
+      <a href="https://linkedin.com/in/mina-nabil-97bb1b300" target="_blank" rel="noopener" class="btn btn-line">LinkedIn ↗</a>
     </div>
   </div>
 
   <div class="manifest reveal" aria-label="Developer summary">
     <div class="manifest-head">manifest.json</div>
-    <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_1">role</span><span class="manifest-v" data-i18n="manifest_v_1">Flutter Developer</span></div>
-    <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_2">focus</span><span class="manifest-v" data-i18n="manifest_v_2">Android · iOS</span></div>
-    <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_3">apps_live</span><span class="manifest-v" data-i18n="manifest_v_3">4 on Play Store</span></div>
-    <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_4">architecture</span><span class="manifest-v" data-i18n="manifest_v_4">Clean · BLoC/Cubit</span></div>
+    <div class="manifest-row"><span class="manifest-k">role</span><span class="manifest-v">Flutter Developer</span></div>
+    <div class="manifest-row"><span class="manifest-k">focus</span><span class="manifest-v">Android · iOS</span></div>
+    <div class="manifest-row"><span class="manifest-k">apps_live</span><span class="manifest-v">4 on Play Store</span></div>
+    <div class="manifest-row"><span class="manifest-k">architecture</span><span class="manifest-v">Clean · BLoC/Cubit</span></div>
   </div>
 </section>
 
@@ -1256,63 +1193,63 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 <section id="work">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="tag" data-i18n="tag_1">Published work</div>
-      <div class="section-note" data-i18n="section_note_1">2 platforms · 4 live deployments</div>
+      <div class="tag">Published work</div>
+      <div class="section-note">2 platforms · 4 live deployments</div>
     </div>
 
-    <h2 class="stitle reveal" style="margin-bottom:16px;" data-i18n="stitle_1">
+    <h2 class="stitle reveal" style="margin-bottom:16px;">
       Build once, <em>ship for two</em>
     </h2>
 
-    <p class="apps-lead reveal" style="margin-bottom:36px;" data-i18n="apps_lead_1">
+    <p class="apps-lead reveal" style="margin-bottom:36px;">
       Each card below is one platform I built — the architecture, features, and backend are
       written once. The switch inside picks which live deployment of it you're looking at.
     </p>
 
     <div class="platform-grid">
 
-      <!-- PLATFORM 1: Tutor LMS (يلا عربي / حاوى العلوم) -->
-      <div class="platform-card reveal" data-platform="lms" tabindex="0" role="button" aria-label="View يلا عربي / حاوى العلوم details">
+      <!-- PLATFORM 1: Tutor LMS (Yalla Arabi / Hawy El-Oloom) -->
+      <div class="platform-card reveal" data-platform="lms" tabindex="0" role="button" aria-label="View Yalla Arabi / Hawy El-Oloom details">
         <div class="platform-top">
           <div class="platform-media">
-            <img id="lmsImg" src="assets/yalla_final.jpg" alt="يلا عربي app icon" loading="lazy" />
+            <img id="lmsImg" src="assets/yalla_final.jpg" alt="Yalla Arabi app icon" loading="lazy" />
           </div>
           <div class="platform-heading">
-            <div class="platform-label" data-i18n="platform_label_1">Tutor LMS platform</div>
-            <div class="platform-name appname" id="lmsName" lang="ar" dir="rtl">يلا عربي</div>
-            <span class="platform-status" data-i18n="platform_status_1">Live</span>
+            <div class="platform-label">Tutor LMS platform</div>
+            <div class="platform-name" id="lmsName">Yalla Arabi</div>
+            <span class="platform-status">Live</span>
           </div>
         </div>
 
         <div class="platform-body">
-          <p class="platform-desc" data-i18n="platform_desc_1">
+          <p class="platform-desc">
             A white-label learning-management app for private tutors, on <strong>Flutter</strong>
             with a shared <strong>Laravel</strong> backend. Built once, then re-branded and deployed
             for two independent tutors teaching different subjects.
           </p>
 
           <div class="platform-features">
-            <span class="platform-feature" data-i18n="platform_feature_1">QR-code attendance</span>
-            <span class="platform-feature" data-i18n="platform_feature_2">Timed online exams</span>
-            <span class="platform-feature" data-i18n="platform_feature_3">Real-time results</span>
-            <span class="platform-feature" data-i18n="platform_feature_4">Subscription tracking</span>
+            <span class="platform-feature">QR-code attendance</span>
+            <span class="platform-feature">Timed online exams</span>
+            <span class="platform-feature">Real-time results</span>
+            <span class="platform-feature">Subscription tracking</span>
           </div>
 
-          <div class="shot-strip" role="group" aria-label="يلا عربي screenshots">
-            <figure class="shot"><img src="assets/shots/yalla-home.webp" width="640" height="1304" loading="lazy" decoding="async" alt="يلا عربي home screen with the tutor profile and the active monthly course" /></figure>
+          <div class="shot-strip" role="group" aria-label="Yalla Arabi screenshots">
+            <figure class="shot"><img src="assets/shots/yalla-home.webp" width="640" height="1304" loading="lazy" decoding="async" alt="Yalla Arabi home screen with the tutor profile and the active monthly course" /></figure>
             <figure class="shot"><img src="assets/shots/yalla-courses.webp" width="640" height="1304" loading="lazy" decoding="async" alt="Course catalogue listing available monthly subscriptions with start and end dates" /></figure>
             <figure class="shot"><img src="assets/shots/yalla-lesson.webp" width="640" height="1306" loading="lazy" decoding="async" alt="Lesson list showing completion progress and the exams attached to each lesson" /></figure>
           </div>
-          <p class="shot-note" data-i18n="shot_note_1">From the live listing</p>
+          <p class="shot-note">From the live listing</p>
 
           <div class="variant-row">
-            <div class="variant-label" data-i18n="variant_label_1">Deployed as</div>
+            <div class="variant-label">Deployed as</div>
             <div class="variant-switch" role="tablist" aria-label="Choose deployment">
-              <button class="variant-btn active" role="tab" aria-selected="true" data-variant="yalla" data-target="lms"><span class="appname" lang="ar" dir="rtl">يلا عربي</span></button>
-              <button class="variant-btn" role="tab" aria-selected="false" data-variant="hawy" data-target="lms"><span class="appname" lang="ar" dir="rtl">حاوى العلوم</span></button>
+              <button class="variant-btn active" role="tab" aria-selected="true" data-variant="yalla" data-target="lms">Yalla Arabi</button>
+              <button class="variant-btn" role="tab" aria-selected="false" data-variant="hawy" data-target="lms">Hawy El-Oloom</button>
             </div>
             <div class="variant-actions">
-              <a href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi" target="_blank" rel="noopener" class="platform-store-btn" id="lmsStoreLink" aria-label="Open on Google Play" data-i18n="platform_store_btn_1">Open on Google Play ↗</a>
+              <a href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi" target="_blank" rel="noopener" class="platform-store-btn" id="lmsStoreLink" aria-label="Open on Google Play">Open on Google Play ↗</a>
             </div>
           </div>
         </div>
@@ -1325,22 +1262,22 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
             <img id="mnImg" src="assets/mncs_final.jpg" alt="MN Learning app icon" loading="lazy" />
           </div>
           <div class="platform-heading">
-            <div class="platform-label" data-i18n="platform_label_2">MN Learning platform</div>
-            <div class="platform-name" id="mnName">MN – CS 1</div>
-            <span class="platform-status" data-i18n="platform_status_2">Live</span>
+            <div class="platform-label">MN Learning platform</div>
+            <div class="platform-name" id="mnName">MN – CS1</div>
+            <span class="platform-status">Live</span>
           </div>
         </div>
 
         <div class="platform-body">
-          <p class="platform-desc" data-i18n="platform_desc_2">
+          <p class="platform-desc">
             A course-companion app for Computer Science students at <strong>Minia University</strong>,
             built with Flutter. One codebase, reused each year with that year's course material.
           </p>
 
           <div class="platform-features">
-            <span class="platform-feature" data-i18n="platform_feature_5">Course resource library</span>
-            <span class="platform-feature" data-i18n="platform_feature_6">Simple, focused navigation</span>
-            <span class="platform-feature" data-i18n="platform_feature_7">Offline-friendly</span>
+            <span class="platform-feature">Course resource library</span>
+            <span class="platform-feature">Simple, focused navigation</span>
+            <span class="platform-feature">Offline-friendly</span>
           </div>
 
           <div class="shot-strip" role="group" aria-label="MN CS1 screenshots">
@@ -1348,22 +1285,22 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
             <figure class="shot"><img src="assets/shots/mncs-resources.webp" width="640" height="1387" loading="lazy" decoding="async" alt="Resource types for a course: theory videos, image gallery and PDF files" /></figure>
             <figure class="shot"><img src="assets/shots/mncs-quiz.webp" width="640" height="1137" loading="lazy" decoding="async" alt="Multiple-choice quiz screen showing an answered question and the final score" /></figure>
           </div>
-          <p class="shot-note" data-i18n="shot_note_2">From the live listing</p>
+          <p class="shot-note">From the live listing</p>
 
           <div class="variant-row">
-            <div class="variant-label" data-i18n="variant_label_2">Deployed as</div>
+            <div class="variant-label">Deployed as</div>
             <div class="variant-switch" role="tablist" aria-label="Choose deployment">
               <button class="variant-btn active" role="tab" aria-selected="true" data-variant="cs1" data-target="mn">CS · Year 1</button>
               <button class="variant-btn" role="tab" aria-selected="false" data-variant="cs2" data-target="mn">CS · Year 2</button>
             </div>
             <div class="variant-actions">
-              <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain" target="_blank" rel="noopener" class="platform-store-btn" id="mnStoreLink" aria-label="Open on Google Play" data-i18n="platform_store_btn_2">Open on Google Play ↗</a>
+              <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain" target="_blank" rel="noopener" class="platform-store-btn" id="mnStoreLink" aria-label="Open on Google Play">Open on Google Play ↗</a>
             </div>
           </div>
         </div>
       </div>
 
-      <p class="platform-shared-note reveal" data-i18n="platform_shared_note_1">4 listings live on Google Play · 600+ downloads · built from these 2 codebases</p>
+      <p class="platform-shared-note reveal">4 listings live on Google Play · 600+ downloads · built from these 2 codebases</p>
     </div>
   </div>
 </section>
@@ -1371,20 +1308,20 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 <section id="about">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="tag" data-i18n="tag_2">About</div>
+      <div class="tag">About</div>
     </div>
 
-    <h2 class="stitle reveal" style="margin-bottom:44px;" data-i18n="stitle_2">
+    <h2 class="stitle reveal" style="margin-bottom:44px;">
       Idea to <em>Play Store</em>, one system at a time
     </h2>
 
     <div class="about-grid">
       <div class="about-copy reveal">
-        <p data-i18n="about_p1">
+        <p>
           I'm a Flutter developer from Minya, Egypt. I build cross-platform mobile
           applications end to end — interface, state, backend, and deployment.
         </p>
-        <p data-i18n="about_p2">
+        <p>
           Most of what I build is made to be re-used. The tutoring platform above runs as
           <strong>four Play Store listings from two codebases</strong> — taking on a new tutor is a
           rebrand and a config change, not a rewrite.
@@ -1393,16 +1330,16 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 
       <div class="credentials reveal">
         <div class="cred-row">
-          <div class="cred-k" data-i18n="cred_k_1">Location</div>
-          <div class="cred-v" data-i18n="cred_v_1">Minya, Egypt<span>Remote-friendly</span></div>
+          <div class="cred-k">Location</div>
+          <div class="cred-v">Minya, Egypt<span>Remote-friendly</span></div>
         </div>
         <div class="cred-row">
-          <div class="cred-k" data-i18n="cred_k_2">Education</div>
-          <div class="cred-v" data-i18n="cred_v_2">Computer Science<span>Minia University</span></div>
+          <div class="cred-k">Education</div>
+          <div class="cred-v">Computer Science<span>Minia University</span></div>
         </div>
         <div class="cred-row">
-          <div class="cred-k" data-i18n="cred_k_3">Deployment</div>
-          <div class="cred-v" data-i18n="cred_v_3">Google Play Store<span>Full publishing pipeline</span></div>
+          <div class="cred-k">Deployment</div>
+          <div class="cred-v">Google Play Store<span>Full publishing pipeline</span></div>
         </div>
       </div>
     </div>
@@ -1413,38 +1350,38 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 <section id="stack">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="tag" data-i18n="tag_3">Stack</div>
+      <div class="tag">Stack</div>
     </div>
 
-    <h2 class="stitle reveal" style="margin-bottom:44px;" data-i18n="stitle_3">
+    <h2 class="stitle reveal" style="margin-bottom:44px;">
       Tools organized by <em>what they do</em>
     </h2>
 
     <div class="stack-groups reveal">
       <div class="stack-group">
-        <div class="stack-group-title" data-i18n="stack_group_title_1">Application</div>
-        <div class="stack-item"><span class="stack-item-name">Flutter</span><span class="stack-item-note" data-i18n="stack_item_note_1">Primary framework</span></div>
-        <div class="stack-item"><span class="stack-item-name">Dart</span><span class="stack-item-note" data-i18n="stack_item_note_2">Application logic</span></div>
-        <div class="stack-item"><span class="stack-item-name">BLoC / Cubit</span><span class="stack-item-note" data-i18n="stack_item_note_3">State management</span></div>
-        <div class="stack-item"><span class="stack-item-name">Clean Architecture</span><span class="stack-item-note" data-i18n="stack_item_note_4">App structure</span></div>
+        <div class="stack-group-title">Application</div>
+        <div class="stack-item"><span class="stack-item-name">Flutter</span><span class="stack-item-note">Primary framework</span></div>
+        <div class="stack-item"><span class="stack-item-name">Dart</span><span class="stack-item-note">Application logic</span></div>
+        <div class="stack-item"><span class="stack-item-name">BLoC / Cubit</span><span class="stack-item-note">State management</span></div>
+        <div class="stack-item"><span class="stack-item-name">Clean Architecture</span><span class="stack-item-note">App structure</span></div>
       </div>
 
       <div class="stack-group">
-        <div class="stack-group-title" data-i18n="stack_group_title_2">Backend &amp; Data</div>
-        <div class="stack-item"><span class="stack-item-name">Firebase</span><span class="stack-item-note" data-i18n="stack_item_note_5">Auth · Firestore</span></div>
-        <div class="stack-item"><span class="stack-item-name">Supabase</span><span class="stack-item-note" data-i18n="stack_item_note_6">Database · Storage</span></div>
-        <div class="stack-item"><span class="stack-item-name">Laravel</span><span class="stack-item-note" data-i18n="stack_item_note_7">PHP backend</span></div>
-        <div class="stack-item"><span class="stack-item-name">MySQL</span><span class="stack-item-note" data-i18n="stack_item_note_8">Database design</span></div>
-        <div class="stack-item"><span class="stack-item-name">REST APIs</span><span class="stack-item-note" data-i18n="stack_item_note_9">Integration</span></div>
+        <div class="stack-group-title">Backend &amp; Data</div>
+        <div class="stack-item"><span class="stack-item-name">Firebase</span><span class="stack-item-note">Auth · Firestore</span></div>
+        <div class="stack-item"><span class="stack-item-name">Supabase</span><span class="stack-item-note">Database · Storage</span></div>
+        <div class="stack-item"><span class="stack-item-name">Laravel</span><span class="stack-item-note">PHP backend</span></div>
+        <div class="stack-item"><span class="stack-item-name">MySQL</span><span class="stack-item-note">Database design</span></div>
+        <div class="stack-item"><span class="stack-item-name">REST APIs</span><span class="stack-item-note">Integration</span></div>
       </div>
 
       <div class="stack-group">
-        <div class="stack-group-title" data-i18n="stack_group_title_3">Delivery &amp; Security</div>
-        <div class="stack-item"><span class="stack-item-name">JWT Auth</span><span class="stack-item-note" data-i18n="stack_item_note_10">Access control</span></div>
-        <div class="stack-item"><span class="stack-item-name">Encryption</span><span class="stack-item-note" data-i18n="stack_item_note_11">Sensitive data</span></div>
-        <div class="stack-item"><span class="stack-item-name">Play Store</span><span class="stack-item-note" data-i18n="stack_item_note_12">Publishing</span></div>
-        <div class="stack-item"><span class="stack-item-name">FCM</span><span class="stack-item-note" data-i18n="stack_item_note_13">Push notifications</span></div>
-        <div class="stack-item"><span class="stack-item-name">Hive</span><span class="stack-item-note" data-i18n="stack_item_note_14">Local storage</span></div>
+        <div class="stack-group-title">Delivery &amp; Security</div>
+        <div class="stack-item"><span class="stack-item-name">JWT Auth</span><span class="stack-item-note">Access control</span></div>
+        <div class="stack-item"><span class="stack-item-name">Encryption</span><span class="stack-item-note">Sensitive data</span></div>
+        <div class="stack-item"><span class="stack-item-name">Play Store</span><span class="stack-item-note">Publishing</span></div>
+        <div class="stack-item"><span class="stack-item-name">FCM</span><span class="stack-item-note">Push notifications</span></div>
+        <div class="stack-item"><span class="stack-item-name">Hive</span><span class="stack-item-note">Local storage</span></div>
       </div>
     </div>
   </div>
@@ -1456,11 +1393,11 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 <section id="oss">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="tag" data-i18n="tag_4">Side projects</div>
-      <div class="section-note" data-i18n="section_note_2">github.com/mina-nabil-dev</div>
+      <div class="tag">Side projects</div>
+      <div class="section-note">github.com/mina-nabil-dev</div>
     </div>
 
-    <h2 class="stitle reveal" style="margin-bottom:44px;" data-i18n="stitle_4">
+    <h2 class="stitle reveal" style="margin-bottom:44px;">
       Source available on <em>GitHub</em>
     </h2>
 
@@ -1469,7 +1406,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
         <span class="oss-idx">01</span>
         <div class="oss-main">
           <div class="oss-name">MotoRent</div>
-          <div class="oss-desc" data-i18n="oss_desc_1">Car rental app with booking flows and a structured Flutter architecture</div>
+          <div class="oss-desc">Car rental app with booking flows and a structured Flutter architecture</div>
         </div>
         <div class="oss-tags"><span class="oss-tag">Flutter</span><span class="oss-tag">Firebase</span></div>
         <span class="oss-arr">↗</span>
@@ -1479,7 +1416,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
         <span class="oss-idx">02</span>
         <div class="oss-main">
           <div class="oss-name">EasyGPS</div>
-          <div class="oss-desc" data-i18n="oss_desc_2">Location and real-time tracking app with Google Maps integration</div>
+          <div class="oss-desc">Location and real-time tracking app with Google Maps integration</div>
         </div>
         <div class="oss-tags"><span class="oss-tag">Flutter</span><span class="oss-tag">Maps API</span></div>
         <span class="oss-arr">↗</span>
@@ -1495,10 +1432,10 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 <section id="contact">
   <div class="wrap">
     <div class="section-head reveal">
-      <div class="tag" data-i18n="tag_9">Contact</div>
+      <div class="tag">Contact</div>
     </div>
 
-    <h2 class="stitle reveal" style="margin-bottom:44px;" data-i18n="stitle_5">
+    <h2 class="stitle reveal" style="margin-bottom:44px;">
       Have a mobile app <em>in mind?</em>
     </h2>
 
@@ -1506,48 +1443,48 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
       <a href="https://wa.me/201016513146?text=Hi%20Mina%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20like%20to%20talk%20about%20a%20mobile%20app%20project." target="_blank" rel="noopener" class="c-card" aria-label="Message Mina Nabil on WhatsApp">
         <div class="c-ico">💬</div>
         <div>
-          <div class="c-name" data-i18n="c_name_1">WhatsApp <span style="color:var(--ink-faint);">↗</span></div>
-          <div class="c-handle" data-i18n="c_handle_1">+20 101 651 3146</div>
+          <div class="c-name">WhatsApp <span style="color:var(--ink-faint);">↗</span></div>
+          <div class="c-handle">+20 101 651 3146</div>
         </div>
       </a>
 
       <a href="mailto:minanabil20303030@gmail.com?subject=Mobile%20app%20project" class="c-card" aria-label="Email Mina Nabil">
         <div class="c-ico">✉️</div>
         <div>
-          <div class="c-name" data-i18n="c_name_2">Email</div>
-          <div class="c-handle" data-i18n="c_handle_2">minanabil20303030@gmail.com</div>
+          <div class="c-name">Email</div>
+          <div class="c-handle">minanabil20303030@gmail.com</div>
         </div>
       </a>
 
       <a href="https://linkedin.com/in/mina-nabil-97bb1b300" target="_blank" rel="noopener" class="c-card" aria-label="LinkedIn">
         <div class="c-ico">💼</div>
         <div>
-          <div class="c-name" data-i18n="c_name_3">LinkedIn <span style="color:var(--ink-faint);">↗</span></div>
-          <div class="c-handle" data-i18n="c_handle_3">mina-nabil-97bb1b300</div>
+          <div class="c-name">LinkedIn <span style="color:var(--ink-faint);">↗</span></div>
+          <div class="c-handle">mina-nabil-97bb1b300</div>
         </div>
       </a>
 
       <a href="https://github.com/mina-nabil-dev" target="_blank" rel="noopener" class="c-card" aria-label="GitHub">
         <div class="c-ico">🐙</div>
         <div>
-          <div class="c-name" data-i18n="c_name_4">GitHub <span style="color:var(--ink-faint);">↗</span></div>
-          <div class="c-handle" data-i18n="c_handle_4">@mina-nabil-dev</div>
+          <div class="c-name">GitHub <span style="color:var(--ink-faint);">↗</span></div>
+          <div class="c-handle">@mina-nabil-dev</div>
         </div>
       </a>
 
       <a href="https://www.facebook.com/profile.php?id=61550226644154" target="_blank" rel="noopener" class="c-card" aria-label="Facebook">
         <div class="c-ico">📘</div>
         <div>
-          <div class="c-name" data-i18n="c_name_5">Facebook <span style="color:var(--ink-faint);">↗</span></div>
-          <div class="c-handle" data-i18n="c_handle_5">Mina Nabil</div>
+          <div class="c-name">Facebook <span style="color:var(--ink-faint);">↗</span></div>
+          <div class="c-handle">Mina Nabil</div>
         </div>
       </a>
 
       <div class="c-card" style="cursor:default;">
         <div class="c-ico">📍</div>
         <div>
-          <div class="c-name" data-i18n="c_name_6">Location</div>
-          <div class="c-handle" data-i18n="c_handle_6">Minya, Egypt · Remote</div>
+          <div class="c-name">Location</div>
+          <div class="c-handle">Minya, Egypt · Remote</div>
         </div>
       </div>
     </div>
@@ -1573,8 +1510,8 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
         <span id="detailStat"></span>
       </div>
       <div class="detail-actions">
-        <a href="#" target="_blank" rel="noopener" class="platform-store-btn" id="detailStoreLink" style="flex:none;padding:11px 22px;" data-i18n="platform_store_btn_3">Open on Google Play ↗</a>
-        <button class="btn btn-line" id="detailCloseBtn" type="button" data-i18n="btn_line_3">Close</button>
+        <a href="#" target="_blank" rel="noopener" class="platform-store-btn" id="detailStoreLink" style="flex:none;padding:11px 22px;">Open on Google Play ↗</a>
+        <button class="btn btn-line" id="detailCloseBtn" type="button">Close</button>
       </div>
     </div>
   </div>
@@ -1584,8 +1521,8 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 
 <footer>
   <div class="wrap">
-    <span class="f-copy" data-i18n="f_copy_1">© 2026 Mina Nabil — Flutter Developer</span>
-    <span class="f-status" data-i18n="f_status_1">
+    <span class="f-copy">© 2026 Mina Nabil — Flutter Developer</span>
+    <span class="f-status">
       <span style="width:6px;height:6px;background:var(--live);border-radius:50%;display:inline-block;"></span>
       Open to freelance &amp; remote collaboration
     </span>
@@ -1608,7 +1545,7 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 /* ---- App detail data ---- */
 const APP_DATA = {
   yalla: {
-    title: 'يلا عربي',
+    title: 'Yalla Arabi',
     img: 'assets/yalla_final.jpg',
     status: 'live',
     platform: 'Shared platform · Build A',
@@ -1618,17 +1555,17 @@ const APP_DATA = {
     store: 'https://play.google.com/store/apps/details?id=com.platform.yallaarabi'
   },
   hawy: {
-    title: 'حاوى العلوم',
+    title: 'Hawy El-Oloom',
     img: 'assets/elhawy_final.jpg',
     status: 'live',
     platform: 'Shared platform · Build A',
     stat: 'Science & biology tutor',
-    desc: 'The same platform as يلا عربي, rebuilt and rebranded for a science and biology tutor — one backend, two independent clients.',
+    desc: 'The same platform as Yalla Arabi, rebuilt and rebranded for a science and biology tutor — one backend, two independent clients.',
     features: ['Lessons library', 'Timed online exams', 'Instant exam results', 'Attendance & subscriptions'],
     store: 'https://play.google.com/store/apps/details?id=com.platform.elhawy'
   },
   cs1: {
-    title: 'MN – CS 1',
+    title: 'MN – CS1',
     img: 'assets/mncs_final.jpg',
     status: 'live',
     platform: 'Standalone build',
@@ -1638,7 +1575,7 @@ const APP_DATA = {
     store: 'https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain'
   },
   cs2: {
-    title: 'MN – CS 2',
+    title: 'MN – CS2',
     img: 'assets/mncs_final.jpg',
     status: 'live',
     platform: 'Standalone build',
@@ -1692,38 +1629,18 @@ const detailStoreLink = document.getElementById('detailStoreLink');
 
 let lastFocused = null;
 
-let openDetailKey = null;
-
-/* Overlay Arabic onto the base (English) record when the page is in Arabic. */
-function localizedApp(key){
-  const base = APP_DATA[key];
-  if (!base) return null;
-  const lang = (typeof window.currentLang === 'function') ? window.currentLang() : 'en';
-  if (lang !== 'ar' || !window.appsAR || !window.appsAR[key]) return base;
-  return Object.assign({}, base, window.appsAR[key]);
-}
-
-/* Called by the language toggle so an open modal re-renders in the new language. */
-window.refreshDetail = function(){
-  if (openDetailKey && overlay.classList.contains('open')) renderDetail(openDetailKey);
-};
-
-function renderDetail(key){
-  const app = localizedApp(key);
+function openDetail(key){
+  const app = APP_DATA[key];
   if (!app) return;
 
   detailImg.src = app.img;
   detailImg.alt = app.title + ' app icon';
   detailTitle.textContent = app.title;
-  const titleIsArabic = /[؀-ۿ]/.test(app.title);
-  detailTitle.lang = titleIsArabic ? 'ar' : 'en';
-  detailTitle.dir  = titleIsArabic ? 'rtl' : 'ltr';
 
   detailBadges.innerHTML = '';
   const statusBadge = document.createElement('span');
   statusBadge.className = 'detail-badge b-live';
-  statusBadge.textContent = (typeof window.currentLang === 'function' && window.currentLang() === 'ar')
-    ? 'منشور على Google Play' : 'Live on Play Store';
+  statusBadge.textContent = 'Live on Play Store';
   detailBadges.appendChild(statusBadge);
 
   detailDesc.textContent = app.desc;
@@ -1740,20 +1657,12 @@ function renderDetail(key){
   detailStat.textContent = app.stat;
   detailStoreLink.href = app.store;
 
-}
-
-function openDetail(key){
-  const app = localizedApp(key);
-  if (!app) return;
-  openDetailKey = key;
-  renderDetail(key);
   lastFocused = document.activeElement;
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
   document.getElementById('detailClose').focus();
 }
-
 
 function closeDetail(){
   overlay.classList.remove('open');
@@ -1797,126 +1706,6 @@ if (overlay) {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) closeDetail();
 });
-</script>
-
-<script>
-/* ---------------------------------------------------------------
-   Bilingual layer. English lives in the markup and is the default;
-   Arabic lives here and is swapped in on demand. The English copy is
-   snapshotted on load so switching back is lossless.
-   --------------------------------------------------------------- */
-const AR = {
-  nav_1:"الأعمال", nav_2:"نبذة", nav_3:"الأدوات", nav_4:"مشاريع", nav_5:"تواصل",
-  avail_1:'<span class="avail-dot"></span> متاح للعمل الحر',
-
-  eyebrow_1:"مطوّر Flutter · المنيا، مصر · متاح للعمل عن بُعد",
-  hero_lede_1:"أبني <strong>تطبيقات موبايل متعددة المنصات</strong> بـ Flutter — من الواجهة وصولًا إلى الباك إند الذي يشغّلها. أعمل مع <strong>Firebase</strong> و<strong>Supabase</strong> وواجهات <strong>Laravel</strong> مخصّصة، بمعمارية <strong>Clean</strong> وإدارة حالة <strong>BLoC/Cubit</strong> ليظل التطبيق سهل التطوير بعد إطلاقه.",
-  btn_solid_1:"شاهد أعمالي ↓",
-
-  manifest_k_1:"الدور",     manifest_v_1:"مطوّر Flutter",
-  manifest_k_2:"المنصات",   manifest_v_2:"Android · iOS",
-  manifest_k_3:"منشور",     manifest_v_3:"4 على Google Play",
-  manifest_k_4:"المعمارية", manifest_v_4:"Clean · BLoC/Cubit",
-
-  tag_1:"أعمال منشورة", section_note_1:"منصتان · 4 إصدارات منشورة",
-  stitle_1:"ابنِ مرة، <em>وأطلق لاثنين</em>",
-  apps_lead_1:"كل بطاقة بالأسفل هي منصة واحدة بنيتها — المعمارية والمزايا والباك إند مكتوبة مرة واحدة. المبدّل بداخلها يحدّد أي إصدار منشور تشاهده.",
-
-  platform_label_1:"منصة تعليمية للمدرّسين", platform_status_1:"منشور",
-  platform_desc_1:"تطبيق إدارة تعلّم بعلامة بيضاء للمدرّسين الخصوصيين، بـ <strong>Flutter</strong> وباك إند <strong>Laravel</strong> مشترك. بُني مرة واحدة، ثم أُعيدت علامته ونُشر لمدرّسَين مستقلَّين يدرّسان مادتين مختلفتين.",
-  platform_feature_1:"حضور بكود QR", platform_feature_2:"امتحانات مؤقّتة أونلاين",
-  platform_feature_3:"نتائج فورية",  platform_feature_4:"متابعة الاشتراكات",
-  shot_note_1:"لقطات من المتجر مباشرة", variant_label_1:"منشور باسم",
-  platform_store_btn_1:"افتح على Google Play ↗",
-
-  platform_label_2:"منصة MN التعليمية", platform_status_2:"منشور",
-  platform_desc_2:"تطبيق مرافق لمقررات طلاب علوم الحاسب بـ<strong>جامعة المنيا</strong>، مبني بـ Flutter. قاعدة كود واحدة يُعاد استخدامها كل عام بمحتوى ذلك العام.",
-  platform_feature_5:"مكتبة مصادر المقرر", platform_feature_6:"تنقّل بسيط ومركّز",
-  platform_feature_7:"يعمل دون إنترنت",
-  shot_note_2:"لقطات من المتجر مباشرة", variant_label_2:"منشور باسم",
-  platform_store_btn_2:"افتح على Google Play ↗",
-  platform_shared_note_1:"4 تطبيقات منشورة على Google Play · أكثر من 600 تحميل · من قاعدتَي كود اثنتين",
-
-  tag_2:"نبذة", stitle_2:"من الفكرة إلى <em>Google Play</em>، نظامًا واحدًا في كل مرة",
-  about_p1:"مطوّر Flutter من المنيا، مصر. أبني تطبيقات موبايل متعددة المنصات من البداية للنهاية — الواجهة والحالة والباك إند والنشر.",
-  about_p2:"معظم ما أبنيه مصمَّم لإعادة الاستخدام. المنصة التعليمية بالأعلى تعمل كـ<strong>أربعة تطبيقات منشورة من قاعدتَي كود</strong> — ضمّ مدرّس جديد يعني تغيير علامة وإعدادات، لا إعادة كتابة.",
-  cred_k_1:"الموقع",  cred_v_1:"المنيا، مصر<span>متاح عن بُعد</span>",
-  cred_k_2:"التعليم", cred_v_2:"علوم الحاسب<span>جامعة المنيا</span>",
-  cred_k_3:"النشر",   cred_v_3:"Google Play<span>دورة نشر كاملة</span>",
-
-  tag_3:"الأدوات", stitle_3:"أدوات مرتّبة حسب <em>وظيفتها</em>",
-  stack_group_title_1:"التطبيق",
-  stack_item_note_1:"الإطار الأساسي", stack_item_note_2:"منطق التطبيق",
-  stack_item_note_3:"إدارة الحالة",   stack_item_note_4:"بنية التطبيق",
-  stack_group_title_2:"الباك إند والبيانات",
-  stack_item_note_5:"مصادقة · Firestore", stack_item_note_6:"قاعدة بيانات · تخزين",
-  stack_item_note_7:"باك إند PHP", stack_item_note_8:"تصميم قواعد البيانات",
-  stack_item_note_9:"التكامل",
-  stack_group_title_3:"التسليم والأمان",
-  stack_item_note_10:"التحكّم بالصلاحيات", stack_item_note_11:"البيانات الحسّاسة",
-  stack_item_note_12:"النشر", stack_item_note_13:"إشعارات فورية",
-  stack_item_note_14:"تخزين محلي",
-
-  tag_4:"مشاريع جانبية", stitle_4:"الكود متاح على <em>GitHub</em>",
-  oss_desc_1:"تطبيق تأجير سيارات بمسارات حجز ومعمارية Flutter منظّمة",
-  oss_desc_2:"تطبيق تتبّع موقع لحظي بتكامل خرائط Google",
-
-  tag_9:"تواصل", stitle_5:"عندك فكرة <em>تطبيق؟</em>",
-  c_name_2:"البريد", c_name_6:"الموقع", c_handle_6:"المنيا، مصر · عن بُعد",
-
-  platform_store_btn_3:"افتح على Google Play ↗", btn_line_3:"إغلاق",
-  f_copy_1:"© 2026 مينا نبيل — مطوّر Flutter",
-  f_status_1:'<span style="width:6px;height:6px;background:var(--live);border-radius:50%;display:inline-block;"></span> متاح للعمل الحر والتعاون عن بُعد'
-};
-
-/* Arabic copy for the project modal (mirrors the APP_DATA object above). */
-const APPS_AR = {
-  yalla:{ platform:"المنصة المشتركة · الإصدار A", stat:"مدرّس لغة عربية",
-    desc:"منصة إدارة تعلّم كاملة لمدرّس لغة عربية — الدروس والحضور والامتحانات والاشتراكات في تطبيق واحد.",
-    features:["حضور بكود QR","النتائج والدرجات فورًا","متابعة الاشتراكات","إشعارات فورية"] },
-  hawy:{ platform:"المنصة المشتركة · الإصدار A", stat:"مدرّس علوم وأحياء",
-    desc:"نفس منصة يلا عربي، أُعيد بناؤها وتغيير علامتها لمدرّس علوم وأحياء — باك إند واحد، وعميلان مستقلان.",
-    features:["مكتبة الدروس","امتحانات مؤقّتة أونلاين","نتائج فورية","الحضور والاشتراكات"] },
-  cs1:{ platform:"إصدار مستقل", stat:"دفعة السنة الأولى",
-    desc:"تطبيق مرافق لطلاب السنة الأولى بعلوم الحاسب في جامعة المنيا، مبني بـ Flutter لتجميع مصادر المقررات في مكان واحد.",
-    features:["مكتبة مصادر المقرر","تنقّل بسيط ومركّز","مبني لمنهج السنة الأولى","خفيف ويعمل دون إنترنت"] },
-  cs2:{ platform:"إصدار مستقل", stat:"دفعة السنة الثانية",
-    desc:"امتداد السنة الثانية لتطبيق CS1، بنفس الواجهة ومحتوى العام التالي من المنهج.",
-    features:["مكتبة مصادر المقرر","متسق مع تجربة CS1","مبني لمنهج السنة الثانية","خفيف ويعمل دون إنترنت"] }
-};
-
-(function () {
-  const root  = document.documentElement;
-  const btn   = document.getElementById('langToggle');
-  const nodes = [...document.querySelectorAll('[data-i18n]')];
-
-  // snapshot the English exactly as authored, so switching back is lossless
-  nodes.forEach(n => n.dataset.en = n.innerHTML);
-
-  function apply(lang) {
-    const ar = lang === 'ar';
-    nodes.forEach(n => {
-      const t = AR[n.dataset.i18n];
-      n.innerHTML = ar && t ? t : n.dataset.en;
-    });
-    root.lang = ar ? 'ar' : 'en';
-    root.dir  = ar ? 'rtl' : 'ltr';
-    btn.textContent = ar ? 'English' : 'العربية';
-    btn.setAttribute('aria-label', ar ? 'Switch to English' : 'التبديل إلى العربية');
-    // the modal reads from a different source, so refresh it if it is open
-    if (typeof window.refreshDetail === 'function') window.refreshDetail();
-    try { localStorage.setItem('lang', lang); } catch (e) {}
-  }
-
-  window.currentLang = () => root.lang === 'ar' ? 'ar' : 'en';
-  window.appsAR = APPS_AR;
-
-  let saved = null;
-  try { saved = localStorage.getItem('lang'); } catch (e) {}
-  if (saved === 'ar') apply('ar');
-
-  btn.addEventListener('click', () => apply(root.lang === 'ar' ? 'en' : 'ar'));
-})();
 </script>
 
 </body>

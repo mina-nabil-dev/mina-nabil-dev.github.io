@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Mina Nabil — Flutter Developer</title>
+
+<meta name="description" content="Flutter developer from Egypt building cross-platform mobile apps with Flutter, Dart, Laravel, Firebase, and Supabase." />
+<meta name="keywords" content="Flutter developer Egypt, Flutter developer, mobile app developer, freelance Flutter developer, Dart developer, Flutter Firebase developer, Flutter Supabase, Flutter Laravel developer, BLoC Flutter, Clean Architecture Flutter, Android iOS developer, cross-platform mobile apps" />
+<meta name="author" content="Mina Nabil" />
+<link rel="canonical" href="https://mina-nabil-dev.github.io/" />
+<meta name="robots" content="index, follow" />
+<meta name="geo.region" content="EG" />
+<meta name="geo.placename" content="Minya, Egypt" />
+<meta name="google-site-verification" content="Bs2xWhhlJlLXBEvBf_Sp0LaVLVvWolKR6exAS2c3Fow" />
+
+<meta property="og:type" content="profile" />
+<meta property="og:url" content="https://mina-nabil-dev.github.io/" />
+<meta property="og:title" content="Mina Nabil — Flutter Developer" />
+<meta property="og:description" content="Flutter developer building cross-platform mobile applications with Flutter, Dart, Laravel, Firebase, and Supabase." />
+<meta property="og:image" content="https://mina-nabil-dev.github.io/og-image.png" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Mina Nabil | Flutter Developer" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Mina Nabil — Flutter Developer" />
+<meta name="twitter:description" content="Flutter developer building cross-platform mobile applications with Flutter, Dart, Firebase, and Supabase." />
+<meta name="twitter:image" content="https://mina-nabil-dev.github.io/og-image.png" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mina Nabil",
+  "alternateName": "مينا نبيل",
+  "jobTitle": "Flutter Developer",
+  "description": "Flutter developer from Minya, Egypt focused on cross-platform mobile application development using Flutter, Dart, Laravel, Firebase, Supabase, and modern software architecture.",
+  "url": "https://mina-nabil-dev.github.io/",
+  "image": "https://mina-nabil-dev.github.io/og-image.png",
+  "sameAs": [
+    "https://linkedin.com/in/mina-nabil-97bb1b300",
+    "https://github.com/mina-nabil-dev"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Minya",
+    "addressCountry": "EG"
+  },
+  "knowsAbout": [
+    "Flutter", "Dart", "Firebase", "Supabase", "Laravel", "PHP", "MySQL",
+    "BLoC", "Cubit", "Clean Architecture", "Mobile Development",
+    "Cross-Platform App Development", "Android App Development",
+    "iOS App Development", "REST API Integration", "JWT Authentication",
+    "Google Play Store Publishing"
+  ],
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "degree",
+    "educationalLevel": "Bachelor",
+    "recognizedBy": {
+      "@type": "EducationalOrganization",
+      "name": "Minia University",
+      "address": { "@type": "PostalAddress", "addressLocality": "Minya", "addressCountry": "EG" }
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "name": "Flutter & Mobile App Development",
+    "description": "Cross-platform mobile application development for Android and iOS using Flutter, Laravel, Firebase, Supabase, and modern architecture.",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mina-nabil-dev.github.io/" },
+    { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://mina-nabil-dev.github.io/#work" },
+    { "@type": "ListItem", "position": 3, "name": "Contact", "item": "https://mina-nabil-dev.github.io/#contact" }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================
+   TOKENS
+   Paper: warm off-white surface, ink-navy text.
+   Accent: a single signal-blue, used sparingly —
+   the color of a status light on hardware, not a
+   gradient. Grounded in "build artifact" language:
+   blueprint grid, build log, module manifest.
+   ============================================ */
+:root{
+  --paper:      #f6f4ef;
+  --paper-dim:  #efece3;
+  --ink:        #171712;
+  --ink-soft:   #57584f;
+  --ink-faint:  #94958a;
+  --line:       #dcd8cb;
+  --line-soft:  #e8e5d9;
+  --signal:     #1f4fff;
+  --signal-dim: #e5eafe;
+  --live:       #1c7a4d;
+  --live-bg:    #e4f2ea;
+  --test:       #9a6a12;
+  --test-bg:    #f6ecd8;
+
+  --display: 'Fraunces', serif;
+  --body:    'Inter', sans-serif;
+  --mono:    'IBM Plex Mono', monospace;
+
+  --wrap: 1120px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+body.modal-open{ overflow:hidden; }
+
+/* faint blueprint grid, fixed, very low contrast */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity:.5;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+a{ color:inherit; }
+
+img{ max-width:100%; display:block; }
+
+.wrap{
+  max-width:var(--wrap);
+  margin:0 auto;
+  padding-left:56px;
+  padding-right:56px;
+  position:relative;
+  z-index:1;
+}
+
+::selection{ background:var(--signal); color:#fff; }
+
+:focus-visible{
+  outline:2px solid var(--signal);
+  outline-offset:3px;
+}
+
+/* ============================================
+   NAV
+   ============================================ */
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(246,244,239,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+
+nav.wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+.brand{
+  font-family:var(--mono);
+  font-size:14px;
+  font-weight:500;
+  letter-spacing:.02em;
+}
+
+.brand span{ color:var(--signal); }
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:36px;
+}
+
+.nav-links a{
+  font-family:var(--mono);
+  font-size:13px;
+  text-decoration:none;
+  color:var(--ink-soft);
+  letter-spacing:.02em;
+  transition:color .15s;
+}
+
+.nav-links a:hover{ color:var(--ink); }
+
+.avail{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--ink-soft);
+  padding:6px 14px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  white-space:nowrap;
+}
+
+.avail-dot{
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--live);
+  flex-shrink:0;
+}
+
+@media (max-width:860px){
+  .nav-links{ display:none; }
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero{
+  padding-top:96px;
+  padding-bottom:88px;
+  display:grid;
+  grid-template-columns:1.35fr 1fr;
+  gap:64px;
+  align-items:end;
+}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--signal);
+  letter-spacing:.06em;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:28px;
+}
+
+.eyebrow::before{
+  content:'';
+  width:28px; height:1px;
+  background:var(--signal);
+}
+
+h1.name{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:clamp(44px,6.4vw,84px);
+  line-height:.98;
+  letter-spacing:-.01em;
+  margin-bottom:26px;
+}
+
+h1.name em{
+  font-style:italic;
+  font-weight:380;
+  color:var(--signal);
+}
+
+.hero-lede{
+  font-size:18px;
+  color:var(--ink-soft);
+  max-width:52ch;
+  line-height:1.6;
+  margin-bottom:36px;
+}
+
+.hero-lede strong{ color:var(--ink); font-weight:600; }
+
+.hero-cta{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  font-family:var(--mono);
+  font-size:13px;
+  letter-spacing:.02em;
+  padding:13px 24px;
+  border-radius:4px;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  transition:transform .15s, background .15s, border-color .15s;
+  border:none;
+  cursor:pointer;
+}
+
+.btn-solid{
+  background:var(--ink);
+  color:var(--paper);
+  border:1px solid var(--ink);
+}
+.btn-solid:hover{ background:var(--signal); border-color:var(--signal); transform:translateY(-2px); }
+
+.btn-line{
+  background:transparent;
+  color:var(--ink);
+  border:1px solid var(--line);
+}
+.btn-line:hover{ border-color:var(--ink); transform:translateY(-2px); }
+
+/* hero side: a manifest, not a stat-brag */
+.manifest{
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fff;
+  overflow:hidden;
+}
+
+.manifest-head{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-faint);
+  letter-spacing:.06em;
+  padding:14px 20px;
+  border-bottom:1px solid var(--line);
+  background:var(--paper-dim);
+}
+
+.manifest-row{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  padding:16px 20px;
+  border-bottom:1px solid var(--line-soft);
+  font-family:var(--mono);
+  font-size:13px;
+}
+
+.manifest-row:last-child{ border-bottom:none; }
+
+.manifest-k{ color:var(--ink-faint); }
+.manifest-v{ color:var(--ink); text-align:right; }
+
+@media (max-width:860px){
+  .hero{ grid-template-columns:1fr; padding-top:56px; padding-bottom:56px; gap:40px; }
+}
+
+/* ============================================
+   SECTION SCAFFOLD
+   ============================================ */
+section{ padding:76px 0; }
+
+.section-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:24px;
+  margin-bottom:44px;
+  flex-wrap:wrap;
+}
+
+.tag{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--signal);
+  letter-spacing:.06em;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.tag::before{ content:'§'; color:var(--ink-faint); }
+
+h2.stitle{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:clamp(28px,3.6vw,44px);
+  letter-spacing:-.01em;
+  line-height:1.05;
+}
+
+h2.stitle em{ font-style:italic; font-weight:380; color:var(--signal); }
+
+.section-note{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--ink-faint);
+  text-align:right;
+}
+
+hr.rule{
+  border:none;
+  border-top:1px solid var(--line);
+  margin:0 0 76px;
+}
+
+/* ============================================
+   ABOUT
+   ============================================ */
+.about-grid{
+  display:grid;
+  grid-template-columns:0.9fr 1.1fr;
+  gap:64px;
+}
+
+.about-copy{
+  font-size:17px;
+  color:var(--ink-soft);
+  line-height:1.75;
+  max-width:60ch;
+}
+
+.about-copy p{ margin-bottom:18px; }
+.about-copy p:last-child{ margin-bottom:0; }
+.about-copy strong{ color:var(--ink); font-weight:600; }
+
+.credentials{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  border-top:1px solid var(--line);
+}
+
+.cred-row{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  padding:18px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.cred-k{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-faint);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding-top:2px;
+  flex-shrink:0;
+  width:120px;
+}
+
+.cred-v{
+  font-size:15px;
+  color:var(--ink);
+  text-align:right;
+}
+
+.cred-v span{
+  display:block;
+  font-size:13px;
+  color:var(--ink-soft);
+  margin-top:2px;
+}
+
+@media (max-width:860px){
+  .about-grid{ grid-template-columns:1fr; gap:40px; }
+}
+
+/* ============================================
+   STACK — grouped by role, not a flat grid.
+   ============================================ */
+.stack-groups{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+}
+
+.stack-group{
+  background:#fff;
+  padding:28px 26px;
+}
+
+.stack-group-title{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--signal);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  margin-bottom:18px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line-soft);
+}
+
+.stack-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:12px;
+  padding:9px 0;
+  font-size:14.5px;
+}
+
+.stack-item + .stack-item{ border-top:1px solid var(--line-soft); }
+
+.stack-item-name{ color:var(--ink); font-weight:500; }
+.stack-item-note{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--ink-faint);
+  text-align:right;
+  white-space:nowrap;
+}
+
+@media (max-width:860px){
+  .stack-groups{ grid-template-columns:1fr; }
+}
+
+/* ============================================
+   PUBLISHED WORK — one platform, two deployments
+   ============================================ */
+.platform-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+
+.platform-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:border-color .18s, box-shadow .18s;
+  cursor:pointer;
+}
+
+.platform-card:hover{
+  border-color:var(--ink);
+  box-shadow:0 14px 32px -18px rgba(23,23,18,.28);
+}
+
+.platform-top{
+  display:flex;
+  gap:16px;
+  padding:22px 24px 18px;
+  border-bottom:1px solid var(--line-soft);
+}
+
+.platform-media{
+  width:64px; height:64px;
+  border-radius:10px;
+  overflow:hidden;
+  flex-shrink:0;
+  border:1px solid var(--line);
+  background:var(--paper-dim);
+  position:relative;
+}
+
+.platform-media img{
+  width:100%; height:100%;
+  object-fit:cover;
+  transition:opacity .18s ease;
+}
+
+.platform-heading{ flex:1; min-width:0; padding-top:2px; }
+
+.platform-label{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--signal);
+  margin-bottom:4px;
+}
+
+.platform-name{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:19px;
+  letter-spacing:-.005em;
+  transition:opacity .12s ease;
+}
+
+.platform-status{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--live);
+  margin-top:5px;
+}
+
+.platform-status::before{ content:''; width:5px; height:5px; border-radius:50%; background:var(--live); }
+
+.platform-body{
+  padding:18px 24px 22px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+.platform-desc{
+  font-size:13.5px;
+  color:var(--ink-soft);
+  line-height:1.65;
+  margin-bottom:16px;
+}
+
+.platform-desc strong{ color:var(--ink); font-weight:600; }
+
+.platform-features{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:20px;
+}
+
+.platform-feature{
+  font-family:var(--mono);
+  font-size:10.5px;
+  color:var(--ink-soft);
+  background:var(--paper-dim);
+  border:1px solid var(--line-soft);
+  padding:4px 10px;
+  border-radius:100px;
+}
+
+/* variant switch: the ONE thing that actually differs */
+.variant-row{
+  margin-top:auto;
+}
+
+.variant-label{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:8px;
+}
+
+.variant-switch{
+  display:flex;
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+  margin-bottom:14px;
+}
+
+.variant-btn{
+  flex:1;
+  background:#fff;
+  border:none;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.02em;
+  color:var(--ink-soft);
+  padding:10px 8px;
+  cursor:pointer;
+  transition:background .15s, color .15s;
+  position:relative;
+}
+
+.variant-btn + .variant-btn{ border-left:1px solid var(--line); }
+
+.variant-btn:hover{ background:var(--paper-dim); }
+
+.variant-btn.active{
+  background:var(--ink);
+  color:var(--paper);
+}
+
+.variant-actions{
+  display:flex;
+  gap:10px;
+}
+
+.platform-store-btn{
+  flex:1;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.02em;
+  color:#fff;
+  background:var(--ink);
+  border:1px solid var(--ink);
+  border-radius:6px;
+  padding:11px 14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  text-decoration:none;
+  transition:background .15s, border-color .15s, transform .15s;
+}
+
+.platform-store-btn:hover{ background:var(--signal); border-color:var(--signal); transform:translateY(-2px); }
+
+.platform-shared-note{
+  grid-column:1 / -1;
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--ink-faint);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:2px;
+}
+
+.platform-shared-note::before{
+  content:'';
+  width:20px; height:1px;
+  background:var(--line);
+  flex-shrink:0;
+}
+
+.apps-lead{
+  font-size:14.5px;
+  color:var(--ink-soft);
+  max-width:64ch;
+  line-height:1.65;
+}
+
+.apps-lead strong{ color:var(--ink); font-weight:600; }
+
+@media (max-width:760px){
+  .platform-grid{ grid-template-columns:1fr; }
+}
+
+/* ---- Detail modal ---- */
+.detail-overlay{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  background:rgba(23,23,18,.46);
+  backdrop-filter:blur(3px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .22s ease;
+}
+
+.detail-overlay.open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.detail-panel{
+  position:relative;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:14px;
+  max-width:640px;
+  width:100%;
+  max-height:88vh;
+  overflow-y:auto;
+  transform:translateY(18px) scale(.98);
+  transition:transform .24s cubic-bezier(.2,.8,.2,1);
+  box-shadow:0 30px 60px -20px rgba(23,23,18,.35);
+}
+
+.detail-overlay.open .detail-panel{ transform:translateY(0) scale(1); }
+
+.detail-top{
+  display:flex;
+  gap:20px;
+  padding:28px 28px 20px;
+  border-bottom:1px solid var(--line);
+}
+
+.detail-media{
+  width:96px; height:96px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  flex-shrink:0;
+  background:var(--paper-dim);
+}
+
+.detail-media img{ width:100%; height:100%; object-fit:cover; }
+
+.detail-heading{ flex:1; min-width:0; }
+
+.detail-title{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:26px;
+  letter-spacing:-.01em;
+  margin-bottom:8px;
+}
+
+.detail-badges{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.detail-badge{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  padding:4px 10px;
+  border-radius:100px;
+  background:var(--paper-dim);
+  color:var(--ink-soft);
+  border:1px solid var(--line);
+}
+
+.detail-badge.b-live{ background:var(--live-bg); color:var(--live); border-color:rgba(28,122,77,.25); }
+
+.detail-close{
+  position:absolute;
+  top:18px; right:18px;
+  width:32px; height:32px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink-soft);
+  font-size:16px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:border-color .15s, color .15s, transform .15s;
+}
+
+.detail-close:hover{ border-color:var(--ink); color:var(--ink); transform:rotate(90deg); }
+
+.detail-body{
+  padding:24px 28px 28px;
+}
+
+.detail-desc{
+  font-size:15px;
+  color:var(--ink-soft);
+  line-height:1.7;
+  margin-bottom:22px;
+}
+
+.detail-features{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:26px;
+}
+
+.detail-feature{
+  font-size:13.5px;
+  color:var(--ink);
+  padding:11px 14px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+}
+
+.detail-feature::before{
+  content:'—';
+  color:var(--signal);
+  flex-shrink:0;
+}
+
+.detail-meta-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--ink-faint);
+  padding:14px 0;
+  border-top:1px solid var(--line-soft);
+  margin-bottom:22px;
+}
+
+.detail-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+@media (max-width:560px){
+  .detail-top{ flex-direction:column; align-items:flex-start; padding:24px 20px 18px; }
+  .detail-body{ padding:20px 20px 24px; }
+  .detail-features{ grid-template-columns:1fr; }
+  .detail-close{ top:14px; right:14px; }
+}
+
+/* ============================================
+   OPEN SOURCE — dense manifest list
+   ============================================ */
+.oss-list{
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+  background:#fff;
+}
+
+.oss-row{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  padding:20px 28px;
+  text-decoration:none;
+  border-bottom:1px solid var(--line-soft);
+  transition:background .15s;
+}
+
+.oss-row:last-child{ border-bottom:none; }
+.oss-row:hover{ background:var(--paper-dim); }
+
+.oss-idx{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-faint);
+  width:22px;
+  flex-shrink:0;
+}
+
+.oss-main{ flex:1; min-width:0; }
+
+.oss-name{
+  font-size:15px;
+  font-weight:600;
+  color:var(--ink);
+}
+
+.oss-desc{
+  font-size:13px;
+  color:var(--ink-soft);
+  margin-top:2px;
+}
+
+.oss-tags{
+  display:flex;
+  gap:8px;
+  flex-shrink:0;
+}
+
+.oss-tag{
+  font-family:var(--mono);
+  font-size:10.5px;
+  color:var(--signal);
+  background:var(--signal-dim);
+  padding:3px 10px;
+  border-radius:100px;
+  white-space:nowrap;
+}
+
+.oss-arr{
+  color:var(--ink-faint);
+  font-size:15px;
+  flex-shrink:0;
+  transition:color .15s, transform .15s;
+}
+
+.oss-row:hover .oss-arr{ color:var(--signal); transform:translate(2px,-2px); }
+
+@media (max-width:640px){
+  .oss-row{ flex-wrap:wrap; padding:18px 20px; }
+  .oss-tags{ width:100%; padding-left:44px; }
+}
+
+/* ============================================
+   CONTACT
+   ============================================ */
+.contact-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+}
+
+.c-card{
+  background:#fff;
+  padding:28px 22px;
+  text-decoration:none;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  transition:background .15s;
+}
+
+.c-card:hover{ background:var(--paper-dim); }
+
+.c-ico{
+  width:38px;height:38px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;
+  border:1px solid var(--line);
+  background:var(--paper-dim);
+}
+
+.c-name{
+  font-size:14.5px;
+  font-weight:600;
+  color:var(--ink);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.c-handle{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--ink-soft);
+  margin-top:2px;
+}
+
+@media (max-width:860px){
+  .contact-grid{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:520px){
+  .contact-grid{ grid-template-columns:1fr; }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer{
+  border-top:1px solid var(--line);
+  padding:32px 0 48px;
+}
+
+footer .wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.f-copy{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--ink-faint);
+}
+
+.f-status{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--ink-faint);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* ============================================
+   MOTION
+   ============================================ */
+.reveal{
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .6s ease, transform .6s ease;
+}
+.reveal.visible{ opacity:1; transform:none; }
+
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .reveal{ opacity:1; transform:none; transition:none; }
+}
+
+@media (max-width:640px){
+  .wrap{ padding-left:22px; padding-right:22px; }
+  section{ padding:56px 0; }
+  .section-note{ display:none; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <nav class="wrap" aria-label="Main navigation">
+    <span class="brand">mina<span>.</span>dev</span>
+
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#stack">Stack</a>
+      <a href="#work">Work</a>
+      <a href="#oss">Open source</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div class="avail" aria-label="Availability status">
+      <span class="avail-dot"></span>
+      Available for freelance
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero wrap" aria-label="Introduction">
+  <div>
+    <p class="eyebrow reveal">Flutter Developer · Minya, Egypt · Open to Remote</p>
+
+    <h1 class="name reveal">Mina<br><em>Nabil</em></h1>
+
+    <p class="hero-lede reveal">
+      I build <strong>cross-platform mobile apps</strong> with Flutter — from the interface
+      down to the backend that runs it. My work spans <strong>Firebase</strong>,
+      <strong>Supabase</strong>, and custom <strong>Laravel APIs</strong>, structured with
+      <strong>Clean Architecture</strong> and <strong>BLoC/Cubit</strong> so apps stay easy to
+      extend once they're live.
+    </p>
+
+    <div class="hero-cta reveal">
+      <a href="#work" class="btn btn-solid">View my work ↓</a>
+      <a href="https://github.com/mina-nabil-dev" target="_blank" rel="noopener" class="btn btn-line">GitHub ↗</a>
+      <a href="https://linkedin.com/in/mina-nabil-97bb1b300" target="_blank" rel="noopener" class="btn btn-line">LinkedIn ↗</a>
+    </div>
+  </div>
+
+  <div class="manifest reveal" aria-label="Developer summary">
+    <div class="manifest-head">manifest.json</div>
+    <div class="manifest-row"><span class="manifest-k">role</span><span class="manifest-v">Flutter Developer</span></div>
+    <div class="manifest-row"><span class="manifest-k">focus</span><span class="manifest-v">Android · iOS</span></div>
+    <div class="manifest-row"><span class="manifest-k">apps_live</span><span class="manifest-v">4 on Play Store</span></div>
+    <div class="manifest-row"><span class="manifest-k">architecture</span><span class="manifest-v">Clean · BLoC/Cubit</span></div>
+    <div class="manifest-row"><span class="manifest-k">education</span><span class="manifest-v">CS, Minia University</span></div>
+    <div class="manifest-row"><span class="manifest-k">status</span><span class="manifest-v">Open to work</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag">About</div>
+    </div>
+
+    <h2 class="stitle reveal" style="margin-bottom:44px;">
+      Idea to <em>Play Store</em>, one system at a time
+    </h2>
+
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p>
+          I'm a Flutter developer from Minya, Egypt, studying Computer Science at
+          <strong>Minia University</strong>. I build cross-platform mobile applications
+          end to end — interface, state, backend, and deployment.
+        </p>
+        <p>
+          Most of my work centers on <strong>Flutter and Dart</strong>, structured with
+          <strong>Clean Architecture</strong> and predictable state management through
+          <strong>BLoC and Cubit</strong>, so a codebase stays legible as it grows past its
+          first version.
+        </p>
+        <p>
+          On the backend I work with <strong>Firebase</strong> (Firestore, Cloud Messaging),
+          <strong>Supabase</strong>, and custom <strong>Laravel / PHP APIs</strong> on MySQL —
+          including JWT authentication and encrypted handling for apps that manage sensitive
+          user data. I've taken apps through full deployment on the <strong>Google Play Store</strong>.
+        </p>
+      </div>
+
+      <div class="credentials reveal">
+        <div class="cred-row">
+          <div class="cred-k">Location</div>
+          <div class="cred-v">Minya, Egypt<span>Remote-friendly</span></div>
+        </div>
+        <div class="cred-row">
+          <div class="cred-k">Education</div>
+          <div class="cred-v">Computer Science<span>Minia University</span></div>
+        </div>
+        <div class="cred-row">
+          <div class="cred-k">Core stack</div>
+          <div class="cred-v">Flutter · Dart<span>BLoC / Cubit · Clean Architecture</span></div>
+        </div>
+        <div class="cred-row">
+          <div class="cred-k">Backends</div>
+          <div class="cred-v">Firebase · Supabase<span>Laravel / PHP · MySQL</span></div>
+        </div>
+        <div class="cred-row">
+          <div class="cred-k">Deployment</div>
+          <div class="cred-v">Google Play Store<span>Full publishing pipeline</span></div>
+        </div>
+        <div class="cred-row">
+          <div class="cred-k">Availability</div>
+          <div class="cred-v">Freelance · Remote<span>Open to new projects</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag">Stack</div>
+      <div class="section-note">Grouped by role, not alphabetically</div>
+    </div>
+
+    <h2 class="stitle reveal" style="margin-bottom:44px;">
+      Tools organized by <em>what they do</em>
+    </h2>
+
+    <div class="stack-groups reveal">
+      <div class="stack-group">
+        <div class="stack-group-title">Application</div>
+        <div class="stack-item"><span class="stack-item-name">Flutter</span><span class="stack-item-note">Primary framework</span></div>
+        <div class="stack-item"><span class="stack-item-name">Dart</span><span class="stack-item-note">Application logic</span></div>
+        <div class="stack-item"><span class="stack-item-name">BLoC / Cubit</span><span class="stack-item-note">State management</span></div>
+        <div class="stack-item"><span class="stack-item-name">Clean Architecture</span><span class="stack-item-note">App structure</span></div>
+        <div class="stack-item"><span class="stack-item-name">C++</span><span class="stack-item-note">Fundamentals</span></div>
+      </div>
+
+      <div class="stack-group">
+        <div class="stack-group-title">Backend &amp; Data</div>
+        <div class="stack-item"><span class="stack-item-name">Firebase</span><span class="stack-item-note">Auth · Firestore</span></div>
+        <div class="stack-item"><span class="stack-item-name">Supabase</span><span class="stack-item-note">Database · Storage</span></div>
+        <div class="stack-item"><span class="stack-item-name">Laravel</span><span class="stack-item-note">PHP backend</span></div>
+        <div class="stack-item"><span class="stack-item-name">MySQL</span><span class="stack-item-note">Database design</span></div>
+        <div class="stack-item"><span class="stack-item-name">REST APIs</span><span class="stack-item-note">Integration</span></div>
+      </div>
+
+      <div class="stack-group">
+        <div class="stack-group-title">Delivery &amp; Security</div>
+        <div class="stack-item"><span class="stack-item-name">JWT Auth</span><span class="stack-item-note">Access control</span></div>
+        <div class="stack-item"><span class="stack-item-name">Encryption</span><span class="stack-item-note">Sensitive data</span></div>
+        <div class="stack-item"><span class="stack-item-name">Play Store</span><span class="stack-item-note">Publishing</span></div>
+        <div class="stack-item"><span class="stack-item-name">FCM</span><span class="stack-item-note">Push notifications</span></div>
+        <div class="stack-item"><span class="stack-item-name">Hive</span><span class="stack-item-note">Local storage</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLISHED WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag">Published work</div>
+      <div class="section-note">2 platforms · 4 live deployments</div>
+    </div>
+
+    <h2 class="stitle reveal" style="margin-bottom:16px;">
+      Build once, <em>ship for two</em>
+    </h2>
+
+    <p class="apps-lead reveal" style="margin-bottom:36px;">
+      Each card below is one platform I built — the architecture, features, and backend are
+      written once. The switch inside picks which live deployment of it you're looking at.
+    </p>
+
+    <div class="platform-grid">
+
+      <!-- PLATFORM 1: Tutor LMS (Yalla Arabi / Hawy El-Oloom) -->
+      <div class="platform-card reveal" data-platform="lms" tabindex="0" role="button" aria-label="View Yalla Arabi / Hawy El-Oloom details">
+        <div class="platform-top">
+          <div class="platform-media">
+            <img id="lmsImg" src="assets/yalla_final.jpg" alt="Yalla Arabi app icon" loading="lazy" />
+          </div>
+          <div class="platform-heading">
+            <div class="platform-label">Tutor LMS platform</div>
+            <div class="platform-name" id="lmsName">Yalla Arabi</div>
+            <span class="platform-status">Live</span>
+          </div>
+        </div>
+
+        <div class="platform-body">
+          <p class="platform-desc">
+            A white-label learning-management app for private tutors, on <strong>Flutter</strong>
+            with a shared <strong>Laravel</strong> backend. Built once, then re-branded and deployed
+            for two independent tutors teaching different subjects.
+          </p>
+
+          <div class="platform-features">
+            <span class="platform-feature">QR-code attendance</span>
+            <span class="platform-feature">Timed online exams</span>
+            <span class="platform-feature">Real-time results</span>
+            <span class="platform-feature">Subscription tracking</span>
+          </div>
+
+          <div class="variant-row">
+            <div class="variant-label">Deployed as</div>
+            <div class="variant-switch" role="tablist" aria-label="Choose deployment">
+              <button class="variant-btn active" role="tab" aria-selected="true" data-variant="yalla" data-target="lms">Yalla Arabi</button>
+              <button class="variant-btn" role="tab" aria-selected="false" data-variant="hawy" data-target="lms">Hawy El-Oloom</button>
+            </div>
+            <div class="variant-actions">
+              <a href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi" target="_blank" rel="noopener" class="platform-store-btn" id="lmsStoreLink" aria-label="Open on Google Play">Open on Google Play ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PLATFORM 2: MN Learning (CS1 / CS2) -->
+      <div class="platform-card reveal" data-platform="mn" tabindex="0" role="button" aria-label="View MN Learning details">
+        <div class="platform-top">
+          <div class="platform-media">
+            <img id="mnImg" src="assets/mncs_final.jpg" alt="MN Learning app icon" loading="lazy" />
+          </div>
+          <div class="platform-heading">
+            <div class="platform-label">MN Learning platform</div>
+            <div class="platform-name" id="mnName">MN – CS1</div>
+            <span class="platform-status">Live</span>
+          </div>
+        </div>
+
+        <div class="platform-body">
+          <p class="platform-desc">
+            A course-companion app for Computer Science students at <strong>Minia University</strong>,
+            built with Flutter. One codebase, reused each year with that year's course material.
+          </p>
+
+          <div class="platform-features">
+            <span class="platform-feature">Course resource library</span>
+            <span class="platform-feature">Simple, focused navigation</span>
+            <span class="platform-feature">Offline-friendly</span>
+          </div>
+
+          <div class="variant-row">
+            <div class="variant-label">Deployed as</div>
+            <div class="variant-switch" role="tablist" aria-label="Choose deployment">
+              <button class="variant-btn active" role="tab" aria-selected="true" data-variant="cs1" data-target="mn">Year 1 · 500+ dl</button>
+              <button class="variant-btn" role="tab" aria-selected="false" data-variant="cs2" data-target="mn">Year 2 · 100+ dl</button>
+            </div>
+            <div class="variant-actions">
+              <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain" target="_blank" rel="noopener" class="platform-store-btn" id="mnStoreLink" aria-label="Open on Google Play">Open on Google Play ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="platform-shared-note reveal">4 listings live on Google Play, built from these 2 codebases</p>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN SOURCE -->
+<section id="oss">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag">Open source</div>
+      <div class="section-note">github.com/mina-nabil-dev</div>
+    </div>
+
+    <h2 class="stitle reveal" style="margin-bottom:44px;">
+      Smaller builds, <em>public repos</em>
+    </h2>
+
+    <div class="oss-list reveal">
+      <a href="https://github.com/mina-nabil-dev/MotoRent" target="_blank" rel="noopener" class="oss-row" aria-label="MotoRent on GitHub">
+        <span class="oss-idx">01</span>
+        <div class="oss-main">
+          <div class="oss-name">MotoRent</div>
+          <div class="oss-desc">Car rental app with booking flows and a structured Flutter architecture</div>
+        </div>
+        <div class="oss-tags"><span class="oss-tag">Flutter</span><span class="oss-tag">Firebase</span></div>
+        <span class="oss-arr">↗</span>
+      </a>
+
+      <a href="https://github.com/mina-nabil-dev/EasyGPS" target="_blank" rel="noopener" class="oss-row" aria-label="EasyGPS on GitHub">
+        <span class="oss-idx">02</span>
+        <div class="oss-main">
+          <div class="oss-name">EasyGPS</div>
+          <div class="oss-desc">Location and real-time tracking app with Google Maps integration</div>
+        </div>
+        <div class="oss-tags"><span class="oss-tag">Flutter</span><span class="oss-tag">Maps API</span></div>
+        <span class="oss-arr">↗</span>
+      </a>
+
+      <a href="https://github.com/mina-nabil-dev/EasyTaskToDo-flutter" target="_blank" rel="noopener" class="oss-row" aria-label="EasyTaskToDo on GitHub">
+        <span class="oss-idx">03</span>
+        <div class="oss-main">
+          <div class="oss-name">EasyTaskToDo</div>
+          <div class="oss-desc">Task manager with local storage and offline-friendly functionality</div>
+        </div>
+        <div class="oss-tags"><span class="oss-tag">Flutter</span><span class="oss-tag">Hive</span></div>
+        <span class="oss-arr">↗</span>
+      </a>
+
+      <a href="https://github.com/mina-nabil-dev/EasyCalculator" target="_blank" rel="noopener" class="oss-row" aria-label="EasyCalculator on GitHub">
+        <span class="oss-idx">04</span>
+        <div class="oss-main">
+          <div class="oss-name">EasyCalculator</div>
+          <div class="oss-desc">Calculator project focused on programming fundamentals in C++</div>
+        </div>
+        <div class="oss-tags"><span class="oss-tag">C++</span></div>
+        <span class="oss-arr">↗</span>
+      </a>
+
+      <a href="https://github.com/mina-nabil-dev/EasyBooklet" target="_blank" rel="noopener" class="oss-row" aria-label="EasyBooklet on GitHub">
+        <span class="oss-idx">05</span>
+        <div class="oss-main">
+          <div class="oss-name">EasyBooklet</div>
+          <div class="oss-desc">Lightweight stories reader with a responsive HTML and CSS interface</div>
+        </div>
+        <div class="oss-tags"><span class="oss-tag">HTML</span><span class="oss-tag">CSS</span></div>
+        <span class="oss-arr">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag">Contact</div>
+    </div>
+
+    <h2 class="stitle reveal" style="margin-bottom:44px;">
+      Have a mobile app <em>in mind?</em>
+    </h2>
+
+    <div class="contact-grid reveal">
+      <a href="https://linkedin.com/in/mina-nabil-97bb1b300" target="_blank" rel="noopener" class="c-card" aria-label="LinkedIn">
+        <div class="c-ico">💼</div>
+        <div>
+          <div class="c-name">LinkedIn <span style="color:var(--ink-faint);">↗</span></div>
+          <div class="c-handle">mina-nabil-97bb1b300</div>
+        </div>
+      </a>
+
+      <a href="https://github.com/mina-nabil-dev" target="_blank" rel="noopener" class="c-card" aria-label="GitHub">
+        <div class="c-ico">🐙</div>
+        <div>
+          <div class="c-name">GitHub <span style="color:var(--ink-faint);">↗</span></div>
+          <div class="c-handle">@mina-nabil-dev</div>
+        </div>
+      </a>
+
+      <a href="https://www.facebook.com/profile.php?id=61550226644154" target="_blank" rel="noopener" class="c-card" aria-label="Facebook">
+        <div class="c-ico">📘</div>
+        <div>
+          <div class="c-name">Facebook <span style="color:var(--ink-faint);">↗</span></div>
+          <div class="c-handle">Mina Nabil</div>
+        </div>
+      </a>
+
+      <div class="c-card" style="cursor:default;">
+        <div class="c-ico">📍</div>
+        <div>
+          <div class="c-name">Location</div>
+          <div class="c-handle">Minya, Egypt · Remote</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- App detail modal (was referenced by JS but missing from markup) -->
+<div class="detail-overlay" id="detailOverlay" aria-hidden="true">
+  <div class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <button class="detail-close" id="detailClose" aria-label="Close">✕</button>
+    <div class="detail-top">
+      <div class="detail-media"><img id="detailImg" src="" alt="" /></div>
+      <div class="detail-heading">
+        <h3 class="detail-title" id="detailTitle"></h3>
+        <div class="detail-badges" id="detailBadges"></div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <p class="detail-desc" id="detailDesc"></p>
+      <div class="detail-features" id="detailFeatures"></div>
+      <div class="detail-meta-row">
+        <span id="detailPlatform"></span>
+        <span id="detailStat"></span>
+      </div>
+      <div class="detail-actions">
+        <a href="#" target="_blank" rel="noopener" class="platform-store-btn" id="detailStoreLink" style="flex:none;padding:11px 22px;">Open on Google Play ↗</a>
+        <button class="btn btn-line" id="detailCloseBtn" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="f-copy">© 2026 Mina Nabil — Flutter Developer</span>
+    <span class="f-status">
+      <span style="width:6px;height:6px;background:var(--live);border-radius:50%;display:inline-block;"></span>
+      Open to freelance &amp; remote collaboration
+    </span>
+  </div>
+</footer>
+
+<script>
+/* reveal-on-scroll */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ---- App detail data ---- */
+const APP_DATA = {
+  yalla: {
+    title: 'Yalla Arabi',
+    img: 'assets/yalla_final.jpg',
+    status: 'live',
+    platform: 'Shared platform · Build A',
+    stat: 'Arabic-language tutor',
+    desc: 'Learning-management app built for an Arabic-language tutor, on a Flutter front end with a Laravel backend shared across the platform-A build.',
+    features: ['QR-code attendance', 'Real-time grades & results', 'Subscription tracking', 'Push notifications'],
+    store: 'https://play.google.com/store/apps/details?id=com.platform.yallaarabi'
+  },
+  hawy: {
+    title: 'Hawy El-Oloom',
+    img: 'assets/elhawy_final.jpg',
+    status: 'live',
+    platform: 'Shared platform · Build A',
+    stat: 'Science & biology tutor',
+    desc: 'The same platform as Yalla Arabi, rebuilt and rebranded for a science and biology tutor — one backend, two independent clients.',
+    features: ['Lessons library', 'Timed online exams', 'Instant exam results', 'Attendance & subscriptions'],
+    store: 'https://play.google.com/store/apps/details?id=com.platform.elhawy'
+  },
+  cs1: {
+    title: 'MN – CS1',
+    img: 'assets/mncs_final.jpg',
+    status: 'live',
+    platform: 'Standalone build',
+    stat: '500+ downloads',
+    desc: 'Companion app for first-year Computer Science students at Minia University, built with Flutter to organize course resources in one place.',
+    features: ['Course resource library', 'Simple, focused navigation', 'Built for first-year syllabus', 'Lightweight & offline-friendly'],
+    store: 'https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain'
+  },
+  cs2: {
+    title: 'MN – CS2',
+    img: 'assets/mncs_final.jpg',
+    status: 'live',
+    platform: 'Standalone build',
+    stat: '100+ downloads',
+    desc: 'Second-year continuation of the CS1 app, carrying the same interface forward with course material for the next year of the syllabus.',
+    features: ['Course resource library', 'Consistent with CS1 UX', 'Built for second-year syllabus', 'Lightweight & offline-friendly'],
+    store: 'https://play.google.com/store/apps/details?id=com.mnu_app_year2.learntrain'
+  }
+};
+
+/* ---- Variant switch: reads data-variant + data-target off each button,
+   updates the matching card's image/name/store-link, toggles .active.
+   This listener was entirely absent before — the buttons rendered but did nothing. ---- */
+document.querySelectorAll('.variant-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;   // "lms" or "mn"
+    const variant = btn.dataset.variant; // "yalla" | "hawy" | "cs1" | "cs2"
+    const data = APP_DATA[variant];
+    if (!data) return;
+
+    btn.closest('.variant-switch').querySelectorAll('.variant-btn').forEach(b => {
+      b.classList.toggle('active', b === btn);
+      b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+    });
+
+    const img = document.getElementById(target + 'Img');
+    const name = document.getElementById(target + 'Name');
+    const storeLink = document.getElementById(target + 'StoreLink');
+
+    if (img) {
+      img.style.opacity = '0';
+      setTimeout(() => { img.src = data.img; img.alt = data.title + ' app icon'; img.style.opacity = '1'; }, 120);
+    }
+    if (name) {
+      name.style.opacity = '0';
+      setTimeout(() => { name.textContent = data.title; name.style.opacity = '1'; }, 120);
+    }
+    if (storeLink) storeLink.href = data.store;
+  });
+});
+
+const overlay = document.getElementById('detailOverlay');
+const detailImg = document.getElementById('detailImg');
+const detailTitle = document.getElementById('detailTitle');
+const detailBadges = document.getElementById('detailBadges');
+const detailDesc = document.getElementById('detailDesc');
+const detailFeatures = document.getElementById('detailFeatures');
+const detailPlatform = document.getElementById('detailPlatform');
+const detailStat = document.getElementById('detailStat');
+const detailStoreLink = document.getElementById('detailStoreLink');
+
+let lastFocused = null;
+
+function openDetail(key){
+  const app = APP_DATA[key];
+  if (!app) return;
+
+  detailImg.src = app.img;
+  detailImg.alt = app.title + ' app icon';
+  detailTitle.textContent = app.title;
+
+  detailBadges.innerHTML = '';
+  const statusBadge = document.createElement('span');
+  statusBadge.className = 'detail-badge b-live';
+  statusBadge.textContent = 'Live on Play Store';
+  detailBadges.appendChild(statusBadge);
+
+  detailDesc.textContent = app.desc;
+
+  detailFeatures.innerHTML = '';
+  app.features.forEach(f => {
+    const el = document.createElement('div');
+    el.className = 'detail-feature';
+    el.textContent = f;
+    detailFeatures.appendChild(el);
+  });
+
+  detailPlatform.textContent = app.platform;
+  detailStat.textContent = app.stat;
+  detailStoreLink.href = app.store;
+
+  lastFocused = document.activeElement;
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  document.getElementById('detailClose').focus();
+}
+
+function closeDetail(){
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+  if (lastFocused) lastFocused.focus();
+}
+
+function activeVariantKeyFor(card){
+  const activeBtn = card.querySelector('.variant-btn.active');
+  if (activeBtn) return activeBtn.dataset.variant;
+  return card.dataset.platform === 'lms' ? 'yalla' : 'cs1';
+}
+
+document.querySelectorAll('.platform-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    /* let the variant switch and the store link handle their own clicks */
+    if (e.target.closest('.variant-switch') || e.target.closest('.platform-store-btn')) return;
+    openDetail(activeVariantKeyFor(card));
+  });
+  card.addEventListener('keydown', (e) => {
+    if (e.target !== card) return;
+    if (e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      openDetail(activeVariantKeyFor(card));
+    }
+  });
+});
+
+const detailCloseBtnEl = document.getElementById('detailClose');
+const detailCloseBtnFooter = document.getElementById('detailCloseBtn');
+if (detailCloseBtnEl) detailCloseBtnEl.addEventListener('click', closeDetail);
+if (detailCloseBtnFooter) detailCloseBtnFooter.addEventListener('click', closeDetail);
+
+if (overlay) {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeDetail();
+  });
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) closeDetail();
+});
+</script>
+
+</body>
+</html>
