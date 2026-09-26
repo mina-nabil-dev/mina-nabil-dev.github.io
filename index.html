@@ -726,6 +726,26 @@ html[lang="ar"] .cine-apps-lead{ font-family:var(--arabic); }
 }
 .mh-slot:not(.is-active):hover > .mh-card{ filter:brightness(.9); }
 
+/* ── Mobile: strip everything that triggers GPU repaints on card switch ── */
+@media (hover:none){
+  /* No box-shadow transition — this is the #1 jank cause when switching cards.
+     color-mix() in animated box-shadow forces a recalc + repaint every frame. */
+  .mh-slot > .mh-card{
+    transition:filter .25s ease;           /* filter only, fast */
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.10),     /* static border, no color-mix */
+      0 20px 40px -16px rgba(0,0,0,.85);  /* static shadow, no recalc */
+  }
+  /* Active card: simple outline ring using a CSS border trick — zero GPU cost */
+  .mh-slot.is-active > .mh-card{
+    box-shadow:
+      0 0 0 2px rgba(142,155,255,.55),     /* static lavender ring instead of color-mix */
+      0 24px 48px -16px rgba(0,0,0,.9);
+    filter:none;
+    transition:none;                        /* instant switch, no animated repaint */
+  }
+}
+
 .mh-card-media{
   position:relative;
   flex:none;
@@ -2196,13 +2216,29 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     if (p.nameLang === 'ar') label.dir = 'rtl';
 
     const img = slot.querySelector('img');
-    img.src = p.img;
+    // On mobile: only the first occurrence of each project image loads eagerly;
+    // duplicates (same project repeated around the ring) load deferred.
+    // This avoids simultaneously decoding S images on a low-power device.
+    const isFirstOfProject = (s % N) === s;  // first N slots = first occurrence
+    if (!isMobile || isFirstOfProject){
+      img.src = p.img;
+    } else {
+      img.dataset.src = p.img;   // will be swapped in by the reveal observer below
+    }
+    // On mobile: skip the reflection clone entirely — it doubles the DOM nodes and
+    // forces the browser to paint an extra image + box-shadow per visible slot.
+    if (!isMobile){
+      slot.querySelector('.mh-reflect').appendChild(slot.querySelector('.mh-card').cloneNode(true));
+    } else {
+      // Remove the reflect and pool elements to reduce layer count
+      const reflect = slot.querySelector('.mh-reflect');
+      const pool    = slot.querySelector('.mh-pool');
+      if (reflect) reflect.remove();
+      if (pool)    pool.remove();
+    }
     slot.querySelector('.mh-chip').textContent = p.chip;
     slot.querySelector('.mh-cap-kind').textContent = p.kind;
     slot.querySelector('.mh-cap-stack').textContent = p.stack;
-
-    // the reflection is a flipped copy of the finished card
-    slot.querySelector('.mh-reflect').appendChild(slot.querySelector('.mh-card').cloneNode(true));
 
     slot.dataset.slot = s;
     ring.appendChild(slot);
@@ -2299,25 +2335,31 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   function setActive(idx, quiet){
     activeIdx = idx;
     const p = projects[idx];
-    if (numEl) numEl.textContent = String(idx + 1).padStart(2, '0');
-    dots.forEach((d, i) => {
-      d.classList.toggle('active', i === idx);
-      if (i === idx) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
-    });
+    // Defer DOM writes to outside the render/rAF callback.
+    // On mobile this prevents style recalc from stacking on top of transform writes.
+    const doUpdate = () => {
+      if (numEl) numEl.textContent = String(idx + 1).padStart(2, '0');
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === idx);
+        if (i === idx) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+      });
 
-    titleEl.textContent = p.name;
-    titleEl.lang = p.nameLang;
-    titleEl.dir  = p.nameLang === 'ar' ? 'rtl' : 'ltr';
-    subEl.textContent = isArabic() && p.subAr ? p.subAr : p.sub;
-    linkEl.href = p.link;
-    linkEl.textContent = (isArabic() && p.linkLabelAr ? p.linkLabelAr : p.linkLabel) + ' ↗';
-    detailsBtn.setAttribute('aria-label', (isArabic() ? 'عرض تفاصيل ' : 'View details: ') + p.name);
+      titleEl.textContent = p.name;
+      titleEl.lang = p.nameLang;
+      titleEl.dir  = p.nameLang === 'ar' ? 'rtl' : 'ltr';
+      subEl.textContent = isArabic() && p.subAr ? p.subAr : p.sub;
+      linkEl.href = p.link;
+      linkEl.textContent = (isArabic() && p.linkLabelAr ? p.linkLabelAr : p.linkLabel) + ' ↗';
+      detailsBtn.setAttribute('aria-label', (isArabic() ? 'عرض تفاصيل ' : 'View details: ') + p.name);
 
-    if (!quiet && !reduceMotion.matches && titleEl.animate){
-      const lift = [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }];
-      titleEl.animate(lift, { duration: 380, easing: 'cubic-bezier(.2,.8,.2,1)' });
-      subEl.animate(lift, { duration: 380, delay: 40, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
-    }
+      if (!quiet && !reduceMotion.matches && titleEl.animate){
+        const lift = [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }];
+        titleEl.animate(lift, { duration: 320, easing: 'cubic-bezier(.2,.8,.2,1)' });
+        subEl.animate(lift, { duration: 320, delay: 30, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
+      }
+    };
+    // On mobile: defer to next task (after paint) to avoid layout thrash inside rAF
+    if (isMobile) setTimeout(doUpdate, 0); else doUpdate();
   }
 
   // announce only once the ring has come to rest, not every card it passes
@@ -2497,10 +2539,21 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
       section.classList.toggle('is-offscreen', !entry.isIntersecting);
       if (entry.isIntersecting && entry.intersectionRatio >= 0.35 && !introDone){
         introDone = true;
-        if (reduceMotion.matches || mode !== 'idle'){ pos = Math.round(pos); render(); return; }
+        // On mobile: skip the 2.6s intro spin — it's 2600ms of continuous rAF
+        // on a low-power GPU. Snap directly to position 0.
+        if (isMobile || reduceMotion.matches || mode !== 'idle'){
+          pos = Math.round(pos); render(); return;
+        }
         mode = 'tween';
         tween = { from: pos, to: 0, start: performance.now() + 120, dur: 2600 };
         kick();
+      }
+      // Load deferred images when the ring enters the viewport
+      if (entry.isIntersecting && isMobile){
+        slots.forEach(sl => {
+          const img = sl.el.querySelector('img');
+          if (img && img.dataset.src){ img.src = img.dataset.src; delete img.dataset.src; }
+        });
       }
     });
   }, { threshold: [0, 0.35] });
