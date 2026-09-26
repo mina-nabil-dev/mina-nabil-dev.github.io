@@ -691,6 +691,11 @@ html[lang="ar"] .cine-apps-lead{ font-family:var(--arabic); }
 }
 .mh-label:lang(ar){ font-family:var(--arabic); font-size:13px; font-weight:600; letter-spacing:0; }
 .mh-slot.is-active .mh-label{ color:#fff; text-shadow:0 0 14px rgba(142,155,255,.75); }
+/* Mobile: kill the text-shadow glow — it flashes visibly on every card switch */
+@media (hover:none){
+  .mh-label{ transition:color .15s ease; }          /* color only, no shadow */
+  .mh-slot.is-active .mh-label{ text-shadow:none; } /* no glow pulse */
+}
 
 .mh-card{
   position:absolute;
@@ -711,12 +716,6 @@ html[lang="ar"] .cine-apps-lead{ font-family:var(--arabic); }
   /* Promote each card to its own compositor layer */
   will-change:filter;
 }
-/* On mobile: skip the filter pass entirely (big perf win) */
-@media (hover:none){
-  .mh-slot > .mh-card{ will-change:auto; filter:brightness(.72); }
-  .mh-slot.is-active > .mh-card{ filter:none; }
-  .mh-slot:not(.is-active):hover > .mh-card{ filter:brightness(.85); }
-}
 .mh-slot.is-active > .mh-card{
   filter:none;
   box-shadow:
@@ -726,24 +725,35 @@ html[lang="ar"] .cine-apps-lead{ font-family:var(--arabic); }
 }
 .mh-slot:not(.is-active):hover > .mh-card{ filter:brightness(.9); }
 
-/* ── Mobile: strip everything that triggers GPU repaints on card switch ── */
+/* ════════════════════════════════════════════════════════════
+   MOBILE CARD STATE — all transitions removed to kill flicker.
+   The flash when switching cards comes from filter:brightness
+   triggering a GPU repaint. We switch to opacity instead:
+   opacity is compositor-only and never causes a repaint.
+   ════════════════════════════════════════════════════════════ */
 @media (hover:none){
-  /* No box-shadow transition — this is the #1 jank cause when switching cards.
-     color-mix() in animated box-shadow forces a recalc + repaint every frame. */
+  /* Dim inactive cards with opacity (compositor) not filter (GPU repaint) */
   .mh-slot > .mh-card{
-    transition:filter .25s ease;           /* filter only, fast */
+    opacity:.55;
+    filter:none;           /* never use filter on mobile */
+    will-change:auto;
+    transition:none;       /* ZERO transitions — instant state changes, no flash */
     box-shadow:
-      0 0 0 1px rgba(255,255,255,.10),     /* static border, no color-mix */
-      0 20px 40px -16px rgba(0,0,0,.85);  /* static shadow, no recalc */
+      0 0 0 1px rgba(255,255,255,.10),
+      0 16px 32px -12px rgba(0,0,0,.8);
   }
-  /* Active card: simple outline ring using a CSS border trick — zero GPU cost */
+  /* Active card: full opacity + static border ring, no transitions */
   .mh-slot.is-active > .mh-card{
-    box-shadow:
-      0 0 0 2px rgba(142,155,255,.55),     /* static lavender ring instead of color-mix */
-      0 24px 48px -16px rgba(0,0,0,.9);
+    opacity:1;
     filter:none;
-    transition:none;                        /* instant switch, no animated repaint */
+    transition:none;
+    box-shadow:
+      0 0 0 2px rgba(142,155,255,.6),
+      0 20px 40px -14px rgba(0,0,0,.85);
   }
+  /* Slot itself dims/brightens via opacity — drives the whole effect */
+  .mh-slot{ opacity:.85; transition:none; }
+  .mh-slot.is-active{ opacity:1; }
 }
 
 .mh-card-media{
@@ -811,6 +821,11 @@ html[lang="ar"] .cine-apps-lead{ font-family:var(--arabic); }
   border-radius:50%;
   background:var(--glow);
   box-shadow:0 0 8px var(--glow);
+}
+/* Mobile: no glow box-shadow — triggers a paint pass per card on every opacity change */
+@media (hover:none){
+  .mh-cap-kind{ color:rgba(200,210,255,.8); } /* static colour, no color-mix recalc */
+  .mh-cap-kind::before{ box-shadow:none; }     /* no glow dot — eliminates per-card repaint */
 }
 .mh-cap-stack{ font-size:10px; color:var(--mh-faint); }
 
