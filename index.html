@@ -195,7 +195,7 @@ header{
   top:0;
   z-index:50;
   background:rgba(7,8,31,.72);
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(6px);
   border-bottom:1px solid var(--line);
 }
 
@@ -521,8 +521,8 @@ h1.name em{
 .orb:nth-child(5){ bottom:-14px; right:22%; animation-duration:6.8s; animation-delay:-3.5s; font-size:14px; }
 
 @keyframes float-orb{
-  0%,100%{ transform:translateY(0px);    box-shadow:0 4px 16px -4px rgba(23,23,18,.18); }
-  50%{     transform:translateY(-10px);   box-shadow:0 14px 28px -4px rgba(37,69,232,.15); }
+  0%,100%{ transform:translateY(0px); }
+  50%{     transform:translateY(-10px); }
 }
 
 @media (max-width:1000px){
@@ -817,7 +817,7 @@ html[lang="ar"] .cine-apps-lead{ font-family:var(--arabic); }
 .mh-slot.is-active .mh-reflect{ opacity:.78; }
 .mh-reflect > .mh-card{
   transform:scaleY(-1);
-  filter:blur(1.2px) saturate(1.25);
+  filter:saturate(1.25);
 }
 /* moving wave lines break the reflection up like a still pool */
 .mh-reflect::after{
@@ -1517,6 +1517,9 @@ footer .wrap{
 @media (prefers-reduced-motion:reduce){
   html{ scroll-behavior:auto; }
   .reveal{ opacity:1; transform:none; transition:none; }
+  .hero-3d-card::before,
+  .orb,
+  .manifest-head::before{ animation:none; }
 }
 
 @media (max-width:640px){
@@ -1788,7 +1791,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
       <p>Luxury limo booking website · Next.js &amp; Supabase · USA</p>
       <a href="https://davesnashvillelimo.com/" tabindex="-1" data-ar="الموقع">Website</a>
     </li>
-    <li data-key="talabat" data-img="assets/talabat_final.png" data-glow="#ff8a1f" data-chip="Live" data-kind="Delivery app" data-stack="Next.js · Supabase · PWA"
+    <li data-key="talabat" data-img="assets/talabat_final.jpg" data-glow="#ff8a1f" data-chip="Live" data-kind="Delivery app" data-stack="Next.js · Supabase · PWA"
         data-sub-ar="منصة توصيل محلية · Next.js و Supabase · منشور">
       <strong lang="ar" dir="rtl">طلبات نزلة عبيد</strong>
       <p>Local delivery marketplace · Next.js &amp; Supabase · Live</p>
@@ -2044,6 +2047,7 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   if (!scene || !card) return;
 
   const MAX_TILT = 12; // degrees
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   scene.addEventListener('mousemove', (e) => {
     const rect = scene.getBoundingClientRect();
@@ -2062,19 +2066,31 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     setTimeout(() => { card.style.transition = ''; }, 600);
   });
 
-  /* Subtle idle float when mouse is far away */
+  /* Subtle idle float when mouse is far away — paused off-screen and for reduced motion,
+     instead of ticking requestAnimationFrame forever regardless of visibility. */
   let idleT = 0;
   let idle  = true;
+  let onScreen = true;
+  let raf = 0;
   scene.addEventListener('mouseenter', () => { idle = false; });
   scene.addEventListener('mouseleave', () => { idle = true; });
-  (function idleFloat(){
+
+  function idleFloat(){
+    raf = 0;
     if (idle) {
       idleT += 0.012;
       const f = Math.sin(idleT) * 4;
       card.style.transform = `rotateX(${f * 0.5}deg) rotateY(${f}deg)`;
     }
-    requestAnimationFrame(idleFloat);
-  })();
+    if (onScreen && !reduceMotion.matches) raf = requestAnimationFrame(idleFloat);
+  }
+
+  new IntersectionObserver((entries) => {
+    onScreen = entries[0].isIntersecting;
+    if (onScreen && !raf && !reduceMotion.matches) raf = requestAnimationFrame(idleFloat);
+  }, { threshold: 0 }).observe(scene);
+
+  if (!reduceMotion.matches) raf = requestAnimationFrame(idleFloat);
 })();
 
 /* ============================================================
@@ -2526,7 +2542,7 @@ const APP_DATA = {
   },
   talabat: {
     title: 'طلبات نزلة عبيد',
-    img: 'assets/talabat_final.png',
+    img: 'assets/talabat_final.jpg',
     status: 'live',
     platform: 'Installable web app · Next.js & Supabase',
     stat: 'Local delivery · Nazlet Obaid',
