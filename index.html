@@ -659,6 +659,8 @@ html[lang="ar"] .cine-apps-lead{ font-family:var(--arabic); }
   transform-style:preserve-3d;
   pointer-events:none;
   direction:ltr;          /* card captions are English; Arabic labels set their own dir */
+  /* GPU layer hint for smooth 3D transforms */
+  backface-visibility:hidden;
 }
 
 /* one position on the ring: label + card + light pool + reflection */
@@ -706,6 +708,14 @@ html[lang="ar"] .cine-apps-lead{ font-family:var(--arabic); }
     0 0 44px -12px color-mix(in srgb, var(--glow) 60%, transparent);
   filter:brightness(.74) saturate(.9);
   transition:filter .5s ease, box-shadow .5s ease;
+  /* Promote each card to its own compositor layer */
+  will-change:filter;
+}
+/* On mobile: skip the filter pass entirely (big perf win) */
+@media (hover:none){
+  .mh-slot > .mh-card{ will-change:auto; filter:brightness(.72); }
+  .mh-slot.is-active > .mh-card{ filter:none; }
+  .mh-slot:not(.is-active):hover > .mh-card{ filter:brightness(.85); }
 }
 .mh-slot.is-active > .mh-card{
   filter:none;
@@ -841,6 +851,23 @@ html[lang="ar"] .cine-apps-lead{ font-family:var(--arabic); }
 }
 .cine-section.is-offscreen .mh-reflect,
 .cine-section.is-offscreen .mh-reflect::after{ animation-play-state:paused; }
+
+/* ── Mobile performance: pause heavy GPU animations on touch devices ── */
+@media (hover:none){
+  /* Freeze the sway & wave animations — biggest source of jank on mobile */
+  .mh-reflect,
+  .mh-reflect::after{ animation:none; }
+  /* Drop the per-card blur pass — saves a full GPU render pass per visible slot */
+  .mh-reflect::after{ filter:none; }
+  /* Reduce reflection opacity slightly to compensate for the static look */
+  .mh-reflect{ opacity:.38; }
+  .mh-slot.is-active .mh-reflect{ opacity:.55; }
+  /* Promote ring + slots to own compositor layer */
+  .mh-ring{ will-change:transform; }
+  .mh-slot{ will-change:transform; }
+  /* Contain layout+style so off-screen slots don't affect the document */
+  .mh-slot{ contain:layout style; }
+}
 
 /* the pool darkens towards the bottom so the caption reads cleanly */
 .mh-floor{
@@ -2143,8 +2170,11 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   const N = projects.length;
   if (!N) return;
 
-  // Repeat the list so the ring has ~18 slots (20° apart) and wraps seamlessly.
-  const S    = N * Math.max(1, Math.round(18 / N));
+  // On touch/mobile devices use fewer ring slots to reduce DOM + GPU work.
+  const isMobile = window.matchMedia('(hover:none)').matches;
+  // Desktop: ~18 slots (20° apart). Mobile: ~10 slots (36° apart) — fewer nodes to transform.
+  const TARGET_SLOTS = isMobile ? 10 : 18;
+  const S    = N * Math.max(1, Math.round(TARGET_SLOTS / N));
   const STEP = 360 / S;
   const RAD  = Math.PI / 180;
 
@@ -2300,6 +2330,10 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   const SPRING = 6.5;        // rad/s, critically damped
   let raf = 0, last = 0;
   let tween = null;
+  // Mobile: throttle renders during drag to ~30 fps to reduce GPU pressure.
+  // Spring/tween still runs at full speed for a snappy snap-to-card feel.
+  let lastRenderT = 0;
+  const MOBILE_DRAG_INTERVAL = isMobile ? 33 : 0; // ~30fps on mobile, uncapped on desktop
 
   function kick(){
     if (!raf){ last = performance.now(); raf = requestAnimationFrame(tick); }
@@ -2319,7 +2353,10 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
         pos += vel * h;
         dt -= h;
       }
-      if (Math.abs(pos - target) < 0.0008 && Math.abs(vel) < 0.01){
+      // Relax settle threshold slightly on mobile — fewer render calls near rest
+      const settleDist = isMobile ? 0.003 : 0.0008;
+      const settleVel  = isMobile ? 0.03  : 0.01;
+      if (Math.abs(pos - target) < settleDist && Math.abs(vel) < settleVel){
         pos = target; vel = 0; mode = 'idle';
         settled();
       }
@@ -2330,7 +2367,12 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
       if (t >= 1){ pos = tween.to; mode = 'idle'; tween = null; settled(); }
     }
 
-    render();
+    // Throttle render during drag on mobile; spring/tween always renders
+    if (mode === 'drag' && MOBILE_DRAG_INTERVAL > 0){
+      if (now - lastRenderT >= MOBILE_DRAG_INTERVAL){ lastRenderT = now; render(); }
+    } else {
+      render();
+    }
     if (mode === 'spring' || mode === 'tween') raf = requestAnimationFrame(tick);
   }
 
