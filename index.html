@@ -256,13 +256,16 @@ nav.wrap{
 /* ============================================
    HERO
    ============================================ */
+/* ============================================
+   HERO — Text left, 3D Profile Card right
+   ============================================ */
 .hero{
-  padding-top:96px;
-  padding-bottom:88px;
+  padding-top:88px;
+  padding-bottom:80px;
   display:grid;
-  grid-template-columns:1.35fr 1fr;
-  gap:64px;
-  align-items:end;
+  grid-template-columns:1.2fr 1fr;
+  gap:72px;
+  align-items:center;
 }
 
 .eyebrow{
@@ -298,10 +301,10 @@ h1.name em{
 }
 
 .hero-lede{
-  font-size:18px;
+  font-size:17px;
   color:var(--ink-soft);
   max-width:52ch;
-  line-height:1.6;
+  line-height:1.65;
   margin-bottom:36px;
 }
 
@@ -342,12 +345,100 @@ h1.name em{
 }
 .btn-line:hover{ border-color:var(--ink); transform:translateY(-2px); }
 
-/* hero side: a manifest, not a stat-brag */
+/* ============================================
+   3D HERO CARD — Profile photo + manifest
+   ============================================ */
+.hero-3d-scene{
+  perspective: 900px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
+.hero-3d-card{
+  position:relative;
+  width:100%;
+  max-width:340px;
+  transform-style:preserve-3d;
+  transition:transform .08s linear;
+  will-change:transform;
+  cursor:default;
+}
+
+/* Ambient glow behind the card */
+.hero-3d-card::before{
+  content:'';
+  position:absolute;
+  inset:-20px;
+  border-radius:32px;
+  background:radial-gradient(ellipse at 60% 40%, rgba(37,69,232,.18) 0%, transparent 70%);
+  z-index:-1;
+  filter:blur(20px);
+  pointer-events:none;
+  animation: glow-pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse{
+  from{ opacity:.6; transform:scale(.95); }
+  to{   opacity:1;  transform:scale(1.05); }
+}
+
+/* Profile photo area */
+.hero-photo-wrap{
+  border-radius:20px 20px 0 0;
+  overflow:hidden;
+  background:#0f0f14;
+  position:relative;
+  height:340px;
+}
+
+.hero-photo-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+}
+
+/* Subtle gradient over photo bottom */
+.hero-photo-wrap::after{
+  content:'';
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:80px;
+  background:linear-gradient(to top, var(--surface), transparent);
+  pointer-events:none;
+}
+
+/* manifest.json card below photo */
 .manifest{
   border:1px solid var(--line);
-  border-radius:8px;
+  border-top:none;
+  border-radius:0 0 20px 20px;
   background:var(--surface);
   overflow:hidden;
+  box-shadow:0 24px 48px -12px rgba(23,23,18,.22), 0 0 0 1px rgba(37,69,232,.06);
+}
+
+/* When inside 3D card, add top border */
+.hero-3d-card .manifest{
+  border-top:1px solid var(--line);
+  border-radius:0 0 20px 20px;
+  box-shadow: none;
+}
+
+.hero-3d-card-inner{
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 24px 56px -16px rgba(23,23,18,.3), 0 0 0 1px rgba(37,69,232,.07);
+  background:var(--surface);
+  transition:box-shadow .3s ease;
+}
+
+.hero-3d-card:hover .hero-3d-card-inner{
+  box-shadow:0 32px 72px -16px rgba(37,69,232,.2), 0 0 0 1px rgba(37,69,232,.14);
 }
 
 .manifest-head{
@@ -355,19 +446,36 @@ h1.name em{
   font-size:11px;
   color:var(--ink-faint);
   letter-spacing:.06em;
-  padding:14px 20px;
+  padding:12px 20px;
   border-bottom:1px solid var(--line);
   background:var(--paper-dim);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.manifest-head::before{
+  content:'';
+  width:8px; height:8px;
+  border-radius:50%;
+  background:var(--signal);
+  opacity:.7;
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dot-pulse{
+  0%,100%{ opacity:.4; transform:scale(1); }
+  50%{      opacity:1;  transform:scale(1.3); }
 }
 
 .manifest-row{
   display:flex;
   justify-content:space-between;
   gap:16px;
-  padding:16px 20px;
+  padding:13px 20px;
   border-bottom:1px solid var(--line-soft);
   font-family:var(--mono);
-  font-size:13px;
+  font-size:12.5px;
 }
 
 .manifest-row:last-child{ border-bottom:none; }
@@ -375,9 +483,542 @@ h1.name em{
 .manifest-k{ color:var(--ink-faint); }
 .manifest-v{ color:var(--ink); text-align:right; }
 
-@media (max-width:860px){
-  .hero{ grid-template-columns:1fr; padding-top:56px; padding-bottom:56px; gap:40px; }
+/* Floating tech orbs orbiting the card */
+.hero-orbs{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:visible;
 }
+
+.orb{
+  position:absolute;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:40px; height:40px;
+  border-radius:50%;
+  background:var(--surface);
+  border:1px solid var(--line);
+  box-shadow:0 4px 16px -4px rgba(23,23,18,.18);
+  font-size:13px;
+  font-family:var(--mono);
+  font-weight:500;
+  color:var(--ink-soft);
+  font-size:10px;
+  letter-spacing:.01em;
+  animation:float-orb linear infinite;
+}
+
+.orb:nth-child(1){ top:-16px; left:-14px;  animation-duration:5.5s; animation-delay:0s;    font-size:14px; }
+.orb:nth-child(2){ top:28%;  right:-20px;  animation-duration:6.2s; animation-delay:-1.3s; font-size:14px; }
+.orb:nth-child(3){ bottom:18%; left:-22px; animation-duration:7s;   animation-delay:-2.8s; font-size:14px; }
+.orb:nth-child(4){ top:60%;  right:-18px;  animation-duration:5.8s; animation-delay:-0.7s; font-size:11px; }
+.orb:nth-child(5){ bottom:-14px; right:22%; animation-duration:6.8s; animation-delay:-3.5s; font-size:14px; }
+
+@keyframes float-orb{
+  0%,100%{ transform:translateY(0px);    box-shadow:0 4px 16px -4px rgba(23,23,18,.18); }
+  50%{     transform:translateY(-10px);   box-shadow:0 14px 28px -4px rgba(37,69,232,.15); }
+}
+
+@media (max-width:1000px){
+  .hero{ grid-template-columns:1fr 0.85fr; gap:48px; }
+}
+
+@media (max-width:860px){
+  .hero{ grid-template-columns:1fr; padding-top:56px; padding-bottom:56px; gap:48px; }
+  .hero-3d-scene{ max-width:320px; margin:0 auto; }
+  .orb:nth-child(1),.orb:nth-child(3),.orb:nth-child(5){ display:none; }
+}
+
+/* ============================================
+   WORK — "Mirror Hall" 360° ring
+   The camera stands at the centre of a ring of cards, so the
+   focused card is the farthest one and its neighbours curve in
+   towards the viewer. The cards stand on a dark reflective pool.
+   Ring geometry (radius, card size, horizon) is measured in JS
+   and handed to CSS as variables, so the 3D math lives in one place.
+   ============================================ */
+.cine-section{
+  --mh-ink:#eef0ff;
+  --mh-muted:rgba(226,230,255,.64);
+  --mh-faint:rgba(226,230,255,.4);
+  --mh-accent:#8e9bff;
+  --mh-r:700px;
+  --mh-w:208px;
+  --mh-h:270px;
+  --mh-horizon:168px;
+  --mh-stage-h:520px;
+  --mh-overlap:100px;
+
+  position:relative;
+  overflow:hidden;
+  padding:88px 0 64px;
+  scroll-margin-top:70px;
+  color:var(--mh-ink);
+  background:
+    radial-gradient(80% 55% at 50% 0%, #1e2280 0%, #11144c 36%, rgba(11,12,44,0) 72%),
+    linear-gradient(180deg, #0b0c2e 0%, #07081f 46%, #030410 100%);
+}
+
+/* fine star dust */
+.cine-section::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.28), transparent),
+    radial-gradient(1.5px 1.5px at 75% 20%, rgba(142,155,255,.35), transparent),
+    radial-gradient(1px 1px at 45% 65%, rgba(255,255,255,.2), transparent),
+    radial-gradient(1.2px 1.2px at 85% 75%, rgba(255,255,255,.3), transparent),
+    radial-gradient(1px 1px at 10% 85%, rgba(142,155,255,.25), transparent);
+  background-size:600px 600px;
+  pointer-events:none;
+  opacity:.55;
+}
+
+.cine-section .wrap{ position:relative; z-index:2; }
+
+/* ── Heading ── */
+.cine-head{ text-align:center; max-width:920px; }
+
+.cine-eyebrow{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:6px 14px;
+  margin-bottom:22px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--mh-faint);
+}
+.cine-eyebrow b{ font-weight:500; color:var(--mh-ink); }
+
+.cine-section .stitle{
+  color:#fff;
+  font-size:clamp(34px,5vw,60px);
+  font-weight:500;
+  letter-spacing:-.015em;
+  line-height:1.04;
+}
+.cine-section .stitle em{ color:var(--mh-accent); }
+
+.cine-apps-lead{
+  max-width:58ch;
+  margin:18px auto 0;
+  font-family:var(--body);
+  font-size:15px;
+  line-height:1.65;
+  color:var(--mh-muted);
+}
+
+html[lang="ar"] .cine-eyebrow{ font-family:var(--arabic); font-size:13px; letter-spacing:0; }
+html[lang="ar"] .cine-apps-lead{ font-family:var(--arabic); }
+
+/* ── 3D stage ── */
+.cine-viewport{
+  position:relative;
+  height:var(--mh-stage-h);
+  margin-top:12px;
+  overflow:hidden;
+  perspective:var(--mh-r);
+  perspective-origin:50% var(--mh-horizon);
+  cursor:grab;
+  touch-action:pan-y;
+  user-select:none;
+  -webkit-user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  /* cards dissolve into the dark at both edges */
+  -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+          mask-image:linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+}
+.cine-viewport.is-dragging{ cursor:grabbing; }
+.cine-viewport:focus-visible{ outline:2px solid var(--mh-accent); outline-offset:-4px; }
+
+/* soft light behind the ring, sits on the horizon */
+.mh-haze{
+  position:absolute;
+  left:50%;
+  top:var(--mh-horizon);
+  width:min(1100px,130%);
+  height:calc(var(--mh-h) * 1.5);
+  transform:translate(-50%,-50%);
+  background:radial-gradient(closest-side, rgba(88,102,255,.2), rgba(88,102,255,0));
+  pointer-events:none;
+}
+
+.mh-ring{
+  position:absolute;
+  inset:0;
+  transform-style:preserve-3d;
+  pointer-events:none;
+  direction:ltr;          /* card captions are English; Arabic labels set their own dir */
+}
+
+/* one position on the ring: label + card + light pool + reflection */
+.mh-slot{
+  position:absolute;
+  left:50%;
+  top:calc(var(--mh-horizon) - var(--mh-h) * .34);   /* eye level sits a third of the way down the card */
+  width:var(--mh-w);
+  height:var(--mh-h);
+  margin-left:calc(var(--mh-w) / -2);
+  backface-visibility:hidden;
+  pointer-events:auto;
+  cursor:pointer;
+  visibility:hidden;                                  /* JS reveals the slots in front of the camera */
+}
+
+.mh-label{
+  position:absolute;
+  left:50%;
+  bottom:calc(100% + 12px);
+  transform:translateX(-50%);
+  font:500 10.5px/1 var(--mono);
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  white-space:nowrap;
+  color:var(--mh-faint);
+  transition:color .45s ease, text-shadow .45s ease;
+}
+.mh-label:lang(ar){ font-family:var(--arabic); font-size:13px; font-weight:600; letter-spacing:0; }
+.mh-slot.is-active .mh-label{ color:#fff; text-shadow:0 0 14px rgba(142,155,255,.75); }
+
+.mh-card{
+  position:absolute;
+  inset:0;
+  border-radius:12px;
+  overflow:hidden;
+  background:#0c0e26;
+  display:flex;
+  flex-direction:column;
+}
+.mh-slot > .mh-card{
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08),
+    0 24px 48px -18px rgba(0,0,0,.9),
+    0 0 44px -12px color-mix(in srgb, var(--glow) 60%, transparent);
+  filter:brightness(.74) saturate(.9);
+  transition:filter .5s ease, box-shadow .5s ease;
+}
+.mh-slot.is-active > .mh-card{
+  filter:none;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--glow) 50%, rgba(255,255,255,.4)),
+    0 30px 60px -20px rgba(0,0,0,.95),
+    0 0 72px -8px color-mix(in srgb, var(--glow) 80%, transparent);
+}
+.mh-slot:not(.is-active):hover > .mh-card{ filter:brightness(.9); }
+
+.mh-card-media{
+  position:relative;
+  flex:none;
+  width:100%;
+  aspect-ratio:1 / 1;
+  background:#fff;
+  overflow:hidden;
+}
+.mh-card-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  pointer-events:none;
+  -webkit-user-drag:none;
+}
+.mh-chip{
+  position:absolute;
+  top:10px;
+  left:10px;
+  padding:5px 8px;
+  border-radius:99px;
+  background:rgba(6,7,26,.78);
+  color:#fff;
+  font:500 9px/1 var(--mono);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.mh-card-cap{
+  flex:1;
+  min-height:0;
+  padding:0 14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:6px;
+  background:linear-gradient(180deg, #13163c 0%, #0a0c22 100%);
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.mh-cap-kind,
+.mh-cap-stack{
+  font-family:var(--mono);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.mh-cap-kind{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:color-mix(in srgb, var(--glow) 45%, #fff);
+}
+.mh-cap-kind::before{
+  content:'';
+  flex:none;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--glow);
+  box-shadow:0 0 8px var(--glow);
+}
+.mh-cap-stack{ font-size:10px; color:var(--mh-faint); }
+
+/* light the card throws onto the water */
+.mh-pool{
+  position:absolute;
+  left:-35%;
+  right:-35%;
+  top:calc(100% - 10px);
+  height:80px;
+  background:radial-gradient(closest-side, color-mix(in srgb, var(--glow) 40%, transparent), transparent);
+  opacity:.3;
+  pointer-events:none;
+  transition:opacity .5s ease;
+}
+.mh-slot.is-active .mh-pool{ opacity:.85; }
+
+/* mirrored copy of the card, standing in the same plane below the waterline */
+.mh-reflect{
+  position:absolute;
+  left:0;
+  right:0;
+  top:calc(100% + 3px);
+  height:100%;
+  pointer-events:none;
+  transform-origin:50% 0;
+  opacity:.58;
+  -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.42) 38%, transparent 80%);
+          mask-image:linear-gradient(180deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.42) 38%, transparent 80%);
+  animation:mh-sway 6s ease-in-out infinite;
+  animation-delay:calc(var(--i) * -.9s);
+  transition:opacity .5s ease;
+}
+.mh-slot.is-active .mh-reflect{ opacity:.78; }
+.mh-reflect > .mh-card{
+  transform:scaleY(-1);
+  filter:blur(1.2px) saturate(1.25);
+}
+/* moving wave lines break the reflection up like a still pool */
+.mh-reflect::after{
+  content:'';
+  position:absolute;
+  left:0;
+  right:0;
+  top:-91px;
+  bottom:0;
+  /* two line spacings (13px, 7px) so the pattern never reads as stripes; loops every 91px */
+  background:
+    repeating-linear-gradient(180deg, rgba(4,5,20,0) 0 8px, rgba(4,5,20,.3) 8px 9.5px, rgba(4,5,20,0) 9.5px 13px),
+    repeating-linear-gradient(180deg, rgba(4,5,20,0) 0 5px, rgba(4,5,20,.16) 5px 6px, rgba(4,5,20,0) 6px 7px);
+  filter:blur(.5px);
+  animation:mh-waves 16s linear infinite;
+}
+@keyframes mh-waves{ to{ transform:translateY(91px); } }
+@keyframes mh-sway{
+  0%,100%{ transform:scale(1,1) skewX(0deg); }
+  50%{     transform:scale(1.015,1.05) skewX(.7deg); }
+}
+.cine-section.is-offscreen .mh-reflect,
+.cine-section.is-offscreen .mh-reflect::after{ animation-play-state:paused; }
+
+/* the pool darkens towards the bottom so the caption reads cleanly */
+.mh-floor{
+  position:absolute;
+  left:0;
+  right:0;
+  top:calc(var(--mh-horizon) + var(--mh-h) * 1.05);
+  bottom:0;
+  background:linear-gradient(180deg, rgba(3,4,16,0) 0%, rgba(3,4,16,.55) 60%, #030410 100%);
+  pointer-events:none;
+}
+
+/* ── Caption under the ring ── */
+.cine-info{
+  z-index:3;
+  margin-top:calc(var(--mh-overlap) * -1);
+  text-align:center;
+  pointer-events:none;
+}
+.cine-info > *{ pointer-events:auto; }
+
+.cine-count{
+  direction:ltr;          /* keep "01 / 06" in reading order in Arabic too */
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.22em;
+  color:var(--mh-faint);
+}
+.cine-count em{ font-style:normal; font-weight:600; color:var(--mh-accent); }
+
+.cine-active-title{
+  margin-top:8px;
+  font-family:var(--display);
+  font-size:clamp(26px,3.4vw,42px);
+  font-weight:400;
+  line-height:1.1;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#fff;
+}
+.cine-active-title:lang(ar){ font-family:var(--arabic); font-weight:600; letter-spacing:0; }
+
+.cine-active-sub{
+  margin-top:8px;
+  font-family:var(--mono);
+  font-size:11px;
+  line-height:1.5;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-wrap:balance;
+  color:var(--mh-muted);
+}
+html[lang="ar"] .cine-active-sub{ font-family:var(--arabic); font-size:13px; letter-spacing:0; text-transform:none; }
+
+/* dots on top, then  ←  [details] [store]  →  */
+.cine-nav{
+  margin-top:14px;
+  display:grid;
+  grid-template-columns:auto auto auto;
+  grid-template-areas:
+    "dots dots dots"
+    "prev acts next";
+  justify-content:center;
+  align-items:center;
+  gap:12px 14px;
+  direction:ltr;          /* the ring spins left-to-right in both languages */
+}
+.cine-nav .cine-dots{ grid-area:dots; justify-self:center; }
+.cine-nav .prev{ grid-area:prev; }
+.cine-nav .next{ grid-area:next; }
+.cine-nav .cine-actions{ grid-area:acts; }
+
+.cine-nav-btn{
+  width:44px;
+  height:44px;
+  flex:none;
+  display:inline-grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.04);
+  color:var(--mh-ink);
+  cursor:pointer;
+  transition:border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.cine-nav-btn svg{ width:18px; height:18px; }
+.cine-nav-btn:hover{ border-color:var(--mh-accent); background:rgba(142,155,255,.14); }
+.cine-nav-btn:active{ transform:scale(.94); }
+
+.cine-dots{ display:flex; align-items:center; gap:4px; }
+.cine-dot{
+  width:24px;
+  height:24px;
+  padding:0;
+  border:0;
+  border-radius:6px;
+  background:transparent;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+}
+.cine-dot::before{
+  content:'';
+  width:6px;
+  height:6px;
+  border-radius:99px;
+  background:rgba(255,255,255,.26);
+  transition:width .35s cubic-bezier(.2,.8,.2,1), background .35s ease, box-shadow .35s ease;
+}
+.cine-dot:hover::before{ background:rgba(255,255,255,.6); }
+.cine-dot.active::before{ width:20px; background:var(--mh-accent); box-shadow:0 0 10px rgba(142,155,255,.7); }
+
+.cine-actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+.cine-cta{
+  height:44px;
+  padding:0 22px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border-radius:99px;
+  font-family:var(--mono);
+  font-size:12.5px;
+  font-weight:500;
+  letter-spacing:.06em;
+  text-decoration:none;
+  cursor:pointer;
+  transition:background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+}
+.cine-cta:active{ transform:scale(.97); }
+.cine-cta--solid{ background:#fff; color:#0a0b24; border:1px solid #fff; }
+.cine-cta--solid:hover{ background:var(--mh-accent); border-color:var(--mh-accent); }
+.cine-cta--ghost{ background:transparent; color:var(--mh-ink); border:1px solid rgba(255,255,255,.24); }
+.cine-cta--ghost:hover{ border-color:var(--mh-accent); background:rgba(142,155,255,.12); }
+html[lang="ar"] .cine-cta--solid{ font-family:var(--arabic); letter-spacing:0; }
+
+.cine-section :focus-visible{ outline:2px solid var(--mh-accent); outline-offset:3px; }
+
+.mh-sr{
+  position:absolute !important;
+  width:1px;
+  height:1px;
+  margin:-1px;
+  padding:0;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  clip-path:inset(50%);
+  white-space:nowrap;
+  border:0;
+}
+
+@media (max-width:640px){
+  .cine-section{ padding:72px 0 56px; }
+  .cine-eyebrow{ font-size:10px; letter-spacing:.22em; margin-bottom:18px; }
+  .cine-apps-lead{ font-size:14px; }
+  .cine-viewport{
+    margin-top:4px;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+            mask-image:linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  }
+  .cine-active-sub{ letter-spacing:.1em; }
+  /* phones:  ←  dots  →  then the two actions */
+  .cine-nav{
+    grid-template-areas:
+      "prev dots next"
+      "acts acts acts";
+  }
+  .cine-cta{ padding:0 18px; }
+  /* ten dots have to fit between the arrows on a phone */
+  .cine-dots{ gap:0; }
+  .cine-dot{ width:20px; }
+  .cine-dot.active::before{ width:14px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .mh-reflect,
+  .mh-reflect::after{ animation:none; }
+}
+
 
 /* ============================================
    SECTION SCAFFOLD
@@ -547,139 +1188,21 @@ hr.rule{
 /* ============================================
    PUBLISHED WORK — one platform, two deployments
    ============================================ */
-.platform-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:22px;
-}
+/* Old platform-grid kept only for modal compatibility */
+.platform-grid{ display:none; }
 
-.platform-card{
-  background:var(--surface);
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  transition:border-color .18s, box-shadow .18s;
-  cursor:pointer;
-}
+.platform-card{ display:none; }
 
-.platform-card:hover{
-  border-color:var(--ink);
-  box-shadow:0 14px 32px -18px rgba(23,23,18,.28);
-}
-
-.platform-top{
-  display:flex;
-  gap:16px;
-  padding:22px 24px 18px;
-  border-bottom:1px solid var(--line-soft);
-}
-
-.platform-media{
-  width:64px; height:64px;
-  border-radius:10px;
-  overflow:hidden;
-  flex-shrink:0;
-  border:1px solid var(--line);
-  background:var(--paper-dim);
-  position:relative;
-}
-
-.platform-media img{
-  width:100%; height:100%;
-  object-fit:cover;
-  transition:opacity .18s ease;
-}
-
-.platform-heading{ flex:1; min-width:0; padding-top:2px; }
-
-.platform-label{
-  font-family:var(--mono);
-  font-size:10.5px;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  color:var(--signal);
-  margin-bottom:4px;
-}
-
-.platform-name{
-  font-family:var(--display);
-  font-weight:600;
-  font-size:19px;
-  letter-spacing:-.005em;
-  transition:opacity .12s ease;
-}
-
-.platform-status{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  color:var(--live);
-  margin-top:5px;
-}
-
-.platform-status::before{ content:''; width:5px; height:5px; border-radius:50%; background:var(--live); }
-
-.platform-body{
-  padding:18px 24px 22px;
-  flex:1;
-  display:flex;
-  flex-direction:column;
-}
-
-.platform-desc{
-  font-size:13.5px;
+.apps-lead{
+  font-size:14.5px;
   color:var(--ink-soft);
+  max-width:64ch;
   line-height:1.65;
-  margin-bottom:16px;
 }
 
-.platform-desc strong{ color:var(--ink); font-weight:600; }
+.apps-lead strong{ color:var(--ink); font-weight:600; }
 
-.platform-features{
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-  margin-bottom:20px;
-}
-
-.platform-feature{
-  font-family:var(--mono);
-  font-size:10.5px;
-  color:var(--ink-soft);
-  background:var(--paper-dim);
-  border:1px solid var(--line-soft);
-  padding:4px 10px;
-  border-radius:100px;
-}
-
-/* variant switch: the ONE thing that actually differs */
-.variant-row{
-  margin-top:auto;
-}
-
-.variant-label{
-  font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  color:var(--ink-faint);
-  margin-bottom:8px;
-}
-
-.variant-switch{
-  display:flex;
-  border:1px solid var(--line);
-  border-radius:8px;
-  overflow:hidden;
-  margin-bottom:14px;
-}
-
+/* Variant switch / store btn inside cinematic card */
 .variant-btn{
   flex:1;
   background:var(--surface);
@@ -703,11 +1226,6 @@ hr.rule{
   color:var(--paper);
 }
 
-.variant-actions{
-  display:flex;
-  gap:10px;
-}
-
 .platform-store-btn{
   flex:1;
   font-family:var(--mono);
@@ -728,36 +1246,6 @@ hr.rule{
 
 .platform-store-btn:hover{ background:var(--signal); border-color:var(--signal); transform:translateY(-2px); }
 
-.platform-shared-note{
-  grid-column:1 / -1;
-  font-family:var(--mono);
-  font-size:11.5px;
-  color:var(--ink-faint);
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:2px;
-}
-
-.platform-shared-note::before{
-  content:'';
-  width:20px; height:1px;
-  background:var(--line);
-  flex-shrink:0;
-}
-
-.apps-lead{
-  font-size:14.5px;
-  color:var(--ink-soft);
-  max-width:64ch;
-  line-height:1.65;
-}
-
-.apps-lead strong{ color:var(--ink); font-weight:600; }
-
-@media (max-width:760px){
-  .platform-grid{ grid-template-columns:1fr; }
-}
 
 /* ---- Detail modal ---- */
 .detail-overlay{
@@ -1242,129 +1730,184 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
     </div>
   </div>
 
-  <div class="manifest reveal" aria-label="Developer summary">
-    <div class="manifest-head">manifest.json</div>
-    <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_1">role</span><span class="manifest-v" data-i18n="manifest_v_1">Flutter Developer</span></div>
-    <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_2">focus</span><span class="manifest-v" data-i18n="manifest_v_2">Android · iOS</span></div>
-    <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_3">apps_live</span><span class="manifest-v" data-i18n="manifest_v_3">4 on Play Store</span></div>
-    <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_4">architecture</span><span class="manifest-v" data-i18n="manifest_v_4">Clean · BLoC/Cubit</span></div>
+  <!-- 3D Profile Card -->
+  <div class="hero-3d-scene reveal" id="hero3dScene" aria-label="Developer profile card">
+    <div class="hero-3d-card" id="hero3dCard">
+      <!-- Floating tech orbs -->
+      <div class="hero-orbs" aria-hidden="true">
+        <div class="orb" title="Flutter">🐦</div>
+        <div class="orb" title="Firebase">🔥</div>
+        <div class="orb" title="Laravel">⚙️</div>
+        <div class="orb" title="Dart">🎯</div>
+        <div class="orb" title="Play Store">▶</div>
+      </div>
+      <div class="hero-3d-card-inner">
+        <!-- Profile photo -->
+        <div class="hero-photo-wrap">
+          <img
+            src="assets/profile.png"
+            alt="Mina Nabil — Flutter Developer"
+            width="460" height="460"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        <!-- manifest.json panel -->
+        <div class="manifest" aria-label="Developer summary">
+          <div class="manifest-head">manifest.json</div>
+          <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_1">role</span><span class="manifest-v" data-i18n="manifest_v_1">Flutter Developer</span></div>
+          <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_2">focus</span><span class="manifest-v" data-i18n="manifest_v_2">Android · iOS</span></div>
+          <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_3">apps_live</span><span class="manifest-v" data-i18n="manifest_v_3">4 on Play Store</span></div>
+          <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_4">architecture</span><span class="manifest-v" data-i18n="manifest_v_4">Clean · BLoC/Cubit</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ABOUT -->
+<!-- WORK — "Mirror Hall" 360° ring -->
+<section id="work" class="cine-section" aria-labelledby="workTitle">
+  <div class="wrap cine-head">
+    <p class="cine-eyebrow reveal">
+      <b data-i18n="tag_1">Featured Work</b>
+      <span aria-hidden="true">·</span>
+      <span data-i18n="section_note_1">11 apps &amp; platforms · 360° interactive view</span>
+    </p>
 
-<section id="work">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="tag" data-i18n="tag_1">Published work</div>
-      <div class="section-note" data-i18n="section_note_1">2 platforms · 4 live deployments</div>
-    </div>
-
-    <h2 class="stitle reveal" style="margin-bottom:16px;" data-i18n="stitle_1">
+    <h2 class="stitle reveal" id="workTitle" data-i18n="stitle_1">
       Build once, <em>ship for two</em>
     </h2>
 
-    <p class="apps-lead reveal" style="margin-bottom:36px;" data-i18n="apps_lead_1">
-      Each card below is one platform I built — the architecture, features, and backend are
-      written once. The switch inside picks which live deployment of it you're looking at.
+    <p class="cine-apps-lead reveal" data-i18n="apps_lead_1">
+      Each card is a production Flutter application — clean architecture, robust state management, and real-time backend integration. Drag the ring or click any card to inspect it.
     </p>
+  </div>
 
-    <div class="platform-grid">
+  <!-- 3D ring. Slots are built from #cineList by the script below. -->
+  <div class="cine-viewport" id="cineViewport" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Featured projects. Use the arrow keys to rotate and Enter to open details.">
+    <div class="mh-haze" aria-hidden="true"></div>
+    <div class="mh-ring" id="cineRing" aria-hidden="true"></div>
+    <div class="mh-floor" aria-hidden="true"></div>
+  </div>
 
-      <!-- PLATFORM 1: Tutor LMS (يلا عربي / حاوى العلوم) -->
-      <div class="platform-card reveal" data-platform="lms" tabindex="0" role="button" aria-label="View يلا عربي / حاوى العلوم details">
-        <div class="platform-top">
-          <div class="platform-media">
-            <img id="lmsImg" src="assets/yalla_final.jpg" alt="يلا عربي app icon" loading="lazy" />
-          </div>
-          <div class="platform-heading">
-            <div class="platform-label" data-i18n="platform_label_1">Tutor LMS platform</div>
-            <div class="platform-name appname" id="lmsName" lang="ar" dir="rtl">يلا عربي</div>
-            <span class="platform-status" data-i18n="platform_status_1">Live</span>
-          </div>
-        </div>
+  <div class="cine-info wrap">
+    <p class="cine-count" aria-hidden="true"><em id="cineCurrentNum">01</em> / <span id="cineTotalNum">11</span></p>
+    <p class="cine-active-title" id="cineActiveTitle" lang="ar" dir="rtl">يلا عربي</p>
+    <p class="cine-active-sub" id="cineActiveSub">Tutor LMS platform · Flutter &amp; Laravel · Live</p>
 
-        <div class="platform-body">
-          <p class="platform-desc" data-i18n="platform_desc_1">
-            A white-label learning-management app for private tutors, on <strong>Flutter</strong>
-            with a shared <strong>Laravel</strong> backend. Built once, then re-branded and deployed
-            for two independent tutors teaching different subjects.
-          </p>
-
-          <div class="platform-features">
-            <span class="platform-feature" data-i18n="platform_feature_1">QR-code attendance</span>
-            <span class="platform-feature" data-i18n="platform_feature_2">Timed online exams</span>
-            <span class="platform-feature" data-i18n="platform_feature_3">Real-time results</span>
-            <span class="platform-feature" data-i18n="platform_feature_4">Subscription tracking</span>
-          </div>
-
-          <div class="shot-strip" role="group" aria-label="يلا عربي screenshots">
-            <figure class="shot"><img src="assets/shots/yalla-home.webp" width="640" height="1304" loading="lazy" decoding="async" alt="يلا عربي home screen with the tutor profile and the active monthly course" /></figure>
-            <figure class="shot"><img src="assets/shots/yalla-courses.webp" width="640" height="1304" loading="lazy" decoding="async" alt="Course catalogue listing available monthly subscriptions with start and end dates" /></figure>
-            <figure class="shot"><img src="assets/shots/yalla-lesson.webp" width="640" height="1306" loading="lazy" decoding="async" alt="Lesson list showing completion progress and the exams attached to each lesson" /></figure>
-          </div>
-          <p class="shot-note" data-i18n="shot_note_1">From the live listing</p>
-
-          <div class="variant-row">
-            <div class="variant-label" data-i18n="variant_label_1">Deployed as</div>
-            <div class="variant-switch" role="tablist" aria-label="Choose deployment">
-              <button class="variant-btn active" role="tab" aria-selected="true" data-variant="yalla" data-target="lms"><span class="appname" lang="ar" dir="rtl">يلا عربي</span></button>
-              <button class="variant-btn" role="tab" aria-selected="false" data-variant="hawy" data-target="lms"><span class="appname" lang="ar" dir="rtl">حاوى العلوم</span></button>
-            </div>
-            <div class="variant-actions">
-              <a href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi" target="_blank" rel="noopener" class="platform-store-btn" id="lmsStoreLink" aria-label="Open on Google Play" data-i18n="platform_store_btn_1">Open on Google Play ↗</a>
-            </div>
-          </div>
-        </div>
+    <div class="cine-nav">
+      <div class="cine-dots" id="cineDots"></div>
+      <button class="cine-nav-btn prev" id="cinePrev" type="button" aria-label="Previous project">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="cine-actions">
+        <button class="cine-cta cine-cta--solid" id="cineDetails" type="button" data-i18n="cine_details_1">View details</button>
+        <a class="cine-cta cine-cta--ghost" id="cineLink" href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi" target="_blank" rel="noopener">Play Store ↗</a>
       </div>
-
-      <!-- PLATFORM 2: MN Learning (CS1 / CS2) -->
-      <div class="platform-card reveal" data-platform="mn" tabindex="0" role="button" aria-label="View MN Learning details">
-        <div class="platform-top">
-          <div class="platform-media">
-            <img id="mnImg" src="assets/mncs_final.jpg" alt="MN Learning app icon" loading="lazy" />
-          </div>
-          <div class="platform-heading">
-            <div class="platform-label" data-i18n="platform_label_2">MN Learning platform</div>
-            <div class="platform-name" id="mnName">MN – CS 1</div>
-            <span class="platform-status" data-i18n="platform_status_2">Live</span>
-          </div>
-        </div>
-
-        <div class="platform-body">
-          <p class="platform-desc" data-i18n="platform_desc_2">
-            A course-companion app for Computer Science students at <strong>Minia University</strong>,
-            built with Flutter. One codebase, reused each year with that year's course material.
-          </p>
-
-          <div class="platform-features">
-            <span class="platform-feature" data-i18n="platform_feature_5">Course resource library</span>
-            <span class="platform-feature" data-i18n="platform_feature_6">Simple, focused navigation</span>
-            <span class="platform-feature" data-i18n="platform_feature_7">Offline-friendly</span>
-          </div>
-
-          <div class="shot-strip" role="group" aria-label="MN CS1 screenshots">
-            <figure class="shot"><img src="assets/shots/mncs-subjects.webp" width="640" height="1137" loading="lazy" decoding="async" alt="Semester subject list with colour-coded cards for each course" /></figure>
-            <figure class="shot"><img src="assets/shots/mncs-resources.webp" width="640" height="1387" loading="lazy" decoding="async" alt="Resource types for a course: theory videos, image gallery and PDF files" /></figure>
-            <figure class="shot"><img src="assets/shots/mncs-quiz.webp" width="640" height="1137" loading="lazy" decoding="async" alt="Multiple-choice quiz screen showing an answered question and the final score" /></figure>
-          </div>
-          <p class="shot-note" data-i18n="shot_note_2">From the live listing</p>
-
-          <div class="variant-row">
-            <div class="variant-label" data-i18n="variant_label_2">Deployed as</div>
-            <div class="variant-switch" role="tablist" aria-label="Choose deployment">
-              <button class="variant-btn active" role="tab" aria-selected="true" data-variant="cs1" data-target="mn">CS · Year 1</button>
-              <button class="variant-btn" role="tab" aria-selected="false" data-variant="cs2" data-target="mn">CS · Year 2</button>
-            </div>
-            <div class="variant-actions">
-              <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain" target="_blank" rel="noopener" class="platform-store-btn" id="mnStoreLink" aria-label="Open on Google Play" data-i18n="platform_store_btn_2">Open on Google Play ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p class="platform-shared-note reveal" data-i18n="platform_shared_note_1">4 listings live on Google Play · 600+ downloads · built from these 2 codebases</p>
+      <button class="cine-nav-btn next" id="cineNext" type="button" aria-label="Next project">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
     </div>
+
+    <p class="mh-sr" id="cineStatus" aria-live="polite"></p>
+  </div>
+
+  <!-- Project list: the single source for the ring, and what screen readers and search engines read. -->
+  <ul class="mh-sr" id="cineList">
+    <li data-key="yalla" data-img="assets/yalla_final.jpg" data-glow="#f2711c" data-chip="Live" data-kind="Tutor LMS · Live" data-stack="Flutter · Laravel · BLoC"
+        data-sub-ar="منصة تعليمية للمدرّسين · Flutter و Laravel · منشور">
+      <strong lang="ar" dir="rtl">يلا عربي</strong>
+      <p>Tutor LMS platform · Flutter &amp; Laravel · Live</p>
+      <a href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi" tabindex="-1">Play Store</a>
+    </li>
+    <li data-key="hawy" data-img="assets/elhawy_final.jpg" data-glow="#f5b82e" data-chip="Live" data-kind="Tutor LMS · Live" data-stack="Flutter · Laravel · Exams"
+        data-sub-ar="منصة لمدرّس علوم وأحياء · نسخة بعلامة بيضاء · منشور">
+      <strong lang="ar" dir="rtl">حاوى العلوم</strong>
+      <p>Science tutor LMS · White-label build · Live</p>
+      <a href="https://play.google.com/store/apps/details?id=com.platform.elhawy" tabindex="-1">Play Store</a>
+    </li>
+    <li data-key="kyrillos" data-img="assets/kyrillos_final.jpg" data-glow="#4f8dff" data-chip="Live" data-kind="Math app · Live" data-stack="Flutter · Laravel · QR"
+        data-sub-ar="منصة رياضيات · موقع وتطبيق أندرويد · منشور">
+      <strong lang="ar" dir="rtl">مستر كيرلس قاصد</strong>
+      <p>Mathematics platform · Web + Android app · Live</p>
+      <a href="https://play.google.com/store/apps/details?id=com.platform.kyrilloskased" tabindex="-1">Play Store</a>
+    </li>
+    <li data-key="shicoril" data-img="assets/shicoril_final.jpg" data-glow="#8b6cff" data-chip="Live" data-kind="Teacher panel · PWA" data-stack="Laravel · React · PWA"
+        data-sub-ar="لوحة تحكم للمدرّس + بوابة للطالب · Laravel و React">
+      <strong lang="ar" dir="rtl">أستاذ مينا شيكوريل</strong>
+      <p>Teacher control panel + student PWA · Laravel &amp; React</p>
+      <a href="https://mr-menashicoril.com/" tabindex="-1" data-ar="الموقع">Website</a>
+    </li>
+    <li data-key="abkarino" data-img="assets/abkarino_final.jpg" data-glow="#36d1c4" data-chip="Website" data-kind="Science platform" data-stack="Laravel · Arabic RTL"
+        data-sub-ar="منصة علوم وأحياء · Laravel · موقع منشور">
+      <strong lang="ar" dir="rtl">دكتور عبقرينو</strong>
+      <p>Science &amp; biology platform · Laravel · Live website</p>
+      <a href="https://doctor-3bkarino.online/" tabindex="-1" data-ar="الموقع">Website</a>
+    </li>
+    <li data-key="cs1" data-img="assets/mncs_final.jpg" data-glow="#86c96f" data-chip="Year 1" data-kind="Course app · Live" data-stack="Flutter · Offline · Y1"
+        data-sub-ar="تطبيق مرافق لمقررات جامعة المنيا · السنة الأولى · منشور">
+      <strong>MN — CS 1</strong>
+      <p>Minia University course companion · Year 1 · Live</p>
+      <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain" tabindex="-1">Play Store</a>
+    </li>
+    <li data-key="cs2" data-img="assets/mncs_final.jpg" data-glow="#4fc3a1" data-chip="Year 2" data-kind="Course app · Live" data-stack="Flutter · Offline · Y2"
+        data-sub-ar="تطبيق مرافق لمقررات جامعة المنيا · السنة الثانية · منشور">
+      <strong>MN — CS 2</strong>
+      <p>Minia University course companion · Year 2 · Live</p>
+      <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year2.learntrain" tabindex="-1">Play Store</a>
+    </li>
+    <li data-key="daveslimo" data-img="assets/daveslimo_final.jpg" data-glow="#d4af37" data-chip="US client" data-kind="Booking website" data-stack="Next.js · Supabase"
+        data-sub-ar="موقع حجز ليموزين فاخر · Next.js و Supabase · أمريكا">
+      <strong>Dave's Nashville Limo</strong>
+      <p>Luxury limo booking website · Next.js &amp; Supabase · USA</p>
+      <a href="https://davesnashvillelimo.com/" tabindex="-1" data-ar="الموقع">Website</a>
+    </li>
+    <li data-key="talabat" data-img="assets/talabat_final.png" data-glow="#ff8a1f" data-chip="Live" data-kind="Delivery app" data-stack="Next.js · Supabase · PWA"
+        data-sub-ar="منصة توصيل محلية · Next.js و Supabase · منشور">
+      <strong lang="ar" dir="rtl">طلبات نزلة عبيد</strong>
+      <p>Local delivery marketplace · Next.js &amp; Supabase · Live</p>
+      <a href="https://talabat-nazlet-obaid.vercel.app/" tabindex="-1" data-ar="الموقع">Website</a>
+    </li>
+    <li data-key="motorent" data-img="assets/motorent_final.jpg" data-glow="#3a86ff" data-chip="Open source" data-kind="Car rental app" data-stack="Flutter · Firebase · BLoC"
+        data-sub-ar="تطبيق تأجير سيارات · Clean Architecture · Flutter">
+      <strong>MotoRent</strong>
+      <p>Car rental platform · Clean Architecture · Flutter</p>
+      <a href="https://github.com/mina-nabil-dev/MotoRent" tabindex="-1">GitHub</a>
+    </li>
+    <li data-key="easygps" data-img="assets/easygps_final.jpg" data-glow="#2ee59d" data-chip="Open source" data-kind="Live GPS tracking" data-stack="Flutter · Maps API"
+        data-sub-ar="تتبّع لحظي وخرائط Google · Flutter">
+      <strong>EasyGPS</strong>
+      <p>Real-time tracking &amp; Google Maps · Flutter</p>
+      <a href="https://github.com/mina-nabil-dev/EasyGPS" tabindex="-1">GitHub</a>
+    </li>
+  </ul>
+
+  <template id="cineSlotTpl">
+    <div class="mh-slot">
+      <div class="mh-label"></div>
+      <div class="mh-card">
+        <div class="mh-card-media">
+          <img alt="" loading="lazy" decoding="async" draggable="false" />
+          <span class="mh-chip"></span>
+        </div>
+        <div class="mh-card-cap">
+          <span class="mh-cap-kind"></span>
+          <span class="mh-cap-stack"></span>
+        </div>
+      </div>
+      <div class="mh-pool"></div>
+      <div class="mh-reflect"></div>
+    </div>
+  </template>
+
+  <!-- Hidden elements for backward modal compatibility -->
+  <div style="display:none" aria-hidden="true">
+    <img id="lmsImg" src="assets/yalla_final.jpg" />
+    <span id="lmsName">يلا عربي</span>
+    <a id="lmsStoreLink" href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi"></a>
+    <img id="mnImg" src="assets/mncs_final.jpg" />
+    <span id="mnName">MN – CS 1</span>
+    <a id="mnStoreLink" href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain"></a>
   </div>
 </section>
 
@@ -1605,6 +2148,433 @@ const io = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+/* ============================================================
+   3D HERO CARD — mouse-tracking tilt
+   ============================================================ */
+(function(){
+  const scene = document.getElementById('hero3dScene');
+  const card  = document.getElementById('hero3dCard');
+  if (!scene || !card) return;
+
+  const MAX_TILT = 12; // degrees
+
+  scene.addEventListener('mousemove', (e) => {
+    const rect = scene.getBoundingClientRect();
+    const cx   = rect.left + rect.width  / 2;
+    const cy   = rect.top  + rect.height / 2;
+    const dx   = (e.clientX - cx) / (rect.width  / 2); // -1 to +1
+    const dy   = (e.clientY - cy) / (rect.height / 2); // -1 to +1
+    const rotX = -dy * MAX_TILT;
+    const rotY =  dx * MAX_TILT;
+    card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  });
+
+  scene.addEventListener('mouseleave', () => {
+    card.style.transition = 'transform .6s cubic-bezier(.2,.8,.2,1)';
+    card.style.transform  = 'rotateX(0deg) rotateY(0deg)';
+    setTimeout(() => { card.style.transition = ''; }, 600);
+  });
+
+  /* Subtle idle float when mouse is far away */
+  let idleT = 0;
+  let idle  = true;
+  scene.addEventListener('mouseenter', () => { idle = false; });
+  scene.addEventListener('mouseleave', () => { idle = true; });
+  (function idleFloat(){
+    if (idle) {
+      idleT += 0.012;
+      const f = Math.sin(idleT) * 4;
+      card.style.transform = `rotateX(${f * 0.5}deg) rotateY(${f}deg)`;
+    }
+    requestAnimationFrame(idleFloat);
+  })();
+})();
+
+/* ============================================================
+   WORK — "Mirror Hall" 360° ring
+   The project list is repeated around a full ring of S slots and
+   the camera sits at the ring's centre. `pos` is the ring position
+   in slot units: slot s sits at angle (s - pos) * STEP, so the
+   slot nearest to `pos` is the focused one. Dragging spins the
+   ring directly; on release the throw is projected forward and a
+   critically-damped spring settles it on a card.
+   ============================================================ */
+(function(){
+  const viewport = document.getElementById('cineViewport');
+  const ring     = document.getElementById('cineRing');
+  const list     = document.getElementById('cineList');
+  const tpl      = document.getElementById('cineSlotTpl');
+  if (!viewport || !ring || !list || !tpl) return;
+
+  const section    = viewport.closest('section');
+  const numEl      = document.getElementById('cineCurrentNum');
+  const totalEl    = document.getElementById('cineTotalNum');
+  const titleEl    = document.getElementById('cineActiveTitle');
+  const subEl      = document.getElementById('cineActiveSub');
+  const linkEl     = document.getElementById('cineLink');
+  const detailsBtn = document.getElementById('cineDetails');
+  const dotsWrap   = document.getElementById('cineDots');
+  const statusEl   = document.getElementById('cineStatus');
+  const prevBtn    = document.getElementById('cinePrev');
+  const nextBtn    = document.getElementById('cineNext');
+
+  const projects = [...list.children].map(li => {
+    const name = li.querySelector('strong');
+    const link = li.querySelector('a');
+    return {
+      key: li.dataset.key,
+      name: name.textContent.trim(),
+      nameLang: name.lang || 'en',
+      sub: li.querySelector('p').textContent.trim(),
+      subAr: li.dataset.subAr || '',
+      link: link.href,
+      linkLabel: link.textContent.trim(),
+      linkLabelAr: link.dataset.ar || '',
+      img: li.dataset.img,
+      glow: li.dataset.glow,
+      chip: li.dataset.chip,
+      kind: li.dataset.kind,
+      stack: li.dataset.stack
+    };
+  });
+  const N = projects.length;
+  if (!N) return;
+
+  // Repeat the list so the ring has ~18 slots (20° apart) and wraps seamlessly.
+  const S    = N * Math.max(1, Math.round(18 / N));
+  const STEP = 360 / S;
+  const RAD  = Math.PI / 180;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+  const wrapIdx = i => ((i % N) + N) % N;
+
+  /* ---- Build the slots ---- */
+  const slots = [];
+  for (let s = 0; s < S; s++){
+    const p    = projects[s % N];
+    const slot = tpl.content.firstElementChild.cloneNode(true);
+    slot.style.setProperty('--glow', p.glow);
+    slot.style.setProperty('--i', s);
+
+    const label = slot.querySelector('.mh-label');
+    label.textContent = p.name;
+    label.lang = p.nameLang;
+    if (p.nameLang === 'ar') label.dir = 'rtl';
+
+    const img = slot.querySelector('img');
+    img.src = p.img;
+    slot.querySelector('.mh-chip').textContent = p.chip;
+    slot.querySelector('.mh-cap-kind').textContent = p.kind;
+    slot.querySelector('.mh-cap-stack').textContent = p.stack;
+
+    // the reflection is a flipped copy of the finished card
+    slot.querySelector('.mh-reflect').appendChild(slot.querySelector('.mh-card').cloneNode(true));
+
+    slot.dataset.slot = s;
+    ring.appendChild(slot);
+    slots.push({ el: slot, shown: false, x: NaN });
+  }
+
+  /* ---- Dots ---- */
+  if (totalEl) totalEl.textContent = String(N).padStart(2, '0');
+  const dots = projects.map((p, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'cine-dot';
+    dot.setAttribute('aria-label', `Project ${i + 1}: ${p.name}`);
+    dot.addEventListener('click', () => goToProject(i));
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
+
+  /* ---- Geometry ---- */
+  let R = 700, W = 208, halfView = 700, pxPerSlot = 240;
+
+  function measure(){
+    const vw = viewport.clientWidth || window.innerWidth;
+    halfView = vw / 2;
+    W = Math.round(clamp(vw * 0.145, 180, 232));
+    const H = Math.round(W * 1.3);
+    // radius that leaves a clear gap between the focused card and its (magnified) neighbour
+    const c2 = Math.cos(STEP * RAD) ** 2;
+    R = Math.round((W / 2 + W / (2 * c2) + 30) / Math.tan(STEP * RAD));
+    pxPerSlot = R * STEP * RAD;
+
+    // headroom for the labels of the outermost visible neighbours
+    const outer = clamp(Math.ceil(Math.atan(halfView / R) / RAD / STEP), 1, 2);
+    const horizon = Math.round(0.34 * H / Math.cos(outer * STEP * RAD) + 46);
+    // below the focused card: room for its reflection, then the caption starts on the water
+    const pool    = 0.8 * H;
+    const gap     = (vw < 640 ? 0.5 : 0.58) * H;
+    const stageH  = Math.round(horizon + 0.66 * H + pool);
+    const overlap = Math.round(pool - gap);
+
+    const st = section.style;
+    st.setProperty('--mh-r', R + 'px');
+    st.setProperty('--mh-w', W + 'px');
+    st.setProperty('--mh-h', H + 'px');
+    st.setProperty('--mh-horizon', horizon + 'px');
+    st.setProperty('--mh-stage-h', stageH + 'px');
+    st.setProperty('--mh-overlap', overlap + 'px');
+  }
+
+  /* ---- Render ---- */
+  let pos = -S;              // one full turn back: identical to 0, and where the intro spin starts
+  let vel = 0;               // slots per second
+  let target = 0;
+  let mode = 'idle';         // idle | drag | spring | tween
+  let activeSlot = -1;
+  let activeIdx  = -1;
+
+  function render(){
+    for (let s = 0; s < S; s++){
+      let d = s - pos;
+      d -= Math.round(d / S) * S;              // shortest way round, in [-S/2, S/2]
+      const a    = d * STEP;
+      const absA = Math.abs(a);
+      const cos  = Math.cos(absA * RAD);
+      // the inner edge of a card, projected — skip anything behind the camera or off-screen
+      const visible = absA < 85 &&
+        (R * Math.tan(absA * RAD) - W / (2 * cos * cos)) < halfView + 40;
+      const slot = slots[s];
+
+      if (!visible){
+        if (slot.shown){ slot.el.style.visibility = 'hidden'; slot.shown = false; }
+        continue;
+      }
+      if (!slot.shown){ slot.el.style.visibility = 'visible'; slot.shown = true; }
+      if (slot.x !== a){
+        slot.x = a;
+        slot.el.style.transform = `translateZ(${R}px) rotateY(${(-a).toFixed(3)}deg) translateZ(${-R}px)`;
+      }
+    }
+
+    const nearest = Math.round(pos);
+    const s = ((nearest % S) + S) % S;
+    if (s !== activeSlot){
+      if (activeSlot >= 0) slots[activeSlot].el.classList.remove('is-active');
+      slots[s].el.classList.add('is-active');
+      activeSlot = s;
+    }
+    const idx = wrapIdx(nearest);
+    if (idx !== activeIdx) setActive(idx);
+  }
+
+  function isArabic(){ return document.documentElement.lang === 'ar'; }
+
+  function setActive(idx, quiet){
+    activeIdx = idx;
+    const p = projects[idx];
+    if (numEl) numEl.textContent = String(idx + 1).padStart(2, '0');
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+      if (i === idx) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+    });
+
+    titleEl.textContent = p.name;
+    titleEl.lang = p.nameLang;
+    titleEl.dir  = p.nameLang === 'ar' ? 'rtl' : 'ltr';
+    subEl.textContent = isArabic() && p.subAr ? p.subAr : p.sub;
+    linkEl.href = p.link;
+    linkEl.textContent = (isArabic() && p.linkLabelAr ? p.linkLabelAr : p.linkLabel) + ' ↗';
+    detailsBtn.setAttribute('aria-label', (isArabic() ? 'عرض تفاصيل ' : 'View details: ') + p.name);
+
+    if (!quiet && !reduceMotion.matches && titleEl.animate){
+      const lift = [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }];
+      titleEl.animate(lift, { duration: 380, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      subEl.animate(lift, { duration: 380, delay: 40, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'backwards' });
+    }
+  }
+
+  // announce only once the ring has come to rest, not every card it passes
+  function settled(){
+    const p = projects[activeIdx];
+    if (statusEl && p) statusEl.textContent = `${activeIdx + 1} / ${N}: ${p.name} — ${isArabic() && p.subAr ? p.subAr : p.sub}`;
+  }
+
+  /* ---- Motion loop ---- */
+  const SPRING = 6.5;        // rad/s, critically damped
+  let raf = 0, last = 0;
+  let tween = null;
+
+  function kick(){
+    if (!raf){ last = performance.now(); raf = requestAnimationFrame(tick); }
+  }
+
+  function tick(now){
+    let dt = Math.min(0.25, (now - last) / 1000);
+    last = now;
+    raf = 0;
+
+    if (mode === 'spring'){
+      // fixed substeps keep the spring stable and on time even when frames drop
+      while (dt > 0){
+        const h = Math.min(dt, 1 / 120);
+        const acc = -SPRING * SPRING * (pos - target) - 2 * SPRING * vel;
+        vel += acc * h;
+        pos += vel * h;
+        dt -= h;
+      }
+      if (Math.abs(pos - target) < 0.0008 && Math.abs(vel) < 0.01){
+        pos = target; vel = 0; mode = 'idle';
+        settled();
+      }
+    } else if (mode === 'tween'){
+      const t = clamp((now - tween.start) / tween.dur, 0, 1);
+      const e = 1 - Math.pow(1 - t, 3);      // easeOutCubic
+      pos = tween.from + (tween.to - tween.from) * e;
+      if (t >= 1){ pos = tween.to; mode = 'idle'; tween = null; settled(); }
+    }
+
+    render();
+    if (mode === 'spring' || mode === 'tween') raf = requestAnimationFrame(tick);
+  }
+
+  function springTo(t){
+    target = t;
+    if (reduceMotion.matches){
+      pos = t; vel = 0; mode = 'idle';
+      render(); settled();
+      return;
+    }
+    if (mode === 'tween'){ vel = 0; tween = null; }
+    mode = 'spring';
+    kick();
+  }
+
+  // step by whole cards from wherever the ring is heading
+  function step(n){
+    const base = mode === 'spring' ? target : Math.round(pos);
+    springTo(base + n);
+  }
+
+  // the nearest copy of project i on the ring
+  function goToProject(i){
+    const base = mode === 'spring' ? target : Math.round(pos);
+    let d = i - wrapIdx(base);
+    if (d > N / 2) d -= N;
+    if (d < -N / 2) d += N;
+    springTo(base + d);
+  }
+
+  prevBtn.addEventListener('click', () => step(-1));
+  nextBtn.addEventListener('click', () => step(1));
+
+  detailsBtn.addEventListener('click', () => {
+    if (typeof openDetail === 'function') openDetail(projects[activeIdx].key);
+  });
+
+  section.addEventListener('keydown', (e) => {
+    if (e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+    if (e.key === 'ArrowLeft'){ e.preventDefault(); step(-1); }
+    else if (e.key === 'ArrowRight'){ e.preventDefault(); step(1); }
+    else if ((e.key === 'Enter' || e.key === ' ') && e.target === viewport){
+      e.preventDefault();
+      if (typeof openDetail === 'function') openDetail(projects[activeIdx].key);
+    }
+  });
+
+  /* ---- Drag with inertia ---- */
+  let pointerId = null, startX = 0, startPos = 0, moved = false, downSlot = null;
+  let samples = [];
+
+  viewport.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0 || pointerId !== null) return;
+    pointerId = e.pointerId;
+    startX = e.clientX;
+    startPos = pos;
+    moved = false;
+    downSlot = e.target.closest('.mh-slot');
+    samples = [{ t: e.timeStamp, x: e.clientX }];
+    mode = 'drag'; vel = 0; tween = null;
+    viewport.setPointerCapture(e.pointerId);
+  });
+
+  viewport.addEventListener('pointermove', (e) => {
+    if (e.pointerId !== pointerId) return;
+    const dx = e.clientX - startX;
+    if (!moved && Math.abs(dx) > 6){ moved = true; viewport.classList.add('is-dragging'); }
+    if (!moved) return;
+    pos = startPos - dx / pxPerSlot;
+    samples.push({ t: e.timeStamp, x: e.clientX });
+    if (samples.length > 6) samples.shift();
+    kick();
+  });
+
+  function release(e, cancelled){
+    if (e.pointerId !== pointerId) return;
+    pointerId = null;
+    viewport.classList.remove('is-dragging');
+
+    if (!moved){
+      mode = 'idle';
+      if (cancelled || !downSlot){ springTo(Math.round(pos)); return; }
+      let d = Number(downSlot.dataset.slot) - pos;
+      d -= Math.round(d / S) * S;
+      if (Math.abs(d) < 0.5){
+        if (typeof openDetail === 'function') openDetail(projects[activeIdx].key);
+        springTo(Math.round(pos));
+      } else {
+        springTo(Math.round(pos + d));
+      }
+      return;
+    }
+
+    // velocity from the last ~100ms of movement, then project the throw forward
+    const lastS  = samples[samples.length - 1];
+    const firstS = samples.find(s => lastS.t - s.t < 100) || samples[0];
+    const span   = (lastS.t - firstS.t) / 1000;
+    vel = span > 0 ? -((lastS.x - firstS.x) / span) / pxPerSlot : 0;
+    vel = clamp(vel, -40, 40);
+    const throwTo = pos + clamp(vel * 0.32, -S, S);
+    springTo(Math.round(throwTo));
+  }
+  viewport.addEventListener('pointerup', (e) => release(e, false));
+  viewport.addEventListener('pointercancel', (e) => release(e, true));
+
+  /* horizontal trackpad swipes spin the ring too */
+  let wheelTimer = 0;
+  viewport.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    mode = 'drag'; tween = null;
+    pos += e.deltaX / pxPerSlot;
+    kick();
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(() => springTo(Math.round(pos)), 120);
+  }, { passive: false });
+
+  /* ---- Intro: one full 360° turn the first time the ring comes into view ---- */
+  let introDone = false;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      section.classList.toggle('is-offscreen', !entry.isIntersecting);
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.35 && !introDone){
+        introDone = true;
+        if (reduceMotion.matches || mode !== 'idle'){ pos = Math.round(pos); render(); return; }
+        mode = 'tween';
+        tween = { from: pos, to: 0, start: performance.now() + 120, dur: 2600 };
+        kick();
+      }
+    });
+  }, { threshold: [0, 0.35] });
+  io.observe(viewport);
+
+  /* ---- Resize / language ---- */
+  new ResizeObserver(() => {
+    measure();
+    slots.forEach(s => { s.x = NaN; });
+    render();
+  }).observe(viewport);
+
+  new MutationObserver(() => { if (activeIdx >= 0) setActive(activeIdx, true); })
+    .observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+
+  measure();
+  render();
+})();
+
 /* ---- App detail data ---- */
 const APP_DATA = {
   yalla: {
@@ -1646,6 +2616,76 @@ const APP_DATA = {
     desc: 'Second-year continuation of the CS1 app, carrying the same interface forward with course material for the next year of the syllabus.',
     features: ['Course resource library', 'Consistent with CS1 UX', 'Built for second-year syllabus', 'Lightweight & offline-friendly'],
     store: 'https://play.google.com/store/apps/details?id=com.mnu_app_year2.learntrain'
+  },
+  motorent: {
+    title: 'MotoRent',
+    img: 'assets/motorent_final.jpg',
+    status: 'live',
+    platform: 'Open Source Flutter Project',
+    stat: 'Car Rental & Booking Platform',
+    desc: 'Full-featured mobile car rental application with multi-step vehicle booking, dynamic pricing, and clean BLoC architecture on Flutter & Firebase.',
+    features: ['Vehicle fleet catalog & filters', 'Booking date picker & calculations', 'Firebase Authentication & Firestore', 'Clean Architecture with BLoC'],
+    store: 'https://github.com/mina-nabil-dev/MotoRent'
+  },
+  easygps: {
+    title: 'EasyGPS',
+    img: 'assets/easygps_final.jpg',
+    status: 'live',
+    platform: 'Open Source Flutter Project',
+    stat: 'Live GPS Tracking & Maps',
+    desc: 'Real-time location tracking and navigation app with Google Maps API integration, live movement markers, and route polyline calculations.',
+    features: ['Real-time GPS coordinate streaming', 'Google Maps API custom markers', 'Route calculation & arrival estimation', 'Background location service'],
+    store: 'https://github.com/mina-nabil-dev/EasyGPS'
+  },
+  talabat: {
+    title: 'طلبات نزلة عبيد',
+    img: 'assets/talabat_final.png',
+    status: 'live',
+    platform: 'Installable web app · Next.js & Supabase',
+    stat: 'Local delivery · Nazlet Obaid',
+    desc: 'A delivery marketplace for the village of Nazlet Obaid: customers order from several local shops — groceries, pharmacy and more — and everything arrives together in one bag, with cash on delivery.',
+    features: ['Orders from several shops in one delivery', 'Nearby stores with live opening hours', 'Product and shop search', 'Delivery from 25 EGP, cash on delivery', 'Installable app with a download page', 'Arabic-first RTL interface'],
+    store: 'https://talabat-nazlet-obaid.vercel.app/'
+  },
+  kyrillos: {
+    title: 'مستر كيرلس قاصد',
+    img: 'assets/kyrillos_final.jpg',
+    status: 'live',
+    platform: 'Web + Android app · Laravel API',
+    stat: 'Mathematics · six grade levels',
+    desc: 'A mathematics platform across six grade levels: an Android app for the student, a control panel for the teacher, a read-only sign-in for the parent, and one Laravel API holding the rules. Equations are written in Arabic notation, right to left.',
+    features: ['Arabic math notation with a custom equation editor', 'QR attendance with signed codes', 'Self-marking exams, rankings & certificates', 'Video lessons with watch progress & HLS', 'Guardian read-only monthly report', 'Device-bound accounts & security audit log'],
+    store: 'https://play.google.com/store/apps/details?id=com.platform.kyrilloskased'
+  },
+  shicoril: {
+    title: 'أستاذ مينا شيكوريل',
+    img: 'assets/shicoril_final.jpg',
+    status: 'live',
+    platform: 'Admin panel + student PWA',
+    stat: 'Social studies teacher',
+    desc: 'A whole teaching operation for a social studies teacher: a control panel that runs groups, lessons, attendance, exams, subscriptions and payments, and an installable student and parent portal on the same API.',
+    features: ['Groups with weekly schedules that generate lessons', 'Attendance per student per session', 'Subscription ledger with partial payments', 'Installable portal with web push', 'WhatsApp message queue paired by QR', 'Attendance, exam & payment reports'],
+    store: 'https://mr-menashicoril.com/'
+  },
+  abkarino: {
+    title: 'دكتور عبقرينو',
+    img: 'assets/abkarino_final.jpg',
+    status: 'live',
+    platform: 'Education website · Laravel',
+    stat: 'Science & biology',
+    desc: 'A science and biology platform whose structure follows the way the material is taught — four steps from understanding to mastery. Launched web-first, with the mobile app as the next stage.',
+    features: ['Method-led site structure', 'Tracks for prep 3, secondary 1 & 3', 'Lesson videos, exams & step-by-step solutions', 'Homework & performance tracking', 'Arabic-first RTL interface'],
+    store: 'https://doctor-3bkarino.online/'
+  },
+  daveslimo: {
+    title: "Dave's Nashville Limo",
+    img: 'assets/daveslimo_final.jpg',
+    status: 'live',
+    platform: 'Booking website · Next.js & Supabase',
+    stat: 'Luxury transportation · Nashville, TN',
+    desc: 'A US luxury transportation brand needed more than a fleet gallery: a three-step quote-request funnel that captures the trip, the route and the passenger, matched against real vehicle capacity.',
+    features: ['Three-step quote request funnel', 'Point-to-point & hourly trip modes', 'Fleet catalog with passenger & luggage capacity', 'Airport, corporate & wedding service pages', 'WhatsApp hand-off with a pre-filled message', 'Light and dark theme'],
+    store: 'https://davesnashvillelimo.com/'
   }
 };
 
@@ -1719,11 +2759,19 @@ function renderDetail(key){
   detailTitle.lang = titleIsArabic ? 'ar' : 'en';
   detailTitle.dir  = titleIsArabic ? 'rtl' : 'ltr';
 
+  // badge and link label follow where the link actually goes
+  const ar = typeof window.currentLang === 'function' && window.currentLang() === 'ar';
+  const where = /play\.google\./.test(app.store) ? 'play' : /github\.com/.test(app.store) ? 'github' : 'web';
+  const LABELS = {
+    play:   { badge: ['Live on Play Store', 'منشور على Google Play'], link: ['Open on Google Play ↗', 'افتح على Google Play ↗'] },
+    github: { badge: ['Open source', 'مفتوح المصدر'],                 link: ['View on GitHub ↗', 'شاهد على GitHub ↗'] },
+    web:    { badge: ['Live website', 'موقع منشور'],                   link: ['Visit website ↗', 'زيارة الموقع ↗'] }
+  }[where];
+
   detailBadges.innerHTML = '';
   const statusBadge = document.createElement('span');
   statusBadge.className = 'detail-badge b-live';
-  statusBadge.textContent = (typeof window.currentLang === 'function' && window.currentLang() === 'ar')
-    ? 'منشور على Google Play' : 'Live on Play Store';
+  statusBadge.textContent = LABELS.badge[ar ? 1 : 0];
   detailBadges.appendChild(statusBadge);
 
   detailDesc.textContent = app.desc;
@@ -1739,7 +2787,7 @@ function renderDetail(key){
   detailPlatform.textContent = app.platform;
   detailStat.textContent = app.stat;
   detailStoreLink.href = app.store;
-
+  detailStoreLink.textContent = LABELS.link[ar ? 1 : 0];
 }
 
 function openDetail(key){
@@ -1818,9 +2866,10 @@ const AR = {
   manifest_k_3:"منشور",     manifest_v_3:"4 على Google Play",
   manifest_k_4:"المعمارية", manifest_v_4:"Clean · BLoC/Cubit",
 
-  tag_1:"أعمال منشورة", section_note_1:"منصتان · 4 إصدارات منشورة",
+  tag_1:"أعمال منشورة", section_note_1:"11 تطبيقًا ومنصات · عرض تفاعلي 360°",
   stitle_1:"ابنِ مرة، <em>وأطلق لاثنين</em>",
-  apps_lead_1:"كل بطاقة بالأسفل هي منصة واحدة بنيتها — المعمارية والمزايا والباك إند مكتوبة مرة واحدة. المبدّل بداخلها يحدّد أي إصدار منشور تشاهده.",
+  apps_lead_1:"كل بطاقة تطبيق Flutter حقيقي منشور — معمارية نظيفة، وإدارة حالة متينة، وربط لحظي بالباك إند. اسحب الحلقة أو اضغط على أي بطاقة لاستعراضها.",
+  cine_details_1:"عرض التفاصيل",
 
   platform_label_1:"منصة تعليمية للمدرّسين", platform_status_1:"منشور",
   platform_desc_1:"تطبيق إدارة تعلّم بعلامة بيضاء للمدرّسين الخصوصيين، بـ <strong>Flutter</strong> وباك إند <strong>Laravel</strong> مشترك. بُني مرة واحدة، ثم أُعيدت علامته ونُشر لمدرّسَين مستقلَّين يدرّسان مادتين مختلفتين.",
@@ -1882,7 +2931,28 @@ const APPS_AR = {
     features:["مكتبة مصادر المقرر","تنقّل بسيط ومركّز","مبني لمنهج السنة الأولى","خفيف ويعمل دون إنترنت"] },
   cs2:{ platform:"إصدار مستقل", stat:"دفعة السنة الثانية",
     desc:"امتداد السنة الثانية لتطبيق CS1، بنفس الواجهة ومحتوى العام التالي من المنهج.",
-    features:["مكتبة مصادر المقرر","متسق مع تجربة CS1","مبني لمنهج السنة الثانية","خفيف ويعمل دون إنترنت"] }
+    features:["مكتبة مصادر المقرر","متسق مع تجربة CS1","مبني لمنهج السنة الثانية","خفيف ويعمل دون إنترنت"] },
+  motorent:{ platform:"مشروع مفتوح المصدر", stat:"تطبيق تأجير سيارات",
+    desc:"تطبيق متكامل لحجز وتأجير السيارات بمعمارية Clean Architecture وإدارة حالة BLoC.",
+    features:["كتالوج وفلاتر للسيارات","تحديد مواعيد الحجز والتسعير","مصادقة وبيانات Firebase","معمارية منظمة وقابلة للاختبار"] },
+  easygps:{ platform:"مشروع مفتوح المصدر", stat:"تتبع لحظي وخرائط",
+    desc:"تطبيق ملاحة وتتبع أسطول مباشر متكامل مع Google Maps API مع حركة حية للعلامات.",
+    features:["تتبع مباشر للإحداثيات","تكامل خرائط Google بعلامات مخصصة","حساب المسار وزمن الوصول","خدمة تتبع بالخلفية"] },
+  talabat:{ platform:"تطبيق ويب قابل للتثبيت · Next.js و Supabase", stat:"توصيل محلي · نزلة عبيد",
+    desc:"منصة توصيل لقرية نزلة عبيد: العميل يطلب من كذا محل — بقالة وصيدلية وغيرهم — وكل الطلبات بتوصله مع بعض في شنطة واحدة، والدفع عند الاستلام.",
+    features:["طلب من كذا محل في توصيلة واحدة","المحلات القريبة بمواعيد الفتح","بحث عن المنتجات والمحلات","توصيل من 25 جنيه والدفع عند الاستلام","تطبيق قابل للتثبيت بصفحة تحميل","واجهة عربية بالكامل"] },
+  kyrillos:{ platform:"موقع وتطبيق أندرويد · Laravel API", stat:"رياضيات · ست مراحل دراسية",
+    desc:"منصة رياضيات تغطي ست مراحل دراسية: تطبيق أندرويد للطالب، ولوحة تحكم للمدرّس، ودخول للقراءة فقط لولي الأمر، وواجهة Laravel واحدة تحمل القواعد. المعادلات تُكتب بالرموز العربية من اليمين لليسار.",
+    features:["كتابة رياضية عربية مع محرّر معادلات مبني من الصفر","حضور بالـ QR برموز موقَّعة","امتحانات ذاتية التصحيح وترتيب وشهادات","دروس فيديو بتتبّع للمشاهدة وبث HLS","تقرير شهري لولي الأمر للقراءة فقط","حسابات مرتبطة بالأجهزة وسجل تدقيق أمني"] },
+  shicoril:{ platform:"لوحة تحكم + تطبيق ويب للطالب", stat:"مدرّس دراسات اجتماعية",
+    desc:"منظومة تدريس كاملة لمدرّس دراسات اجتماعية: لوحة تحكم تدير المجموعات والحصص والحضور والامتحانات والاشتراكات والمدفوعات، وبوابة قابلة للتثبيت للطالب وولي الأمر على نفس الـ API.",
+    features:["مجموعات بجداول أسبوعية تولّد حصصها","حضور لكل طالب في كل حصة","سجل اشتراكات بدفعات جزئية","بوابة قابلة للتثبيت بإشعارات ويب","طابور رسائل واتساب بربط QR","تقارير الحضور والامتحانات والمدفوعات"] },
+  abkarino:{ platform:"موقع تعليمي · Laravel", stat:"علوم وأحياء",
+    desc:"منصة علوم وأحياء تتبع بنيتها طريقة تدريس المادة — أربع خطوات من الفهم إلى الإتقان. أُطلقت عبر الويب أولًا، والتطبيق هو المرحلة التالية.",
+    features:["بنية موقع تتبع الطريقة التعليمية","مسارات للثالث الإعدادي والأول والثالث الثانوي","فيديوهات وامتحانات وحلول خطوة بخطوة","واجبات ومتابعة للأداء","واجهة عربية بالكامل"] },
+  daveslimo:{ platform:"موقع حجز · Next.js و Supabase", stat:"نقل فاخر · ناشفيل، أمريكا",
+    desc:"علامة أمريكية للنقل الفاخر كانت تحتاج أكثر من معرض للسيارات: مسار طلب عرض سعر من ثلاث خطوات يجمع الرحلة والمسار والراكب، ويطابق الطلب مع سعة المركبات الحقيقية.",
+    features:["مسار طلب عرض سعر من ثلاث خطوات","رحلات من نقطة لنقطة أو بالساعة","كتالوج أسطول بسعة الركاب والحقائب","صفحات للمطار والشركات والأفراح","تحويل لواتساب برسالة جاهزة","وضع فاتح وداكن"] }
 };
 
 (function () {
