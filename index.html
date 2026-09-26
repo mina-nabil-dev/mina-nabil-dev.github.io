@@ -1413,81 +1413,6 @@ hr.rule{
 }
 
 /* ============================================
-   OPEN SOURCE — dense manifest list
-   ============================================ */
-.oss-list{
-  border:1px solid var(--line);
-  border-radius:8px;
-  overflow:hidden;
-  background:var(--surface);
-}
-
-.oss-row{
-  display:flex;
-  align-items:center;
-  gap:22px;
-  padding:20px 28px;
-  text-decoration:none;
-  border-bottom:1px solid var(--line-soft);
-  transition:background .15s;
-}
-
-.oss-row:last-child{ border-bottom:none; }
-.oss-row:hover{ background:var(--paper-dim); }
-
-.oss-idx{
-  font-family:var(--mono);
-  font-size:11px;
-  color:var(--ink-faint);
-  width:22px;
-  flex-shrink:0;
-}
-
-.oss-main{ flex:1; min-width:0; }
-
-.oss-name{
-  font-size:15px;
-  font-weight:600;
-  color:var(--ink);
-}
-
-.oss-desc{
-  font-size:13px;
-  color:var(--ink-soft);
-  margin-top:2px;
-}
-
-.oss-tags{
-  display:flex;
-  gap:8px;
-  flex-shrink:0;
-}
-
-.oss-tag{
-  font-family:var(--mono);
-  font-size:10.5px;
-  color:var(--signal);
-  background:var(--signal-dim);
-  padding:3px 10px;
-  border-radius:100px;
-  white-space:nowrap;
-}
-
-.oss-arr{
-  color:var(--ink-faint);
-  font-size:15px;
-  flex-shrink:0;
-  transition:color .15s, transform .15s;
-}
-
-.oss-row:hover .oss-arr{ color:var(--signal); transform:translate(2px,-2px); }
-
-@media (max-width:640px){
-  .oss-row{ flex-wrap:wrap; padding:18px 20px; }
-  .oss-tags{ width:100%; padding-left:44px; }
-}
-
-/* ============================================
    CONTACT
    ============================================ */
 .contact-grid{
@@ -1649,12 +1574,10 @@ html[lang="ar"] .platform-shared-note{ font-family:var(--arabic); letter-spacing
 [dir="rtl"] .stack-item-note{ text-align:left; }
 [dir="rtl"] .variant-btn + .variant-btn{ border-left:0; border-right:1px solid var(--line); }
 [dir="rtl"] .detail-close{ right:auto; left:18px; }
-[dir="rtl"] .oss-tags{ padding-left:0; padding-right:44px; }
 [dir="rtl"] .hero-lede,
 [dir="rtl"] .apps-lead,
 [dir="rtl"] .about-copy p{ text-align:right; }
 /* arrows point the other way when the text does */
-[dir="rtl"] .oss-arr{ transform:scaleX(-1); display:inline-block; }
 
 /* latin runs inside arabic text keep their own direction */
 html[lang="ar"] .c-handle,
@@ -1693,7 +1616,6 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
       <a data-i18n="nav_1" href="#work">Work</a>
       <a data-i18n="nav_2" href="#about">About</a>
       <a data-i18n="nav_3" href="#stack">Stack</a>
-      <a data-i18n="nav_4" href="#oss">Projects</a>
       <a data-i18n="nav_5" href="#contact">Contact</a>
     </div>
 
@@ -1994,45 +1916,6 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 </section>
 
 <!-- PUBLISHED WORK -->
-
-<!-- OPEN SOURCE -->
-<section id="oss">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="tag" data-i18n="tag_4">Side projects</div>
-      <div class="section-note" data-i18n="section_note_2">github.com/mina-nabil-dev</div>
-    </div>
-
-    <h2 class="stitle reveal" style="margin-bottom:44px;" data-i18n="stitle_4">
-      Source available on <em>GitHub</em>
-    </h2>
-
-    <div class="oss-list reveal">
-      <a href="https://github.com/mina-nabil-dev/MotoRent" target="_blank" rel="noopener" class="oss-row" aria-label="MotoRent on GitHub">
-        <span class="oss-idx">01</span>
-        <div class="oss-main">
-          <div class="oss-name">MotoRent</div>
-          <div class="oss-desc" data-i18n="oss_desc_1">Car rental app with booking flows and a structured Flutter architecture</div>
-        </div>
-        <div class="oss-tags"><span class="oss-tag">Flutter</span><span class="oss-tag">Firebase</span></div>
-        <span class="oss-arr">↗</span>
-      </a>
-
-      <a href="https://github.com/mina-nabil-dev/EasyGPS" target="_blank" rel="noopener" class="oss-row" aria-label="EasyGPS on GitHub">
-        <span class="oss-idx">02</span>
-        <div class="oss-main">
-          <div class="oss-name">EasyGPS</div>
-          <div class="oss-desc" data-i18n="oss_desc_2">Location and real-time tracking app with Google Maps integration</div>
-        </div>
-        <div class="oss-tags"><span class="oss-tag">Flutter</span><span class="oss-tag">Maps API</span></div>
-        <span class="oss-arr">↗</span>
-      </a>
-
-
-
-    </div>
-  </div>
-</section>
 
 <!-- CONTACT -->
 <section id="contact">
@@ -2906,9 +2789,6 @@ const AR = {
   stack_item_note_12:"النشر", stack_item_note_13:"إشعارات فورية",
   stack_item_note_14:"تخزين محلي",
 
-  tag_4:"مشاريع جانبية", stitle_4:"الكود متاح على <em>GitHub</em>",
-  oss_desc_1:"تطبيق تأجير سيارات بمسارات حجز ومعمارية Flutter منظّمة",
-  oss_desc_2:"تطبيق تتبّع موقع لحظي بتكامل خرائط Google",
 
   tag_9:"تواصل", stitle_5:"عندك فكرة <em>تطبيق؟</em>",
   c_name_2:"البريد", c_name_6:"الموقع", c_handle_6:"المنيا، مصر · عن بُعد",
