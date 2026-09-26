@@ -19,7 +19,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
-<meta name="theme-color" content="#f6f4ef" />
+<meta name="theme-color" content="#07081f" />
 
 <meta property="og:type" content="profile" />
 <meta property="og:url" content="https://mina-nabil-dev.github.io/" />
@@ -110,21 +110,21 @@
    blueprint grid, build log, module manifest.
    ============================================ */
 :root{
-  --paper:      #f6f4ef;
-  --paper-dim:  #efece3;
-  --ink:        #171712;
-  --ink-soft:   #57584f;
-  --ink-faint:  #6a6b61;
-  --surface:    #fdfbf7;   /* card surface — warm white, not pure #fff */
-  --line:       #dcd8cb;
-  --line-strong:#8e8878;   /* interactive borders, WCAG 1.4.11 needs >=3:1 */
-  --line-soft:  #e8e5d9;
-  --signal:     #2545e8;
-  --signal-dim: #e6e9fc;
-  --live:       #1c7a4d;
-  --live-bg:    #e4f2ea;
-  --test:       #8a5f10;
-  --test-bg:    #f6ecd8;
+  --paper:      #07081f;   /* deep indigo night, same family as the Work ring */
+  --paper-dim:  #0e1036;
+  --ink:        #eef0ff;
+  --ink-soft:   #b6bbdf;
+  --ink-faint:  #8d93bd;
+  --surface:    #0d0f2b;   /* raised card surface */
+  --line:       #262a5c;
+  --line-strong:#5a60a0;   /* interactive borders, WCAG 1.4.11 needs >=3:1 */
+  --line-soft:  #16193f;
+  --signal:     #8e9bff;   /* lavender accent from the ring */
+  --signal-dim: #1b1f52;
+  --live:       #4ade9a;
+  --live-bg:    #0f2e26;
+  --test:       #f5c26b;
+  --test-bg:    #33270f;
 
   --display: 'Fraunces', serif;
   --body:    'Inter', sans-serif;
@@ -138,7 +138,11 @@
 html{ scroll-behavior:smooth; }
 
 body{
-  background:var(--paper);
+  /* the same indigo haze the Work ring sits in */
+  background:
+    radial-gradient(1100px 620px at 78% -8%, rgba(34,40,140,.55), rgba(34,40,140,0) 65%),
+    radial-gradient(900px 520px at 8% 12%, rgba(88,70,200,.18), rgba(88,70,200,0) 70%),
+    var(--paper);
   color:var(--ink);
   font-family:var(--body);
   font-size:16px;
@@ -176,7 +180,7 @@ img{ max-width:100%; display:block; }
   z-index:1;
 }
 
-::selection{ background:var(--signal); color:#fff; }
+::selection{ background:var(--signal); color:var(--paper); }
 
 :focus-visible{
   outline:2px solid var(--signal);
@@ -190,7 +194,7 @@ header{
   position:sticky;
   top:0;
   z-index:50;
-  background:rgba(246,244,239,.88);
+  background:rgba(7,8,31,.72);
   backdrop-filter:blur(10px);
   border-bottom:1px solid var(--line);
 }
@@ -557,8 +561,8 @@ h1.name em{
   scroll-margin-top:70px;
   color:var(--mh-ink);
   background:
-    radial-gradient(80% 55% at 50% 0%, #1e2280 0%, #11144c 36%, rgba(11,12,44,0) 72%),
-    linear-gradient(180deg, #0b0c2e 0%, #07081f 46%, #030410 100%);
+    radial-gradient(80% 55% at 50% 26%, rgba(30,34,128,.9) 0%, rgba(17,20,76,.6) 38%, rgba(11,12,44,0) 72%),
+    linear-gradient(180deg, var(--paper) 0%, #07081f 46%, #030410 100%);   /* starts on the page colour, so no seam */
 }
 
 /* fine star dust */
@@ -1231,7 +1235,7 @@ hr.rule{
   font-family:var(--mono);
   font-size:12px;
   letter-spacing:.02em;
-  color:#fff;
+  color:var(--paper);
   background:var(--ink);
   border:1px solid var(--ink);
   border-radius:6px;
@@ -1526,10 +1530,10 @@ footer .wrap{
   display:flex; gap:12px; margin:22px 0 2px;
   overflow-x:auto; overscroll-behavior-x:contain;
   padding:2px 2px 8px; scrollbar-width:thin;
-  scrollbar-color:var(--line2, #dcd8cb) transparent;
+  scrollbar-color:var(--line) transparent;
 }
 .shot-strip::-webkit-scrollbar{ height:6px; }
-.shot-strip::-webkit-scrollbar-thumb{ background:#dcd8cb; border-radius:3px; }
+.shot-strip::-webkit-scrollbar-thumb{ background:var(--line); border-radius:3px; }
 .shot{
   flex:1 1 0; min-width:0; margin:0; padding:4px;
   background:#0b0b10; border-radius:15px;
@@ -1593,7 +1597,7 @@ html[lang="ar"] .f-copy{ direction:ltr; unicode-bidi:isolate; }
   border:1px solid var(--line-strong);
   transition:background .18s ease, color .18s ease;
 }
-.lang-toggle:hover{ background:var(--signal); border-color:var(--signal); color:#fff; }
+.lang-toggle:hover{ background:var(--signal); border-color:var(--signal); color:var(--paper); }
 .lang-toggle:focus-visible{ outline:2px solid var(--signal); outline-offset:2px; }
 html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 @media (max-width:860px){ .avail{ display:none; } }
@@ -1602,7 +1606,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
    the glyphs, since Inter and Fraunces do not. */
 .appname{ font-family:var(--arabic); font-weight:600; }
 .variant-btn .appname{ font-weight:500; }
-.detail-title[lang="ar"]{ font-family:var(--arabic); font-weight:600; }
+.detail-title[lang="ar"]{ font-family:var(--arabic); font-weight:600; text-align:left; }  /* sit next to the icon, clear of the close button */
 </style>
 </head>
 
