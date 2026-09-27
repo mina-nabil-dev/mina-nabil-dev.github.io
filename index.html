@@ -2107,6 +2107,9 @@ html[lang="ar"] .c-handle,
 html[lang="ar"] .f-copy{ direction:ltr; unicode-bidi:isolate; }
 [dir="rtl"] .c-handle,
 [dir="rtl"] .f-copy{ text-align:right; }
+/* ...except the slots whose Arabic copy is Arabic prose */
+html[lang="ar"] .f-copy,
+html[lang="ar"] [data-i18n="c_handle_6"]{ direction:rtl; font-family:var(--arabic); }
 
 /* ---- language toggle ---- */
 .lang-toggle{
