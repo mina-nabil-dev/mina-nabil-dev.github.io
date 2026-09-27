@@ -459,7 +459,9 @@
   function audit(ctx) {
     const t = ctx.target;
     const W = t.win;
-    const dpr = W.devicePixelRatio || 1;
+    // A single-source image (no srcset) also has to stay sharp on 2x screens,
+    // so it is judged against at least 2x even when the test runs at 1x.
+    const dpr = Math.max(2, W.devicePixelRatio || 1);
     const sizes = new Map(W.performance.getEntriesByType('resource').map((e) => [e.name, e.encodedBodySize || e.transferSize || 0]));
     const byFile = new Map();
     [...t.doc.images].forEach((img) => {

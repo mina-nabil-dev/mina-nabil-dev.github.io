@@ -1,7 +1,7 @@
 {
   "meta": {
-    "date": "2026-09-27T08:24:31.077Z",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+    "date": "2026-09-27T08:34:50.333Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
     "profile": "desktop",
     "cpu": 1,
     "refreshMs": 16.7,
@@ -16,17 +16,17 @@
     "runner": {
       "browser": "Chrome/153.0.8010.53",
       "binary": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-      "headed": true,
+      "headed": false,
       "net": "none",
       "cpu": 1
     }
   },
   "load": {
-    "ttfbMs": 3,
-    "domContentLoadedMs": 395,
-    "loadMs": 469,
-    "fcpMs": 448,
-    "lcpMs": 1216,
+    "ttfbMs": 4,
+    "domContentLoadedMs": 406,
+    "loadMs": 441,
+    "fcpMs": 464,
+    "lcpMs": 1280,
     "lcpElement": "p.hero-lede.reveal",
     "cls": 0,
     "blockingMs": 0,
@@ -38,36 +38,36 @@
       "topScripts": []
     },
     "requests": 13,
-    "transferKB": 1064,
+    "transferKB": 775,
     "heaviest": [
       {
-        "file": "talabat_final.jpg",
-        "kb": 186.5,
+        "file": "abkarino_final.jpg",
+        "kb": 114.1,
         "type": "img"
       },
       {
         "file": "easygps_final.jpg",
-        "kb": 161.5,
+        "kb": 82.3,
         "type": "img"
       },
       {
-        "file": "abkarino_final.jpg",
-        "kb": 130.3,
-        "type": "img"
-      },
-      {
-        "file": "kyrillos_final.jpg",
-        "kb": 103.3,
+        "file": "talabat_final.jpg",
+        "kb": 80.7,
         "type": "img"
       },
       {
         "file": "daveslimo_final.jpg",
         "kb": 77.6,
         "type": "img"
+      },
+      {
+        "file": "shicoril_final.jpg",
+        "kb": 53.3,
+        "type": "img"
       }
     ],
     "domNodes": 802,
-    "runningAnimations": 53,
+    "runningAnimations": 54,
     "perpetualAnimations": 53,
     "status": "pass"
   },
@@ -76,15 +76,15 @@
       "id": "hero_idle",
       "label": "Hero · idle 3 s",
       "frames": {
-        "durationMs": 3000,
-        "frames": 180,
+        "durationMs": 3017,
+        "frames": 181,
         "fps": 60,
         "smoothness": 1,
         "droppedFrames": 0,
         "p50Ms": 16.7,
         "p95Ms": 16.8,
-        "p99Ms": 16.8,
-        "maxMs": 16.9,
+        "p99Ms": 17.6,
+        "maxMs": 17.7,
         "longFrames": 0
       },
       "blockingMs": 0,
@@ -102,110 +102,28 @@
       "status": "pass",
       "engine": {
         "layouts": 0,
-        "styleRecalcs": 181,
+        "styleRecalcs": 182,
         "layoutMs": 0,
-        "styleMs": 25.5,
-        "scriptMs": 6.9,
-        "taskMs": 107.9,
-        "busyPct": 3.6
-      }
-    },
-    {
-      "id": "scroll_hero",
-      "label": "Scroll · hero",
-      "frames": {
-        "durationMs": 467,
-        "frames": 20,
-        "fps": 42.9,
-        "smoothness": 0.714,
-        "droppedFrames": 8,
-        "p50Ms": 16.7,
-        "p95Ms": 116.6,
-        "p99Ms": 116.6,
-        "maxMs": 116.6,
-        "longFrames": 1
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0,
-      "extra": {},
-      "issues": [
-        "smoothness 0.714 < 0.9",
-        "p95 frame 116.6 ms > 33.4 ms"
-      ],
-      "status": "fail",
-      "engine": {
-        "layouts": 0,
-        "styleRecalcs": 43,
-        "layoutMs": 0,
-        "styleMs": 14.3,
-        "scriptMs": 2.9,
-        "taskMs": 61.9,
-        "busyPct": 12.7
+        "styleMs": 108.7,
+        "scriptMs": 24,
+        "taskMs": 327,
+        "busyPct": 10.8
       }
     },
     {
       "id": "scroll_work",
       "label": "Scroll · work",
       "frames": {
-        "durationMs": 867,
-        "frames": 27,
-        "fps": 31.2,
-        "smoothness": 0.519,
-        "droppedFrames": 25,
-        "p50Ms": 16.7,
-        "p95Ms": 66.7,
-        "p99Ms": 233.3,
-        "maxMs": 233.3,
-        "longFrames": 2
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0.0004,
-      "extra": {},
-      "issues": [
-        "smoothness 0.519 < 0.9",
-        "p95 frame 66.7 ms > 33.4 ms"
-      ],
-      "status": "fail",
-      "engine": {
-        "layouts": 31,
-        "styleRecalcs": 79,
-        "layoutMs": 16.6,
-        "styleMs": 59.7,
-        "scriptMs": 7.6,
-        "taskMs": 179,
-        "busyPct": 20.4
-      }
-    },
-    {
-      "id": "scroll_about",
-      "label": "Scroll · about",
-      "frames": {
-        "durationMs": 467,
-        "frames": 28,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
-        "p50Ms": 16.7,
-        "p95Ms": 16.8,
-        "p99Ms": 16.8,
-        "maxMs": 16.8,
-        "longFrames": 0
+        "durationMs": 933,
+        "frames": 10,
+        "fps": 10.7,
+        "smoothness": 0.179,
+        "droppedFrames": 46,
+        "p50Ms": 100.1,
+        "p95Ms": 266.7,
+        "p99Ms": 266.7,
+        "maxMs": 266.7,
+        "longFrames": 6
       },
       "blockingMs": 0,
       "longTasks": 0,
@@ -218,69 +136,149 @@
       },
       "cls": 0.0003,
       "extra": {},
+      "issues": [
+        "smoothness 0.179 < 0.9",
+        "p95 frame 266.7 ms > 33.4 ms",
+        "6 frames over 50 ms (max 2)"
+      ],
+      "status": "warn",
+      "engine": {
+        "layouts": 9,
+        "styleRecalcs": 26,
+        "layoutMs": 8.1,
+        "styleMs": 32.8,
+        "scriptMs": 5.8,
+        "taskMs": 81.7,
+        "busyPct": 8.5
+      }
+    },
+    {
+      "id": "ring_drag",
+      "label": "Work ring · drag ×2",
+      "frames": {
+        "durationMs": 4233,
+        "frames": 254,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.9,
+        "maxMs": 17.5,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0.0004,
+      "extra": {},
       "issues": [],
       "status": "pass",
       "engine": {
-        "layouts": 29,
-        "styleRecalcs": 60,
-        "layoutMs": 16.4,
-        "styleMs": 54.3,
-        "scriptMs": 5.4,
-        "taskMs": 169.3,
-        "busyPct": 35.3
+        "layouts": 163,
+        "styleRecalcs": 255,
+        "layoutMs": 72.3,
+        "styleMs": 391.8,
+        "scriptMs": 42.5,
+        "taskMs": 1154.6,
+        "busyPct": 27.2
+      }
+    },
+    {
+      "id": "ring_intro",
+      "label": "Work ring · intro spin (cold)",
+      "frames": {
+        "durationMs": 3317,
+        "frames": 199,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.9,
+        "maxMs": 16.9,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0.0011,
+      "extra": {},
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 141,
+        "styleRecalcs": 201,
+        "layoutMs": 61.6,
+        "styleMs": 308.2,
+        "scriptMs": 30.2,
+        "taskMs": 897.8,
+        "busyPct": 27
       }
     }
   ],
   "audit": {
-    "dpr": 1,
+    "dpr": 2,
     "images": [
       {
-        "file": "talabat_final.jpg",
-        "natural": "1254×1254",
+        "file": "shicoril_final.jpg",
+        "natural": "640×626",
         "shown": 196,
         "copies": 4,
-        "kb": 186.5,
-        "oversize": 6.4
+        "kb": 53.3,
+        "oversize": 1.63
       },
       {
-        "file": "kyrillos_final.jpg",
-        "natural": "1080×1350",
+        "file": "talabat_final.jpg",
+        "natural": "640×640",
         "shown": 196,
         "copies": 4,
-        "kb": 103.3,
-        "oversize": 5.51
+        "kb": 80.7,
+        "oversize": 1.63
       },
       {
         "file": "motorent_final.jpg",
-        "natural": "1024×1024",
+        "natural": "640×640",
         "shown": 196,
         "copies": 4,
-        "kb": 73.7,
-        "oversize": 5.22
+        "kb": 52.9,
+        "oversize": 1.63
       },
       {
         "file": "easygps_final.jpg",
-        "natural": "1024×1024",
+        "natural": "640×640",
         "shown": 196,
         "copies": 4,
-        "kb": 161.5,
-        "oversize": 5.22
+        "kb": 82.3,
+        "oversize": 1.63
       },
       {
-        "file": "shicoril_final.jpg",
-        "natural": "672×657",
+        "file": "kyrillos_final.jpg",
+        "natural": "512×640",
         "shown": 196,
         "copies": 4,
-        "kb": 69.5,
-        "oversize": 3.43
+        "kb": 51.9,
+        "oversize": 1.31
       },
       {
         "file": "abkarino_final.jpg",
         "natural": "512×512",
         "shown": 196,
         "copies": 4,
-        "kb": 130.3,
-        "oversize": 2.61
+        "kb": 114.1,
+        "oversize": 1.31
       },
       {
         "file": "daveslimo_final.jpg",
@@ -288,7 +286,7 @@
         "shown": 196,
         "copies": 4,
         "kb": 77.6,
-        "oversize": 2.52
+        "oversize": 1.26
       },
       {
         "file": "yalla_final.jpg",
@@ -296,7 +294,7 @@
         "shown": 196,
         "copies": 4,
         "kb": 30.2,
-        "oversize": 2.45
+        "oversize": 1.22
       },
       {
         "file": "elhawy_final.jpg",
@@ -304,7 +302,7 @@
         "shown": 196,
         "copies": 4,
         "kb": 39.7,
-        "oversize": 2.45
+        "oversize": 1.22
       },
       {
         "file": "mncs_final.jpg",
@@ -312,7 +310,7 @@
         "shown": 196,
         "copies": 8,
         "kb": 38.2,
-        "oversize": 2.45
+        "oversize": 1.22
       },
       {
         "file": "profile.png",
@@ -320,102 +318,36 @@
         "shown": 338,
         "copies": 1,
         "kb": 12.3,
-        "oversize": 1.2
+        "oversize": 0.6
       }
     ],
     "domNodes": 802,
     "perpetualAnimations": 53,
-    "heapMB": 2.3
+    "heapMB": 1.4
   },
   "issues": [
     {
-      "where": "scroll_hero",
-      "msg": "smoothness 0.714 < 0.9",
-      "level": "fail",
-      "kind": "pacing"
-    },
-    {
-      "where": "scroll_hero",
-      "msg": "p95 frame 116.6 ms > 33.4 ms",
-      "level": "fail",
+      "where": "scroll_work",
+      "msg": "smoothness 0.179 < 0.9 (headless raster, confirm with --headed)",
+      "level": "warn",
       "kind": "pacing"
     },
     {
       "where": "scroll_work",
-      "msg": "smoothness 0.519 < 0.9",
-      "level": "fail",
+      "msg": "p95 frame 266.7 ms > 33.4 ms (headless raster, confirm with --headed)",
+      "level": "warn",
       "kind": "pacing"
     },
     {
       "where": "scroll_work",
-      "msg": "p95 frame 66.7 ms > 33.4 ms",
-      "level": "fail",
+      "msg": "6 frames over 50 ms (max 2) (headless raster, confirm with --headed)",
+      "level": "warn",
       "kind": "pacing"
-    },
-    {
-      "where": "images",
-      "msg": "talabat_final.jpg is 6.4× larger than displayed (1254×1254 shown at 196px, 186.5 KB)",
-      "level": "warn",
-      "kind": "budget"
-    },
-    {
-      "where": "images",
-      "msg": "kyrillos_final.jpg is 5.51× larger than displayed (1080×1350 shown at 196px, 103.3 KB)",
-      "level": "warn",
-      "kind": "budget"
-    },
-    {
-      "where": "images",
-      "msg": "motorent_final.jpg is 5.22× larger than displayed (1024×1024 shown at 196px, 73.7 KB)",
-      "level": "warn",
-      "kind": "budget"
-    },
-    {
-      "where": "images",
-      "msg": "easygps_final.jpg is 5.22× larger than displayed (1024×1024 shown at 196px, 161.5 KB)",
-      "level": "warn",
-      "kind": "budget"
-    },
-    {
-      "where": "images",
-      "msg": "shicoril_final.jpg is 3.43× larger than displayed (672×657 shown at 196px, 69.5 KB)",
-      "level": "warn",
-      "kind": "budget"
-    },
-    {
-      "where": "images",
-      "msg": "abkarino_final.jpg is 2.61× larger than displayed (512×512 shown at 196px, 130.3 KB)",
-      "level": "warn",
-      "kind": "budget"
-    },
-    {
-      "where": "images",
-      "msg": "daveslimo_final.jpg is 2.52× larger than displayed (493×591 shown at 196px, 77.6 KB)",
-      "level": "warn",
-      "kind": "budget"
-    },
-    {
-      "where": "images",
-      "msg": "yalla_final.jpg is 2.45× larger than displayed (480×480 shown at 196px, 30.2 KB)",
-      "level": "warn",
-      "kind": "budget"
-    },
-    {
-      "where": "images",
-      "msg": "elhawy_final.jpg is 2.45× larger than displayed (480×480 shown at 196px, 39.7 KB)",
-      "level": "warn",
-      "kind": "budget"
-    },
-    {
-      "where": "images",
-      "msg": "mncs_final.jpg is 2.45× larger than displayed (480×480 shown at 196px, 38.2 KB)",
-      "level": "warn",
-      "kind": "budget"
     }
   ],
   "summary": {
     "scenarios": 4,
-    "failures": 4,
-    "warnings": 10
+    "failures": 0,
+    "warnings": 3
   }
 }

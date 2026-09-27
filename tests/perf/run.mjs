@@ -259,7 +259,7 @@ function printReport(r, baseline) {
 
   if (r.audit) {
     const big = r.audit.images.filter((i) => i.oversize > 1.5);
-    console.log(`\n${bold('IMAGES')} ${dim(`(natural width ÷ displayed width × DPR ${r.audit.dpr})`)}`);
+    console.log(`\n${bold('IMAGES')} ${dim(`(natural width ÷ displayed width × ${r.audit.dpr}x screen)`)}`);
     (big.length ? big : r.audit.images.slice(0, 3)).forEach((i) => {
       const tag = i.oversize > 2 ? yellow(`${i.oversize}×`) : `${i.oversize}×`;
       console.log(`  ${i.file.padEnd(22)} ${i.natural.padStart(10)} shown ${String(i.shown).padStart(4)} px  ${tag}  ${i.kb} KB`);
