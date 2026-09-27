@@ -1,6 +1,6 @@
 {
   "meta": {
-    "date": "2026-09-27T08:15:28.705Z",
+    "date": "2026-09-27T08:17:12.436Z",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
     "profile": "mobile",
     "cpu": 4,
@@ -23,10 +23,10 @@
   },
   "load": {
     "ttfbMs": 3,
-    "domContentLoadedMs": 1050,
-    "loadMs": 1051,
-    "fcpMs": 792,
-    "lcpMs": 1892,
+    "domContentLoadedMs": 881,
+    "loadMs": 881,
+    "fcpMs": 696,
+    "lcpMs": 1744,
     "lcpElement": "p.hero-lede.reveal",
     "cls": 0,
     "blockingMs": 0,
@@ -104,10 +104,10 @@
         "layouts": 0,
         "styleRecalcs": 181,
         "layoutMs": 0,
-        "styleMs": 168.4,
-        "scriptMs": 37.9,
-        "taskMs": 476.8,
-        "busyPct": 15.8
+        "styleMs": 185.1,
+        "scriptMs": 40.2,
+        "taskMs": 499.5,
+        "busyPct": 16.6
       }
     },
     {
@@ -120,9 +120,9 @@
         "smoothness": 1,
         "droppedFrames": 0,
         "p50Ms": 16.7,
-        "p95Ms": 16.7,
-        "p99Ms": 16.8,
-        "maxMs": 16.8,
+        "p95Ms": 16.8,
+        "p99Ms": 16.9,
+        "maxMs": 16.9,
         "longFrames": 0
       },
       "blockingMs": 0,
@@ -139,13 +139,13 @@
       "issues": [],
       "status": "pass",
       "engine": {
-        "layouts": 0,
+        "layouts": 1,
         "styleRecalcs": 91,
-        "layoutMs": 0,
-        "styleMs": 74.2,
-        "scriptMs": 16.9,
-        "taskMs": 268.9,
-        "busyPct": 34.6
+        "layoutMs": 0.4,
+        "styleMs": 67.1,
+        "scriptMs": 15.4,
+        "taskMs": 254.3,
+        "busyPct": 32.6
       }
     },
     {
@@ -158,7 +158,7 @@
         "smoothness": 1,
         "droppedFrames": 0,
         "p50Ms": 16.7,
-        "p95Ms": 16.7,
+        "p95Ms": 16.8,
         "p99Ms": 16.8,
         "maxMs": 16.8,
         "longFrames": 0
@@ -177,13 +177,13 @@
       "issues": [],
       "status": "pass",
       "engine": {
-        "layouts": 3,
+        "layouts": 4,
         "styleRecalcs": 103,
-        "layoutMs": 1.4,
-        "styleMs": 62.3,
-        "scriptMs": 15.9,
-        "taskMs": 273.8,
-        "busyPct": 31.2
+        "layoutMs": 2.7,
+        "styleMs": 60.7,
+        "scriptMs": 13.6,
+        "taskMs": 291.7,
+        "busyPct": 33.3
       }
     },
     {
@@ -215,20 +215,20 @@
       "issues": [],
       "status": "pass",
       "engine": {
-        "layouts": 2,
+        "layouts": 3,
         "styleRecalcs": 85,
-        "layoutMs": 1.9,
-        "styleMs": 76.3,
-        "scriptMs": 9.2,
-        "taskMs": 285.2,
-        "busyPct": 39
+        "layoutMs": 2.5,
+        "styleMs": 79.2,
+        "scriptMs": 9.3,
+        "taskMs": 305.3,
+        "busyPct": 41.8
       }
     },
     {
       "id": "scroll_stack",
       "label": "Scroll · stack",
       "frames": {
-        "durationMs": 983,
+        "durationMs": 984,
         "frames": 59,
         "fps": 60,
         "smoothness": 1,
@@ -253,13 +253,13 @@
       "issues": [],
       "status": "pass",
       "engine": {
-        "layouts": 33,
+        "layouts": 32,
         "styleRecalcs": 117,
-        "layoutMs": 28.9,
-        "styleMs": 158.7,
-        "scriptMs": 11.5,
-        "taskMs": 550.5,
-        "busyPct": 55.3
+        "layoutMs": 29.2,
+        "styleMs": 165.4,
+        "scriptMs": 10.4,
+        "taskMs": 575.1,
+        "busyPct": 57.7
       }
     },
     {
@@ -268,44 +268,6 @@
       "frames": {
         "durationMs": 767,
         "frames": 46,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
-        "p50Ms": 16.7,
-        "p95Ms": 16.7,
-        "p99Ms": 16.8,
-        "maxMs": 16.8,
-        "longFrames": 0
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0,
-      "extra": {},
-      "issues": [],
-      "status": "pass",
-      "engine": {
-        "layouts": 9,
-        "styleRecalcs": 91,
-        "layoutMs": 8.6,
-        "styleMs": 88.8,
-        "scriptMs": 12.5,
-        "taskMs": 372.7,
-        "busyPct": 48.1
-      }
-    },
-    {
-      "id": "contact_idle",
-      "label": "Contact · idle 3 s",
-      "frames": {
-        "durationMs": 3017,
-        "frames": 181,
         "fps": 60,
         "smoothness": 1,
         "droppedFrames": 0,
@@ -329,21 +291,21 @@
       "issues": [],
       "status": "pass",
       "engine": {
-        "layouts": 0,
-        "styleRecalcs": 182,
-        "layoutMs": 0,
-        "styleMs": 96.4,
-        "scriptMs": 17.5,
-        "taskMs": 403.9,
-        "busyPct": 13.3
+        "layouts": 10,
+        "styleRecalcs": 91,
+        "layoutMs": 8.3,
+        "styleMs": 86.7,
+        "scriptMs": 8.7,
+        "taskMs": 358.7,
+        "busyPct": 46.4
       }
     },
     {
-      "id": "ring_drag",
-      "label": "Work ring · drag ×2",
+      "id": "contact_idle",
+      "label": "Contact · idle 3 s",
       "frames": {
-        "durationMs": 4233,
-        "frames": 254,
+        "durationMs": 3000,
+        "frames": 180,
         "fps": 60,
         "smoothness": 1,
         "droppedFrames": 0,
@@ -362,35 +324,33 @@
         "worstMs": 0,
         "topScripts": []
       },
-      "cls": 0.0109,
+      "cls": 0,
       "extra": {},
-      "issues": [
-        "CLS 0.0109 > 0.01"
-      ],
-      "status": "fail",
+      "issues": [],
+      "status": "pass",
       "engine": {
-        "layouts": 141,
-        "styleRecalcs": 260,
-        "layoutMs": 163.7,
-        "styleMs": 351.7,
-        "scriptMs": 90.5,
-        "taskMs": 1539.1,
-        "busyPct": 36.2
+        "layouts": 0,
+        "styleRecalcs": 181,
+        "layoutMs": 0,
+        "styleMs": 88.7,
+        "scriptMs": 16.1,
+        "taskMs": 374.9,
+        "busyPct": 12.4
       }
     },
     {
-      "id": "ring_step",
-      "label": "Work ring · next ×6",
+      "id": "ring_drag",
+      "label": "Work ring · drag ×2",
       "frames": {
-        "durationMs": 2717,
-        "frames": 163,
+        "durationMs": 4250,
+        "frames": 255,
         "fps": 60,
         "smoothness": 1,
         "droppedFrames": 0,
         "p50Ms": 16.7,
-        "p95Ms": 16.7,
-        "p99Ms": 16.8,
-        "maxMs": 16.8,
+        "p95Ms": 16.8,
+        "p99Ms": 16.9,
+        "maxMs": 16.9,
         "longFrames": 0
       },
       "blockingMs": 0,
@@ -402,18 +362,58 @@
         "worstMs": 0,
         "topScripts": []
       },
-      "cls": 0.006,
+      "cls": 0.0112,
+      "extra": {},
+      "issues": [
+        "CLS 0.0112 > 0.01"
+      ],
+      "status": "fail",
+      "engine": {
+        "layouts": 143,
+        "styleRecalcs": 261,
+        "layoutMs": 174.9,
+        "styleMs": 383.5,
+        "scriptMs": 91,
+        "taskMs": 1616.9,
+        "busyPct": 37.9
+      }
+    },
+    {
+      "id": "ring_step",
+      "label": "Work ring · next ×6",
+      "frames": {
+        "durationMs": 2683,
+        "frames": 161,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.9,
+        "maxMs": 16.9,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0.0062,
       "extra": {},
       "issues": [],
       "status": "pass",
       "engine": {
         "layouts": 100,
-        "styleRecalcs": 166,
-        "layoutMs": 110.7,
-        "styleMs": 269.1,
-        "scriptMs": 65.5,
-        "taskMs": 1082.1,
-        "busyPct": 39.7
+        "styleRecalcs": 164,
+        "layoutMs": 119,
+        "styleMs": 276.6,
+        "scriptMs": 63.7,
+        "taskMs": 1147.8,
+        "busyPct": 42.4
       }
     },
     {
@@ -445,7 +445,7 @@
         "moves": 121,
         "handlerP50Ms": 0,
         "handlerP95Ms": 0.1,
-        "handlerMaxMs": 0.3
+        "handlerMaxMs": 0.2
       },
       "issues": [],
       "status": "pass",
@@ -453,10 +453,10 @@
         "layouts": 0,
         "styleRecalcs": 122,
         "layoutMs": 0,
-        "styleMs": 45.5,
-        "scriptMs": 13.4,
-        "taskMs": 239.6,
-        "busyPct": 11.8
+        "styleMs": 56.3,
+        "scriptMs": 15.8,
+        "taskMs": 269.8,
+        "busyPct": 13.3
       }
     },
     {
@@ -487,7 +487,7 @@
       "extra": {
         "moves": 121,
         "handlerP50Ms": 0,
-        "handlerP95Ms": 0,
+        "handlerP95Ms": 0.1,
         "handlerMaxMs": 0.2
       },
       "issues": [],
@@ -496,26 +496,26 @@
         "layouts": 0,
         "styleRecalcs": 122,
         "layoutMs": 0,
-        "styleMs": 48.9,
-        "scriptMs": 11.5,
-        "taskMs": 235.8,
-        "busyPct": 11.6
+        "styleMs": 56.4,
+        "scriptMs": 14.5,
+        "taskMs": 264.2,
+        "busyPct": 13.1
       }
     },
     {
       "id": "modal",
       "label": "Project modal · open + close",
       "frames": {
-        "durationMs": 1667,
-        "frames": 98,
+        "durationMs": 1650,
+        "frames": 97,
         "fps": 58.8,
         "smoothness": 0.98,
         "droppedFrames": 2,
         "p50Ms": 16.7,
         "p95Ms": 16.8,
-        "p99Ms": 50,
-        "maxMs": 50,
-        "longFrames": 0
+        "p99Ms": 50.1,
+        "maxMs": 50.1,
+        "longFrames": 1
       },
       "blockingMs": 0,
       "longTasks": 0,
@@ -528,34 +528,34 @@
       },
       "cls": 0,
       "extra": {
-        "openScriptMs": 29.1,
-        "closeScriptMs": 5.6
+        "openScriptMs": 28.1,
+        "closeScriptMs": 5.4
       },
       "issues": [],
       "status": "pass",
       "engine": {
         "layouts": 8,
-        "styleRecalcs": 104,
-        "layoutMs": 21.1,
-        "styleMs": 102.5,
-        "scriptMs": 13.4,
-        "taskMs": 488.6,
-        "busyPct": 29.1
+        "styleRecalcs": 103,
+        "layoutMs": 20.7,
+        "styleMs": 119.3,
+        "scriptMs": 14.2,
+        "taskMs": 530,
+        "busyPct": 31.8
       }
     },
     {
       "id": "lang_toggle",
       "label": "Language · switch + back",
       "frames": {
-        "durationMs": 1550,
-        "frames": 48,
-        "fps": 31,
-        "smoothness": 0.516,
-        "droppedFrames": 45,
+        "durationMs": 1450,
+        "frames": 44,
+        "fps": 30.3,
+        "smoothness": 0.506,
+        "droppedFrames": 43,
         "p50Ms": 16.7,
-        "p95Ms": 133.3,
-        "p99Ms": 400,
-        "maxMs": 400,
+        "p95Ms": 83.4,
+        "p99Ms": 450,
+        "maxMs": 450,
         "longFrames": 4
       },
       "blockingMs": 0,
@@ -567,26 +567,26 @@
         "worstMs": 0,
         "topScripts": []
       },
-      "cls": 0.637,
+      "cls": 0.5499,
       "extra": {
-        "firstToggleMs": 6.2,
-        "secondToggleMs": 11.9
+        "firstToggleMs": 7.3,
+        "secondToggleMs": 1.4
       },
       "issues": [
-        "smoothness 0.516 < 0.9",
-        "p95 frame 133.3 ms > 33.4 ms",
+        "smoothness 0.506 < 0.9",
+        "p95 frame 83.4 ms > 33.4 ms",
         "4 frames over 50 ms (max 3)",
-        "main thread busy 63.2% > 60%"
+        "main thread busy 64.5% > 60%"
       ],
       "status": "fail",
       "engine": {
         "layouts": 6,
-        "styleRecalcs": 56,
-        "layoutMs": 654.6,
-        "styleMs": 126.9,
-        "scriptMs": 26.1,
-        "taskMs": 991.5,
-        "busyPct": 63.2
+        "styleRecalcs": 51,
+        "layoutMs": 608.8,
+        "styleMs": 128.6,
+        "scriptMs": 21.7,
+        "taskMs": 941.8,
+        "busyPct": 64.5
       }
     },
     {
@@ -600,8 +600,8 @@
         "droppedFrames": 0,
         "p50Ms": 16.7,
         "p95Ms": 16.8,
-        "p99Ms": 16.8,
-        "maxMs": 16.8,
+        "p99Ms": 16.9,
+        "maxMs": 16.9,
         "longFrames": 0
       },
       "blockingMs": 0,
@@ -618,28 +618,28 @@
       "issues": [],
       "status": "pass",
       "engine": {
-        "layouts": 0,
+        "layouts": 4,
         "styleRecalcs": 479,
-        "layoutMs": 0,
-        "styleMs": 216,
-        "scriptMs": 63.5,
-        "taskMs": 1072.3,
-        "busyPct": 26.7
+        "layoutMs": 1.5,
+        "styleMs": 221.3,
+        "scriptMs": 67.6,
+        "taskMs": 1107.9,
+        "busyPct": 27.6
       }
     },
     {
       "id": "ring_intro",
       "label": "Work ring · intro spin (cold)",
       "frames": {
-        "durationMs": 3300,
-        "frames": 198,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
+        "durationMs": 3317,
+        "frames": 197,
+        "fps": 59.4,
+        "smoothness": 0.99,
+        "droppedFrames": 2,
         "p50Ms": 16.7,
         "p95Ms": 16.8,
-        "p99Ms": 16.8,
-        "maxMs": 16.8,
+        "p99Ms": 16.9,
+        "maxMs": 50,
         "longFrames": 0
       },
       "blockingMs": 0,
@@ -656,13 +656,13 @@
       "issues": [],
       "status": "pass",
       "engine": {
-        "layouts": 2,
-        "styleRecalcs": 200,
-        "layoutMs": 1.4,
-        "styleMs": 83.8,
-        "scriptMs": 15.3,
-        "taskMs": 347.3,
-        "busyPct": 10.5
+        "layouts": 3,
+        "styleRecalcs": 201,
+        "layoutMs": 36,
+        "styleMs": 102.9,
+        "scriptMs": 18.6,
+        "taskMs": 432.8,
+        "busyPct": 13
       }
     }
   ],
@@ -765,19 +765,19 @@
   "issues": [
     {
       "where": "ring_drag",
-      "msg": "CLS 0.0109 > 0.01",
+      "msg": "CLS 0.0112 > 0.01",
       "level": "fail",
       "kind": "budget"
     },
     {
       "where": "lang_toggle",
-      "msg": "smoothness 0.516 < 0.9 (headless raster, confirm with --headed)",
+      "msg": "smoothness 0.506 < 0.9 (headless raster, confirm with --headed)",
       "level": "warn",
       "kind": "pacing"
     },
     {
       "where": "lang_toggle",
-      "msg": "p95 frame 133.3 ms > 33.4 ms (headless raster, confirm with --headed)",
+      "msg": "p95 frame 83.4 ms > 33.4 ms (headless raster, confirm with --headed)",
       "level": "warn",
       "kind": "pacing"
     },
@@ -813,7 +813,7 @@
     },
     {
       "where": "lang_toggle",
-      "msg": "main thread busy 63.2% > 60%",
+      "msg": "main thread busy 64.5% > 60%",
       "level": "fail"
     }
   ],

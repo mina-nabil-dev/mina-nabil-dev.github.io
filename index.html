@@ -1177,14 +1177,6 @@ section{ padding:76px 0; }
 #about{   background:radial-gradient(38% 42% at 90% 55%, rgba(88,70,200,.10), rgba(88,70,200,0) 100%); }
 #stack{   background:radial-gradient(40% 40% at 8% 58%,  rgba(34,40,140,.28), rgba(34,40,140,0) 100%); }
 #contact{ background:radial-gradient(46% 44% at 72% 60%, rgba(64,76,220,.14), rgba(64,76,220,0) 100%); }
-
-/* below-the-fold sections skip style, layout and paint until they near the
-   viewport; the browser remembers their real size once they have rendered */
-#about, #stack, #contact{
-  content-visibility:auto;
-  contain-intrinsic-size:auto 640px;
-}
-
 /*  § About ─────────────────────────── 02 / 04  */
 .section-head{
   display:flex;
