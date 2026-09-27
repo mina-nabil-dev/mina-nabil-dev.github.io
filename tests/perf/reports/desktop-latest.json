@@ -1,7 +1,7 @@
 {
   "meta": {
-    "date": "2026-09-27T08:14:30.039Z",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+    "date": "2026-09-27T08:24:31.077Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
     "profile": "desktop",
     "cpu": 1,
     "refreshMs": 16.7,
@@ -16,17 +16,17 @@
     "runner": {
       "browser": "Chrome/153.0.8010.53",
       "binary": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-      "headed": false,
+      "headed": true,
       "net": "none",
       "cpu": 1
     }
   },
   "load": {
     "ttfbMs": 3,
-    "domContentLoadedMs": 392,
-    "loadMs": 416,
+    "domContentLoadedMs": 395,
+    "loadMs": 469,
     "fcpMs": 448,
-    "lcpMs": 1264,
+    "lcpMs": 1216,
     "lcpElement": "p.hero-lede.reveal",
     "cls": 0,
     "blockingMs": 0,
@@ -67,7 +67,7 @@
       }
     ],
     "domNodes": 802,
-    "runningAnimations": 54,
+    "runningAnimations": 53,
     "perpetualAnimations": 53,
     "status": "pass"
   },
@@ -83,242 +83,7 @@
         "droppedFrames": 0,
         "p50Ms": 16.7,
         "p95Ms": 16.8,
-        "p99Ms": 16.9,
-        "maxMs": 16.9,
-        "longFrames": 0
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0,
-      "extra": {},
-      "issues": [],
-      "status": "pass",
-      "engine": {
-        "layouts": 0,
-        "styleRecalcs": 182,
-        "layoutMs": 0,
-        "styleMs": 68.4,
-        "scriptMs": 10.4,
-        "taskMs": 306.9,
-        "busyPct": 10.2
-      }
-    },
-    {
-      "id": "scroll_hero",
-      "label": "Scroll · hero",
-      "frames": {
-        "durationMs": 483,
-        "frames": 23,
-        "fps": 47.6,
-        "smoothness": 0.793,
-        "droppedFrames": 6,
-        "p50Ms": 16.7,
-        "p95Ms": 49.9,
-        "p99Ms": 83.3,
-        "maxMs": 83.3,
-        "longFrames": 1
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0,
-      "extra": {},
-      "issues": [
-        "smoothness 0.793 < 0.9",
-        "p95 frame 49.9 ms > 33.4 ms"
-      ],
-      "status": "warn",
-      "engine": {
-        "layouts": 0,
-        "styleRecalcs": 45,
-        "layoutMs": 0,
-        "styleMs": 16.4,
-        "scriptMs": 2.7,
-        "taskMs": 79.6,
-        "busyPct": 15.7
-      }
-    },
-    {
-      "id": "scroll_work",
-      "label": "Scroll · work",
-      "frames": {
-        "durationMs": 867,
-        "frames": 27,
-        "fps": 31.1,
-        "smoothness": 0.519,
-        "droppedFrames": 25,
-        "p50Ms": 16.8,
-        "p95Ms": 100.2,
-        "p99Ms": 183.4,
-        "maxMs": 183.4,
-        "longFrames": 4
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0.0004,
-      "extra": {},
-      "issues": [
-        "smoothness 0.519 < 0.9",
-        "p95 frame 100.2 ms > 33.4 ms",
-        "4 frames over 50 ms (max 2)"
-      ],
-      "status": "warn",
-      "engine": {
-        "layouts": 25,
-        "styleRecalcs": 68,
-        "layoutMs": 12.6,
-        "styleMs": 57.7,
-        "scriptMs": 7,
-        "taskMs": 175.2,
-        "busyPct": 19.3
-      }
-    },
-    {
-      "id": "scroll_about",
-      "label": "Scroll · about",
-      "frames": {
-        "durationMs": 467,
-        "frames": 28,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
-        "p50Ms": 16.7,
-        "p95Ms": 16.7,
         "p99Ms": 16.8,
-        "maxMs": 16.8,
-        "longFrames": 0
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0.0003,
-      "extra": {},
-      "issues": [],
-      "status": "pass",
-      "engine": {
-        "layouts": 29,
-        "styleRecalcs": 55,
-        "layoutMs": 14.1,
-        "styleMs": 59,
-        "scriptMs": 6.3,
-        "taskMs": 157.4,
-        "busyPct": 32.8
-      }
-    },
-    {
-      "id": "scroll_stack",
-      "label": "Scroll · stack",
-      "frames": {
-        "durationMs": 517,
-        "frames": 31,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
-        "p50Ms": 16.7,
-        "p95Ms": 16.8,
-        "p99Ms": 16.8,
-        "maxMs": 16.8,
-        "longFrames": 0
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0,
-      "extra": {},
-      "issues": [],
-      "status": "pass",
-      "engine": {
-        "layouts": 32,
-        "styleRecalcs": 61,
-        "layoutMs": 14.7,
-        "styleMs": 55.1,
-        "scriptMs": 5.2,
-        "taskMs": 164.5,
-        "busyPct": 31.1
-      }
-    },
-    {
-      "id": "scroll_contact",
-      "label": "Scroll · contact",
-      "frames": {
-        "durationMs": 283,
-        "frames": 17,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
-        "p50Ms": 16.7,
-        "p95Ms": 16.8,
-        "p99Ms": 16.8,
-        "maxMs": 16.8,
-        "longFrames": 0
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0,
-      "extra": {},
-      "issues": [],
-      "status": "pass",
-      "engine": {
-        "layouts": 18,
-        "styleRecalcs": 33,
-        "layoutMs": 8.4,
-        "styleMs": 26.9,
-        "scriptMs": 2.3,
-        "taskMs": 82.1,
-        "busyPct": 27.6
-      }
-    },
-    {
-      "id": "contact_idle",
-      "label": "Contact · idle 3 s",
-      "frames": {
-        "durationMs": 3000,
-        "frames": 180,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
-        "p50Ms": 16.7,
-        "p95Ms": 16.8,
-        "p99Ms": 16.9,
         "maxMs": 16.9,
         "longFrames": 0
       },
@@ -339,228 +104,25 @@
         "layouts": 0,
         "styleRecalcs": 181,
         "layoutMs": 0,
-        "styleMs": 31.7,
-        "scriptMs": 5.4,
-        "taskMs": 144.6,
-        "busyPct": 4.8
+        "styleMs": 25.5,
+        "scriptMs": 6.9,
+        "taskMs": 107.9,
+        "busyPct": 3.6
       }
     },
     {
-      "id": "ring_drag",
-      "label": "Work ring · drag ×2",
+      "id": "scroll_hero",
+      "label": "Scroll · hero",
       "frames": {
-        "durationMs": 4233,
-        "frames": 254,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
+        "durationMs": 467,
+        "frames": 20,
+        "fps": 42.9,
+        "smoothness": 0.714,
+        "droppedFrames": 8,
         "p50Ms": 16.7,
-        "p95Ms": 16.8,
-        "p99Ms": 16.8,
-        "maxMs": 16.9,
-        "longFrames": 0
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0.0002,
-      "extra": {},
-      "issues": [],
-      "status": "pass",
-      "engine": {
-        "layouts": 156,
-        "styleRecalcs": 255,
-        "layoutMs": 71.4,
-        "styleMs": 375.8,
-        "scriptMs": 30.6,
-        "taskMs": 1075.8,
-        "busyPct": 25.3
-      }
-    },
-    {
-      "id": "ring_step",
-      "label": "Work ring · next ×6",
-      "frames": {
-        "durationMs": 2667,
-        "frames": 160,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
-        "p50Ms": 16.7,
-        "p95Ms": 16.8,
-        "p99Ms": 16.8,
-        "maxMs": 16.9,
-        "longFrames": 0
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0.0002,
-      "extra": {},
-      "issues": [],
-      "status": "pass",
-      "engine": {
-        "layouts": 103,
-        "styleRecalcs": 161,
-        "layoutMs": 46.7,
-        "styleMs": 250.5,
-        "scriptMs": 20.2,
-        "taskMs": 694.8,
-        "busyPct": 26
-      }
-    },
-    {
-      "id": "spotlight_stack",
-      "label": "Stack · pointer sweep",
-      "frames": {
-        "durationMs": 2017,
-        "frames": 121,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
-        "p50Ms": 16.7,
-        "p95Ms": 16.8,
-        "p99Ms": 16.9,
-        "maxMs": 16.9,
-        "longFrames": 0
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0,
-      "extra": {
-        "moves": 121,
-        "handlerP50Ms": 0,
-        "handlerP95Ms": 0,
-        "handlerMaxMs": 0.1
-      },
-      "issues": [],
-      "status": "pass",
-      "engine": {
-        "layouts": 0,
-        "styleRecalcs": 122,
-        "layoutMs": 0,
-        "styleMs": 13.9,
-        "scriptMs": 3.5,
-        "taskMs": 67.2,
-        "busyPct": 3.3
-      }
-    },
-    {
-      "id": "spotlight_contact",
-      "label": "Contact · pointer sweep",
-      "frames": {
-        "durationMs": 2017,
-        "frames": 121,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
-        "p50Ms": 16.7,
-        "p95Ms": 16.8,
-        "p99Ms": 16.8,
-        "maxMs": 16.8,
-        "longFrames": 0
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0,
-      "extra": {
-        "moves": 121,
-        "handlerP50Ms": 0.2,
-        "handlerP95Ms": 0.4,
-        "handlerMaxMs": 0.7
-      },
-      "issues": [],
-      "status": "pass",
-      "engine": {
-        "layouts": 0,
-        "styleRecalcs": 243,
-        "layoutMs": 0,
-        "styleMs": 142.2,
-        "scriptMs": 14,
-        "taskMs": 285.1,
-        "busyPct": 14.1
-      }
-    },
-    {
-      "id": "modal",
-      "label": "Project modal · open + close",
-      "frames": {
-        "durationMs": 1617,
-        "frames": 97,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
-        "p50Ms": 16.7,
-        "p95Ms": 16.8,
-        "p99Ms": 16.9,
-        "maxMs": 16.9,
-        "longFrames": 0
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0,
-      "extra": {
-        "openScriptMs": 5.1,
-        "closeScriptMs": 1.1
-      },
-      "issues": [],
-      "status": "pass",
-      "engine": {
-        "layouts": 8,
-        "styleRecalcs": 103,
-        "layoutMs": 4.2,
-        "styleMs": 106.7,
-        "scriptMs": 3.2,
-        "taskMs": 304.7,
-        "busyPct": 18.7
-      }
-    },
-    {
-      "id": "lang_toggle",
-      "label": "Language · switch + back",
-      "frames": {
-        "durationMs": 1417,
-        "frames": 80,
-        "fps": 56.5,
-        "smoothness": 0.941,
-        "droppedFrames": 5,
-        "p50Ms": 16.7,
-        "p95Ms": 16.9,
-        "p99Ms": 83.3,
-        "maxMs": 83.3,
+        "p95Ms": 116.6,
+        "p99Ms": 116.6,
+        "maxMs": 116.6,
         "longFrames": 1
       },
       "blockingMs": 0,
@@ -572,29 +134,70 @@
         "worstMs": 0,
         "topScripts": []
       },
-      "cls": 1.5074,
-      "extra": {
-        "firstToggleMs": 1.4,
-        "secondToggleMs": 1.4
-      },
-      "issues": [],
-      "status": "pass",
+      "cls": 0,
+      "extra": {},
+      "issues": [
+        "smoothness 0.714 < 0.9",
+        "p95 frame 116.6 ms > 33.4 ms"
+      ],
+      "status": "fail",
       "engine": {
-        "layouts": 8,
-        "styleRecalcs": 85,
-        "layoutMs": 159.8,
-        "styleMs": 43,
-        "scriptMs": 5.1,
-        "taskMs": 314.3,
-        "busyPct": 22.1
+        "layouts": 0,
+        "styleRecalcs": 43,
+        "layoutMs": 0,
+        "styleMs": 14.3,
+        "scriptMs": 2.9,
+        "taskMs": 61.9,
+        "busyPct": 12.7
       }
     },
     {
-      "id": "scroll_warm",
-      "label": "Scroll · whole page (warm)",
+      "id": "scroll_work",
+      "label": "Scroll · work",
       "frames": {
-        "durationMs": 2417,
-        "frames": 145,
+        "durationMs": 867,
+        "frames": 27,
+        "fps": 31.2,
+        "smoothness": 0.519,
+        "droppedFrames": 25,
+        "p50Ms": 16.7,
+        "p95Ms": 66.7,
+        "p99Ms": 233.3,
+        "maxMs": 233.3,
+        "longFrames": 2
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0.0004,
+      "extra": {},
+      "issues": [
+        "smoothness 0.519 < 0.9",
+        "p95 frame 66.7 ms > 33.4 ms"
+      ],
+      "status": "fail",
+      "engine": {
+        "layouts": 31,
+        "styleRecalcs": 79,
+        "layoutMs": 16.6,
+        "styleMs": 59.7,
+        "scriptMs": 7.6,
+        "taskMs": 179,
+        "busyPct": 20.4
+      }
+    },
+    {
+      "id": "scroll_about",
+      "label": "Scroll · about",
+      "frames": {
+        "durationMs": 467,
+        "frames": 28,
         "fps": 60,
         "smoothness": 1,
         "droppedFrames": 0,
@@ -613,56 +216,18 @@
         "worstMs": 0,
         "topScripts": []
       },
-      "cls": 0,
+      "cls": 0.0003,
       "extra": {},
       "issues": [],
       "status": "pass",
       "engine": {
-        "layouts": 0,
-        "styleRecalcs": 289,
-        "layoutMs": 0,
-        "styleMs": 99.8,
-        "scriptMs": 10,
-        "taskMs": 351.8,
-        "busyPct": 14.5
-      }
-    },
-    {
-      "id": "ring_intro",
-      "label": "Work ring · intro spin (cold)",
-      "frames": {
-        "durationMs": 3300,
-        "frames": 198,
-        "fps": 60,
-        "smoothness": 1,
-        "droppedFrames": 0,
-        "p50Ms": 16.7,
-        "p95Ms": 16.8,
-        "p99Ms": 17,
-        "maxMs": 17.2,
-        "longFrames": 0
-      },
-      "blockingMs": 0,
-      "longTasks": 0,
-      "loaf": {
-        "count": 0,
-        "totalMs": 0,
-        "blockingMs": 0,
-        "worstMs": 0,
-        "topScripts": []
-      },
-      "cls": 0.0011,
-      "extra": {},
-      "issues": [],
-      "status": "pass",
-      "engine": {
-        "layouts": 141,
-        "styleRecalcs": 202,
-        "layoutMs": 66.9,
-        "styleMs": 322.5,
-        "scriptMs": 27.4,
-        "taskMs": 979.7,
-        "busyPct": 29.3
+        "layouts": 29,
+        "styleRecalcs": 60,
+        "layoutMs": 16.4,
+        "styleMs": 54.3,
+        "scriptMs": 5.4,
+        "taskMs": 169.3,
+        "busyPct": 35.3
       }
     }
   ],
@@ -760,37 +325,31 @@
     ],
     "domNodes": 802,
     "perpetualAnimations": 53,
-    "heapMB": 1.5
+    "heapMB": 2.3
   },
   "issues": [
     {
       "where": "scroll_hero",
-      "msg": "smoothness 0.793 < 0.9 (headless raster, confirm with --headed)",
-      "level": "warn",
+      "msg": "smoothness 0.714 < 0.9",
+      "level": "fail",
       "kind": "pacing"
     },
     {
       "where": "scroll_hero",
-      "msg": "p95 frame 49.9 ms > 33.4 ms (headless raster, confirm with --headed)",
-      "level": "warn",
+      "msg": "p95 frame 116.6 ms > 33.4 ms",
+      "level": "fail",
       "kind": "pacing"
     },
     {
       "where": "scroll_work",
-      "msg": "smoothness 0.519 < 0.9 (headless raster, confirm with --headed)",
-      "level": "warn",
+      "msg": "smoothness 0.519 < 0.9",
+      "level": "fail",
       "kind": "pacing"
     },
     {
       "where": "scroll_work",
-      "msg": "p95 frame 100.2 ms > 33.4 ms (headless raster, confirm with --headed)",
-      "level": "warn",
-      "kind": "pacing"
-    },
-    {
-      "where": "scroll_work",
-      "msg": "4 frames over 50 ms (max 2) (headless raster, confirm with --headed)",
-      "level": "warn",
+      "msg": "p95 frame 66.7 ms > 33.4 ms",
+      "level": "fail",
       "kind": "pacing"
     },
     {
@@ -855,8 +414,8 @@
     }
   ],
   "summary": {
-    "scenarios": 15,
-    "failures": 0,
-    "warnings": 15
+    "scenarios": 4,
+    "failures": 4,
+    "warnings": 10
   }
 }

@@ -1,0 +1,2 @@
+# perf runs: keep baselines, not every run
+tests/perf/reports/*-latest.json
