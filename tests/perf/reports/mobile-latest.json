@@ -1,0 +1,825 @@
+{
+  "meta": {
+    "date": "2026-09-27T08:15:28.705Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36",
+    "profile": "mobile",
+    "cpu": 4,
+    "refreshMs": 16.7,
+    "hz": 60,
+    "throttled": false,
+    "loafSupported": true,
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "dpr": 2
+    },
+    "runner": {
+      "browser": "Chrome/153.0.8010.53",
+      "binary": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "headed": false,
+      "net": "none",
+      "cpu": 4
+    }
+  },
+  "load": {
+    "ttfbMs": 3,
+    "domContentLoadedMs": 1050,
+    "loadMs": 1051,
+    "fcpMs": 792,
+    "lcpMs": 1892,
+    "lcpElement": "p.hero-lede.reveal",
+    "cls": 0,
+    "blockingMs": 0,
+    "loaf": {
+      "count": 0,
+      "totalMs": 0,
+      "blockingMs": 0,
+      "worstMs": 0,
+      "topScripts": []
+    },
+    "requests": 13,
+    "transferKB": 1064,
+    "heaviest": [
+      {
+        "file": "talabat_final.jpg",
+        "kb": 186.5,
+        "type": "img"
+      },
+      {
+        "file": "easygps_final.jpg",
+        "kb": 161.5,
+        "type": "img"
+      },
+      {
+        "file": "abkarino_final.jpg",
+        "kb": 130.3,
+        "type": "img"
+      },
+      {
+        "file": "kyrillos_final.jpg",
+        "kb": 103.3,
+        "type": "img"
+      },
+      {
+        "file": "daveslimo_final.jpg",
+        "kb": 77.6,
+        "type": "img"
+      }
+    ],
+    "domNodes": 505,
+    "runningAnimations": 6,
+    "perpetualAnimations": 5,
+    "status": "pass"
+  },
+  "scenarios": [
+    {
+      "id": "hero_idle",
+      "label": "Hero · idle 3 s",
+      "frames": {
+        "durationMs": 3000,
+        "frames": 180,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {},
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 0,
+        "styleRecalcs": 181,
+        "layoutMs": 0,
+        "styleMs": 168.4,
+        "scriptMs": 37.9,
+        "taskMs": 476.8,
+        "busyPct": 15.8
+      }
+    },
+    {
+      "id": "scroll_hero",
+      "label": "Scroll · hero",
+      "frames": {
+        "durationMs": 767,
+        "frames": 46,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.7,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {},
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 0,
+        "styleRecalcs": 91,
+        "layoutMs": 0,
+        "styleMs": 74.2,
+        "scriptMs": 16.9,
+        "taskMs": 268.9,
+        "busyPct": 34.6
+      }
+    },
+    {
+      "id": "scroll_work",
+      "label": "Scroll · work",
+      "frames": {
+        "durationMs": 867,
+        "frames": 52,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.7,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {},
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 3,
+        "styleRecalcs": 103,
+        "layoutMs": 1.4,
+        "styleMs": 62.3,
+        "scriptMs": 15.9,
+        "taskMs": 273.8,
+        "busyPct": 31.2
+      }
+    },
+    {
+      "id": "scroll_about",
+      "label": "Scroll · about",
+      "frames": {
+        "durationMs": 717,
+        "frames": 43,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {},
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 2,
+        "styleRecalcs": 85,
+        "layoutMs": 1.9,
+        "styleMs": 76.3,
+        "scriptMs": 9.2,
+        "taskMs": 285.2,
+        "busyPct": 39
+      }
+    },
+    {
+      "id": "scroll_stack",
+      "label": "Scroll · stack",
+      "frames": {
+        "durationMs": 983,
+        "frames": 59,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {},
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 33,
+        "styleRecalcs": 117,
+        "layoutMs": 28.9,
+        "styleMs": 158.7,
+        "scriptMs": 11.5,
+        "taskMs": 550.5,
+        "busyPct": 55.3
+      }
+    },
+    {
+      "id": "scroll_contact",
+      "label": "Scroll · contact",
+      "frames": {
+        "durationMs": 767,
+        "frames": 46,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.7,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {},
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 9,
+        "styleRecalcs": 91,
+        "layoutMs": 8.6,
+        "styleMs": 88.8,
+        "scriptMs": 12.5,
+        "taskMs": 372.7,
+        "busyPct": 48.1
+      }
+    },
+    {
+      "id": "contact_idle",
+      "label": "Contact · idle 3 s",
+      "frames": {
+        "durationMs": 3017,
+        "frames": 181,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {},
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 0,
+        "styleRecalcs": 182,
+        "layoutMs": 0,
+        "styleMs": 96.4,
+        "scriptMs": 17.5,
+        "taskMs": 403.9,
+        "busyPct": 13.3
+      }
+    },
+    {
+      "id": "ring_drag",
+      "label": "Work ring · drag ×2",
+      "frames": {
+        "durationMs": 4233,
+        "frames": 254,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.8,
+        "maxMs": 16.9,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0.0109,
+      "extra": {},
+      "issues": [
+        "CLS 0.0109 > 0.01"
+      ],
+      "status": "fail",
+      "engine": {
+        "layouts": 141,
+        "styleRecalcs": 260,
+        "layoutMs": 163.7,
+        "styleMs": 351.7,
+        "scriptMs": 90.5,
+        "taskMs": 1539.1,
+        "busyPct": 36.2
+      }
+    },
+    {
+      "id": "ring_step",
+      "label": "Work ring · next ×6",
+      "frames": {
+        "durationMs": 2717,
+        "frames": 163,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.7,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0.006,
+      "extra": {},
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 100,
+        "styleRecalcs": 166,
+        "layoutMs": 110.7,
+        "styleMs": 269.1,
+        "scriptMs": 65.5,
+        "taskMs": 1082.1,
+        "busyPct": 39.7
+      }
+    },
+    {
+      "id": "spotlight_stack",
+      "label": "Stack · pointer sweep",
+      "frames": {
+        "durationMs": 2017,
+        "frames": 121,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {
+        "moves": 121,
+        "handlerP50Ms": 0,
+        "handlerP95Ms": 0.1,
+        "handlerMaxMs": 0.3
+      },
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 0,
+        "styleRecalcs": 122,
+        "layoutMs": 0,
+        "styleMs": 45.5,
+        "scriptMs": 13.4,
+        "taskMs": 239.6,
+        "busyPct": 11.8
+      }
+    },
+    {
+      "id": "spotlight_contact",
+      "label": "Contact · pointer sweep",
+      "frames": {
+        "durationMs": 2017,
+        "frames": 121,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {
+        "moves": 121,
+        "handlerP50Ms": 0,
+        "handlerP95Ms": 0,
+        "handlerMaxMs": 0.2
+      },
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 0,
+        "styleRecalcs": 122,
+        "layoutMs": 0,
+        "styleMs": 48.9,
+        "scriptMs": 11.5,
+        "taskMs": 235.8,
+        "busyPct": 11.6
+      }
+    },
+    {
+      "id": "modal",
+      "label": "Project modal · open + close",
+      "frames": {
+        "durationMs": 1667,
+        "frames": 98,
+        "fps": 58.8,
+        "smoothness": 0.98,
+        "droppedFrames": 2,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 50,
+        "maxMs": 50,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {
+        "openScriptMs": 29.1,
+        "closeScriptMs": 5.6
+      },
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 8,
+        "styleRecalcs": 104,
+        "layoutMs": 21.1,
+        "styleMs": 102.5,
+        "scriptMs": 13.4,
+        "taskMs": 488.6,
+        "busyPct": 29.1
+      }
+    },
+    {
+      "id": "lang_toggle",
+      "label": "Language · switch + back",
+      "frames": {
+        "durationMs": 1550,
+        "frames": 48,
+        "fps": 31,
+        "smoothness": 0.516,
+        "droppedFrames": 45,
+        "p50Ms": 16.7,
+        "p95Ms": 133.3,
+        "p99Ms": 400,
+        "maxMs": 400,
+        "longFrames": 4
+      },
+      "blockingMs": 0,
+      "longTasks": 1,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0.637,
+      "extra": {
+        "firstToggleMs": 6.2,
+        "secondToggleMs": 11.9
+      },
+      "issues": [
+        "smoothness 0.516 < 0.9",
+        "p95 frame 133.3 ms > 33.4 ms",
+        "4 frames over 50 ms (max 3)",
+        "main thread busy 63.2% > 60%"
+      ],
+      "status": "fail",
+      "engine": {
+        "layouts": 6,
+        "styleRecalcs": 56,
+        "layoutMs": 654.6,
+        "styleMs": 126.9,
+        "scriptMs": 26.1,
+        "taskMs": 991.5,
+        "busyPct": 63.2
+      }
+    },
+    {
+      "id": "scroll_warm",
+      "label": "Scroll · whole page (warm)",
+      "frames": {
+        "durationMs": 4000,
+        "frames": 240,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {},
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 0,
+        "styleRecalcs": 479,
+        "layoutMs": 0,
+        "styleMs": 216,
+        "scriptMs": 63.5,
+        "taskMs": 1072.3,
+        "busyPct": 26.7
+      }
+    },
+    {
+      "id": "ring_intro",
+      "label": "Work ring · intro spin (cold)",
+      "frames": {
+        "durationMs": 3300,
+        "frames": 198,
+        "fps": 60,
+        "smoothness": 1,
+        "droppedFrames": 0,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.8,
+        "maxMs": 16.8,
+        "longFrames": 0
+      },
+      "blockingMs": 0,
+      "longTasks": 0,
+      "loaf": {
+        "count": 0,
+        "totalMs": 0,
+        "blockingMs": 0,
+        "worstMs": 0,
+        "topScripts": []
+      },
+      "cls": 0,
+      "extra": {},
+      "issues": [],
+      "status": "pass",
+      "engine": {
+        "layouts": 2,
+        "styleRecalcs": 200,
+        "layoutMs": 1.4,
+        "styleMs": 83.8,
+        "scriptMs": 15.3,
+        "taskMs": 347.3,
+        "busyPct": 10.5
+      }
+    }
+  ],
+  "audit": {
+    "dpr": 2,
+    "images": [
+      {
+        "file": "talabat_final.jpg",
+        "natural": "1254×1254",
+        "shown": 180,
+        "copies": 1,
+        "kb": 186.5,
+        "oversize": 3.48
+      },
+      {
+        "file": "kyrillos_final.jpg",
+        "natural": "1080×1350",
+        "shown": 180,
+        "copies": 1,
+        "kb": 103.3,
+        "oversize": 3
+      },
+      {
+        "file": "motorent_final.jpg",
+        "natural": "1024×1024",
+        "shown": 180,
+        "copies": 1,
+        "kb": 73.7,
+        "oversize": 2.84
+      },
+      {
+        "file": "easygps_final.jpg",
+        "natural": "1024×1024",
+        "shown": 180,
+        "copies": 1,
+        "kb": 161.5,
+        "oversize": 2.84
+      },
+      {
+        "file": "shicoril_final.jpg",
+        "natural": "672×657",
+        "shown": 180,
+        "copies": 1,
+        "kb": 69.5,
+        "oversize": 1.87
+      },
+      {
+        "file": "abkarino_final.jpg",
+        "natural": "512×512",
+        "shown": 180,
+        "copies": 1,
+        "kb": 130.3,
+        "oversize": 1.42
+      },
+      {
+        "file": "daveslimo_final.jpg",
+        "natural": "493×591",
+        "shown": 180,
+        "copies": 1,
+        "kb": 77.6,
+        "oversize": 1.37
+      },
+      {
+        "file": "yalla_final.jpg",
+        "natural": "480×480",
+        "shown": 180,
+        "copies": 1,
+        "kb": 30.2,
+        "oversize": 1.33
+      },
+      {
+        "file": "elhawy_final.jpg",
+        "natural": "480×480",
+        "shown": 180,
+        "copies": 1,
+        "kb": 39.7,
+        "oversize": 1.33
+      },
+      {
+        "file": "mncs_final.jpg",
+        "natural": "480×480",
+        "shown": 180,
+        "copies": 2,
+        "kb": 38.2,
+        "oversize": 1.33
+      },
+      {
+        "file": "profile.png",
+        "natural": "405×405",
+        "shown": 318,
+        "copies": 1,
+        "kb": 12.3,
+        "oversize": 0.64
+      }
+    ],
+    "domNodes": 505,
+    "perpetualAnimations": 5,
+    "heapMB": 1.8
+  },
+  "issues": [
+    {
+      "where": "ring_drag",
+      "msg": "CLS 0.0109 > 0.01",
+      "level": "fail",
+      "kind": "budget"
+    },
+    {
+      "where": "lang_toggle",
+      "msg": "smoothness 0.516 < 0.9 (headless raster, confirm with --headed)",
+      "level": "warn",
+      "kind": "pacing"
+    },
+    {
+      "where": "lang_toggle",
+      "msg": "p95 frame 133.3 ms > 33.4 ms (headless raster, confirm with --headed)",
+      "level": "warn",
+      "kind": "pacing"
+    },
+    {
+      "where": "lang_toggle",
+      "msg": "4 frames over 50 ms (max 3) (headless raster, confirm with --headed)",
+      "level": "warn",
+      "kind": "pacing"
+    },
+    {
+      "where": "images",
+      "msg": "talabat_final.jpg is 3.48× larger than displayed (1254×1254 shown at 180px, 186.5 KB)",
+      "level": "warn",
+      "kind": "budget"
+    },
+    {
+      "where": "images",
+      "msg": "kyrillos_final.jpg is 3× larger than displayed (1080×1350 shown at 180px, 103.3 KB)",
+      "level": "warn",
+      "kind": "budget"
+    },
+    {
+      "where": "images",
+      "msg": "motorent_final.jpg is 2.84× larger than displayed (1024×1024 shown at 180px, 73.7 KB)",
+      "level": "warn",
+      "kind": "budget"
+    },
+    {
+      "where": "images",
+      "msg": "easygps_final.jpg is 2.84× larger than displayed (1024×1024 shown at 180px, 161.5 KB)",
+      "level": "warn",
+      "kind": "budget"
+    },
+    {
+      "where": "lang_toggle",
+      "msg": "main thread busy 63.2% > 60%",
+      "level": "fail"
+    }
+  ],
+  "summary": {
+    "scenarios": 15,
+    "failures": 2,
+    "warnings": 7
+  }
+}

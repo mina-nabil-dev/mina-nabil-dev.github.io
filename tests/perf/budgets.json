@@ -1,0 +1,36 @@
+{
+  "_about": "Performance budgets checked by tests/perf. Frame budgets are relative to the display refresh measured at the start of each run; ms values are wall-clock. A null value switches a check off for that scenario.",
+
+  "load": {
+    "fcpMs": 1800,
+    "lcpMs": 2500,
+    "cls": 0.1,
+    "blockingMs": 200,
+    "domNodes": 1500,
+    "transferKB": 1600
+  },
+
+  "frames": {
+    "minSmoothness": 0.9,
+    "maxP95Factor": 2,
+    "maxLongFrames": 2,
+    "maxBlockingMs": 50,
+    "maxCls": 0.01,
+    "maxBusyPct": 60
+  },
+
+  "interactions": {
+    "modalOpenMs": 50,
+    "langToggleMs": 50,
+    "spotlightHandlerMs": 2
+  },
+
+  "advisories": {
+    "maxImageOversize": 2
+  },
+
+  "scenarios": {
+    "ring_intro":  { "minSmoothness": 0.85 },
+    "lang_toggle": { "maxCls": null, "maxLongFrames": 3 }
+  }
+}

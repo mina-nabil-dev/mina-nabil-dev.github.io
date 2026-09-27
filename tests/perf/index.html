@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Perf harness · mina.dev</title>
+<style>
+:root{
+  --bg:#07081f; --panel:#0d0f2b; --line:#262a5c; --ink:#eef0ff; --soft:#b6bbdf; --faint:#8d93bd;
+  --signal:#8e9bff; --pass:#4ade9a; --fail:#ff7a8a; --warn:#f5c26b;
+  --mono:'IBM Plex Mono', ui-monospace, Consolas, monospace;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+body{ background:var(--bg); color:var(--ink); font:14px/1.5 system-ui, sans-serif; }
+
+header{
+  position:sticky; top:0; z-index:5;
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  padding:14px 20px; background:rgba(7,8,31,.94); border-bottom:1px solid var(--line);
+}
+h1{ font:600 14px var(--mono); margin-right:auto; }
+h1 span{ color:var(--signal); }
+label{ font:12px var(--mono); color:var(--faint); display:flex; gap:6px; align-items:center; }
+select, button{
+  font:13px var(--mono); color:var(--ink); background:var(--panel);
+  border:1px solid var(--line); border-radius:6px; padding:8px 12px; min-height:36px;
+}
+button{ cursor:pointer; }
+button.primary{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
+button:disabled{ opacity:.5; cursor:progress; }
+#status{ width:100%; font:12px var(--mono); color:var(--faint); }
+
+main{ display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:20px; padding:20px; align-items:start; }
+.stage{ position:sticky; top:96px; }
+.frame-box{ overflow:hidden; border:1px solid var(--line); border-radius:8px; background:#000; }
+iframe{ border:0; display:block; transform-origin:0 0; }
+.hint{ margin-top:10px; font:12px var(--mono); color:var(--faint); }
+
+h2{ font:600 12px var(--mono); color:var(--signal); letter-spacing:.08em; text-transform:uppercase; margin:22px 0 10px; }
+h2:first-child{ margin-top:0; }
+.banner{ padding:10px 14px; border:1px solid var(--warn); color:var(--warn); border-radius:8px; font:12px var(--mono); margin-bottom:14px; }
+.summary{ font:13px var(--mono); margin-bottom:6px; }
+
+.cards{
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(118px, 1fr));
+  gap:1px; background:var(--line); border:1px solid var(--line); border-radius:8px; overflow:hidden;
+}
+.card{ background:var(--panel); padding:12px 14px; }
+.card b{ display:block; font:600 18px var(--mono); }
+.card span{ font:10.5px var(--mono); color:var(--faint); text-transform:uppercase; letter-spacing:.06em; }
+
+.scroll{ overflow-x:auto; border:1px solid var(--line); border-radius:8px; }
+table{ width:100%; border-collapse:collapse; font:12px var(--mono); }
+th, td{ padding:7px 9px; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap; }
+th{ color:var(--faint); font-weight:500; background:var(--panel); position:sticky; top:0; }
+th:first-child, td:first-child{ text-align:left; }
+tr:last-child td{ border-bottom:0; }
+td.note{ text-align:left; color:var(--soft); white-space:normal; min-width:180px; }
+.pass{ color:var(--pass); } .fail{ color:var(--fail); } .warn{ color:var(--warn); }
+.muted{ color:var(--faint); }
+ul.issues{ list-style:none; font:12px var(--mono); display:grid; gap:4px; }
+
+/* CLI mode: the page is only the site, at the emulated viewport */
+body.auto{ overflow:hidden; }
+body.auto header, body.auto .results, body.auto .hint{ display:none; }
+body.auto main{ display:block; padding:0; }
+body.auto .stage{ position:fixed; inset:0; }
+body.auto .frame-box{ border:0; border-radius:0; }
+
+@media (max-width:1100px){
+  main{ grid-template-columns:1fr; }
+  .stage{ position:static; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>mina<span>.</span>dev · perf harness</h1>
+  <label>viewport
+    <select id="profile">
+      <option value="desktop">Desktop 1366×768</option>
+      <option value="mobile">Mobile 390×844</option>
+    </select>
+  </label>
+  <label>scenario <select id="scenario"><option value="">All scenarios</option></select></label>
+  <button class="primary" id="run" type="button">Run</button>
+  <button id="copy" type="button" disabled>Copy JSON</button>
+  <button id="download" type="button" disabled>Download JSON</button>
+  <p id="status">Keep this tab visible while it runs: hidden tabs pause animation frames.</p>
+</header>
+
+<main>
+  <section class="stage">
+    <div class="frame-box" id="frameBox"><iframe id="target" title="Site under test"></iframe></div>
+    <p class="hint">In-browser numbers include this page. For repeatable numbers with CPU throttling and engine counters, run <code>node tests/perf/run.mjs</code>.</p>
+  </section>
+  <section class="results" id="results"></section>
+</main>
+
+<script src="harness.js"></script>
+<script>
+(function () {
+  const PROFILES = { desktop: [1366, 768], mobile: [390, 844] };
+  const params = new URLSearchParams(location.search);
+  const auto = params.has('auto');
+  const $ = (id) => document.getElementById(id);
+  const iframe = $('target');
+  const SITE = new URL('../../', location.href).href;
+  const esc = (v) => String(v ?? '–').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const num = (v, unit = '') => (v == null ? '–' : `${v}${unit}`);
+  let last = null;
+
+  if (auto) document.body.classList.add('auto');
+
+  PerfHarness.SCENARIOS.forEach((s) => {
+    const o = document.createElement('option');
+    o.value = s.id;
+    o.textContent = s.label;
+    $('scenario').appendChild(o);
+  });
+
+  function sizeFrame() {
+    if (auto) { iframe.style.width = '100vw'; iframe.style.height = '100vh'; return; }
+    const [w, h] = PROFILES[$('profile').value];
+    const box = $('frameBox');
+    const scale = Math.min(1, box.parentElement.clientWidth / w);
+    iframe.style.width = `${w}px`;
+    iframe.style.height = `${h}px`;
+    iframe.style.transform = `scale(${scale})`;
+    box.style.width = `${w * scale}px`;
+    box.style.height = `${h * scale}px`;
+  }
+  sizeFrame();
+  window.addEventListener('resize', sizeFrame);
+  $('profile').addEventListener('change', sizeFrame);
+
+  function render(r) {
+    const L = r.load;
+    const s = r.summary;
+    const parts = [];
+    if (r.meta.throttled) parts.push('<p class="banner">Animation frames were throttled (hidden tab or background window). Frame numbers below are not reliable.</p>');
+    parts.push(`<p class="summary"><span class="${s.failures ? 'fail' : 'pass'}">${s.failures ? `✗ ${s.failures} budget failure(s)` : '✓ all budgets met'}</span>
+      <span class="muted"> · ${s.warnings} warning(s) · ${s.scenarios} scenarios · display ${r.meta.hz} Hz · ${r.meta.viewport ? `${r.meta.viewport.width}×${r.meta.viewport.height} @${r.meta.viewport.dpr}x` : ''}</span></p>`);
+
+    if (L) {
+      parts.push('<h2>Load</h2><div class="cards">' + [
+        ['FCP', num(L.fcpMs, ' ms')], ['LCP', num(L.lcpMs, ' ms')], ['CLS', num(L.cls)], ['Blocking', num(L.blockingMs, ' ms')],
+        ['Requests', num(L.requests)], ['Transfer', num(L.transferKB, ' KB')], ['DOM nodes', num(L.domNodes)], ['Endless anims', num(L.perpetualAnimations)],
+      ].map(([k, v]) => `<div class="card"><b>${esc(v)}</b><span>${k}</span></div>`).join('') + '</div>');
+      parts.push(`<p class="hint">LCP element: ${esc(L.lcpElement)} · heaviest: ${L.heaviest.map((h) => `${esc(h.file)} ${h.kb} KB`).join(' · ')}</p>`);
+    }
+
+    parts.push(`<h2>Scenarios</h2><div class="scroll"><table>
+      <tr><th>scenario</th><th>fps</th><th>smooth</th><th>p95 ms</th><th>max ms</th><th>&gt;50ms</th><th>block ms</th><th>CLS</th><th>status</th><th>detail</th></tr>
+      ${r.scenarios.map((sc) => {
+        const f = sc.frames || {};
+        const x = sc.extra || {};
+        const detail = [
+          x.handlerP95Ms != null && `handler p95 ${x.handlerP95Ms} ms`,
+          x.openScriptMs != null && `open ${x.openScriptMs} ms · close ${x.closeScriptMs} ms`,
+          x.firstToggleMs != null && `switch ${x.firstToggleMs} ms · back ${x.secondToggleMs} ms`,
+          sc.loaf && sc.loaf.topScripts.length && `slowest: ${sc.loaf.topScripts[0].where} ${sc.loaf.topScripts[0].ms} ms`,
+          ...(sc.issues || []),
+        ].filter(Boolean).join(' · ');
+        return `<tr><td>${esc(sc.label)}</td><td>${num(f.fps)}</td><td>${num(f.smoothness)}</td><td>${num(f.p95Ms)}</td>
+          <td>${num(f.maxMs)}</td><td>${num(f.longFrames)}</td><td>${num(sc.blockingMs)}</td><td>${num(sc.cls)}</td>
+          <td class="${sc.status}">${sc.status === 'pass' ? '✓' : '✗'}</td><td class="note">${esc(detail)}</td></tr>`;
+      }).join('')}
+    </table></div>`);
+
+    if (r.audit) {
+      parts.push(`<h2>Images</h2><div class="scroll"><table>
+        <tr><th>file</th><th>natural</th><th>shown px</th><th>oversize</th><th>KB</th><th>copies</th></tr>
+        ${r.audit.images.map((i) => `<tr><td>${esc(i.file)}</td><td>${esc(i.natural)}</td><td>${i.shown}</td>
+          <td class="${i.oversize > 2 ? 'warn' : ''}">${i.oversize}×</td><td>${num(i.kb)}</td><td>${i.copies}</td></tr>`).join('')}
+      </table></div>`);
+    }
+
+    if (r.issues.length) {
+      parts.push(`<h2>Issues</h2><ul class="issues">${r.issues.map((i) =>
+        `<li class="${i.level}">${i.level === 'fail' ? '✗' : '!'} ${esc(i.where)} · ${esc(i.msg)}</li>`).join('')}</ul>`);
+    }
+    $('results').innerHTML = parts.join('');
+  }
+
+  async function run() {
+    const controls = ['run', 'profile', 'scenario'].map($);
+    controls.forEach((c) => { c.disabled = true; });
+    try {
+      const budgets = await fetch('budgets.json', { cache: 'no-store' }).then((res) => res.json());
+      const only = auto ? (params.get('only') || '').split(',').filter(Boolean) : [$('scenario').value].filter(Boolean);
+      last = await PerfHarness.run({
+        iframe, url: SITE, budgets, ids: only,
+        profile: auto ? params.get('profile') || 'desktop' : $('profile').value,
+        cpu: Number(params.get('cpu')) || 1,
+        onProgress: (m) => { $('status').textContent = m; },
+      });
+      window.__perfResults = last;
+      render(last);
+      $('copy').disabled = false;
+      $('download').disabled = false;
+      if (auto) PerfHarness.send({ type: 'done', results: last });
+    } catch (e) {
+      $('status').textContent = `Run failed: ${e.message}`;
+      if (auto) PerfHarness.send({ type: 'error', message: String(e && e.stack || e) });
+      else console.error(e);
+    } finally {
+      controls.forEach((c) => { c.disabled = false; });
+    }
+  }
+
+  $('run').addEventListener('click', run);
+  $('copy').addEventListener('click', () => navigator.clipboard.writeText(JSON.stringify(last, null, 2)));
+  $('download').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(last, null, 2)], { type: 'application/json' }));
+    a.download = `perf-${last.meta.profile}-${last.meta.date.slice(0, 19).replace(/[:T]/g, '-')}.json`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  });
+
+  if (auto) run();
+})();
+</script>
+</body>
+</html>

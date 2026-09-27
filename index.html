@@ -96,6 +96,9 @@
 }
 </script>
 
+<!-- flag before first paint: scroll-reveal content only starts hidden when the motion script will run -->
+<script>document.documentElement.classList.add('has-motion');</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -131,11 +134,24 @@
   --mono:    'IBM Plex Mono', monospace;
 
   --wrap: 1120px;
+
+  /* motion */
+  --ease-out:    cubic-bezier(.16,1,.3,1);    /* expo-out: fast start, long settle */
+  --ease-spring: cubic-bezier(.34,1.56,.64,1); /* slight overshoot, for small pops */
+  --dur-reveal:  .7s;    /* content entering the view */
+  --dur-draw:    1s;     /* rules and underlines drawing across */
+  --stagger:     45ms;   /* between siblings in a cascade */
+  --rise:        14px;   /* how far entering content travels */
+  --dir: 1;                                    /* flips horizontal motion in RTL */
 }
+html[dir="rtl"]{ --dir:-1; }
 
 *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
 
-html{ scroll-behavior:smooth; }
+html{
+  scroll-behavior:smooth;
+  scrollbar-gutter:stable;   /* locking scroll for the modal would otherwise shift the page by the scrollbar width */
+}
 
 body{
   /* the same indigo haze the Work ring sits in */
@@ -197,6 +213,30 @@ header{
   background:rgba(7,8,31,.72);
   backdrop-filter:blur(6px);
   border-bottom:1px solid var(--line);
+  transition:background .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+/* once the page moves, the bar firms up and lifts off the content */
+header.is-scrolled{
+  background:rgba(7,8,31,.9);
+  border-bottom-color:rgba(90,96,160,.4);
+  box-shadow:0 14px 34px -22px rgba(0,0,0,.95);
+}
+
+/* reading progress, drawn along the header's bottom edge */
+.scroll-progress{
+  position:absolute;
+  left:0; right:0;
+  bottom:-1px;
+  height:2px;
+  background:linear-gradient(90deg, rgba(142,155,255,0), var(--signal) 70%, #c8ceff);
+  transform:scaleX(0);
+  transform-origin:left;
+  pointer-events:none;
+}
+[dir="rtl"] .scroll-progress{
+  transform-origin:right;
+  background:linear-gradient(270deg, rgba(142,155,255,0), var(--signal) 70%, #c8ceff);
 }
 
 nav.wrap{
@@ -228,10 +268,31 @@ nav.wrap{
   text-decoration:none;
   color:var(--ink-soft);
   letter-spacing:.02em;
-  transition:color .15s;
+  transition:color .2s ease;
+  position:relative;
+  padding:6px 0;
 }
 
-.nav-links a:hover{ color:var(--ink); }
+.nav-links a:hover,
+.nav-links a.is-active{ color:var(--ink); }
+
+/* underline grows in on hover and stays under the section in view */
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  inset-inline:0;
+  bottom:0;
+  height:1px;
+  background:var(--signal);
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform .45s cubic-bezier(.16,1,.3,1);
+}
+.nav-links a:hover::after,
+.nav-links a.is-active::after{ transform:scaleX(1); transform-origin:left; }
+[dir="rtl"] .nav-links a::after{ transform-origin:left; }
+[dir="rtl"] .nav-links a:hover::after,
+[dir="rtl"] .nav-links a.is-active::after{ transform-origin:right; }
 
 .avail{
   display:flex;
@@ -246,11 +307,31 @@ nav.wrap{
   white-space:nowrap;
 }
 
-.avail-dot{
+.avail-dot,
+.live-dot{
+  position:relative;
+  display:inline-block;
   width:6px; height:6px;
   border-radius:50%;
   background:var(--live);
+  box-shadow:0 0 8px rgba(74,222,154,.6);
   flex-shrink:0;
+}
+
+/* status light: a ring pings out of the dot */
+.avail-dot::after,
+.live-dot::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:var(--live);
+  animation:live-ping 2.4s cubic-bezier(.16,1,.3,1) infinite;
+}
+
+@keyframes live-ping{
+  0%{        transform:scale(1); opacity:.7; }
+  70%,100%{  transform:scale(3.2); opacity:0; }
 }
 
 @media (max-width:860px){
@@ -1090,15 +1171,50 @@ html[lang="ar"] .cine-cta--solid{ font-family:var(--arabic); letter-spacing:0; }
    SECTION SCAFFOLD
    ============================================ */
 section{ padding:76px 0; }
+:where(section[id]){ scroll-margin-top:64px; }   /* clear the sticky header on nav jumps */
 
+/* soft light pooled behind each section, fully faded inside its box so no seams */
+#about{   background:radial-gradient(38% 42% at 90% 55%, rgba(88,70,200,.10), rgba(88,70,200,0) 100%); }
+#stack{   background:radial-gradient(40% 40% at 8% 58%,  rgba(34,40,140,.28), rgba(34,40,140,0) 100%); }
+#contact{ background:radial-gradient(46% 44% at 72% 60%, rgba(64,76,220,.14), rgba(64,76,220,0) 100%); }
+
+/* below-the-fold sections skip style, layout and paint until they near the
+   viewport; the browser remembers their real size once they have rendered */
+#about, #stack, #contact{
+  content-visibility:auto;
+  contain-intrinsic-size:auto 640px;
+}
+
+/*  § About ─────────────────────────── 02 / 04  */
 .section-head{
   display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  gap:24px;
-  margin-bottom:44px;
-  flex-wrap:wrap;
+  align-items:center;
+  gap:18px;
+  margin-bottom:30px;
 }
+
+.sh-line{
+  flex:1;
+  min-width:32px;
+  height:1px;
+  background:linear-gradient(90deg, var(--line-strong), var(--line) 35%, rgba(38,42,92,0));
+  transform-origin:left;
+}
+[dir="rtl"] .sh-line{
+  background:linear-gradient(270deg, var(--line-strong), var(--line) 35%, rgba(38,42,92,0));
+  transform-origin:right;
+}
+
+.sh-idx{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  color:var(--ink-faint);
+  direction:ltr;
+  unicode-bidi:isolate;
+  white-space:nowrap;
+}
+.sh-idx b{ font-weight:500; color:var(--ink-soft); }
 
 .tag{
   font-family:var(--mono);
@@ -1151,24 +1267,51 @@ hr.rule{
   max-width:60ch;
 }
 
-.about-copy p{ margin-bottom:18px; }
+.about-copy p{ margin-bottom:18px; text-wrap:pretty; }
 .about-copy p:last-child{ margin-bottom:0; }
-.about-copy strong{ color:var(--ink); font-weight:600; }
+.about-copy strong{
+  color:var(--ink);
+  font-weight:600;
+  /* a highlighter band under the key phrases; it sweeps in on reveal */
+  background-image:linear-gradient(transparent 66%, rgba(142,155,255,.22) 66%, rgba(142,155,255,.22) 94%, transparent 94%);
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  background-position:0 0;
+}
+[dir="rtl"] .about-copy strong{ background-position:100% 0; }
 
+/* rules are drawn as pseudo-elements so they can be animated across */
 .credentials{
   display:flex;
   flex-direction:column;
   gap:0;
-  border-top:1px solid var(--line);
+  position:relative;
 }
+
+.credentials::before,
+.cred-row::after{
+  content:'';
+  position:absolute;
+  left:0; right:0;
+  height:1px;
+  background:var(--line);
+  transform-origin:left;
+}
+.credentials::before{ top:0; }
+.cred-row::after{ bottom:0; }
+[dir="rtl"] .credentials::before,
+[dir="rtl"] .cred-row::after{ transform-origin:right; }
 
 .cred-row{
   display:flex;
   justify-content:space-between;
   gap:20px;
   padding:18px 0;
-  border-bottom:1px solid var(--line);
+  position:relative;
 }
+
+.cred-k{ transition:color .3s ease; }
+.cred-row:hover .cred-k{ color:var(--signal); }
 
 .cred-k{
   font-family:var(--mono);
@@ -1205,10 +1348,11 @@ hr.rule{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:1px;
+  padding:1px;                 /* the outer edge is drawn by the background, like the gaps */
   background:var(--line);
-  border:1px solid var(--line);
   border-radius:8px;
   overflow:hidden;
+  counter-reset:grp;
 }
 
 .stack-group{
@@ -1224,7 +1368,27 @@ hr.rule{
   text-transform:uppercase;
   margin-bottom:18px;
   padding-bottom:14px;
-  border-bottom:1px solid var(--line-soft);
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  counter-increment:grp;
+}
+.stack-group-title::before{
+  content:counter(grp, decimal-leading-zero);
+  color:var(--ink-faint);
+}
+.stack-group-title::after{
+  content:'';
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:1px;
+  background:linear-gradient(90deg, rgba(142,155,255,.5), var(--line-soft) 45%);
+  transform-origin:left;
+}
+[dir="rtl"] .stack-group-title::after{
+  background:linear-gradient(270deg, rgba(142,155,255,.5), var(--line-soft) 45%);
+  transform-origin:right;
 }
 
 .stack-item{
@@ -1238,14 +1402,21 @@ hr.rule{
 
 .stack-item + .stack-item{ border-top:1px solid var(--line-soft); }
 
-.stack-item-name{ color:var(--ink); font-weight:500; }
+.stack-item-name{
+  color:var(--ink);
+  font-weight:500;
+  transition:color .25s ease;
+}
 .stack-item-note{
   font-family:var(--mono);
   font-size:11.5px;
   color:var(--ink-faint);
   text-align:right;
   white-space:nowrap;
+  transition:color .25s ease;
 }
+.stack-item:hover .stack-item-name{ color:#fff; }
+.stack-item:hover .stack-item-note{ color:var(--signal); }
 
 @media (max-width:860px){
   .stack-groups{ grid-template-columns:1fr; }
@@ -1318,20 +1489,23 @@ hr.rule{
   position:fixed;
   inset:0;
   z-index:100;
-  background:rgba(23,23,18,.46);
-  backdrop-filter:blur(3px);
+  background:rgba(3,4,16,.72);
+  backdrop-filter:blur(6px);
   display:flex;
   align-items:center;
   justify-content:center;
   padding:24px;
   opacity:0;
+  visibility:hidden;          /* keeps the closed dialog's buttons out of the tab order */
   pointer-events:none;
-  transition:opacity .22s ease;
+  transition:opacity .35s ease, visibility 0s linear .35s;
 }
 
 .detail-overlay.open{
   opacity:1;
+  visibility:visible;
   pointer-events:auto;
+  transition:opacity .35s ease, visibility 0s;
 }
 
 .detail-panel{
@@ -1343,12 +1517,62 @@ hr.rule{
   width:100%;
   max-height:88vh;
   overflow-y:auto;
-  transform:translateY(18px) scale(.98);
-  transition:transform .24s cubic-bezier(.2,.8,.2,1);
-  box-shadow:0 30px 60px -20px rgba(23,23,18,.35);
+  opacity:0;
+  transform:translateY(28px) scale(.96);
+  transition:transform .3s ease, opacity .25s ease;
+  box-shadow:
+    0 40px 80px -30px rgba(0,0,0,.9),
+    0 0 90px -30px rgba(142,155,255,.35);
 }
 
-.detail-overlay.open .detail-panel{ transform:translateY(0) scale(1); }
+/* a thin light along the top edge */
+.detail-panel::before{
+  content:'';
+  position:absolute;
+  top:0; left:12%; right:12%;
+  height:1px;
+  background:linear-gradient(90deg, rgba(142,155,255,0), rgba(142,155,255,.85), rgba(142,155,255,0));
+}
+
+.detail-overlay.open .detail-panel{
+  opacity:1;
+  transform:none;
+  transition:transform .7s var(--ease-out), opacity .35s ease;
+}
+
+/* the contents follow the panel in, one block after another; closing skips the delays */
+.detail-top,
+.detail-desc,
+.detail-feature,
+.detail-meta-row,
+.detail-actions{
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .2s ease, transform .2s ease;
+}
+.detail-overlay.open .detail-top,
+.detail-overlay.open .detail-desc,
+.detail-overlay.open .detail-feature,
+.detail-overlay.open .detail-meta-row,
+.detail-overlay.open .detail-actions{
+  opacity:1;
+  transform:none;
+  transition:opacity .6s var(--ease-out), transform .7s var(--ease-out), border-color .25s ease;
+}
+.detail-overlay.open .detail-top{      transition-delay:.08s, .08s, 0s; }
+.detail-overlay.open .detail-desc{     transition-delay:.16s, .16s, 0s; }
+.detail-overlay.open .detail-feature{  transition-delay:calc(.22s + var(--i, 0) * .05s), calc(.22s + var(--i, 0) * .05s), 0s; }
+.detail-overlay.open .detail-meta-row{ transition-delay:.46s, .46s, 0s; }
+.detail-overlay.open .detail-actions{  transition-delay:.52s, .52s, 0s; }
+
+.detail-media img{
+  transform:scale(1.14);
+  transition:transform .3s ease;
+}
+.detail-overlay.open .detail-media img{
+  transform:none;
+  transition:transform 1s var(--ease-out) .1s;
+}
 
 .detail-top{
   display:flex;
@@ -1453,6 +1677,8 @@ hr.rule{
   flex-shrink:0;
 }
 
+.detail-feature:hover{ border-color:var(--line-strong); }
+
 .detail-meta-row{
   display:flex;
   justify-content:space-between;
@@ -1485,8 +1711,8 @@ hr.rule{
   display:grid;
   grid-template-columns:repeat(3,1fr); /* 6 cards -> two full rows, no empty cells */
   gap:1px;
+  padding:1px;
   background:var(--line);
-  border:1px solid var(--line);
   border-radius:8px;
   overflow:hidden;
 }
@@ -1498,19 +1724,54 @@ hr.rule{
   display:flex;
   flex-direction:column;
   gap:16px;
-  transition:background .15s;
+  transition:background .3s ease;
 }
 
-.c-card:hover{ background:var(--paper-dim); }
+a.c-card:hover{ background:var(--paper-dim); }
 
 .c-ico{
   width:38px;height:38px;
   border-radius:8px;
   display:flex;align-items:center;justify-content:center;
-  font-size:17px;
+  color:var(--ink-soft);
   border:1px solid var(--line);
   background:var(--paper-dim);
+  transition:transform .45s var(--ease-out), color .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease;
 }
+
+.c-ico svg{
+  width:18px; height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* keyboard focus gets the same state as hover; the ring sits inside the card
+   because the grid clips its edges and neighbouring cards paint over it */
+a.c-card:focus-visible{ outline:2px solid var(--signal); outline-offset:-2px; z-index:2; }
+
+a.c-card:hover .c-ico,
+a.c-card:focus-visible .c-ico{
+  transform:translateY(-2px);
+  color:#fff;
+  border-color:rgba(142,155,255,.55);
+  background:var(--signal-dim);
+  box-shadow:0 10px 22px -10px rgba(142,155,255,.6);
+}
+
+.c-arrow{
+  display:inline-block;
+  color:var(--ink-faint);
+  transition:transform .45s var(--ease-out), color .3s ease;
+}
+a.c-card:hover .c-arrow,
+a.c-card:focus-visible .c-arrow{ color:var(--signal); transform:translate(3px,-3px); }
+
+a.c-card .c-handle{ transition:color .3s ease; }
+a.c-card:hover .c-handle,
+a.c-card:focus-visible .c-handle{ color:var(--ink); }
 
 .c-name{
   font-size:14.5px;
@@ -1539,8 +1800,17 @@ hr.rule{
    FOOTER
    ============================================ */
 footer{
-  border-top:1px solid var(--line);
+  position:relative;
   padding:32px 0 48px;
+}
+
+/* brightest in the middle, fading out to both edges */
+footer::before{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:1px;
+  background:linear-gradient(90deg, rgba(90,96,160,0), var(--line-strong) 50%, rgba(90,96,160,0));
 }
 
 footer .wrap{
@@ -1582,6 +1852,191 @@ footer .wrap{
   .hero-3d-card::before,
   .orb,
   .manifest-head::before{ animation:none; }
+  .avail-dot::after,
+  .live-dot::after{ animation:none; opacity:0; }
+  .detail-panel,
+  .detail-overlay.open .detail-panel{ transform:none; }
+  .detail-top, .detail-desc, .detail-feature, .detail-meta-row, .detail-actions,
+  .detail-media img{ opacity:1; transform:none; transition:none; }
+}
+
+/* ============================================
+   SCROLL CHOREOGRAPHY — About, Stack, Contact, footer
+   One observer adds .is-in as each block enters the
+   viewport. Hidden start states apply only when the
+   motion script is present (html.has-motion) and the
+   visitor has not asked for reduced motion, so the
+   page never renders blank. Entrances use keyframes
+   with backwards fill: once they finish, hover
+   transitions on the same elements work untouched.
+   ============================================ */
+@keyframes m-rise{  from{ opacity:0; transform:translateY(var(--rise)); } }
+@keyframes m-slide{ from{ opacity:0; transform:translateX(calc(-10px * var(--dir))); } }
+@keyframes m-pop{   from{ opacity:0; transform:scale(.6); } }
+@keyframes nav-in{  from{ opacity:0; transform:translateY(-8px); } }
+
+/* headline words ride up out of their own masks (spans built by the script) */
+.m-title{ text-wrap:balance; }
+.m-title .w{
+  display:inline-block;
+  vertical-align:top;
+  overflow:hidden;
+  /* extra clip room for italic overhang and Arabic ascenders, cancelled by the margins */
+  padding:.14em .08em .2em;
+  margin:-.14em -.08em -.2em;
+}
+.m-title .wi{ display:inline-block; }
+
+/* spotlight (Contact): the grid lines light up around the cursor and the card under it glows */
+.spot-grid{ position:relative; isolation:isolate; }
+.spot-grid::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(142,155,255,.7), rgba(142,155,255,0) 65%);
+  opacity:0;
+  transition:opacity .5s ease;
+  pointer-events:none;
+}
+.spot-grid > *{ position:relative; z-index:1; }
+.spot-grid > *::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), rgba(142,155,255,.09), rgba(142,155,255,0) 70%);
+  opacity:0;
+  transition:opacity .5s ease;
+  pointer-events:none;
+}
+.spot-grid > * > *{ position:relative; z-index:1; }
+@media (hover:hover) and (pointer:fine){
+  .spot-grid:hover::before,
+  .spot-grid:hover > *::before{ opacity:1; }
+}
+
+@media (prefers-reduced-motion:no-preference){
+
+  /* nav settles in on load */
+  .has-motion nav.wrap > *{ animation:nav-in var(--dur-reveal) var(--ease-out) backwards; }
+  .has-motion nav.wrap > :nth-child(2){ animation-delay:calc(var(--stagger) * 1); }
+  .has-motion nav.wrap > :nth-child(3){ animation-delay:calc(var(--stagger) * 2); }
+  .has-motion nav.wrap > :nth-child(4){ animation-delay:calc(var(--stagger) * 3); }
+
+  /* section head: the tag wipes in, the rule draws out, the index lands */
+  .has-motion .m-head .tag{
+    clip-path:inset(0 100% 0 0);
+    transition:clip-path var(--dur-reveal) var(--ease-out);
+  }
+  [dir="rtl"].has-motion .m-head .tag{ clip-path:inset(0 0 0 100%); }
+  .has-motion .m-head .sh-line{
+    transform:scaleX(0);
+    transition:transform var(--dur-draw) var(--ease-out) .1s;
+  }
+  .has-motion .m-head .sh-idx{
+    opacity:0;
+    transform:translateY(6px);
+    transition:opacity var(--dur-reveal) ease .35s, transform var(--dur-reveal) var(--ease-out) .35s;
+  }
+  .has-motion .m-head.is-in .tag,
+  [dir="rtl"].has-motion .m-head.is-in .tag{ clip-path:inset(0 0 0 0); }
+  .has-motion .m-head.is-in .sh-line{ transform:none; }
+  .has-motion .m-head.is-in .sh-idx{ opacity:1; transform:none; }
+
+  /* headline */
+  .has-motion .m-title .wi{
+    transform:translateY(calc(100% + .3em));
+    transition:transform .8s var(--ease-out);
+    transition-delay:calc(.08s + var(--wi, 0) * var(--stagger));
+  }
+  .has-motion .m-title.is-in .wi{ transform:none; }
+
+  /* staggered children; --i is a row+column wave set by the script */
+  .has-motion .m-stagger > *{ opacity:0; }
+  .has-motion .m-stagger.is-in > *{
+    opacity:1;
+    animation:m-rise var(--dur-reveal) var(--ease-out) backwards;
+    animation-delay:calc(var(--i, 0) * var(--stagger) * 2);
+  }
+
+  /* Line grids (Stack, Contact) draw their rules with the container background,
+     so hiding a cell would show a solid block. The grid arrives as one piece and
+     the cells' contents cascade in instead, on the same row+column wave. */
+  .has-motion .m-grid{ opacity:0; }
+  .has-motion .m-grid.is-in{ opacity:1; animation:m-rise var(--dur-reveal) var(--ease-out) backwards; }
+
+  /* About: highlighter sweeps under the key phrases after each paragraph lands */
+  .has-motion .about-copy strong{
+    background-size:0% 100%;
+    transition:background-size var(--dur-draw) var(--ease-out);
+    transition-delay:calc(.35s + var(--i, 0) * var(--stagger) * 2);
+  }
+  .has-motion .about-copy.is-in strong{ background-size:100% 100%; }
+
+  /* About: the credentials table rules itself, then fills in */
+  .has-motion .m-cred::before,
+  .has-motion .m-cred .cred-row::after{
+    transform:scaleX(0);
+    transition:transform var(--dur-draw) var(--ease-out);
+    transition-delay:calc(var(--i, 0) * var(--stagger) * 2);
+  }
+  .has-motion .m-cred.is-in::before,
+  .has-motion .m-cred.is-in .cred-row::after{ transform:none; }
+  .has-motion .m-cred .cred-k,
+  .has-motion .m-cred .cred-v{ opacity:0; }
+  .has-motion .m-cred.is-in .cred-k,
+  .has-motion .m-cred.is-in .cred-v{
+    opacity:1;
+    animation:m-rise var(--dur-reveal) var(--ease-out) backwards;
+    animation-delay:calc(.18s + var(--i, 0) * var(--stagger) * 2);
+  }
+  .has-motion .m-cred.is-in .cred-v{ animation-delay:calc(.18s + var(--stagger) + var(--i, 0) * var(--stagger) * 2); }
+
+  /* Stack: each column arrives, its title rule draws, then its rows cascade in */
+  .has-motion .stack-groups .stack-group-title,
+  .has-motion .stack-groups .stack-item{ opacity:0; }
+  .has-motion .stack-groups.is-in .stack-group-title,
+  .has-motion .stack-groups.is-in .stack-item{
+    opacity:1;
+    animation:m-slide var(--dur-reveal) var(--ease-out) backwards;
+  }
+  .has-motion .stack-groups.is-in .stack-group-title{ animation-delay:calc(.12s + var(--i, 0) * var(--stagger) * 2); }
+  .has-motion .stack-groups.is-in .stack-item{ animation-delay:calc(.2s + var(--i, 0) * var(--stagger) * 2 + var(--j, 0) * var(--stagger)); }
+  .has-motion .stack-groups .stack-group-title::after{
+    transform:scaleX(0);
+    transition:transform var(--dur-draw) var(--ease-out);
+    transition-delay:calc(.2s + var(--i, 0) * var(--stagger) * 2);
+  }
+  .has-motion .stack-groups.is-in .stack-group-title::after{ transform:none; }
+
+  /* Contact: icons pop across the grid in a wave, each label follows its icon */
+  .has-motion .contact-grid .c-ico,
+  .has-motion .contact-grid .c-card > div:last-child{ opacity:0; }
+  .has-motion .contact-grid.is-in .c-ico{
+    opacity:1;
+    animation:m-pop .6s var(--ease-spring) backwards;
+    animation-delay:calc(.15s + var(--i, 0) * var(--stagger) * 1.5);
+  }
+  .has-motion .contact-grid.is-in .c-card > div:last-child{
+    opacity:1;
+    animation:m-rise var(--dur-reveal) var(--ease-out) backwards;
+    animation-delay:calc(.22s + var(--i, 0) * var(--stagger) * 1.5);
+  }
+
+  /* footer: the rule opens from the centre, then the line of text fades up */
+  .has-motion .m-foot::before{
+    transform:scaleX(0);
+    transition:transform 1.2s var(--ease-out);
+  }
+  .has-motion .m-foot.is-in::before{ transform:none; }
+  .has-motion .m-foot .wrap > *{ opacity:0; }
+  .has-motion .m-foot.is-in .wrap > *{
+    opacity:1;
+    animation:m-rise var(--dur-reveal) var(--ease-out) backwards;
+    animation-delay:.2s;
+  }
+  .has-motion .m-foot.is-in .wrap > :nth-child(2){ animation-delay:calc(.2s + var(--stagger) * 2); }
 }
 
 @media (max-width:640px){
@@ -1633,6 +2088,13 @@ html[lang="ar"] .manifest-v,
 html[lang="ar"] .tag,
 html[lang="ar"] .section-note,
 html[lang="ar"] .cred-k,
+html[lang="ar"] .stack-group-title,
+html[lang="ar"] .stack-item-note,
+html[lang="ar"] .nav-links a,
+html[lang="ar"] .avail,
+html[lang="ar"] .f-status,
+html[lang="ar"] .detail-badge,
+html[lang="ar"] .detail-meta-row,
 html[lang="ar"] .shot-note,
 html[lang="ar"] .platform-shared-note{ font-family:var(--arabic); letter-spacing:0; }
 
@@ -1691,10 +2153,11 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
     <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">العربية</button>
 
     <div class="avail" aria-label="Availability status" data-i18n="avail_1">
-      <span class="avail-dot" ></span>
+      <span class="avail-dot"></span>
       Available for freelance
     </div>
   </nav>
+  <div class="scroll-progress" aria-hidden="true"></div>
 </header>
 
 <main>
@@ -1904,16 +2367,18 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 
 <section id="about">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head m-head">
       <div class="tag" data-i18n="tag_2">About</div>
+      <span class="sh-line" aria-hidden="true"></span>
+      <span class="sh-idx" aria-hidden="true"><b>02</b> / 04</span>
     </div>
 
-    <h2 class="stitle reveal" style="margin-bottom:44px;" data-i18n="stitle_2">
+    <h2 class="stitle m-title" style="margin-bottom:44px;" data-i18n="stitle_2">
       Idea to <em>Play Store</em>, one system at a time
     </h2>
 
     <div class="about-grid">
-      <div class="about-copy reveal">
+      <div class="about-copy m-stagger">
         <p data-i18n="about_p1">
           I'm a Flutter developer from Minya, Egypt. I build cross-platform mobile
           applications end to end — interface, state, backend, and deployment.
@@ -1925,7 +2390,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
         </p>
       </div>
 
-      <div class="credentials reveal">
+      <div class="credentials m-cred">
         <div class="cred-row">
           <div class="cred-k" data-i18n="cred_k_1">Location</div>
           <div class="cred-v" data-i18n="cred_v_1">Minya, Egypt<span>Remote-friendly</span></div>
@@ -1946,15 +2411,17 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 <!-- STACK -->
 <section id="stack">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head m-head">
       <div class="tag" data-i18n="tag_3">Stack</div>
+      <span class="sh-line" aria-hidden="true"></span>
+      <span class="sh-idx" aria-hidden="true"><b>03</b> / 04</span>
     </div>
 
-    <h2 class="stitle reveal" style="margin-bottom:44px;" data-i18n="stitle_3">
+    <h2 class="stitle m-title" style="margin-bottom:44px;" data-i18n="stitle_3">
       Tools organized by <em>what they do</em>
     </h2>
 
-    <div class="stack-groups reveal">
+    <div class="stack-groups m-grid">
       <div class="stack-group">
         <div class="stack-group-title" data-i18n="stack_group_title_1">Application</div>
         <div class="stack-item"><span class="stack-item-name">Flutter</span><span class="stack-item-note" data-i18n="stack_item_note_1">Primary framework</span></div>
@@ -1989,25 +2456,27 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 <!-- CONTACT -->
 <section id="contact">
   <div class="wrap">
-    <div class="section-head reveal">
+    <div class="section-head m-head">
       <div class="tag" data-i18n="tag_9">Contact</div>
+      <span class="sh-line" aria-hidden="true"></span>
+      <span class="sh-idx" aria-hidden="true"><b>04</b> / 04</span>
     </div>
 
-    <h2 class="stitle reveal" style="margin-bottom:44px;" data-i18n="stitle_5">
+    <h2 class="stitle m-title" style="margin-bottom:44px;" data-i18n="stitle_5">
       Have a mobile app <em>in mind?</em>
     </h2>
 
-    <div class="contact-grid reveal">
+    <div class="contact-grid m-grid spot-grid">
       <a href="https://wa.me/201016513146?text=Hi%20Mina%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20like%20to%20talk%20about%20a%20mobile%20app%20project." target="_blank" rel="noopener" class="c-card" aria-label="Message Mina Nabil on WhatsApp">
-        <div class="c-ico">💬</div>
+        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
         <div>
-          <div class="c-name" data-i18n="c_name_1">WhatsApp <span style="color:var(--ink-faint);">↗</span></div>
+          <div class="c-name" data-i18n="c_name_1">WhatsApp <span class="c-arrow" aria-hidden="true">↗</span></div>
           <div class="c-handle" data-i18n="c_handle_1">+20 101 651 3146</div>
         </div>
       </a>
 
       <a href="mailto:minanabil20303030@gmail.com?subject=Mobile%20app%20project" class="c-card" aria-label="Email Mina Nabil">
-        <div class="c-ico">✉️</div>
+        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <div>
           <div class="c-name" data-i18n="c_name_2">Email</div>
           <div class="c-handle" data-i18n="c_handle_2">minanabil20303030@gmail.com</div>
@@ -2015,31 +2484,31 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
       </a>
 
       <a href="https://linkedin.com/in/mina-nabil-97bb1b300" target="_blank" rel="noopener" class="c-card" aria-label="LinkedIn">
-        <div class="c-ico">💼</div>
+        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
         <div>
-          <div class="c-name" data-i18n="c_name_3">LinkedIn <span style="color:var(--ink-faint);">↗</span></div>
+          <div class="c-name" data-i18n="c_name_3">LinkedIn <span class="c-arrow" aria-hidden="true">↗</span></div>
           <div class="c-handle" data-i18n="c_handle_3">mina-nabil-97bb1b300</div>
         </div>
       </a>
 
       <a href="https://github.com/mina-nabil-dev" target="_blank" rel="noopener" class="c-card" aria-label="GitHub">
-        <div class="c-ico">🐙</div>
+        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
         <div>
-          <div class="c-name" data-i18n="c_name_4">GitHub <span style="color:var(--ink-faint);">↗</span></div>
+          <div class="c-name" data-i18n="c_name_4">GitHub <span class="c-arrow" aria-hidden="true">↗</span></div>
           <div class="c-handle" data-i18n="c_handle_4">@mina-nabil-dev</div>
         </div>
       </a>
 
       <a href="https://www.facebook.com/profile.php?id=61550226644154" target="_blank" rel="noopener" class="c-card" aria-label="Facebook">
-        <div class="c-ico">📘</div>
+        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
         <div>
-          <div class="c-name" data-i18n="c_name_5">Facebook <span style="color:var(--ink-faint);">↗</span></div>
+          <div class="c-name" data-i18n="c_name_5">Facebook <span class="c-arrow" aria-hidden="true">↗</span></div>
           <div class="c-handle" data-i18n="c_handle_5">Mina Nabil</div>
         </div>
       </a>
 
       <div class="c-card" style="cursor:default;">
-        <div class="c-ico">📍</div>
+        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
         <div>
           <div class="c-name" data-i18n="c_name_6">Location</div>
           <div class="c-handle" data-i18n="c_handle_6">Minya, Egypt · Remote</div>
@@ -2077,11 +2546,11 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 
 </main>
 
-<footer>
+<footer class="m-foot">
   <div class="wrap">
     <span class="f-copy" data-i18n="f_copy_1">© 2026 Mina Nabil — Flutter Developer</span>
     <span class="f-status" data-i18n="f_status_1">
-      <span style="width:6px;height:6px;background:var(--live);border-radius:50%;display:inline-block;"></span>
+      <span class="live-dot"></span>
       Open to freelance &amp; remote collaboration
     </span>
   </div>
@@ -2790,9 +3259,10 @@ function renderDetail(key){
   detailDesc.textContent = app.desc;
 
   detailFeatures.innerHTML = '';
-  app.features.forEach(f => {
+  app.features.forEach((f, i) => {
     const el = document.createElement('div');
     el.className = 'detail-feature';
+    el.style.setProperty('--i', i);   // entrance stagger
     el.textContent = f;
     detailFeatures.appendChild(el);
   });
@@ -2809,6 +3279,7 @@ function openDetail(key){
   openDetailKey = key;
   renderDetail(key);
   lastFocused = document.activeElement;
+  void overlay.offsetWidth;   // commit the fresh feature tiles' start state so they animate in too
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
   document.body.classList.add('modal-open');
@@ -2858,6 +3329,17 @@ if (overlay) {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) closeDetail();
 });
+
+/* keep Tab inside the open dialog */
+if (overlay) {
+  overlay.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab' || !overlay.classList.contains('open')) return;
+    const stops = [...overlay.querySelectorAll('a[href], button:not([disabled])')];
+    const first = stops[0], last = stops[stops.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+}
 </script>
 
 <script>
@@ -2925,7 +3407,7 @@ const AR = {
 
   platform_store_btn_3:"افتح على Google Play ↗", btn_line_3:"إغلاق",
   f_copy_1:"© 2026 مينا نبيل — مطوّر Flutter",
-  f_status_1:'<span style="width:6px;height:6px;background:var(--live);border-radius:50%;display:inline-block;"></span> متاح للعمل الحر والتعاون عن بُعد'
+  f_status_1:'<span class="live-dot"></span> متاح للعمل الحر والتعاون عن بُعد'
 };
 
 /* Arabic copy for the project modal (mirrors the APP_DATA object above). */
@@ -2996,6 +3478,164 @@ const APPS_AR = {
   if (saved === 'ar') apply('ar');
 
   btn.addEventListener('click', () => apply(root.lang === 'ar' ? 'en' : 'ar'));
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Motion for everything below the Work ring, plus the header.
+   Runs after the bilingual layer so it splits whichever language
+   is on screen, and re-splits headlines when the language flips.
+   --------------------------------------------------------------- */
+(function () {
+  const root = document.documentElement;
+  const isRTL = () => root.dir === 'rtl';
+
+  /* ---- Headlines: wrap each word in a mask so it can rise into place ---- */
+  const ARABIC = /[؀-ۿ]/;
+  // Inline-blocks are bidi-neutral, so in an RTL line two separate Latin words
+  // would swap places ("Play Google"). Runs of words written in the other
+  // script stay together in one mask.
+  const foreign = (t) => isRTL() ? !ARABIC.test(t) && /[A-Za-z0-9]/.test(t) : ARABIC.test(t);
+
+  function splitWords(el) {
+    let n = 0;
+    const makeWord = (text) => {
+      const w = document.createElement('span');
+      w.className = 'w';
+      w.setAttribute('aria-hidden', 'true');
+      const wi = document.createElement('span');
+      wi.className = 'wi';
+      wi.style.setProperty('--wi', n++);
+      wi.textContent = text;
+      w.appendChild(wi);
+      return w;
+    };
+    (function walk(node) {
+      [...node.childNodes].forEach((child) => {
+        if (child.nodeType === Node.ELEMENT_NODE) { walk(child); return; }
+        if (child.nodeType !== Node.TEXT_NODE || !child.textContent.trim()) return;
+
+        const frag = document.createDocumentFragment();
+        let run = null;   // a pending run of foreign-script words
+        const flush = () => { if (run) { frag.appendChild(makeWord(run.trim())); frag.appendChild(document.createTextNode(run.match(/\s*$/)[0])); run = null; } };
+        child.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { if (run !== null) run += part; else frag.appendChild(document.createTextNode(part)); return; }
+          if (foreign(part)) { run = (run || '') + part; return; }
+          flush();
+          frag.appendChild(makeWord(part));
+        });
+        flush();
+        child.replaceWith(frag);
+      });
+    })(el);
+    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+  }
+
+  const titles = [...document.querySelectorAll('.m-title')];
+  titles.forEach(splitWords);
+  // the bilingual layer rewrites innerHTML, then sets <html lang>
+  new MutationObserver(() => titles.forEach((t) => { if (!t.querySelector('.w')) splitWords(t); }))
+    .observe(root, { attributes: true, attributeFilter: ['lang'] });
+
+  /* ---- Scroll reveal ---- */
+  // Stagger order is a diagonal wave: row + column, measured when the block
+  // is revealed so it follows the grid at any breakpoint.
+  function waveIndex(container) {
+    const kids = [...container.children];
+    const rank = (vals) => { const u = [...new Set(vals)].sort((a, b) => a - b); return vals.map((v) => u.indexOf(v)); };
+    const rows = rank(kids.map((k) => k.offsetTop));
+    const cols = rank(kids.map((k) => (isRTL() ? -1 : 1) * k.offsetLeft));
+    kids.forEach((k, i) => k.style.setProperty('--i', rows[i] + cols[i]));
+  }
+
+  document.querySelectorAll('.m-cred .cred-row').forEach((r, i) => r.style.setProperty('--i', i));
+  document.querySelectorAll('.stack-group').forEach((g) =>
+    g.querySelectorAll('.stack-item').forEach((it, j) => it.style.setProperty('--j', j)));
+
+  const reveal = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      if (e.target.matches('.m-stagger, .m-grid')) waveIndex(e.target);
+      e.target.classList.add('is-in');
+      reveal.unobserve(e.target);
+    });
+  }, { rootMargin: '0px 0px -12% 0px' });
+
+  document.querySelectorAll('.m-head, .m-title, .m-stagger, .m-grid, .m-cred, .m-foot').forEach((el) => reveal.observe(el));
+
+  /* ---- Header: scrolled state + reading progress ----
+     The scroll range is measured only when the page or viewport changes size,
+     so a scroll frame reads scrollY and writes two styles, nothing else. */
+  const header = document.querySelector('header');
+  const bar = document.querySelector('.scroll-progress');
+  let maxScroll = 1, scrolled = null, ticking = false;
+  function measureRange() {
+    maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    onScroll();
+  }
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const y = window.scrollY;
+      if ((y > 8) !== scrolled) { scrolled = y > 8; header.classList.toggle('is-scrolled', scrolled); }
+      if (bar) bar.style.transform = `scaleX(${Math.min(1, y / maxScroll)})`;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', measureRange);
+  new ResizeObserver(measureRange).observe(document.body);   // fonts, images, language switch
+  measureRange();
+
+  /* ---- Nav: mark the link for the section crossing the middle of the screen ---- */
+  const links = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+  const byId = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+  const setActive = (a) => links.forEach((l) => {
+    l.classList.toggle('is-active', l === a);
+    if (l === a) l.setAttribute('aria-current', 'location'); else l.removeAttribute('aria-current');
+  });
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) setActive(byId.get(e.target.id) || null); });
+  }, { rootMargin: '-45% 0px -54% 0px' });
+  byId.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+  const hero = document.querySelector('.hero');
+  if (hero) spy.observe(hero);   // back at the top, nothing is active
+
+  /* ---- Spotlight on the Contact grid (mouse only) ----
+     Reading a cell's rect after writing the grid's variables forced a style and
+     layout pass per cell (~8 recalcs a frame in tests/perf). Cell offsets inside
+     the grid are fixed while the pointer is over it, so they are read once on
+     entry; each frame is then one rect read followed by writes only. */
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.spot-grid').forEach((grid) => {
+      const cells = [...grid.children];
+      let offsets = null, raf = 0, px = 0, py = 0;
+      const forget = () => { offsets = null; };
+      grid.addEventListener('pointerenter', forget);
+      window.addEventListener('resize', forget);
+      grid.addEventListener('pointermove', (e) => {
+        px = e.clientX; py = e.clientY;
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          // reads
+          if (!offsets) offsets = cells.map((c) => [c.offsetLeft, c.offsetTop]);
+          const g = grid.getBoundingClientRect();
+          const x = px - g.left, y = py - g.top;
+          // writes
+          grid.style.setProperty('--mx', `${x}px`);
+          grid.style.setProperty('--my', `${y}px`);
+          cells.forEach((c, i) => {
+            c.style.setProperty('--mx', `${x - offsets[i][0]}px`);
+            c.style.setProperty('--my', `${y - offsets[i][1]}px`);
+          });
+        });
+      });
+    });
+  }
 })();
 </script>
 
