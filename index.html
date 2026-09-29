@@ -2240,7 +2240,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
   </div>
 
   <div class="cine-info wrap">
-    <p class="cine-count" aria-hidden="true"><em id="cineCurrentNum">01</em> / <span id="cineTotalNum">11</span></p>
+    <p class="cine-count" aria-hidden="true"><em id="cineCurrentNum">01</em> / <span id="cineTotalNum">12</span></p>
     <p class="cine-active-title" id="cineActiveTitle" lang="ar" dir="rtl">يلا عربي</p>
     <p class="cine-active-sub" id="cineActiveSub">Tutor LMS platform · Flutter &amp; Laravel · Live</p>
 
@@ -2316,6 +2316,12 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
       <strong lang="ar" dir="rtl">طلبات نزلة عبيد</strong>
       <p>Local delivery marketplace · Next.js &amp; Supabase · Live</p>
       <a href="https://talabat-nazlet-obaid.vercel.app/" tabindex="-1" data-ar="الموقع">Website</a>
+    </li>
+    <li data-key="keyframes" data-img="assets/keyframes_final.jpg" data-glow="#b981ff" data-chip="Live" data-kind="Motion UI marketplace" data-stack="Next.js · Three.js · Postgres"
+        data-sub-ar="متجر مكونات واجهات متحركة · Next.js و WebGL · منشور">
+      <strong>Keyframes UI</strong>
+      <p>Animated UI component marketplace · Next.js &amp; WebGL · Live</p>
+      <a href="https://keyframes-ui.vercel.app/" tabindex="-1" data-ar="الموقع">Website</a>
     </li>
     <li data-key="motorent" data-img="assets/motorent_final.jpg" data-glow="#3a86ff" data-chip="Open source" data-kind="Car rental app" data-stack="Flutter · Firebase · BLoC"
         data-sub-ar="تطبيق تأجير سيارات · Clean Architecture · Flutter">
@@ -3124,6 +3130,16 @@ const APP_DATA = {
     features: ['Orders from several shops in one delivery', 'Nearby stores with live opening hours', 'Product and shop search', 'Delivery from 25 EGP, cash on delivery', 'Installable app with a download page', 'Arabic-first RTL interface'],
     store: 'https://talabat-nazlet-obaid.vercel.app/'
   },
+  keyframes: {
+    title: 'Keyframes UI',
+    img: 'assets/keyframes_final.jpg',
+    status: 'live',
+    platform: 'Web platform · Next.js & Postgres',
+    stat: 'Animated UI components',
+    desc: 'A marketplace for production-grade animated UI components. Every component runs live in the page before you take it: WebGL heroes built with Three.js and custom shaders, each with a detail view, related picks and clear licensing.',
+    features: ['Live previews rendered in the browser', 'WebGL & custom GLSL shader heroes', 'Component pages with “More like this”', 'Postgres catalog with Drizzle migrations', 'Email and OAuth sign-in with Better Auth', 'Monorepo with typed config and tests'],
+    store: 'https://keyframes-ui.vercel.app/'
+  },
   kyrillos: {
     title: 'مستر كيرلس قاصد',
     img: 'assets/kyrillos_final.jpg',
@@ -3428,6 +3444,9 @@ const APPS_AR = {
   talabat:{ platform:"تطبيق ويب قابل للتثبيت · Next.js و Supabase", stat:"توصيل محلي · نزلة عبيد",
     desc:"منصة توصيل لقرية نزلة عبيد: العميل يطلب من كذا محل — بقالة وصيدلية وغيرهم — وكل الطلبات بتوصله مع بعض في شنطة واحدة، والدفع عند الاستلام.",
     features:["طلب من كذا محل في توصيلة واحدة","المحلات القريبة بمواعيد الفتح","بحث عن المنتجات والمحلات","توصيل من 25 جنيه والدفع عند الاستلام","تطبيق قابل للتثبيت بصفحة تحميل","واجهة عربية بالكامل"] },
+  keyframes:{ platform:"منصة ويب · Next.js و Postgres", stat:"مكونات واجهات متحركة",
+    desc:"متجر لمكونات واجهات متحركة جاهزة للإنتاج. كل مكوّن بيشتغل مباشرة في الصفحة قبل ما تاخده: واجهات WebGL مبنية بـ Three.js وشيدرات مخصصة، ولكل مكوّن صفحة تفاصيل واقتراحات مشابهة وترخيص واضح.",
+    features:["معاينة حية داخل المتصفح","واجهات WebGL بشيدرات GLSL مخصصة","صفحة لكل مكوّن مع «مكونات مشابهة»","كتالوج على Postgres بترحيلات Drizzle","تسجيل دخول بالإيميل و OAuth عبر Better Auth","Monorepo بإعدادات مكتوبة واختبارات"] },
   kyrillos:{ platform:"موقع وتطبيق أندرويد · Laravel API", stat:"رياضيات · ست مراحل دراسية",
     desc:"منصة رياضيات تغطي ست مراحل دراسية: تطبيق أندرويد للطالب، ولوحة تحكم للمدرّس، ودخول للقراءة فقط لولي الأمر، وواجهة Laravel واحدة تحمل القواعد. المعادلات تُكتب بالرموز العربية من اليمين لليسار.",
     features:["كتابة رياضية عربية مع محرّر معادلات مبني من الصفر","حضور بالـ QR برموز موقَّعة","امتحانات ذاتية التصحيح وترتيب وشهادات","دروس فيديو بتتبّع للمشاهدة وبث HLS","تقرير شهري لولي الأمر للقراءة فقط","حسابات مرتبطة بالأجهزة وسجل تدقيق أمني"] },
