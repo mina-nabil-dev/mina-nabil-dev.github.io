@@ -7,7 +7,6 @@
 <title>Mina Nabil — Flutter Developer</title>
 
 <meta name="description" content="Flutter developer from Egypt building cross-platform mobile apps with Flutter, Dart, Laravel, Firebase, and Supabase." />
-<meta name="keywords" content="Flutter developer Egypt, Flutter developer, mobile app developer, freelance Flutter developer, Dart developer, Flutter Firebase developer, Flutter Supabase, Flutter Laravel developer, BLoC Flutter, Clean Architecture Flutter, Android iOS developer, cross-platform mobile apps" />
 <meta name="author" content="Mina Nabil" />
 <link rel="canonical" href="https://mina-nabil-dev.github.io/" />
 <meta name="robots" content="index, follow" />
@@ -84,24 +83,13 @@
 }
 </script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mina-nabil-dev.github.io/" },
-    { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://mina-nabil-dev.github.io/#work" },
-    { "@type": "ListItem", "position": 3, "name": "Contact", "item": "https://mina-nabil-dev.github.io/#contact" }
-  ]
-}
-</script>
 
 <!-- flag before first paint: scroll-reveal content only starts hidden when the motion script will run -->
 <script>document.documentElement.classList.add('has-motion');</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Caveat:wght@500;600&family=Aref+Ruqaa:wght@400&display=swap" rel="stylesheet" />
 
 <style>
 /* ============================================
@@ -154,6 +142,8 @@ html{
 }
 
 body{
+  /* The Work ring's 3D slots reach past the edges on small phones; never let the page scroll sideways. */
+  overflow-x:clip;
   /* the same indigo haze the Work ring sits in */
   background:
     radial-gradient(1100px 620px at 78% -8%, rgba(34,40,140,.55), rgba(34,40,140,0) 65%),
@@ -373,10 +363,16 @@ nav.wrap{
 h1.name{
   font-family:var(--display);
   font-weight:600;
-  font-size:clamp(44px,6.4vw,84px);
+  font-size:clamp(50px,6.4vw,84px);
+  white-space:nowrap;
   line-height:.98;
   letter-spacing:-.01em;
   margin-bottom:26px;
+}
+
+/* phones: scale with the screen so the one-line name fills more of the width */
+@media (max-width:600px){
+  h1.name{ font-size:clamp(46px,15vw,64px); }
 }
 
 h1.name em{
@@ -2162,7 +2158,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
   <div>
     <p class="eyebrow reveal" data-i18n="eyebrow_1">Flutter Developer · Minya, Egypt · Open to Remote</p>
 
-    <h1 class="name reveal">Mina<br><em>Nabil</em></h1>
+    <h1 class="name reveal">Mina <em>Nabil</em></h1>
 
     <p class="hero-lede reveal" data-i18n="hero_lede_1">
       I build <strong>cross-platform mobile apps</strong> with Flutter — from the interface
@@ -2357,10 +2353,10 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 
   <!-- Hidden elements for backward modal compatibility -->
   <div style="display:none" aria-hidden="true">
-    <img id="lmsImg" src="assets/yalla_final.jpg" />
+    <img id="lmsImg" src="assets/yalla_final.jpg" alt="" loading="lazy" />
     <span id="lmsName">يلا عربي</span>
     <a id="lmsStoreLink" href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi"></a>
-    <img id="mnImg" src="assets/mncs_final.jpg" />
+    <img id="mnImg" src="assets/mncs_final.jpg" alt="" loading="lazy" />
     <span id="mnName">MN – CS 1</span>
     <a id="mnStoreLink" href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain"></a>
   </div>
@@ -3650,6 +3646,274 @@ const APPS_AR = {
       });
     });
   }
+})();
+</script>
+
+
+<style>
+/* ============================================
+   HERO INK — hand-drawn notes that draw themselves
+   over the hero: a loop round the name, a squiggle,
+   a highlighter swipe, a boxed call to action.
+   ============================================ */
+.hero{ position:relative; }
+.hero-ink{
+  position:absolute; inset:0; z-index:3;
+  width:100%; height:100%;
+  overflow:visible; pointer-events:none;
+}
+.hero-ink path{
+  fill:none; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:1; stroke-dashoffset:1;
+}
+.hero-ink.drawn path{
+  stroke-dashoffset:0;
+  transition:stroke-dashoffset var(--t) cubic-bezier(.45,0,.25,1) var(--d);
+}
+.hero-ink.instant path{ transition:none; }
+.hero-ink .ink-marker{ stroke:#ff6f61; stroke-width:3.2; }
+.hero-ink .ink-pen{ stroke:#9fb0ff; stroke-width:2.4; }
+.hero-ink .ink-highlight{
+  stroke:rgba(255,207,51,.42);
+  stroke-linecap:butt;
+  mix-blend-mode:screen;
+}
+.hero-note{
+  position:absolute; z-index:3;
+  color:#9fb0ff;
+  font-family:'Caveat',cursive;
+  font-size:clamp(20px,2vw,26px);
+  font-weight:600;
+  line-height:1;
+  white-space:nowrap;
+  rotate:-4deg;
+  pointer-events:none;
+  clip-path:inset(-30% 100% -30% 0);
+}
+html[lang="ar"] .hero-note{
+  font-family:'Aref Ruqaa',serif;
+  font-size:clamp(17px,1.7vw,22px);
+  rotate:3deg;
+  clip-path:inset(-30% 0 -30% 100%);
+}
+.hero-note.drawn,
+html[lang="ar"] .hero-note.drawn{
+  clip-path:inset(-30% 0 -30% 0);
+  transition:clip-path .7s cubic-bezier(.3,0,.2,1) var(--d);
+}
+.hero-note.instant{ transition:none; }
+@media (prefers-reduced-motion:reduce){
+  .hero-ink.drawn path, .hero-note.drawn{ transition:none; }
+}
+</style>
+
+<script>
+/* ---------------------------------------------------------------
+   Hero ink. Every mark is measured from the real words it annotates,
+   so it follows the layout at any width and in both languages, and
+   redraws when the language switches or the page resizes. Marks draw
+   once with stroke-dashoffset (one CSS transition each, no loop).
+   --------------------------------------------------------------- */
+(function () {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('class', 'hero-ink');
+  svg.setAttribute('aria-hidden', 'true');
+  hero.appendChild(svg);
+  let notes = [];
+  let drawn = false;
+
+  const NOTES = {
+    en: { cta: 'start here!', remote: 'yes, remote!' },
+    ar: { cta: 'ابدأ من هنا!', remote: 'أيوه، عن بُعد!' },
+  };
+
+  // Seeded wobble, so a mark looks hand-drawn but never jumps between redraws.
+  const seeded = (s) => () => { s = (s + 0x6d2b79f5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const f = (n) => n.toFixed(1);
+  const smooth = (p) => {
+    let d = `M${f(p[0][0])} ${f(p[0][1])}`;
+    for (let i = 0; i < p.length - 1; i++) {
+      const a = p[i - 1] || p[i], b = p[i], c = p[i + 1], e = p[i + 2] || c;
+      d += ` C${f(b[0] + (c[0] - a[0]) / 6)} ${f(b[1] + (c[1] - a[1]) / 6)} ${f(c[0] - (e[0] - b[0]) / 6)} ${f(c[1] - (e[1] - b[1]) / 6)} ${f(c[0])} ${f(c[1])}`;
+    }
+    return d;
+  };
+  const loop = (b, r) => {
+    const cx = b.x + b.w / 2, cy = b.y + b.h * 0.58, rx = b.w / 2 + b.h * 0.22, ry = b.h * 0.45;
+    const start = -Math.PI * 0.62, pts = [];
+    for (let i = 0; i <= 22; i++) {
+      const t = i / 22, a = start + t * Math.PI * 2 * 1.13, g = 1 + t * 0.06 + (r() - 0.5) * 0.05;
+      pts.push([cx + Math.cos(a) * rx * g, cy + Math.sin(a) * ry * g]);
+    }
+    return smooth(pts);
+  };
+  const squiggle = (b, r) => {
+    const y = b.y + b.h * 0.98, amp = Math.max(2.4, b.h * 0.08), n = Math.max(4, Math.round(b.w / Math.max(6, b.h * 0.17))), pts = [];
+    for (let i = 0; i <= n; i++) pts.push([b.x - 3 + ((b.w + 6) * i) / n, y + (i % 2 ? amp : -amp) + (r() - 0.5) * amp * 0.5]);
+    return smooth(pts);
+  };
+  const swipe = (b, r) => {
+    const y0 = b.y + b.h * 0.62 + (r() - 0.5) * 2, y1 = b.y + b.h * 0.56;
+    return `M${f(b.x - 4)} ${f(y0)} C${f(b.x + b.w * 0.3)} ${f(y0 - 1)} ${f(b.x + b.w * 0.7)} ${f(y1 + 1)} ${f(b.x + b.w + 5)} ${f(y1)}`;
+  };
+  const frame = (b, r) => {
+    const p = 8, j = () => (r() - 0.5) * 4;
+    const pass = (o) => [[b.x - p + o, b.y - p - o * 0.4], [b.x + b.w + p + o * 0.6, b.y - p + o], [b.x + b.w + p - o, b.y + b.h + p + o * 0.5], [b.x - p - o * 0.4, b.y + b.h + p - o], [b.x - p + o * 1.4, b.y - p + o * 0.8]]
+      .map(([x, y], i) => `${i ? 'L' : 'M'}${f(x + j())} ${f(y + j())}`).join(' ');
+    return `${pass(0)} ${pass(3)}`;
+  };
+  const arrow = (from, to, r, bend) => {
+    const dx = to[0] - from[0], dy = to[1] - from[1], len = Math.hypot(dx, dy) || 1, nx = -dy / len, ny = dx / len;
+    const lift = len * bend * (0.85 + r() * 0.3);
+    const mid = [from[0] + dx / 2 + nx * lift, from[1] + dy / 2 + ny * lift];
+    const shaft = smooth([from, [from[0] + dx * 0.25 + nx * lift * 0.7, from[1] + dy * 0.25 + ny * lift * 0.7], mid, to]);
+    const tl = Math.hypot(to[0] - mid[0], to[1] - mid[1]) || 1, ux = (to[0] - mid[0]) / tl, uy = (to[1] - mid[1]) / tl, s = 12;
+    const side = (k) => [to[0] - ux * s - uy * s * 0.6 * k, to[1] - uy * s + ux * s * 0.6 * k];
+    const a = side(1), c = side(-1);
+    return [shaft, `M${f(a[0])} ${f(a[1])} L${f(to[0])} ${f(to[1])} L${f(c[0])} ${f(c[1])}`];
+  };
+
+  function build() {
+    const base = hero.getBoundingClientRect();
+    if (!base.width) return;
+    const rtl = document.documentElement.dir === 'rtl';
+    const lang = document.documentElement.lang === 'ar' ? 'ar' : 'en';
+    const box = (r) => ({ x: r.left - base.left, y: r.top - base.top, w: r.width, h: r.height });
+    const rects = (el) => (el ? [...el.getClientRects()].map(box).filter((b) => b.w > 1) : []);
+    const strongs = hero.querySelectorAll('.hero-lede strong');
+    const col = box(hero.firstElementChild.getBoundingClientRect());
+    const marks = [];
+    const add = (d, kind, delay, dur, width) => marks.push({ d, kind, delay, dur, width });
+
+    // "Mina" is the h1's first text node (before the <em>), measured with a Range.
+    const h1 = hero.querySelector('h1.name');
+    const first = h1 && [...h1.childNodes].find((n) => n.nodeType === 3 && n.textContent.trim());
+    if (first) {
+      const range = document.createRange();
+      const text = first.textContent;
+      range.setStart(first, text.length - text.trimStart().length);
+      range.setEnd(first, text.trimEnd().length);
+      const name = [...range.getClientRects()].map(box).filter((b) => b.w > 1)[0];
+      if (name) add(loop(name, seeded(11)), 'marker', 0.2, 0.85);
+    }
+    const lead = rects(strongs[0]);
+    lead.forEach((b, i) => add(squiggle(b, seeded(23 + i)), 'marker', 0.95 + i * 0.3, 0.45));
+    rects(strongs[4]).forEach((b, i) => add(swipe(b, seeded(40 + i)), 'highlight', 1.6 + i * 0.3, 0.45, b.h * 0.7));
+
+    // Clear old notes, then place new ones (measured, kept inside the hero).
+    notes.forEach((n) => n.remove());
+    notes = [];
+    const note = (text, x, y, delay) => {
+      const el = document.createElement('span');
+      el.className = 'hero-note' + (drawn ? ' instant drawn' : '');
+      el.setAttribute('aria-hidden', 'true');
+      el.textContent = text;
+      el.style.setProperty('--d', `${delay}s`);
+      hero.appendChild(el);
+      const w = el.offsetWidth;
+      const left = Math.max(col.x + 2, Math.min(col.x + col.w - w - 2, rtl ? x - w : x));
+      el.style.left = `${left}px`;
+      el.style.top = `${y}px`;
+      notes.push(el);
+      return { left, w, h: el.offsetHeight };
+    };
+
+    // "Open to remote" is the end of the eyebrow: the note sits just above it, inside the text column.
+    // Measure the eyebrow's text itself (the element is a full-width flex row).
+    const eyebrowEl = hero.querySelector('.eyebrow');
+    let eyebrow = null;
+    if (eyebrowEl) {
+      const range = document.createRange();
+      range.selectNodeContents(eyebrowEl);
+      const parts = [...range.getClientRects()].map(box).filter((b) => b.w > 1);
+      if (parts.length) {
+        const x0 = Math.min(...parts.map((b) => b.x)), x1 = Math.max(...parts.map((b) => b.x + b.w));
+        const y0 = Math.min(...parts.map((b) => b.y)), y1 = Math.max(...parts.map((b) => b.y + b.h));
+        eyebrow = { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+      }
+    }
+    const roomy = col.w >= 440;
+    if (eyebrow && roomy && eyebrow.y > 50) {
+      const end = rtl ? eyebrow.x : eyebrow.x + eyebrow.w;
+      const n = note(NOTES[lang].remote, rtl ? end + 70 : end - 70, eyebrow.y - 44, 2.25);
+      const from = [rtl ? n.left + n.w * 0.35 : n.left + n.w * 0.65, eyebrow.y - 44 + n.h + 2];
+      const to = [rtl ? end + 16 : end - 16, eyebrow.y - 3];
+      const [shaft, head] = arrow(from, to, seeded(7), rtl ? -0.3 : 0.3);
+      add(shaft, 'pen', 2.55, 0.3);
+      add(head, 'pen', 2.83, 0.15);
+    }
+
+    const cta = rects(hero.querySelector('.hero-cta .btn-solid'))[0];
+    if (cta) {
+      add(frame(cta, seeded(3)), 'marker', 3.1, 0.9);
+    }
+    // The note under the button needs the room the other buttons take on narrow screens.
+    if (cta && roomy) {
+      const below = cta.y + cta.h + 26;
+      const nx = rtl ? cta.x + cta.w * 0.35 : cta.x + cta.w * 0.65;
+      const n = note(NOTES[lang].cta, nx, below, 3.75);
+      const from = [rtl ? n.left + n.w : n.left, below + n.h * 0.45];
+      const to = [rtl ? cta.x + cta.w * 0.3 : cta.x + cta.w * 0.7, cta.y + cta.h + 12];
+      const [shaft, head] = arrow(from, to, seeded(19), rtl ? -0.4 : 0.4);
+      add(shaft, 'marker', 4.0, 0.35);
+      add(head, 'marker', 4.33, 0.15);
+    }
+
+    svg.setAttribute('viewBox', `0 0 ${f(base.width)} ${f(base.height)}`);
+    svg.innerHTML = marks.map((m) =>
+      `<path class="ink-${m.kind}" pathLength="1" d="${m.d}" style="--d:${m.delay}s;--t:${m.dur}s${m.width ? `;stroke-width:${f(m.width)}px` : ''}"/>`
+    ).join('');
+  }
+
+  function draw(instant) {
+    drawn = true;
+    svg.classList.toggle('instant', instant);
+    notes.forEach((n) => n.classList.toggle('instant', instant));
+    requestAnimationFrame(() => {
+      svg.classList.add('drawn');
+      notes.forEach((n) => n.classList.add('drawn'));
+    });
+  }
+
+  // Redraw in place (no animation) after a resize or a language switch.
+  let pending = 0;
+  const rebuild = () => {
+    cancelAnimationFrame(pending);
+    pending = requestAnimationFrame(() => { build(); if (drawn) draw(true); });
+  };
+
+  build();
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(rebuild);
+  // The Arabic font arrives only when the language switches; remeasure once it has.
+  if (document.fonts) document.fonts.addEventListener('loadingdone', rebuild);
+  // Watch the words themselves, not just the hero: the text can reflow while the hero keeps its size.
+  const ro = new ResizeObserver(rebuild);
+  [hero, hero.firstElementChild, ...hero.querySelectorAll('.eyebrow, h1.name, .hero-lede, .hero-cta')].forEach((el) => el && ro.observe(el));
+  window.addEventListener('resize', rebuild, { passive: true });
+  new MutationObserver(rebuild).observe(document.documentElement, { attributes: true, attributeFilter: ['lang', 'dir'] });
+
+  if (reduce) { draw(true); return; }
+  // Start once the hero has faded in, so the marks land on settled text.
+  const io = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    io.disconnect();
+    // Wait for every hero .reveal to be shown and its 0.6s fade to finish, then measure and draw.
+    // Only the text column carries marks; the photo card may still be fading in below.
+    const reveals = [...hero.firstElementChild.querySelectorAll('.reveal')];
+    const start = performance.now();
+    const ready = () => {
+      const shown = reveals.every((el) => el.classList.contains('visible') || el.getBoundingClientRect().top > window.innerHeight);
+      if (!shown && performance.now() - start < 1500) return setTimeout(ready, 100);
+      setTimeout(() => { build(); requestAnimationFrame(() => draw(false)); }, 700);
+    };
+    ready();
+  }, { threshold: 0 });
+  // The marks live in the text column; on a short screen the hero is far taller than the view.
+  io.observe(hero.firstElementChild);
 })();
 </script>
 
