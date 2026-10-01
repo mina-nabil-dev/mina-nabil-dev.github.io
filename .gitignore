@@ -4,3 +4,9 @@ tests/perf/reports/*-latest.json
 # local backups, never publish
 *.bak*
 *.pre3d
+
+# content drafts under review, not for publishing
+content/
+
+# old CV (home address, birth date): never publish
+assets/cv.pdf

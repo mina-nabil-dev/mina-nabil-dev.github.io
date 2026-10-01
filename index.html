@@ -6,7 +6,7 @@
 
 <title>Mina Nabil — Flutter Developer</title>
 
-<meta name="description" content="Mina Nabil, Flutter developer from Egypt building cross-platform mobile apps for Android and iOS with Flutter, Dart, Laravel, Firebase, and Supabase." />
+<meta name="description" content="Mina Nabil, Flutter developer from Egypt building Flutter apps for Android and the web, with Laravel, Firebase, and Supabase backends. Learning platform used by 500+ students." />
 <meta name="author" content="Mina Nabil" />
 <link rel="canonical" href="https://mina-nabil-dev.github.io/" />
 <meta name="robots" content="index, follow" />
@@ -43,7 +43,7 @@
   "name": "Mina Nabil",
   "alternateName": "مينا نبيل",
   "jobTitle": "Flutter Developer",
-  "description": "Flutter developer from Minya, Egypt focused on cross-platform mobile application development using Flutter, Dart, Laravel, Firebase, Supabase, and modern software architecture.",
+  "description": "Flutter developer from Minya, Egypt. Builds Flutter apps and their Laravel, Firebase, and Supabase backends; his white-label learning platform is used by 5 tutors and 500+ students.",
   "url": "https://mina-nabil-dev.github.io/",
   "image": "https://mina-nabil-dev.github.io/og-image.png",
   "email": "mailto:minanabil20303030@gmail.com",
@@ -61,8 +61,8 @@
     "Flutter", "Dart", "Firebase", "Supabase", "Laravel", "PHP", "MySQL",
     "BLoC", "Cubit", "Clean Architecture", "Mobile Development",
     "Cross-Platform App Development", "Android App Development",
-    "iOS App Development", "REST API Integration", "JWT Authentication",
-    "Google Play Store Publishing"
+    "Web Development", "REST API Integration", "JWT Authentication",
+    "Google Play Store Publishing", "Next.js", "Education Platforms"
   ],
   "hasCredential": {
     "@type": "EducationalOccupationalCredential",
@@ -70,14 +70,14 @@
     "educationalLevel": "Bachelor",
     "recognizedBy": {
       "@type": "EducationalOrganization",
-      "name": "Minia University",
+      "name": "Minia National University",
       "address": { "@type": "PostalAddress", "addressLocality": "Minya", "addressCountry": "EG" }
     }
   },
   "offers": {
     "@type": "Offer",
     "name": "Flutter & Mobile App Development",
-    "description": "Cross-platform mobile application development for Android and iOS using Flutter, Laravel, Firebase, Supabase, and modern architecture.",
+    "description": "Flutter apps for Android and the web, Laravel and Firebase backends, and white-label learning platforms for tutors.",
     "availability": "https://schema.org/InStock"
   }
 }
@@ -88,6 +88,8 @@
 <script>document.documentElement.classList.add('has-motion');</script>
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- body text font (Inter, latin): fetched early so the hero copy does not reflow when it swaps in -->
+<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" crossorigin />
 <!-- Google Fonts @font-face rules inlined (latin, latin-ext, arabic subsets: everything the page uses)
      so first paint does not wait on a render-blocking request to fonts.googleapis.com -->
 <style>
@@ -432,6 +434,38 @@ h1.name em{
   display:flex;
   gap:14px;
   flex-wrap:wrap;
+}
+
+/* proof row under the buttons: big number, mono label, same rules as the manifest card */
+.hero-stats{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:0 28px;
+  margin-top:40px;
+  padding-top:22px;
+  border-top:1px solid var(--line);
+  max-width:600px;
+}
+.hero-stats div{ display:flex; flex-direction:column; gap:6px; }
+.hero-stats dd{
+  order:-1;   /* number above its label, tops aligned across the row */
+  font-family:var(--display);
+  font-weight:600;
+  font-size:30px;
+  line-height:1;
+  color:var(--ink);
+  direction:ltr;
+  unicode-bidi:isolate;
+}
+[dir="rtl"] .hero-stats dd{ text-align:right; }
+.hero-stats dt{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.04em;
+  color:var(--ink-faint);
+}
+@media (max-width:600px){
+  .hero-stats{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:20px 28px; }
 }
 
 .btn{
@@ -1367,6 +1401,115 @@ hr.rule{
 }
 
 /* ============================================
+   SERVICES — what a client can ask for, in their words.
+   Same hairline grid as Stack, two columns.
+   ============================================ */
+#services{ background:radial-gradient(40% 44% at 12% 40%, rgba(64,76,220,.12), rgba(64,76,220,0) 100%); }
+.svc-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1px;
+  padding:1px;
+  background:var(--line);
+  border-radius:8px;
+  overflow:hidden;
+  counter-reset:svc;
+}
+.svc{
+  background:var(--surface);
+  padding:30px 28px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  counter-increment:svc;
+  transition:background .3s ease;
+}
+.svc:hover{ background:var(--paper-dim); }
+.svc-n{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--signal);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.svc-n::before{ content:counter(svc, decimal-leading-zero); color:var(--ink-faint); }
+.svc h3{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:22px;
+  line-height:1.2;
+  color:var(--ink);
+}
+.svc p{ font-size:15px; color:var(--ink-soft); line-height:1.65; text-wrap:pretty; }
+.svc-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:6px; }
+.svc-tags span{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-faint);
+  border:1px solid var(--line);
+  border-radius:3px;
+  padding:3px 8px;
+  direction:ltr;
+  unicode-bidi:isolate;
+}
+@media (max-width:860px){
+  .svc-grid{ grid-template-columns:1fr; }
+}
+
+/* ============================================
+   EXPERIENCE — dated rows, newest first
+   ============================================ */
+#experience{ background:radial-gradient(38% 42% at 88% 50%, rgba(88,70,200,.10), rgba(88,70,200,0) 100%); }
+.xp{ list-style:none; border-top:1px solid var(--line); }
+.xp-item{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:32px;
+  padding:30px 0;
+  border-bottom:1px solid var(--line);
+}
+.xp-when{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--signal);
+  letter-spacing:.04em;
+  padding-top:5px;
+}
+.xp-when span{ display:block; color:var(--ink-faint); margin-top:6px; }
+.xp-role{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:22px;
+  line-height:1.25;
+  color:var(--ink);
+  margin-bottom:14px;
+}
+.xp-role em{ font-style:italic; font-weight:380; color:var(--signal); }
+.xp-points{ list-style:none; display:flex; flex-direction:column; gap:9px; }
+.xp-points li{
+  position:relative;
+  padding-inline-start:18px;
+  font-size:15px;
+  color:var(--ink-soft);
+  line-height:1.65;
+  text-wrap:pretty;
+}
+.xp-points li::before{
+  content:'';
+  position:absolute;
+  inset-inline-start:0;
+  top:.8em;
+  width:7px; height:1px;
+  background:var(--signal);
+}
+@media (max-width:860px){
+  .xp-item{ grid-template-columns:1fr; gap:12px; }
+}
+
+/* ============================================
    STACK — grouped by role, not a flat grid.
    ============================================ */
 .stack-groups{
@@ -1732,6 +1875,14 @@ hr.rule{
 /* ============================================
    CONTACT
    ============================================ */
+.contact-lead{
+  font-size:16px;
+  color:var(--ink-soft);
+  line-height:1.65;
+  max-width:60ch;
+  margin:-20px 0 34px;
+}
+.contact-lead a{ color:var(--signal); text-underline-offset:3px; }
 .contact-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr); /* 6 cards -> two full rows, no empty cells */
@@ -2064,6 +2215,315 @@ footer .wrap{
   .has-motion .m-foot.is-in .wrap > :nth-child(2){ animation-delay:calc(.2s + var(--stagger) * 2); }
 }
 
+/* ============================================
+   FUTURE LAYER — holographic panels, a scan beam
+   per section, decoding labels, an energy rail on
+   the timeline, a reading-mode story, a stack band,
+   an aurora behind Contact, and a status-bar footer.
+   Every effect is transform/opacity or a one-shot;
+   reduced motion turns all of it off (bottom).
+   ============================================ */
+@property --ang{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
+
+/* scan beam: a band of light crosses each section once as it arrives */
+.fx-scan{ position:relative; overflow:clip; }
+.fx-scan::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:linear-gradient(to bottom,
+    rgba(142,155,255,0) 0,
+    rgba(142,155,255,0) calc(100% - 160px),
+    rgba(142,155,255,.06) calc(100% - 3px),
+    rgba(190,198,255,.75) calc(100% - 1px),
+    rgba(142,155,255,0) 100%);
+  transform:translateY(-100%);
+  opacity:0;
+}
+.fx-scan.is-scanned::after{ animation:fx-scan 1.6s cubic-bezier(.45,.05,.25,1) forwards; }
+@keyframes fx-scan{
+  0%{   transform:translateY(-100%); opacity:1; }
+  85%{  opacity:1; }
+  100%{ transform:translateY(0); opacity:0; }
+}
+.fx-scan > .wrap{ position:relative; z-index:1; }
+
+/* ---------- holo panel: shared by Services cards and the spec sheet ---------- */
+.holo{
+  --rx:0deg; --ry:0deg; --gx:50%; --gy:50%;
+  position:relative;
+  isolation:isolate;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:
+    linear-gradient(155deg, rgba(142,155,255,.09), rgba(142,155,255,0) 38%),
+    linear-gradient(180deg, rgba(20,23,62,.92), rgba(10,12,36,.92));
+  box-shadow:0 30px 60px -38px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.05);
+  transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));
+  transition:transform .6s var(--ease-out), border-color .4s ease, box-shadow .4s ease;
+}
+.holo.is-tilting{ transition:transform .12s linear, border-color .4s ease, box-shadow .4s ease; }
+/* glare that follows the pointer */
+.holo::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  z-index:-1;
+  pointer-events:none;
+  background:radial-gradient(420px circle at var(--gx) var(--gy), rgba(142,155,255,.16), rgba(142,155,255,0) 60%);
+  opacity:0;
+  transition:opacity .45s ease;
+}
+/* a light that runs around the border */
+.holo::after{
+  content:'';
+  position:absolute;
+  inset:-1px;
+  border-radius:inherit;
+  padding:1px;
+  pointer-events:none;
+  background:conic-gradient(from var(--ang), rgba(142,155,255,0) 0deg, rgba(142,155,255,0) 250deg, rgba(200,206,255,.95) 320deg, rgba(142,155,255,0) 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  opacity:0;
+  transition:opacity .45s ease;
+  animation:holo-orbit 3.2s linear infinite paused;
+}
+@keyframes holo-orbit{ to{ --ang:360deg; } }
+.holo:hover{ border-color:rgba(142,155,255,.4); box-shadow:0 40px 70px -36px rgba(40,50,180,.55), inset 0 1px 0 rgba(255,255,255,.07); }
+.holo:hover::before{ opacity:1; }
+.holo:hover::after{ opacity:1; animation-play-state:running; }
+
+/* corner brackets lock on to the panel */
+.holo-corners{
+  position:absolute;
+  inset:10px;
+  pointer-events:none;
+  --c:rgba(142,155,255,.75);
+  background:
+    linear-gradient(var(--c),var(--c)) top left    / 12px 1px no-repeat,
+    linear-gradient(var(--c),var(--c)) top left    / 1px 12px no-repeat,
+    linear-gradient(var(--c),var(--c)) top right   / 12px 1px no-repeat,
+    linear-gradient(var(--c),var(--c)) top right   / 1px 12px no-repeat,
+    linear-gradient(var(--c),var(--c)) bottom left / 12px 1px no-repeat,
+    linear-gradient(var(--c),var(--c)) bottom left / 1px 12px no-repeat,
+    linear-gradient(var(--c),var(--c)) bottom right/ 12px 1px no-repeat,
+    linear-gradient(var(--c),var(--c)) bottom right/ 1px 12px no-repeat;
+  opacity:.45;
+  transition:inset .5s var(--ease-out), opacity .4s ease;
+}
+.holo:hover .holo-corners{ inset:6px; opacity:1; }
+
+/* ---------- Services: four floating panels ---------- */
+.svc-grid{
+  gap:18px;
+  padding:0;
+  background:none;
+  border-radius:0;
+  overflow:visible;
+}
+.svc{ padding:30px 28px 26px; background:none; }
+.svc:hover{ background:none; }
+.svc-ico{
+  width:44px; height:44px;
+  fill:none;
+  stroke:var(--signal);
+  stroke-width:1.5;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 8px rgba(142,155,255,.45));
+  margin-bottom:4px;
+}
+.svc:first-child{ border-color:rgba(142,155,255,.35); }
+.svc:first-child .svc-n{ color:#c8ceff; }
+
+/* ---------- About: the spec sheet becomes a panel ---------- */
+.credentials.holo{ padding:10px 26px; align-self:start; }
+.credentials.holo::before{ display:none; }
+.credentials.holo .cred-row:last-child::after{ display:none; }
+
+/* About: reading mode, each paragraph lights up as it is read */
+.about-copy.story{ position:relative; padding-inline-start:28px; --prog:1; }
+.about-copy.story::before,
+.about-copy.story::after{
+  content:'';
+  position:absolute;
+  inset-inline-start:0;
+  top:6px; bottom:6px;
+  width:2px;
+  border-radius:2px;
+}
+.about-copy.story::before{ background:var(--line); }
+.about-copy.story::after{
+  background:linear-gradient(to bottom, rgba(142,155,255,.2), var(--signal));
+  box-shadow:0 0 12px rgba(142,155,255,.7);
+  transform-origin:top;
+  transform:scaleY(var(--prog));
+}
+.about-copy.story p{
+  --lit:1;
+  color:color-mix(in oklab, var(--ink-soft) calc(var(--lit) * 100%), #7a80ad);
+  transition:color .35s ease;
+}
+
+/* ---------- Experience: an energy beam runs down the timeline ---------- */
+/* without the script (or with reduced motion) the beam is full and every node is lit;
+   .beam-on hands control to the scroll loop */
+.xp-wrap{ position:relative; --beam:1; --rail-x:236px; }
+.xp-rail{
+  position:absolute;
+  inset-inline-start:var(--rail-x);
+  top:0; bottom:0;
+  width:2px;
+  background:var(--line);
+  border-radius:2px;
+}
+.xp-beam{
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:linear-gradient(to bottom, rgba(142,155,255,.15), var(--signal) 85%, #fff);
+  box-shadow:0 0 14px rgba(142,155,255,.8);
+  transform-origin:top;
+  transform:scaleY(var(--beam));
+}
+.xp{ border-top:none; }
+.xp-item{ position:relative; border-bottom:1px solid var(--line-soft); }
+.xp-item:last-child{ border-bottom:none; }
+.xp-item > div:last-child{ padding-inline-start:20px; }
+/* node on the rail: dark until the beam reaches it, then it ignites */
+.xp-item::before{
+  content:'';
+  position:absolute;
+  inset-inline-start:calc(var(--rail-x) - 5px);
+  top:37px;
+  width:12px; height:12px;
+  border-radius:50%;
+  background:var(--paper);
+  border:2px solid var(--line-strong);
+  transition:background .4s ease, border-color .4s ease, box-shadow .4s ease, transform .5s var(--ease-spring);
+  z-index:1;
+}
+.xp-item.lit::before,
+.xp-wrap:not(.beam-on) .xp-item::before{
+  background:var(--signal);
+  border-color:#d9ddff;
+  box-shadow:0 0 0 5px rgba(142,155,255,.16), 0 0 18px rgba(142,155,255,.9);
+  transform:scale(1.15);
+}
+.xp-item .xp-role{ transition:color .4s ease; }
+.xp-wrap.beam-on .xp-item:not(.lit) .xp-role{ color:var(--ink-soft); }
+@media (max-width:860px){
+  .xp-wrap{ --rail-x:5px; }
+  .xp-item{ padding-inline-start:30px; }
+  .xp-item > div:last-child{ padding-inline-start:0; }
+  .xp-item::before{ top:33px; }
+}
+
+/* ---------- Stack band ---------- */
+.tech-marquee{
+  direction:ltr;
+  overflow:hidden;
+  padding:26px 0;
+  border-top:1px solid var(--line-soft);
+  border-bottom:1px solid var(--line-soft);
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+          mask-image:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.tm-track{ display:flex; width:max-content; animation:tm-slide 48s linear infinite; }
+.tech-marquee:hover .tm-track{ animation-play-state:paused; }
+.tm-run{ display:flex; align-items:center; flex-shrink:0; }
+.tm-run span{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:clamp(34px, 5vw, 64px);
+  line-height:1;
+  padding:0 26px;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(142,155,255,.45);
+  white-space:nowrap;
+  transition:color .4s ease, -webkit-text-stroke-color .4s ease;
+}
+.tm-run span:hover{ color:var(--ink); -webkit-text-stroke-color:transparent; }
+.tm-run i{ font-style:normal; color:var(--signal); font-size:18px; opacity:.7; }
+@keyframes tm-slide{ to{ transform:translateX(-50%); } }
+
+/* ---------- Contact: aurora + magnetic calls to action ---------- */
+.aurora{ position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+.aurora i{
+  position:absolute;
+  width:46vmax; height:46vmax;
+  border-radius:50%;
+  filter:blur(70px);
+  opacity:.38;
+  will-change:transform;
+}
+.aurora i:nth-child(1){ background:radial-gradient(circle, rgba(88,100,255,.9), rgba(88,100,255,0) 65%); left:-12%; top:10%; animation:aur-a 22s ease-in-out infinite alternate; }
+.aurora i:nth-child(2){ background:radial-gradient(circle, rgba(150,90,255,.75), rgba(150,90,255,0) 65%); right:-14%; top:-20%; animation:aur-b 26s ease-in-out infinite alternate; }
+.aurora i:nth-child(3){ background:radial-gradient(circle, rgba(60,190,220,.45), rgba(60,190,220,0) 65%); left:30%; bottom:-35%; animation:aur-c 30s ease-in-out infinite alternate; }
+@keyframes aur-a{ to{ transform:translate(18vw, 6vh) scale(1.15); } }
+@keyframes aur-b{ to{ transform:translate(-16vw, 14vh) scale(.9); } }
+@keyframes aur-c{ to{ transform:translate(-10vw, -12vh) scale(1.2); } }
+#contact > .wrap{ position:relative; z-index:1; }
+.contact-cta{ display:flex; flex-wrap:wrap; gap:14px; margin:-6px 0 38px; }
+.magnetic{ transform:translate(var(--mgx, 0px), var(--mgy, 0px)); transition:transform .5s var(--ease-out), background .15s, border-color .15s, box-shadow .3s; }
+.magnetic.is-pulled{ transition:transform .15s linear, background .15s, border-color .15s, box-shadow .3s; }
+.magnetic:hover{ transform:translate(var(--mgx, 0px), var(--mgy, 0px)); }
+.btn-glow{ box-shadow:0 0 0 1px rgba(142,155,255,.35), 0 12px 34px -12px rgba(142,155,255,.85); }
+.btn-glow:hover{ box-shadow:0 0 0 1px rgba(200,206,255,.6), 0 16px 44px -10px rgba(142,155,255,1); }
+
+/* ---------- Footer: status bar ---------- */
+.f-clock{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--ink-faint);
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.f-clock time{ color:var(--ink-soft); font-variant-numeric:tabular-nums; direction:ltr; unicode-bidi:isolate; }
+.f-top{
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--ink-soft);
+  text-decoration:none;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:6px 12px;
+  transition:border-color .3s ease, color .3s ease, transform .3s var(--ease-out);
+}
+.f-top:hover{ color:var(--ink); border-color:var(--signal); transform:translateY(-2px); }
+html[lang="ar"] .f-clock,
+html[lang="ar"] .f-top{ font-family:var(--arabic); }
+/* buttons are mono with tracking in English; Arabic letters must stay joined */
+html[lang="ar"] .btn{ font-family:var(--arabic); letter-spacing:0; }
+
+/* ---------- reduced motion: show everything, move nothing ---------- */
+@media (prefers-reduced-motion:reduce){
+  .fx-scan::after,
+  .aurora i,
+  .holo::after{ animation:none !important; }
+  .tm-track{ animation:none; }
+  .holo{ transform:none !important; }
+  .magnetic{ transform:none !important; }
+  .about-copy.story p{ --lit:1 !important; }
+  .about-copy.story{ --prog:1 !important; }
+  .xp-wrap{ --beam:1 !important; }
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .has-motion .svc-ico *{ stroke-dasharray:1; stroke-dashoffset:1; }
+  .has-motion .svc-grid.is-in .svc-ico *{
+    stroke-dashoffset:0;
+    transition:stroke-dashoffset 1.4s var(--ease-out);
+    transition-delay:calc(.3s + var(--i, 0) * .12s);
+  }
+}
+
 @media (max-width:640px){
   .wrap{ padding-left:22px; padding-right:22px; }
   section{ padding:56px 0; }
@@ -2121,7 +2581,14 @@ html[lang="ar"] .f-status,
 html[lang="ar"] .detail-badge,
 html[lang="ar"] .detail-meta-row,
 html[lang="ar"] .shot-note,
-html[lang="ar"] .platform-shared-note{ font-family:var(--arabic); letter-spacing:0; }
+html[lang="ar"] .platform-shared-note,
+html[lang="ar"] .hero-stats dt,
+html[lang="ar"] .svc-n,
+html[lang="ar"] .xp-when,
+html[lang="ar"] .contact-lead{ font-family:var(--arabic); letter-spacing:0; }
+html[lang="ar"] .svc h3,
+html[lang="ar"] .xp-role{ font-family:var(--arabic); }
+html[lang="ar"] .xp-role em{ font-style:normal; }
 
 /* physical properties that must flip */
 [dir="rtl"] .manifest-v,
@@ -2174,7 +2641,8 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
     <div class="nav-links">
       <a data-i18n="nav_1" href="#work">Work</a>
       <a data-i18n="nav_2" href="#about">About</a>
-      <a data-i18n="nav_3" href="#stack">Stack</a>
+      <a data-i18n="nav_6" href="#services">Services</a>
+      <a data-i18n="nav_7" href="#experience">Experience</a>
       <a data-i18n="nav_5" href="#contact">Contact</a>
     </div>
 
@@ -2198,18 +2666,25 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
     <h1 class="name reveal">Mina <em>Nabil</em></h1>
 
     <p class="hero-lede reveal" data-i18n="hero_lede_1">
-      I build <strong>cross-platform mobile apps</strong> with Flutter — from the interface
-      down to the backend that runs it. My work spans <strong>Firebase</strong>,
-      <strong>Supabase</strong>, and custom <strong>Laravel APIs</strong>, structured with
-      <strong>Clean Architecture</strong> and <strong>BLoC/Cubit</strong> so apps stay easy to
-      extend once they're live.
+      I build <strong>Flutter apps</strong> and the <strong>backends</strong> behind them.
+      My white-label learning platform runs for <strong>5 tutors</strong> and
+      <strong>500+ students</strong> on Android and the web, each copy
+      <strong>shaped around how that tutor teaches</strong>.
     </p>
 
     <div class="hero-cta reveal">
       <a href="#work" class="btn btn-solid" data-i18n="btn_solid_1">View my work ↓</a>
+      <a href="assets/Mina-Nabil-CV.pdf" download class="btn btn-line" data-i18n="btn_cv_1">Download CV ↓</a>
       <a href="https://github.com/mina-nabil-dev" target="_blank" rel="noopener" class="btn btn-line" data-i18n="btn_line_1">GitHub ↗</a>
-      <a href="https://linkedin.com/in/mina-nabil-97bb1b300" target="_blank" rel="noopener" class="btn btn-line" data-i18n="btn_line_2">LinkedIn ↗</a>
     </div>
+
+    <!-- every number here can be checked: Google Play listings and the platforms' own student counts -->
+    <dl class="hero-stats reveal">
+      <div><dt data-i18n="stat_k_1">apps on Google Play</dt><dd>5</dd></div>
+      <div><dt data-i18n="stat_k_2">Play Store downloads</dt><dd>800+</dd></div>
+      <div><dt data-i18n="stat_k_3">students on my platforms</dt><dd>500+</dd></div>
+      <div><dt data-i18n="stat_k_4">tutors running it</dt><dd>5</dd></div>
+    </dl>
   </div>
 
   <!-- 3D Profile Card -->
@@ -2238,8 +2713,8 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
         <div class="manifest" aria-label="Developer summary">
           <div class="manifest-head">manifest.json</div>
           <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_1">role</span><span class="manifest-v" data-i18n="manifest_v_1">Flutter Developer</span></div>
-          <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_2">focus</span><span class="manifest-v" data-i18n="manifest_v_2">Android · iOS</span></div>
-          <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_3">apps_live</span><span class="manifest-v" data-i18n="manifest_v_3">4 on Play Store</span></div>
+          <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_2">platforms</span><span class="manifest-v" data-i18n="manifest_v_2">Android · Web · iOS-ready</span></div>
+          <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_3">apps_live</span><span class="manifest-v" data-i18n="manifest_v_3">5 on Google Play</span></div>
           <div class="manifest-row"><span class="manifest-k" data-i18n="manifest_k_4">architecture</span><span class="manifest-v" data-i18n="manifest_v_4">Clean · BLoC/Cubit</span></div>
         </div>
       </div>
@@ -2257,11 +2732,11 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
     </p>
 
     <h2 class="stitle reveal" id="workTitle" data-i18n="stitle_1">
-      Build once, <em>ship for two</em>
+      Built once, <em>shaped for each client</em>
     </h2>
 
     <p class="cine-apps-lead reveal" data-i18n="apps_lead_1">
-      Each card is a production Flutter application — clean architecture, robust state management, and real-time backend integration. Drag the ring or click any card to inspect it.
+      One learning platform, shaped for five tutors with five different needs — plus the web and mobile work around it. Drag the ring or click any card to inspect it.
     </p>
   </div>
 
@@ -2326,16 +2801,16 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
       <p>Science &amp; biology platform · Laravel · Live website</p>
       <a href="https://doctor-3bkarino.online/" tabindex="-1" data-ar="الموقع">Website</a>
     </li>
-    <li data-key="cs1" data-img="assets/mncs_final.webp" data-glow="#86c96f" data-chip="Year 1" data-kind="Course app · Live" data-stack="Flutter · Offline · Y1"
-        data-sub-ar="تطبيق مرافق لمقررات جامعة المنيا · السنة الأولى · منشور">
+    <li data-key="cs1" data-img="assets/mncs_final.webp" data-glow="#86c96f" data-chip="Year 1" data-kind="Course app · Live" data-stack="Flutter · Firebase · Y1"
+        data-sub-ar="تطبيق مذاكرة لكليتي · جامعة المنيا الأهلية · السنة الأولى">
       <strong>MN — CS 1</strong>
-      <p>Minia University course companion · Year 1 · Live</p>
+      <p>Study app for my faculty · Minia National University · Year 1 · 500+ downloads</p>
       <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain" tabindex="-1">Play Store</a>
     </li>
-    <li data-key="cs2" data-img="assets/mncs_final.webp" data-glow="#4fc3a1" data-chip="Year 2" data-kind="Course app · Live" data-stack="Flutter · Offline · Y2"
-        data-sub-ar="تطبيق مرافق لمقررات جامعة المنيا · السنة الثانية · منشور">
+    <li data-key="cs2" data-img="assets/mncs_final.webp" data-glow="#4fc3a1" data-chip="Year 2" data-kind="Course app · Live" data-stack="Flutter · Firebase · Y2"
+        data-sub-ar="تطبيق مذاكرة لكليتي · جامعة المنيا الأهلية · السنة الثانية">
       <strong>MN — CS 2</strong>
-      <p>Minia University course companion · Year 2 · Live</p>
+      <p>Study app for my faculty · Minia National University · Year 2 · 100+ downloads</p>
       <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year2.learntrain" tabindex="-1">Play Store</a>
     </li>
     <li data-key="daveslimo" data-img="assets/daveslimo_final.webp" data-glow="#d4af37" data-chip="US client" data-kind="Booking website" data-stack="Next.js · Supabase"
@@ -2399,87 +2874,211 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
   </div>
 </section>
 
-<section id="about">
+<section id="about" class="fx-scan">
   <div class="wrap">
     <div class="section-head m-head">
       <div class="tag" data-i18n="tag_2">About</div>
       <span class="sh-line" aria-hidden="true"></span>
-      <span class="sh-idx" aria-hidden="true"><b>02</b> / 04</span>
+      <span class="sh-idx" aria-hidden="true"><b>02</b> / 06</span>
     </div>
 
     <h2 class="stitle m-title" style="margin-bottom:44px;" data-i18n="stitle_2">
-      Idea to <em>Play Store</em>, one system at a time
+      From a study app to a platform <em>tutors run on</em>
     </h2>
 
     <div class="about-grid">
-      <div class="about-copy m-stagger">
+      <div class="about-copy story m-stagger">
         <p data-i18n="about_p1">
-          I'm a Flutter developer from Minya, Egypt. I build cross-platform mobile
-          applications end to end — interface, state, backend, and deployment.
+          I'm a Flutter developer from Minya, Egypt, and a final-year student at the
+          Faculty of Computers and Artificial Intelligence, Minia National University.
         </p>
         <p data-i18n="about_p2">
-          Most of what I build is made to be re-used. The tutoring platform above runs as
-          <strong>four Play Store listings from two codebases</strong> — taking on a new tutor is a
-          rebrand and a config change, not a rewrite.
+          It started with my own faculty: study material was scattered across YouTube,
+          WhatsApp, and Telegram, so I built <strong>an app for each year</strong> that puts
+          it in one place. Together they passed 600 downloads.
+        </p>
+        <p data-i18n="about_p3">
+          Then I built a full learning platform for a real tutor. Other tutors asked for it,
+          so I made it white-label — <strong>five Play Store listings from two codebases</strong> —
+          and each tutor gets what their teaching needs: an equation editor for a math teacher,
+          attendance and WhatsApp alerts to parents for another.
+        </p>
+        <p data-i18n="about_p4">
+          I also build websites with Technova, a startup in Minya and Beni Suef, including
+          one for a client in the US.
         </p>
       </div>
 
-      <div class="credentials m-cred">
+      <div class="credentials m-cred holo" data-tilt>
+        <span class="holo-corners" aria-hidden="true"></span>
         <div class="cred-row">
           <div class="cred-k" data-i18n="cred_k_1">Location</div>
           <div class="cred-v" data-i18n="cred_v_1">Minya, Egypt<span>Remote-friendly</span></div>
         </div>
         <div class="cred-row">
           <div class="cred-k" data-i18n="cred_k_2">Education</div>
-          <div class="cred-v" data-i18n="cred_v_2">Computer Science<span>Minia University</span></div>
+          <div class="cred-v" data-i18n="cred_v_2">Computers &amp; Artificial Intelligence<span>Minia National University · 2027</span></div>
+        </div>
+        <div class="cred-row">
+          <div class="cred-k" data-i18n="cred_k_4">Training</div>
+          <div class="cred-v" data-i18n="cred_v_4">Flutter Development<span>ITI · 120 hours · 2025</span></div>
+        </div>
+        <div class="cred-row">
+          <div class="cred-k" data-i18n="cred_k_5">Languages</div>
+          <div class="cred-v" data-i18n="cred_v_5">Arabic · English<span>Native · Good working level</span></div>
         </div>
         <div class="cred-row">
           <div class="cred-k" data-i18n="cred_k_3">Deployment</div>
-          <div class="cred-v" data-i18n="cred_v_3">Google Play Store<span>Full publishing pipeline</span></div>
+          <div class="cred-v" data-i18n="cred_v_3">Google Play<span>5 live apps · 800+ downloads</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- SERVICES -->
+<section id="services" class="fx-scan">
+  <div class="wrap">
+    <div class="section-head m-head">
+      <div class="tag" data-i18n="tag_4">Services</div>
+      <span class="sh-line" aria-hidden="true"></span>
+      <span class="sh-idx" aria-hidden="true"><b>03</b> / 06</span>
+    </div>
+
+    <h2 class="stitle m-title" style="margin-bottom:44px;" data-i18n="stitle_4">
+      What I can <em>build for you</em>
+    </h2>
+
+    <div class="svc-grid m-stagger">
+      <article class="svc holo" data-tilt>
+        <span class="holo-corners" aria-hidden="true"></span>
+        <svg class="svc-ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M4 19 24 10l20 9-20 9Z"/><path pathLength="1" d="M12 23v9c0 3 5.4 6 12 6s12-3 12-6v-9"/><path pathLength="1" d="M44 19v10"/></svg>
+        <div class="svc-n" data-i18n="svc_n_1">Main service</div>
+        <h3 data-i18n="svc_t_1">A learning platform under your name</h3>
+        <p data-i18n="svc_d_1">Lessons, exams, subscriptions, and student tracking — on Android and the web, with your name and brand.</p>
+        <div class="svc-tags"><span>White-label</span><span>Exams</span><span>Android + Web</span></div>
+      </article>
+      <article class="svc holo" data-tilt>
+        <span class="holo-corners" aria-hidden="true"></span>
+        <svg class="svc-ico" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M8 14h32M8 24h32M8 34h32"/><circle pathLength="1" cx="17" cy="14" r="3.5"/><circle pathLength="1" cx="31" cy="24" r="3.5"/><circle pathLength="1" cx="21" cy="34" r="3.5"/></svg>
+        <div class="svc-n" data-i18n="svc_n_2">Custom features</div>
+        <h3 data-i18n="svc_t_2">Built around how you work</h3>
+        <p data-i18n="svc_d_2">An equation editor for math exams, QR attendance, monthly reports for parents, automatic WhatsApp alerts.</p>
+        <div class="svc-tags"><span>Equations</span><span>QR</span><span>WhatsApp</span></div>
+      </article>
+      <article class="svc holo" data-tilt>
+        <span class="holo-corners" aria-hidden="true"></span>
+        <svg class="svc-ico" viewBox="0 0 48 48" aria-hidden="true"><rect pathLength="1" x="14" y="4" width="20" height="40" rx="4.5"/><path pathLength="1" d="M21 38h6"/><path pathLength="1" d="M19 10h10"/></svg>
+        <div class="svc-n" data-i18n="svc_n_3">Mobile apps</div>
+        <h3 data-i18n="svc_t_3">Flutter apps, from idea to Google Play</h3>
+        <p data-i18n="svc_d_3">Design, state management, backend integration, and publishing — with code that stays easy to change.</p>
+        <div class="svc-tags"><span>Flutter</span><span>BLoC</span><span>Google Play</span></div>
+      </article>
+      <article class="svc holo" data-tilt>
+        <span class="holo-corners" aria-hidden="true"></span>
+        <svg class="svc-ico" viewBox="0 0 48 48" aria-hidden="true"><rect pathLength="1" x="7" y="8" width="34" height="12" rx="2.5"/><rect pathLength="1" x="7" y="28" width="34" height="12" rx="2.5"/><path pathLength="1" d="M13 14h5M13 34h5M24 20v8"/></svg>
+        <div class="svc-n" data-i18n="svc_n_4">Backends &amp; web</div>
+        <h3 data-i18n="svc_t_4">APIs, dashboards, and websites</h3>
+        <p data-i18n="svc_d_4">Laravel APIs and admin panels behind your app, and Next.js websites like the one I built for a US client.</p>
+        <div class="svc-tags"><span>Laravel</span><span>Next.js</span><span>Supabase</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="fx-scan">
+  <div class="wrap">
+    <div class="section-head m-head">
+      <div class="tag" data-i18n="tag_5">Experience</div>
+      <span class="sh-line" aria-hidden="true"></span>
+      <span class="sh-idx" aria-hidden="true"><b>04</b> / 06</span>
+    </div>
+
+    <h2 class="stitle m-title" style="margin-bottom:44px;" data-i18n="stitle_6">
+      Where I've <em>worked</em>
+    </h2>
+
+    <div class="xp-wrap">
+    <div class="xp-rail" aria-hidden="true"><span class="xp-beam"></span></div>
+    <ol class="xp m-stagger">
+      <li class="xp-item">
+        <div class="xp-when" data-i18n="xp_when_1">Jun 2026 — Present<span>Remote</span></div>
+        <div>
+          <h3 class="xp-role" data-i18n="xp_role_1">EdTech Platform Developer <em>· Freelance</em></h3>
+          <ul class="xp-points">
+            <li data-i18n="xp_1_1">Built and run a white-label learning platform — Flutter for Android and the web, Laravel backend — used by 5 tutors and 500+ students.</li>
+            <li data-i18n="xp_1_2">Shipped three branded Android apps from one codebase, all live on Google Play.</li>
+            <li data-i18n="xp_1_3">Built features per tutor: a LaTeX equation editor for math exams, and attendance with automatic WhatsApp alerts to parents.</li>
+            <li data-i18n="xp_1_4">Added device lock, screenshot protection, field encryption, QR attendance, and roles for admins, teachers, secretaries, and students.</li>
+            <li data-i18n="xp_1_5">Migrated the backend from NestJS and PostgreSQL to Laravel and MySQL.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="xp-item">
+        <div class="xp-when" data-i18n="xp_when_2">Jun 2026 — Present<span>Minya &amp; Beni Suef</span></div>
+        <div>
+          <h3 class="xp-role" data-i18n="xp_role_2">Web Developer <em>· Technova (startup)</em></h3>
+          <ul class="xp-points">
+            <li data-i18n="xp_2_1">Built a booking website for a client in the United States, with Next.js and Supabase.</li>
+            <li data-i18n="xp_2_2">Built the company&rsquo;s own website.</li>
+          </ul>
+        </div>
+      </li>
+      <li class="xp-item">
+        <div class="xp-when" data-i18n="xp_when_3">Since Jul 2025<span>Personal project</span></div>
+        <div>
+          <h3 class="xp-role" data-i18n="xp_role_3">MN — CS study apps <em>· Flutter</em></h3>
+          <ul class="xp-points">
+            <li data-i18n="xp_3_1">Two apps for my faculty on Google Play, with 600+ downloads: curated videos, PDFs, past exams, and quizzes.</li>
+            <li data-i18n="xp_3_2">Firebase Crashlytics, Remote Config, and Realtime Database. This is where the learning platform started.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+    </div>
+  </div>
+</section>
+
 <!-- STACK -->
-<section id="stack">
+<section id="stack" class="fx-scan">
   <div class="wrap">
     <div class="section-head m-head">
       <div class="tag" data-i18n="tag_3">Stack</div>
       <span class="sh-line" aria-hidden="true"></span>
-      <span class="sh-idx" aria-hidden="true"><b>03</b> / 04</span>
+      <span class="sh-idx" aria-hidden="true"><b>05</b> / 06</span>
     </div>
 
     <h2 class="stitle m-title" style="margin-bottom:44px;" data-i18n="stitle_3">
       Tools organized by <em>what they do</em>
     </h2>
 
-    <div class="stack-groups m-grid">
+    <div class="stack-groups m-grid spot-grid">
       <div class="stack-group">
-        <div class="stack-group-title" data-i18n="stack_group_title_1">Application</div>
+        <div class="stack-group-title" data-i18n="stack_group_title_1">Mobile</div>
         <div class="stack-item"><span class="stack-item-name">Flutter</span><span class="stack-item-note" data-i18n="stack_item_note_1">Primary framework</span></div>
         <div class="stack-item"><span class="stack-item-name">Dart</span><span class="stack-item-note" data-i18n="stack_item_note_2">Application logic</span></div>
         <div class="stack-item"><span class="stack-item-name">BLoC / Cubit</span><span class="stack-item-note" data-i18n="stack_item_note_3">State management</span></div>
         <div class="stack-item"><span class="stack-item-name">Clean Architecture</span><span class="stack-item-note" data-i18n="stack_item_note_4">App structure</span></div>
+        <div class="stack-item"><span class="stack-item-name">Hive</span><span class="stack-item-note" data-i18n="stack_item_note_14">Local caching</span></div>
       </div>
 
       <div class="stack-group">
         <div class="stack-group-title" data-i18n="stack_group_title_2">Backend &amp; Data</div>
-        <div class="stack-item"><span class="stack-item-name">Firebase</span><span class="stack-item-note" data-i18n="stack_item_note_5">Auth · Firestore</span></div>
-        <div class="stack-item"><span class="stack-item-name">Supabase</span><span class="stack-item-note" data-i18n="stack_item_note_6">Database · Storage</span></div>
-        <div class="stack-item"><span class="stack-item-name">Laravel</span><span class="stack-item-note" data-i18n="stack_item_note_7">PHP backend</span></div>
+        <div class="stack-item"><span class="stack-item-name">Laravel</span><span class="stack-item-note" data-i18n="stack_item_note_7">PHP APIs</span></div>
         <div class="stack-item"><span class="stack-item-name">MySQL</span><span class="stack-item-note" data-i18n="stack_item_note_8">Database design</span></div>
-        <div class="stack-item"><span class="stack-item-name">REST APIs</span><span class="stack-item-note" data-i18n="stack_item_note_9">Integration</span></div>
+        <div class="stack-item"><span class="stack-item-name">Firebase</span><span class="stack-item-note" data-i18n="stack_item_note_5">Auth · FCM · Config</span></div>
+        <div class="stack-item"><span class="stack-item-name">Supabase</span><span class="stack-item-note" data-i18n="stack_item_note_6">Database · Storage</span></div>
+        <div class="stack-item"><span class="stack-item-name">NestJS</span><span class="stack-item-note" data-i18n="stack_item_note_15">Earlier backend</span></div>
       </div>
 
       <div class="stack-group">
-        <div class="stack-group-title" data-i18n="stack_group_title_3">Delivery &amp; Security</div>
+        <div class="stack-group-title" data-i18n="stack_group_title_3">Web &amp; Delivery</div>
+        <div class="stack-item"><span class="stack-item-name">Next.js</span><span class="stack-item-note" data-i18n="stack_item_note_16">Client websites</span></div>
+        <div class="stack-item"><span class="stack-item-name">React</span><span class="stack-item-note" data-i18n="stack_item_note_17">Web dashboards</span></div>
+        <div class="stack-item"><span class="stack-item-name">Google Play</span><span class="stack-item-note" data-i18n="stack_item_note_12">Publishing</span></div>
         <div class="stack-item"><span class="stack-item-name">JWT Auth</span><span class="stack-item-note" data-i18n="stack_item_note_10">Access control</span></div>
-        <div class="stack-item"><span class="stack-item-name">Encryption</span><span class="stack-item-note" data-i18n="stack_item_note_11">Sensitive data</span></div>
-        <div class="stack-item"><span class="stack-item-name">Play Store</span><span class="stack-item-note" data-i18n="stack_item_note_12">Publishing</span></div>
-        <div class="stack-item"><span class="stack-item-name">FCM</span><span class="stack-item-note" data-i18n="stack_item_note_13">Push notifications</span></div>
-        <div class="stack-item"><span class="stack-item-name">Hive</span><span class="stack-item-note" data-i18n="stack_item_note_14">Local storage</span></div>
+        <div class="stack-item"><span class="stack-item-name">Testing</span><span class="stack-item-note" data-i18n="stack_item_note_18">Unit · Integration</span></div>
       </div>
     </div>
   </div>
@@ -2487,18 +3086,34 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 
 <!-- PUBLISHED WORK -->
 
+<!-- moving band of the stack, decorative -->
+<div class="tech-marquee" aria-hidden="true">
+  <div class="tm-track"><div class="tm-run"><span>Flutter</span><i>✦</i><span>Dart</span><i>✦</i><span>Laravel</span><i>✦</i><span>Firebase</span><i>✦</i><span>Supabase</span><i>✦</i><span>Next.js</span><i>✦</i><span>BLoC</span><i>✦</i><span>MySQL</span><i>✦</i><span>Google Play</span><i>✦</i><span>Clean Architecture</span><i>✦</i></div><div class="tm-run"><span>Flutter</span><i>✦</i><span>Dart</span><i>✦</i><span>Laravel</span><i>✦</i><span>Firebase</span><i>✦</i><span>Supabase</span><i>✦</i><span>Next.js</span><i>✦</i><span>BLoC</span><i>✦</i><span>MySQL</span><i>✦</i><span>Google Play</span><i>✦</i><span>Clean Architecture</span><i>✦</i></div></div>
+</div>
+
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="fx-scan">
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="wrap">
     <div class="section-head m-head">
       <div class="tag" data-i18n="tag_9">Contact</div>
       <span class="sh-line" aria-hidden="true"></span>
-      <span class="sh-idx" aria-hidden="true"><b>04</b> / 04</span>
+      <span class="sh-idx" aria-hidden="true"><b>06</b> / 06</span>
     </div>
 
     <h2 class="stitle m-title" style="margin-bottom:44px;" data-i18n="stitle_5">
       Have a mobile app <em>in mind?</em>
     </h2>
+
+    <p class="contact-lead" data-i18n="contact_lead_1">
+      Send me your idea and when you need it — WhatsApp is the fastest way to reach me.
+      Hiring? My CV is one click away.
+    </p>
+
+    <div class="contact-cta">
+      <a class="btn btn-solid btn-glow magnetic" href="https://wa.me/201016513146?text=Hi%20Mina%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20like%20to%20talk%20about%20a%20mobile%20app%20project." target="_blank" rel="noopener"><span data-i18n="cta_wa_1">Message me on WhatsApp ↗</span></a>
+      <a class="btn btn-line magnetic" href="assets/Mina-Nabil-CV.pdf" download><span data-i18n="btn_cv_2">Download CV ↓</span></a>
+    </div>
 
     <div class="contact-grid m-grid spot-grid">
       <a href="https://wa.me/201016513146?text=Hi%20Mina%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20like%20to%20talk%20about%20a%20mobile%20app%20project." target="_blank" rel="noopener" class="c-card" aria-label="Message Mina Nabil on WhatsApp">
@@ -2583,10 +3198,12 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 <footer class="m-foot">
   <div class="wrap">
     <span class="f-copy" data-i18n="f_copy_1">© 2026 Mina Nabil — Flutter Developer</span>
+    <span class="f-clock"><span class="f-clock-k" data-i18n="f_clock_1">Minya, EG</span> <time id="fClock">--:--</time></span>
     <span class="f-status" data-i18n="f_status_1">
       <span class="live-dot"></span>
       Open to freelance &amp; remote collaboration
     </span>
+    <a class="f-top" href="#" data-i18n="f_top_1">↑ Back to top</a>
   </div>
 </footer>
 
@@ -3099,8 +3716,8 @@ const APP_DATA = {
     img: 'assets/yalla_final.webp',
     status: 'live',
     platform: 'Shared platform · Build A',
-    stat: 'Arabic-language tutor',
-    desc: 'Learning-management app built for an Arabic-language tutor, on a Flutter front end with a Laravel backend shared across the platform-A build.',
+    stat: 'Arabic-language tutor · ~130 students',
+    desc: 'The base build of my white-label platform, made for an Arabic-language tutor who needed lessons, exams, and subscriptions in one app instead of WhatsApp groups. Flutter front end, Laravel backend. About 130 students use it.',
     features: ['QR-code attendance', 'Real-time grades & results', 'Subscription tracking', 'Push notifications'],
     store: 'https://play.google.com/store/apps/details?id=com.platform.yallaarabi'
   },
@@ -3109,8 +3726,8 @@ const APP_DATA = {
     img: 'assets/elhawy_final.webp',
     status: 'live',
     platform: 'Shared platform · Build A',
-    stat: 'Science & biology tutor',
-    desc: 'The same platform as يلا عربي, rebuilt and rebranded for a science and biology tutor — one backend, two independent clients.',
+    stat: 'Science & biology tutor · ~360 students',
+    desc: 'The same platform as يلا عربي, rebranded for a science and biology tutor from the same codebase — a new client is a rebrand and a config change, not a rewrite. My largest platform, with about 360 students.',
     features: ['Lessons library', 'Timed online exams', 'Instant exam results', 'Attendance & subscriptions'],
     store: 'https://play.google.com/store/apps/details?id=com.platform.elhawy'
   },
@@ -3120,8 +3737,8 @@ const APP_DATA = {
     status: 'live',
     platform: 'Standalone build',
     stat: 'First-year cohort',
-    desc: 'Companion app for first-year Computer Science students at Minia University, built with Flutter to organize course resources in one place.',
-    features: ['Course resource library', 'Simple, focused navigation', 'Built for first-year syllabus', 'Lightweight & offline-friendly'],
+    desc: 'Study material for my own faculty was scattered across YouTube, WhatsApp, and Telegram. This Flutter app puts the first year in one place: curated videos, PDFs and past exams, and quizzes. 500+ downloads on Google Play.',
+    features: ['Curated video explanations', 'PDFs & past exams', 'MCQ & true/false quizzes', 'Firebase Remote Config & Crashlytics'],
     store: 'https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain'
   },
   cs2: {
@@ -3130,8 +3747,8 @@ const APP_DATA = {
     status: 'live',
     platform: 'Standalone build',
     stat: 'Second-year cohort',
-    desc: 'Second-year continuation of the CS1 app, carrying the same interface forward with course material for the next year of the syllabus.',
-    features: ['Course resource library', 'Consistent with CS1 UX', 'Built for second-year syllabus', 'Lightweight & offline-friendly'],
+    desc: 'The second-year edition of CS 1, built from the same codebase with the next year of the syllabus. 100+ downloads on Google Play.',
+    features: ['Same codebase as CS 1', 'Curated video explanations', 'PDFs & past exams', 'MCQ & true/false quizzes'],
     store: 'https://play.google.com/store/apps/details?id=com.mnu_app_year2.learntrain'
   },
   motorent: {
@@ -3179,8 +3796,8 @@ const APP_DATA = {
     img: 'assets/kyrillos_final.webp',
     status: 'live',
     platform: 'Web + Android app · Laravel API',
-    stat: 'Mathematics · six grade levels',
-    desc: 'A mathematics platform across six grade levels: an Android app for the student, a control panel for the teacher, a read-only sign-in for the parent, and one Laravel API holding the rules. Equations are written in Arabic notation, right to left.',
+    stat: 'Mathematics · six grade levels · ~33 students',
+    desc: 'The teacher used to photograph exam questions because fractions and powers could not be typed, so I built an equation editor into the platform. Across six grade levels, it has an Android app for the student, a control panel for the teacher, a read-only sign-in for the parent, and one Laravel API holding the rules. Equations are written in Arabic notation, right to left.',
     features: ['Arabic math notation with a custom equation editor', 'QR attendance with signed codes', 'Self-marking exams, rankings & certificates', 'Video lessons with watch progress & HLS', 'Guardian read-only monthly report', 'Device-bound accounts & security audit log'],
     store: 'https://play.google.com/store/apps/details?id=com.platform.kyrilloskased'
   },
@@ -3200,7 +3817,7 @@ const APP_DATA = {
     status: 'live',
     platform: 'Education website · Laravel',
     stat: 'Science & biology',
-    desc: 'A science and biology platform whose structure follows the way the material is taught — four steps from understanding to mastery. Launched web-first, with the mobile app as the next stage.',
+    desc: 'A science and biology platform whose structure follows the way the material is taught — four steps from understanding to mastery. The tutor wanted it on the web only, so it ships as a website without a mobile app.',
     features: ['Method-led site structure', 'Tracks for prep 3, secondary 1 & 3', 'Lesson videos, exams & step-by-step solutions', 'Homework & performance tracking', 'Arabic-first RTL interface'],
     store: 'https://doctor-3bkarino.online/'
   },
@@ -3394,21 +4011,23 @@ if (overlay) {
    snapshotted on load so switching back is lossless.
    --------------------------------------------------------------- */
 const AR = {
-  nav_1:"الأعمال", nav_2:"نبذة", nav_3:"الأدوات", nav_4:"مشاريع", nav_5:"تواصل",
+  nav_1:"الأعمال", nav_2:"نبذة", nav_3:"الأدوات", nav_4:"مشاريع", nav_5:"تواصل", nav_6:"الخدمات", nav_7:"الخبرة",
   avail_1:'<span class="avail-dot"></span> متاح للعمل الحر',
 
   eyebrow_1:"مطوّر Flutter · المنيا، مصر · متاح للعمل عن بُعد",
-  hero_lede_1:"أبني <strong>تطبيقات موبايل متعددة المنصات</strong> بـ Flutter — من الواجهة وصولًا إلى الباك إند الذي يشغّلها. أعمل مع <strong>Firebase</strong> و<strong>Supabase</strong> وواجهات <strong>Laravel</strong> مخصّصة، بمعمارية <strong>Clean</strong> وإدارة حالة <strong>BLoC/Cubit</strong> ليظل التطبيق سهل التطوير بعد إطلاقه.",
-  btn_solid_1:"شاهد أعمالي ↓",
+  hero_lede_1:"أبني <strong>تطبيقات Flutter</strong> و<strong>الباك إند</strong> الذي يشغّلها. منصتي التعليمية تعمل لدى <strong>5 مدرّسين</strong> وأكثر من <strong>500 طالب</strong> على أندرويد والويب، وكل نسخة <strong>مصمَّمة حسب طريقة شرح المدرّس</strong>.",
+  btn_solid_1:"شاهد أعمالي ↓", btn_cv_1:"تحميل السيرة الذاتية ↓",
+  stat_k_1:"تطبيقات على Google Play", stat_k_2:"تحميل على Google Play",
+  stat_k_3:"طالب على منصاتي", stat_k_4:"مدرّسين يستخدمونها",
 
   manifest_k_1:"الدور",     manifest_v_1:"مطوّر Flutter",
-  manifest_k_2:"المنصات",   manifest_v_2:"Android · iOS",
-  manifest_k_3:"منشور",     manifest_v_3:"4 على Google Play",
+  manifest_k_2:"المنصات",   manifest_v_2:"Android · Web · جاهز لـ iOS",
+  manifest_k_3:"منشور",     manifest_v_3:"5 على Google Play",
   manifest_k_4:"المعمارية", manifest_v_4:"Clean · BLoC/Cubit",
 
   tag_1:"أعمال منشورة", section_note_1:"12 تطبيقًا ومنصات · عرض تفاعلي 360°",
-  stitle_1:"ابنِ مرة، <em>وأطلق لاثنين</em>",
-  apps_lead_1:"كل بطاقة تطبيق Flutter حقيقي منشور — معمارية نظيفة، وإدارة حالة متينة، وربط لحظي بالباك إند. اسحب الحلقة أو اضغط على أي بطاقة لاستعراضها.",
+  stitle_1:"بُنيت مرة، <em>وصُمّمت لكل عميل</em>",
+  apps_lead_1:"منصة تعليمية واحدة، صُمّمت لخمسة مدرّسين باحتياجات مختلفة، ومعها أعمال الويب والموبايل حولها. اسحب الحلقة أو اضغط على أي بطاقة لاستعراضها.",
   cine_details_1:"عرض التفاصيل",
 
   platform_label_1:"منصة تعليمية للمدرّسين", platform_status_1:"منشور",
@@ -3426,28 +4045,64 @@ const AR = {
   platform_store_btn_2:"افتح على Google Play ↗",
   platform_shared_note_1:"4 تطبيقات منشورة على Google Play · أكثر من 600 تحميل · من قاعدتَي كود اثنتين",
 
-  tag_2:"نبذة", stitle_2:"من الفكرة إلى <em>Google Play</em>، نظامًا واحدًا في كل مرة",
-  about_p1:"مطوّر Flutter من المنيا، مصر. أبني تطبيقات موبايل متعددة المنصات من البداية للنهاية — الواجهة والحالة والباك إند والنشر.",
-  about_p2:"معظم ما أبنيه مصمَّم لإعادة الاستخدام. المنصة التعليمية بالأعلى تعمل كـ<strong>أربعة تطبيقات منشورة من قاعدتَي كود</strong> — ضمّ مدرّس جديد يعني تغيير علامة وإعدادات، لا إعادة كتابة.",
+  tag_2:"نبذة", stitle_2:"من تطبيق مذاكرة إلى منصة <em>يعمل عليها مدرّسون</em>",
+  about_p1:"مطوّر Flutter من المنيا، مصر، وطالب في السنة النهائية بكلية الحاسبات والذكاء الاصطناعي، جامعة المنيا الأهلية.",
+  about_p2:"بدأت من كليتي: كانت المذاكرة متفرقة بين يوتيوب وواتساب وتيليجرام، فبنيت <strong>تطبيقًا لكل سنة دراسية</strong> يجمعها في مكان واحد، وتجاوزت التطبيقات معًا 600 تحميل.",
+  about_p3:"ثم بنيت منصة تعليمية كاملة لمدرّس حقيقي. طلبها مدرّسون آخرون، فجعلتها بعلامة بيضاء — <strong>خمسة تطبيقات منشورة من قاعدتَي كود</strong> — ويحصل كل مدرّس على ما تحتاجه طريقة شرحه: محرّر معادلات لمدرّس رياضيات، وحضور وتنبيهات واتساب لأولياء الأمور لمدرّس آخر.",
+  about_p4:"وأبني أيضًا مواقع ويب مع Technova، شركة ناشئة في المنيا وبني سويف، منها موقع لعميل في الولايات المتحدة.",
   cred_k_1:"الموقع",  cred_v_1:"المنيا، مصر<span>متاح عن بُعد</span>",
-  cred_k_2:"التعليم", cred_v_2:"علوم الحاسب<span>جامعة المنيا</span>",
-  cred_k_3:"النشر",   cred_v_3:"Google Play<span>دورة نشر كاملة</span>",
+  cred_k_2:"التعليم", cred_v_2:"الحاسبات والذكاء الاصطناعي<span>جامعة المنيا الأهلية · 2027</span>",
+  cred_k_4:"التدريب", cred_v_4:"Flutter Development<span>ITI · 120 ساعة · 2025</span>",
+  cred_k_5:"اللغات",  cred_v_5:"العربية · الإنجليزية<span>اللغة الأم · مستوى جيد للعمل</span>",
+  cred_k_3:"النشر",   cred_v_3:"Google Play<span>5 تطبيقات منشورة · أكثر من 800 تحميل</span>",
 
   tag_3:"الأدوات", stitle_3:"أدوات مرتّبة حسب <em>وظيفتها</em>",
-  stack_group_title_1:"التطبيق",
+  stack_group_title_1:"الموبايل",
   stack_item_note_1:"الإطار الأساسي", stack_item_note_2:"منطق التطبيق",
   stack_item_note_3:"إدارة الحالة",   stack_item_note_4:"بنية التطبيق",
+  stack_item_note_14:"تخزين مؤقت محلي",
   stack_group_title_2:"الباك إند والبيانات",
-  stack_item_note_5:"مصادقة · Firestore", stack_item_note_6:"قاعدة بيانات · تخزين",
-  stack_item_note_7:"باك إند PHP", stack_item_note_8:"تصميم قواعد البيانات",
-  stack_item_note_9:"التكامل",
-  stack_group_title_3:"التسليم والأمان",
-  stack_item_note_10:"التحكّم بالصلاحيات", stack_item_note_11:"البيانات الحسّاسة",
-  stack_item_note_12:"النشر", stack_item_note_13:"إشعارات فورية",
-  stack_item_note_14:"تخزين محلي",
+  stack_item_note_7:"واجهات PHP", stack_item_note_8:"تصميم قواعد البيانات",
+  stack_item_note_5:"مصادقة · إشعارات · إعدادات", stack_item_note_6:"قاعدة بيانات · تخزين",
+  stack_item_note_15:"الباك إند السابق",
+  stack_group_title_3:"الويب والتسليم",
+  stack_item_note_16:"مواقع العملاء", stack_item_note_17:"لوحات تحكم ويب",
+  stack_item_note_12:"النشر", stack_item_note_10:"التحكّم بالصلاحيات",
+  stack_item_note_18:"اختبارات وحدة وتكامل",
+
+  tag_4:"الخدمات", stitle_4:"ماذا يمكنني <em>أن أبني لك</em>",
+  svc_n_1:"الخدمة الأساسية", svc_t_1:"منصة تعليمية باسمك",
+  svc_d_1:"دروس وامتحانات واشتراكات ومتابعة للطلاب، على أندرويد والويب، باسمك وهويتك.",
+  svc_n_2:"مميزات مخصّصة", svc_t_2:"مبنية حسب طريقة عملك",
+  svc_d_2:"محرّر معادلات لامتحانات الرياضيات، وحضور بالـ QR، وتقارير شهرية لأولياء الأمور، وتنبيهات واتساب تلقائية.",
+  svc_n_3:"تطبيقات الموبايل", svc_t_3:"تطبيقات Flutter من الفكرة إلى Google Play",
+  svc_d_3:"التصميم وإدارة الحالة والربط بالباك إند والنشر، بكود يظل سهل التعديل.",
+  svc_n_4:"الباك إند والويب", svc_t_4:"واجهات برمجية ولوحات تحكم ومواقع",
+  svc_d_4:"واجهات Laravel ولوحات تحكم خلف تطبيقك، ومواقع Next.js مثل الموقع الذي بنيته لعميل في أمريكا.",
+
+  tag_5:"الخبرة", stitle_6:"أين <em>عملت</em>",
+  xp_when_1:"يونيو 2026 — الآن<span>عن بُعد</span>",
+  xp_role_1:"مطوّر منصات تعليمية <em>· عمل حر</em>",
+  xp_1_1:"بنيت وأدير منصة تعليمية بعلامة بيضاء — Flutter لأندرويد والويب وباك إند Laravel — يستخدمها 5 مدرّسين وأكثر من 500 طالب.",
+  xp_1_2:"أطلقت ثلاثة تطبيقات أندرويد بهويات مختلفة من قاعدة كود واحدة، وكلها منشورة على Google Play.",
+  xp_1_3:"بنيت مميزات لكل مدرّس: محرّر معادلات LaTeX لامتحانات الرياضيات، وحضورًا مع تنبيهات واتساب تلقائية لأولياء الأمور.",
+  xp_1_4:"أضفت قفل الجهاز ومنع تصوير الشاشة وتشفير البيانات والحضور بالـ QR وصلاحيات للأدمن والمدرّس والسكرتير والطالب.",
+  xp_1_5:"نقلت الباك إند من NestJS و PostgreSQL إلى Laravel و MySQL.",
+  xp_when_2:"يونيو 2026 — الآن<span>المنيا وبني سويف</span>",
+  xp_role_2:"مطوّر ويب <em>· Technova (شركة ناشئة)</em>",
+  xp_2_1:"بنيت موقع حجز لعميل في الولايات المتحدة باستخدام Next.js و Supabase.",
+  xp_2_2:"بنيت الموقع الرسمي للشركة.",
+  xp_when_3:"منذ يوليو 2025<span>مشروع شخصي</span>",
+  xp_role_3:"تطبيقات مذاكرة MN — CS <em>· Flutter</em>",
+  xp_3_1:"تطبيقان لكليتي على Google Play بأكثر من 600 تحميل: شروحات فيديو مختارة وملفات PDF وامتحانات سابقة واختبارات.",
+  xp_3_2:"Firebase Crashlytics و Remote Config و Realtime Database. ومن هنا بدأت المنصة التعليمية.",
+
 
 
   tag_9:"تواصل", stitle_5:"عندك فكرة <em>تطبيق؟</em>",
+  contact_lead_1:"أرسل لي فكرتك والموعد الذي تحتاجها فيه — واتساب أسرع طريقة للتواصل معي. تبحث عن موظف؟ سيرتي الذاتية على بُعد ضغطة.",
+  cta_wa_1:"راسلني على واتساب ↗", btn_cv_2:"تحميل السيرة الذاتية ↓",
+  f_clock_1:"المنيا، مصر", f_top_1:"↑ للأعلى",
   c_name_2:"البريد", c_name_6:"الموقع", c_handle_6:"المنيا، مصر · عن بُعد",
 
   platform_store_btn_3:"افتح على Google Play ↗", btn_line_3:"إغلاق",
@@ -3457,18 +4112,18 @@ const AR = {
 
 /* Arabic copy for the project modal (mirrors the APP_DATA object above). */
 const APPS_AR = {
-  yalla:{ platform:"المنصة المشتركة · الإصدار A", stat:"مدرّس لغة عربية",
-    desc:"منصة إدارة تعلّم كاملة لمدرّس لغة عربية — الدروس والحضور والامتحانات والاشتراكات في تطبيق واحد.",
+  yalla:{ platform:"المنصة المشتركة · الإصدار A", stat:"مدرّس لغة عربية · نحو 130 طالبًا",
+    desc:"النسخة الأساسية من منصتي، صُمّمت لمدرّس لغة عربية احتاج الدروس والامتحانات والاشتراكات في تطبيق واحد بدل مجموعات واتساب. واجهة Flutter وباك إند Laravel، ويستخدمها نحو 130 طالبًا.",
     features:["حضور بكود QR","النتائج والدرجات فورًا","متابعة الاشتراكات","إشعارات فورية"] },
-  hawy:{ platform:"المنصة المشتركة · الإصدار A", stat:"مدرّس علوم وأحياء",
-    desc:"نفس منصة يلا عربي، أُعيد بناؤها وتغيير علامتها لمدرّس علوم وأحياء — باك إند واحد، وعميلان مستقلان.",
+  hawy:{ platform:"المنصة المشتركة · الإصدار A", stat:"مدرّس علوم وأحياء · نحو 360 طالبًا",
+    desc:"نفس منصة يلا عربي بهوية مدرّس علوم وأحياء ومن نفس الكود؛ فالعميل الجديد يعني تغيير هوية وإعدادات لا إعادة كتابة. أكبر منصاتي، ويستخدمها نحو 360 طالبًا.",
     features:["مكتبة الدروس","امتحانات مؤقّتة أونلاين","نتائج فورية","الحضور والاشتراكات"] },
   cs1:{ platform:"إصدار مستقل", stat:"دفعة السنة الأولى",
-    desc:"تطبيق مرافق لطلاب السنة الأولى بعلوم الحاسب في جامعة المنيا، مبني بـ Flutter لتجميع مصادر المقررات في مكان واحد.",
-    features:["مكتبة مصادر المقرر","تنقّل بسيط ومركّز","مبني لمنهج السنة الأولى","خفيف ويعمل دون إنترنت"] },
+    desc:"كانت مذاكرة كليتي متفرقة بين يوتيوب وواتساب وتيليجرام. يجمع هذا التطبيق السنة الأولى في مكان واحد: شروحات فيديو مختارة، وملفات PDF وامتحانات سابقة، واختبارات. أكثر من 500 تحميل على Google Play.",
+    features:["شروحات فيديو مختارة","ملفات PDF وامتحانات سابقة","اختبارات اختيار من متعدد وصواب وخطأ","Firebase Remote Config و Crashlytics"] },
   cs2:{ platform:"إصدار مستقل", stat:"دفعة السنة الثانية",
-    desc:"امتداد السنة الثانية لتطبيق CS1، بنفس الواجهة ومحتوى العام التالي من المنهج.",
-    features:["مكتبة مصادر المقرر","متسق مع تجربة CS1","مبني لمنهج السنة الثانية","خفيف ويعمل دون إنترنت"] },
+    desc:"نسخة السنة الثانية من CS 1، من نفس الكود بمنهج العام التالي. أكثر من 100 تحميل على Google Play.",
+    features:["نفس كود CS 1","شروحات فيديو مختارة","ملفات PDF وامتحانات سابقة","اختبارات اختيار من متعدد وصواب وخطأ"] },
   motorent:{ platform:"مشروع مفتوح المصدر", stat:"تطبيق تأجير سيارات",
     desc:"تطبيق متكامل لحجز وتأجير السيارات بمعمارية Clean Architecture وإدارة حالة BLoC.",
     features:["كتالوج وفلاتر للسيارات","تحديد مواعيد الحجز والتسعير","مصادقة وبيانات Firebase","معمارية منظمة وقابلة للاختبار"] },
@@ -3481,14 +4136,14 @@ const APPS_AR = {
   keyframes:{ platform:"منصة ويب · Next.js و Postgres", stat:"مكونات واجهات متحركة",
     desc:"متجر لمكونات واجهات متحركة جاهزة للإنتاج. كل مكوّن بيشتغل مباشرة في الصفحة قبل ما تاخده: واجهات WebGL مبنية بـ Three.js وشيدرات مخصصة، ولكل مكوّن صفحة تفاصيل واقتراحات مشابهة وترخيص واضح.",
     features:["معاينة حية داخل المتصفح","واجهات WebGL بشيدرات GLSL مخصصة","صفحة لكل مكوّن مع «مكونات مشابهة»","كتالوج على Postgres بترحيلات Drizzle","تسجيل دخول بالإيميل و OAuth عبر Better Auth","Monorepo بإعدادات مكتوبة واختبارات"] },
-  kyrillos:{ platform:"موقع وتطبيق أندرويد · Laravel API", stat:"رياضيات · ست مراحل دراسية",
-    desc:"منصة رياضيات تغطي ست مراحل دراسية: تطبيق أندرويد للطالب، ولوحة تحكم للمدرّس، ودخول للقراءة فقط لولي الأمر، وواجهة Laravel واحدة تحمل القواعد. المعادلات تُكتب بالرموز العربية من اليمين لليسار.",
+  kyrillos:{ platform:"موقع وتطبيق أندرويد · Laravel API", stat:"رياضيات · ست مراحل دراسية · نحو 33 طالبًا",
+    desc:"كان المدرّس يصوّر أسئلة الامتحانات لأن الكسور والأسس لا تُكتب، فبنيت محرّر معادلات داخل المنصة. تغطي المنصة ست مراحل دراسية: تطبيق أندرويد للطالب، ولوحة تحكم للمدرّس، ودخول للقراءة فقط لولي الأمر، وواجهة Laravel واحدة تحمل القواعد. المعادلات تُكتب بالرموز العربية من اليمين لليسار.",
     features:["كتابة رياضية عربية مع محرّر معادلات مبني من الصفر","حضور بالـ QR برموز موقَّعة","امتحانات ذاتية التصحيح وترتيب وشهادات","دروس فيديو بتتبّع للمشاهدة وبث HLS","تقرير شهري لولي الأمر للقراءة فقط","حسابات مرتبطة بالأجهزة وسجل تدقيق أمني"] },
   shicoril:{ platform:"لوحة تحكم + تطبيق ويب للطالب", stat:"مدرّس دراسات اجتماعية",
     desc:"منظومة تدريس كاملة لمدرّس دراسات اجتماعية: لوحة تحكم تدير المجموعات والحصص والحضور والامتحانات والاشتراكات والمدفوعات، وبوابة قابلة للتثبيت للطالب وولي الأمر على نفس الـ API.",
     features:["مجموعات بجداول أسبوعية تولّد حصصها","حضور لكل طالب في كل حصة","سجل اشتراكات بدفعات جزئية","بوابة قابلة للتثبيت بإشعارات ويب","طابور رسائل واتساب بربط QR","تقارير الحضور والامتحانات والمدفوعات"] },
   abkarino:{ platform:"موقع تعليمي · Laravel", stat:"علوم وأحياء",
-    desc:"منصة علوم وأحياء تتبع بنيتها طريقة تدريس المادة — أربع خطوات من الفهم إلى الإتقان. أُطلقت عبر الويب أولًا، والتطبيق هو المرحلة التالية.",
+    desc:"منصة علوم وأحياء تتبع بنيتها طريقة تدريس المادة — أربع خطوات من الفهم إلى الإتقان. أراد المدرّس المنصة على الويب فقط، فسُلّمت موقعًا دون تطبيق موبايل.",
     features:["بنية موقع تتبع الطريقة التعليمية","مسارات للثالث الإعدادي والأول والثالث الثانوي","فيديوهات وامتحانات وحلول خطوة بخطوة","واجبات ومتابعة للأداء","واجهة عربية بالكامل"] },
   daveslimo:{ platform:"موقع حجز · Next.js و Supabase", stat:"نقل فاخر · ناشفيل، أمريكا",
     desc:"علامة أمريكية للنقل الفاخر كانت تحتاج أكثر من معرض للسيارات: مسار طلب عرض سعر من ثلاث خطوات يجمع الرحلة والمسار والراكب، ويطابق الطلب مع سعة المركبات الحقيقية.",
@@ -3952,6 +4607,165 @@ html[lang="ar"] .hero-note.drawn{
   }, { threshold: 0 });
   // The marks live in the text column; on a short screen the hero is far taller than the view.
   io.observe(hero.firstElementChild);
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Future layer: scan beams, decoding labels, holo tilt, magnetic
+   buttons, the About reading rail, the Experience energy beam,
+   and the footer clock. One scroll loop, active only while its
+   sections are near the viewport; reads first, then writes.
+   --------------------------------------------------------------- */
+(function () {
+  const root = document.documentElement;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  /* ---- footer clock: local time in Minya ---- */
+  const clock = document.getElementById('fClock');
+  if (clock) {
+    const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Cairo' });
+    const tick = () => { clock.textContent = fmt.format(new Date()); };
+    tick();
+    setInterval(tick, 20000);
+  }
+  const top = document.querySelector('.f-top');
+  if (top) top.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+
+  if (reduce) return;
+
+  /* ---- scan beam: once per section ---- */
+  const scanIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-scanned');
+      scanIO.unobserve(e.target);
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fx-scan').forEach((el) => scanIO.observe(el));
+
+  /* ---- decoding labels (Latin only: scrambled Arabic would break its joins) ---- */
+  const GLYPHS = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789#%&*+<>/=_';
+  function decode(el) {
+    if (root.lang === 'ar') return;
+    const nodes = [];
+    const walk = (n) => n.childNodes.forEach((c) => { if (c.nodeType === 3 && c.textContent.trim()) nodes.push(c); else if (c.nodeType === 1) walk(c); });
+    walk(el);
+    const finals = nodes.map((n) => n.textContent);
+    const total = finals.reduce((a, t) => a + t.length, 0);
+    const dur = Math.min(900, 280 + total * 22);
+    const t0 = performance.now();
+    (function frame(now) {
+      const k = Math.min(1, (now - t0) / dur);
+      let seen = 0;
+      nodes.forEach((n, i) => {
+        const f = finals[i];
+        let out = '';
+        for (let c = 0; c < f.length; c++, seen++) {
+          const ch = f[c];
+          out += (ch === ' ' || seen / total < k) ? ch : GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        }
+        n.textContent = out;
+      });
+      if (k < 1) requestAnimationFrame(frame);
+      else nodes.forEach((n, i) => { n.textContent = finals[i]; });
+    })(t0);
+  }
+  const decodeIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      decodeIO.unobserve(e.target);
+      setTimeout(() => decode(e.target), 140);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.fx-scan .tag, .fx-scan .sh-idx, .svc-n, .cred-k, .xp-when').forEach((el) => decodeIO.observe(el));
+
+  /* ---- holo tilt + glare (mouse only) ---- */
+  if (finePointer) {
+    document.querySelectorAll('[data-tilt]').forEach((card) => {
+      let rect = null, raf = 0, px = 0, py = 0;
+      card.addEventListener('pointerenter', () => { rect = card.getBoundingClientRect(); card.classList.add('is-tilting'); });
+      card.addEventListener('pointermove', (e) => {
+        px = e.clientX; py = e.clientY;
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          if (!rect) rect = card.getBoundingClientRect();
+          const x = (px - rect.left) / rect.width, y = (py - rect.top) / rect.height;
+          card.style.setProperty('--ry', ((x - 0.5) * 9).toFixed(2) + 'deg');
+          card.style.setProperty('--rx', ((0.5 - y) * 7).toFixed(2) + 'deg');
+          card.style.setProperty('--gx', (x * 100).toFixed(1) + '%');
+          card.style.setProperty('--gy', (y * 100).toFixed(1) + '%');
+        });
+      });
+      card.addEventListener('pointerleave', () => {
+        rect = null;
+        card.classList.remove('is-tilting');
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+      });
+      window.addEventListener('scroll', () => { rect = null; }, { passive: true });
+    });
+
+    /* ---- magnetic buttons ---- */
+    document.querySelectorAll('.magnetic').forEach((btn) => {
+      let rect = null;
+      btn.addEventListener('pointerenter', () => { rect = btn.getBoundingClientRect(); btn.classList.add('is-pulled'); });
+      btn.addEventListener('pointermove', (e) => {
+        if (!rect) rect = btn.getBoundingClientRect();
+        const dx = e.clientX - (rect.left + rect.width / 2), dy = e.clientY - (rect.top + rect.height / 2);
+        btn.style.setProperty('--mgx', (dx * 0.22).toFixed(1) + 'px');
+        btn.style.setProperty('--mgy', (dy * 0.32).toFixed(1) + 'px');
+      });
+      btn.addEventListener('pointerleave', () => {
+        rect = null;
+        btn.classList.remove('is-pulled');
+        btn.style.setProperty('--mgx', '0px');
+        btn.style.setProperty('--mgy', '0px');
+      });
+    });
+  }
+
+  /* ---- scroll-linked: About reading rail + Experience energy beam ---- */
+  const story = document.querySelector('.about-copy.story');
+  const paras = story ? [...story.querySelectorAll('p')] : [];
+  const xpWrap = document.querySelector('.xp-wrap');
+  const xpItems = xpWrap ? [...xpWrap.querySelectorAll('.xp-item')] : [];
+  const live = new Set();
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    const vh = window.innerHeight;
+    const line = vh * 0.62;
+    // reads
+    const sRect = live.has(story) ? story.getBoundingClientRect() : null;
+    const pRects = sRect ? paras.map((p) => p.getBoundingClientRect()) : null;
+    const xRect = live.has(xpWrap) ? xpWrap.getBoundingClientRect() : null;
+    const iTops = xRect ? xpItems.map((it) => it.getBoundingClientRect().top) : null;
+    // writes
+    if (sRect) {
+      story.style.setProperty('--prog', Math.max(0, Math.min(1, (line - sRect.top) / sRect.height)).toFixed(3));
+      pRects.forEach((r, i) => {
+        const lit = Math.max(0, Math.min(1, (line - r.top) / (r.height * 0.7)));
+        paras[i].style.setProperty('--lit', lit.toFixed(3));
+      });
+    }
+    if (xRect) {
+      xpWrap.style.setProperty('--beam', Math.max(0, Math.min(1, (line - xRect.top) / xRect.height)).toFixed(3));
+      iTops.forEach((t, i) => xpItems[i].classList.toggle('lit', t + 40 < line));
+    }
+  }
+  const onScroll = () => { if (!ticking && live.size) { ticking = true; requestAnimationFrame(update); } };
+  const liveIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) live.add(e.target); else live.delete(e.target); });
+    onScroll();
+  }, { rootMargin: '20% 0px 20% 0px' });
+  if (xpWrap) xpWrap.classList.add('beam-on');
+  [story, xpWrap].forEach((el) => el && liveIO.observe(el));
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
 })();
 </script>
 
