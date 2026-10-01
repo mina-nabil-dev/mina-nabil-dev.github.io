@@ -6,7 +6,7 @@
 
 <title>Mina Nabil — Flutter Developer</title>
 
-<meta name="description" content="Flutter developer from Egypt building cross-platform mobile apps with Flutter, Dart, Laravel, Firebase, and Supabase." />
+<meta name="description" content="Mina Nabil, Flutter developer from Egypt building cross-platform mobile apps for Android and iOS with Flutter, Dart, Laravel, Firebase, and Supabase." />
 <meta name="author" content="Mina Nabil" />
 <link rel="canonical" href="https://mina-nabil-dev.github.io/" />
 <meta name="robots" content="index, follow" />
@@ -87,9 +87,46 @@
 <!-- flag before first paint: scroll-reveal content only starts hidden when the motion script will run -->
 <script>document.documentElement.classList.add('has-motion');</script>
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Caveat:wght@500;600&family=Aref+Ruqaa:wght@400&display=swap" rel="stylesheet" />
+<!-- Google Fonts @font-face rules inlined (latin, latin-ext, arabic subsets: everything the page uses)
+     so first paint does not wait on a render-blocking request to fonts.googleapis.com -->
+<style>
+@font-face {font-family:'Aref Ruqaa';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/arefruqaa/v26/WwkbxPW1E165rajQKDulIIIoVeo5.woff2) format('woff2');unicode-range:U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;}
+@font-face {font-family:'Aref Ruqaa';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/arefruqaa/v26/WwkbxPW1E165rajQKDulIIkoVeo5.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Aref Ruqaa';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/arefruqaa/v26/WwkbxPW1E165rajQKDulIIcoVQ.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Caveat';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/caveat/v23/Wnz6HAc5bAfYB2Q7aDYYmg8.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Caveat';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/caveat/v23/Wnz6HAc5bAfYB2Q7ZjYY.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Caveat';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/caveat/v23/Wnz6HAc5bAfYB2Q7aDYYmg8.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Caveat';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/caveat/v23/Wnz6HAc5bAfYB2Q7ZjYY.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Fraunces';font-style:normal;font-weight:380;font-display:swap;src:url(https://fonts.gstatic.com/s/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxCFTeO-U.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Fraunces';font-style:normal;font-weight:380;font-display:swap;src:url(https://fonts.gstatic.com/s/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxC9TeA.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Fraunces';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxCFTeO-U.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Fraunces';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxC9TeA.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Fraunces';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxCFTeO-U.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Fraunces';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/fraunces/v38/6NU78FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c2Wa0KxC9TeA.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1iEq129k.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1i8q1w.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwl5FgtIU.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgg.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3CZRtWPQCuHme67tEYUIx3Kh0PHR9N6Ys43PWrfQ.woff2) format('woff2');unicode-range:U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3CZRtWPQCuHme67tEYUIx3Kh0PHR9N6Ysz3PWrfQ.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3CZRtWPQCuHme67tEYUIx3Kh0PHR9N6Ys93PU.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPO_-CRXMR5Kw.woff2) format('woff2');unicode-range:U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPO_-CaXMR5Kw.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPO_-CUXMQ.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPi-OCRXMR5Kw.woff2) format('woff2');unicode-range:U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPi-OCaXMR5Kw.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YPi-OCUXMQ.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YOG-eCRXMR5Kw.woff2) format('woff2');unicode-range:U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC, U+102E0-102FB, U+10E60-10E7E, U+10EC2-10EC4, U+10EFC-10EFF, U+1EE00-1EE03, U+1EE05-1EE1F, U+1EE21-1EE22, U+1EE24, U+1EE27, U+1EE29-1EE32, U+1EE34-1EE37, U+1EE39, U+1EE3B, U+1EE42, U+1EE47, U+1EE49, U+1EE4B, U+1EE4D-1EE4F, U+1EE51-1EE52, U+1EE54, U+1EE57, U+1EE59, U+1EE5B, U+1EE5D, U+1EE5F, U+1EE61-1EE62, U+1EE64, U+1EE67-1EE6A, U+1EE6C-1EE72, U+1EE74-1EE77, U+1EE79-1EE7C, U+1EE7E, U+1EE80-1EE89, U+1EE8B-1EE9B, U+1EEA1-1EEA3, U+1EEA5-1EEA9, U+1EEAB-1EEBB, U+1EEF0-1EEF1;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YOG-eCaXMR5Kw.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'IBM Plex Sans Arabic';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/ibmplexsansarabic/v15/Qw3NZRtWPQCuHme67tEYUIx3Kh0PHR9N6YOG-eCUXMQ.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7SUc.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+</style>
 
 <style>
 /* ============================================
@@ -2259,73 +2296,73 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 
   <!-- Project list: the single source for the ring, and what screen readers and search engines read. -->
   <ul class="mh-sr" id="cineList">
-    <li data-key="yalla" data-img="assets/yalla_final.jpg" data-glow="#f2711c" data-chip="Live" data-kind="Tutor LMS · Live" data-stack="Flutter · Laravel · BLoC"
+    <li data-key="yalla" data-img="assets/yalla_final.webp" data-glow="#f2711c" data-chip="Live" data-kind="Tutor LMS · Live" data-stack="Flutter · Laravel · BLoC"
         data-sub-ar="منصة تعليمية للمدرّسين · Flutter و Laravel · منشور">
       <strong lang="ar" dir="rtl">يلا عربي</strong>
       <p>Tutor LMS platform · Flutter &amp; Laravel · Live</p>
       <a href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi" tabindex="-1">Play Store</a>
     </li>
-    <li data-key="hawy" data-img="assets/elhawy_final.jpg" data-glow="#f5b82e" data-chip="Live" data-kind="Tutor LMS · Live" data-stack="Flutter · Laravel · Exams"
+    <li data-key="hawy" data-img="assets/elhawy_final.webp" data-glow="#f5b82e" data-chip="Live" data-kind="Tutor LMS · Live" data-stack="Flutter · Laravel · Exams"
         data-sub-ar="منصة لمدرّس علوم وأحياء · نسخة بعلامة بيضاء · منشور">
       <strong lang="ar" dir="rtl">حاوى العلوم</strong>
       <p>Science tutor LMS · White-label build · Live</p>
       <a href="https://play.google.com/store/apps/details?id=com.platform.elhawy" tabindex="-1">Play Store</a>
     </li>
-    <li data-key="kyrillos" data-img="assets/kyrillos_final.jpg" data-glow="#4f8dff" data-chip="Live" data-kind="Math app · Live" data-stack="Flutter · Laravel · QR"
+    <li data-key="kyrillos" data-img="assets/kyrillos_final.webp" data-glow="#4f8dff" data-chip="Live" data-kind="Math app · Live" data-stack="Flutter · Laravel · QR"
         data-sub-ar="منصة رياضيات · موقع وتطبيق أندرويد · منشور">
       <strong lang="ar" dir="rtl">مستر كيرلس قاصد</strong>
       <p>Mathematics platform · Web + Android app · Live</p>
       <a href="https://play.google.com/store/apps/details?id=com.platform.kyrilloskased" tabindex="-1">Play Store</a>
     </li>
-    <li data-key="shicoril" data-img="assets/shicoril_final.jpg" data-glow="#8b6cff" data-chip="Live" data-kind="Teacher panel · PWA" data-stack="Laravel · React · PWA"
+    <li data-key="shicoril" data-img="assets/shicoril_final.webp" data-glow="#8b6cff" data-chip="Live" data-kind="Teacher panel · PWA" data-stack="Laravel · React · PWA"
         data-sub-ar="لوحة تحكم للمدرّس + بوابة للطالب · Laravel و React">
       <strong lang="ar" dir="rtl">أستاذ مينا شيكوريل</strong>
       <p>Teacher control panel + student PWA · Laravel &amp; React</p>
       <a href="https://mr-menashicoril.com/" tabindex="-1" data-ar="الموقع">Website</a>
     </li>
-    <li data-key="abkarino" data-img="assets/abkarino_final.jpg" data-glow="#36d1c4" data-chip="Website" data-kind="Science platform" data-stack="Laravel · Arabic RTL"
+    <li data-key="abkarino" data-img="assets/abkarino_final.webp" data-glow="#36d1c4" data-chip="Website" data-kind="Science platform" data-stack="Laravel · Arabic RTL"
         data-sub-ar="منصة علوم وأحياء · Laravel · موقع منشور">
       <strong lang="ar" dir="rtl">دكتور عبقرينو</strong>
       <p>Science &amp; biology platform · Laravel · Live website</p>
       <a href="https://doctor-3bkarino.online/" tabindex="-1" data-ar="الموقع">Website</a>
     </li>
-    <li data-key="cs1" data-img="assets/mncs_final.jpg" data-glow="#86c96f" data-chip="Year 1" data-kind="Course app · Live" data-stack="Flutter · Offline · Y1"
+    <li data-key="cs1" data-img="assets/mncs_final.webp" data-glow="#86c96f" data-chip="Year 1" data-kind="Course app · Live" data-stack="Flutter · Offline · Y1"
         data-sub-ar="تطبيق مرافق لمقررات جامعة المنيا · السنة الأولى · منشور">
       <strong>MN — CS 1</strong>
       <p>Minia University course companion · Year 1 · Live</p>
       <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain" tabindex="-1">Play Store</a>
     </li>
-    <li data-key="cs2" data-img="assets/mncs_final.jpg" data-glow="#4fc3a1" data-chip="Year 2" data-kind="Course app · Live" data-stack="Flutter · Offline · Y2"
+    <li data-key="cs2" data-img="assets/mncs_final.webp" data-glow="#4fc3a1" data-chip="Year 2" data-kind="Course app · Live" data-stack="Flutter · Offline · Y2"
         data-sub-ar="تطبيق مرافق لمقررات جامعة المنيا · السنة الثانية · منشور">
       <strong>MN — CS 2</strong>
       <p>Minia University course companion · Year 2 · Live</p>
       <a href="https://play.google.com/store/apps/details?id=com.mnu_app_year2.learntrain" tabindex="-1">Play Store</a>
     </li>
-    <li data-key="daveslimo" data-img="assets/daveslimo_final.jpg" data-glow="#d4af37" data-chip="US client" data-kind="Booking website" data-stack="Next.js · Supabase"
+    <li data-key="daveslimo" data-img="assets/daveslimo_final.webp" data-glow="#d4af37" data-chip="US client" data-kind="Booking website" data-stack="Next.js · Supabase"
         data-sub-ar="موقع حجز ليموزين فاخر · Next.js و Supabase · أمريكا">
       <strong>Dave's Nashville Limo</strong>
       <p>Luxury limo booking website · Next.js &amp; Supabase · USA</p>
       <a href="https://davesnashvillelimo.com/" tabindex="-1" data-ar="الموقع">Website</a>
     </li>
-    <li data-key="talabat" data-img="assets/talabat_final.jpg" data-glow="#ff8a1f" data-chip="Live" data-kind="Delivery app" data-stack="Next.js · Supabase · PWA"
+    <li data-key="talabat" data-img="assets/talabat_final.webp" data-glow="#ff8a1f" data-chip="Live" data-kind="Delivery app" data-stack="Next.js · Supabase · PWA"
         data-sub-ar="منصة توصيل محلية · Next.js و Supabase · منشور">
       <strong lang="ar" dir="rtl">طلبات نزلة عبيد</strong>
       <p>Local delivery marketplace · Next.js &amp; Supabase · Live</p>
       <a href="https://talabat-nazlet-obaid.vercel.app/" tabindex="-1" data-ar="الموقع">Website</a>
     </li>
-    <li data-key="keyframes" data-img="assets/keyframes_final.jpg" data-glow="#b981ff" data-chip="Live" data-kind="Motion UI marketplace" data-stack="Next.js · Three.js · Postgres"
+    <li data-key="keyframes" data-img="assets/keyframes_final.webp" data-glow="#b981ff" data-chip="Live" data-kind="Motion UI marketplace" data-stack="Next.js · Three.js · Postgres"
         data-sub-ar="متجر مكونات واجهات متحركة · Next.js و WebGL · منشور">
       <strong>Keyframes UI</strong>
       <p>Animated UI component marketplace · Next.js &amp; WebGL · Live</p>
       <a href="https://keyframes-ui.vercel.app/" tabindex="-1" data-ar="الموقع">Website</a>
     </li>
-    <li data-key="motorent" data-img="assets/motorent_final.jpg" data-glow="#3a86ff" data-chip="Open source" data-kind="Car rental app" data-stack="Flutter · Firebase · BLoC"
+    <li data-key="motorent" data-img="assets/motorent_final.webp" data-glow="#3a86ff" data-chip="Open source" data-kind="Car rental app" data-stack="Flutter · Firebase · BLoC"
         data-sub-ar="تطبيق تأجير سيارات · Clean Architecture · Flutter">
       <strong>MotoRent</strong>
       <p>Car rental platform · Clean Architecture · Flutter</p>
       <a href="https://github.com/mina-nabil-dev/MotoRent" tabindex="-1">GitHub</a>
     </li>
-    <li data-key="easygps" data-img="assets/easygps_final.jpg" data-glow="#2ee59d" data-chip="Open source" data-kind="Live GPS tracking" data-stack="Flutter · Maps API"
+    <li data-key="easygps" data-img="assets/easygps_final.webp" data-glow="#2ee59d" data-chip="Open source" data-kind="Live GPS tracking" data-stack="Flutter · Maps API"
         data-sub-ar="تتبّع لحظي وخرائط Google · Flutter">
       <strong>EasyGPS</strong>
       <p>Real-time tracking &amp; Google Maps · Flutter</p>
@@ -2353,10 +2390,10 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 
   <!-- Hidden elements for backward modal compatibility -->
   <div style="display:none" aria-hidden="true">
-    <img id="lmsImg" src="assets/yalla_final.jpg" alt="" loading="lazy" />
+    <img id="lmsImg" src="assets/yalla_final.webp" alt="Yalla Arabi app icon" loading="lazy" />
     <span id="lmsName">يلا عربي</span>
     <a id="lmsStoreLink" href="https://play.google.com/store/apps/details?id=com.platform.yallaarabi"></a>
-    <img id="mnImg" src="assets/mncs_final.jpg" alt="" loading="lazy" />
+    <img id="mnImg" src="assets/mncs_final.webp" alt="MN CS 1 app icon" loading="lazy" />
     <span id="mnName">MN – CS 1</span>
     <a id="mnStoreLink" href="https://play.google.com/store/apps/details?id=com.mnu_app_year1.learntrain"></a>
   </div>
@@ -2697,6 +2734,7 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     if (p.nameLang === 'ar') label.dir = 'rtl';
 
     const img = slot.querySelector('img');
+    img.alt = p.name + ' logo';
     // On mobile: only the first occurrence of each project image loads eagerly;
     // duplicates (same project repeated around the ring) load deferred.
     // This avoids simultaneously decoding S images on a low-power device.
@@ -3058,7 +3096,7 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 const APP_DATA = {
   yalla: {
     title: 'يلا عربي',
-    img: 'assets/yalla_final.jpg',
+    img: 'assets/yalla_final.webp',
     status: 'live',
     platform: 'Shared platform · Build A',
     stat: 'Arabic-language tutor',
@@ -3068,7 +3106,7 @@ const APP_DATA = {
   },
   hawy: {
     title: 'حاوى العلوم',
-    img: 'assets/elhawy_final.jpg',
+    img: 'assets/elhawy_final.webp',
     status: 'live',
     platform: 'Shared platform · Build A',
     stat: 'Science & biology tutor',
@@ -3078,7 +3116,7 @@ const APP_DATA = {
   },
   cs1: {
     title: 'MN – CS 1',
-    img: 'assets/mncs_final.jpg',
+    img: 'assets/mncs_final.webp',
     status: 'live',
     platform: 'Standalone build',
     stat: 'First-year cohort',
@@ -3088,7 +3126,7 @@ const APP_DATA = {
   },
   cs2: {
     title: 'MN – CS 2',
-    img: 'assets/mncs_final.jpg',
+    img: 'assets/mncs_final.webp',
     status: 'live',
     platform: 'Standalone build',
     stat: 'Second-year cohort',
@@ -3098,7 +3136,7 @@ const APP_DATA = {
   },
   motorent: {
     title: 'MotoRent',
-    img: 'assets/motorent_final.jpg',
+    img: 'assets/motorent_final.webp',
     status: 'live',
     platform: 'Open Source Flutter Project',
     stat: 'Car Rental & Booking Platform',
@@ -3108,7 +3146,7 @@ const APP_DATA = {
   },
   easygps: {
     title: 'EasyGPS',
-    img: 'assets/easygps_final.jpg',
+    img: 'assets/easygps_final.webp',
     status: 'live',
     platform: 'Open Source Flutter Project',
     stat: 'Live GPS Tracking & Maps',
@@ -3118,7 +3156,7 @@ const APP_DATA = {
   },
   talabat: {
     title: 'طلبات نزلة عبيد',
-    img: 'assets/talabat_final.jpg',
+    img: 'assets/talabat_final.webp',
     status: 'live',
     platform: 'Installable web app · Next.js & Supabase',
     stat: 'Local delivery · Nazlet Obaid',
@@ -3128,7 +3166,7 @@ const APP_DATA = {
   },
   keyframes: {
     title: 'Keyframes UI',
-    img: 'assets/keyframes_final.jpg',
+    img: 'assets/keyframes_final.webp',
     status: 'live',
     platform: 'Web platform · Next.js & Postgres',
     stat: 'Animated UI components',
@@ -3138,7 +3176,7 @@ const APP_DATA = {
   },
   kyrillos: {
     title: 'مستر كيرلس قاصد',
-    img: 'assets/kyrillos_final.jpg',
+    img: 'assets/kyrillos_final.webp',
     status: 'live',
     platform: 'Web + Android app · Laravel API',
     stat: 'Mathematics · six grade levels',
@@ -3148,7 +3186,7 @@ const APP_DATA = {
   },
   shicoril: {
     title: 'أستاذ مينا شيكوريل',
-    img: 'assets/shicoril_final.jpg',
+    img: 'assets/shicoril_final.webp',
     status: 'live',
     platform: 'Admin panel + student PWA',
     stat: 'Social studies teacher',
@@ -3158,7 +3196,7 @@ const APP_DATA = {
   },
   abkarino: {
     title: 'دكتور عبقرينو',
-    img: 'assets/abkarino_final.jpg',
+    img: 'assets/abkarino_final.webp',
     status: 'live',
     platform: 'Education website · Laravel',
     stat: 'Science & biology',
@@ -3168,7 +3206,7 @@ const APP_DATA = {
   },
   daveslimo: {
     title: "Dave's Nashville Limo",
-    img: 'assets/daveslimo_final.jpg',
+    img: 'assets/daveslimo_final.webp',
     status: 'live',
     platform: 'Booking website · Next.js & Supabase',
     stat: 'Luxury transportation · Nashville, TN',
