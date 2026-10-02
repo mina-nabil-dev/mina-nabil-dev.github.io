@@ -290,6 +290,10 @@ nav.wrap{
   align-items:center;
   gap:36px;
 }
+/* five links need room: tighten them on laptops, and drop the availability badge
+   on small ones (the footer carries the same status) */
+@media (max-width:1100px){ .nav-links{ gap:22px; } }
+@media (min-width:861px) and (max-width:1023px){ nav.wrap .avail{ display:none; } }
 
 .nav-links a{
   font-family:var(--mono);
@@ -1509,86 +1513,6 @@ hr.rule{
   .xp-item{ grid-template-columns:1fr; gap:12px; }
 }
 
-/* ============================================
-   STACK — grouped by role, not a flat grid.
-   ============================================ */
-.stack-groups{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1px;
-  padding:1px;                 /* the outer edge is drawn by the background, like the gaps */
-  background:var(--line);
-  border-radius:8px;
-  overflow:hidden;
-  counter-reset:grp;
-}
-
-.stack-group{
-  background:var(--surface);
-  padding:28px 26px;
-}
-
-.stack-group-title{
-  font-family:var(--mono);
-  font-size:11px;
-  color:var(--signal);
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  margin-bottom:18px;
-  padding-bottom:14px;
-  position:relative;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  counter-increment:grp;
-}
-.stack-group-title::before{
-  content:counter(grp, decimal-leading-zero);
-  color:var(--ink-faint);
-}
-.stack-group-title::after{
-  content:'';
-  position:absolute;
-  left:0; right:0; bottom:0;
-  height:1px;
-  background:linear-gradient(90deg, rgba(142,155,255,.5), var(--line-soft) 45%);
-  transform-origin:left;
-}
-[dir="rtl"] .stack-group-title::after{
-  background:linear-gradient(270deg, rgba(142,155,255,.5), var(--line-soft) 45%);
-  transform-origin:right;
-}
-
-.stack-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  gap:12px;
-  padding:9px 0;
-  font-size:14.5px;
-}
-
-.stack-item + .stack-item{ border-top:1px solid var(--line-soft); }
-
-.stack-item-name{
-  color:var(--ink);
-  font-weight:500;
-  transition:color .25s ease;
-}
-.stack-item-note{
-  font-family:var(--mono);
-  font-size:11.5px;
-  color:var(--ink-faint);
-  text-align:right;
-  white-space:nowrap;
-  transition:color .25s ease;
-}
-.stack-item:hover .stack-item-name{ color:#fff; }
-.stack-item:hover .stack-item-note{ color:var(--signal); }
-
-@media (max-width:860px){
-  .stack-groups{ grid-template-columns:1fr; }
-}
 
 /* ============================================
    PUBLISHED WORK — one platform, two deployments
@@ -2169,22 +2093,6 @@ footer .wrap{
   }
   .has-motion .m-cred.is-in .cred-v{ animation-delay:calc(.18s + var(--stagger) + var(--i, 0) * var(--stagger) * 2); }
 
-  /* Stack: each column arrives, its title rule draws, then its rows cascade in */
-  .has-motion .stack-groups .stack-group-title,
-  .has-motion .stack-groups .stack-item{ opacity:0; }
-  .has-motion .stack-groups.is-in .stack-group-title,
-  .has-motion .stack-groups.is-in .stack-item{
-    opacity:1;
-    animation:m-slide var(--dur-reveal) var(--ease-out) backwards;
-  }
-  .has-motion .stack-groups.is-in .stack-group-title{ animation-delay:calc(.12s + var(--i, 0) * var(--stagger) * 2); }
-  .has-motion .stack-groups.is-in .stack-item{ animation-delay:calc(.2s + var(--i, 0) * var(--stagger) * 2 + var(--j, 0) * var(--stagger)); }
-  .has-motion .stack-groups .stack-group-title::after{
-    transform:scaleX(0);
-    transition:transform var(--dur-draw) var(--ease-out);
-    transition-delay:calc(.2s + var(--i, 0) * var(--stagger) * 2);
-  }
-  .has-motion .stack-groups.is-in .stack-group-title::after{ transform:none; }
 
   /* Contact: icons pop across the grid in a wave, each label follows its icon */
   .has-motion .contact-grid .c-ico,
@@ -2434,8 +2342,9 @@ footer .wrap{
   -webkit-mask-image:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
           mask-image:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
-.tm-track{ display:flex; width:max-content; animation:tm-slide 48s linear infinite; }
-.tech-marquee:hover .tm-track{ animation-play-state:paused; }
+.tm-track{ display:flex; width:max-content; animation:tm-slide 48s linear infinite paused; }
+.tech-marquee.is-live .tm-track{ animation-play-state:running; }
+.tech-marquee.is-live:hover .tm-track{ animation-play-state:paused; }
 .tm-run{ display:flex; align-items:center; flex-shrink:0; }
 .tm-run span{
   font-family:var(--display);
@@ -2468,6 +2377,8 @@ footer .wrap{
 @keyframes aur-a{ to{ transform:translate(18vw, 6vh) scale(1.15); } }
 @keyframes aur-b{ to{ transform:translate(-16vw, 14vh) scale(.9); } }
 @keyframes aur-c{ to{ transform:translate(-10vw, -12vh) scale(1.2); } }
+.aurora i{ animation-play-state:paused !important; }
+.aurora.is-live i{ animation-play-state:running !important; }
 #contact > .wrap{ position:relative; z-index:1; }
 .contact-cta{ display:flex; flex-wrap:wrap; gap:14px; margin:-6px 0 38px; }
 .magnetic{ transform:translate(var(--mgx, 0px), var(--mgy, 0px)); transition:transform .5s var(--ease-out), background .15s, border-color .15s, box-shadow .3s; }
@@ -2524,6 +2435,260 @@ html[lang="ar"] .btn{ font-family:var(--arabic); letter-spacing:0; }
   }
 }
 
+/* ============================================
+   STACK — a live wiring diagram of the products:
+   three layers, edges drawn between the tools that
+   actually talk, packets running along them, and a
+   delivery pipeline that keeps shipping underneath.
+   ============================================ */
+.wire-lead{ color:var(--ink-soft); font-size:16px; margin:14px 0 0; max-width:60ch; }
+.wire{ position:relative; }
+/* trace readout: a terminal line that spells out the lit path */
+.wire-lead{ margin-bottom:14px; }
+.wire-trace{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  min-height:22px;
+  margin:0 0 34px;
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--ink-faint);
+}
+.wt-k{
+  color:var(--signal);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  flex-shrink:0;
+}
+.wt-k::after{ content:' ›'; color:var(--ink-faint); }
+.wt-v{ color:var(--ink-soft); }
+.wt-path{ color:var(--ink); direction:ltr; unicode-bidi:isolate; }
+.wt-path b{ font-weight:500; color:#c8ceff; }
+.wt-path i{ font-style:normal; color:var(--signal); margin:0 6px; }
+.wt-caret{ display:inline-block; width:7px; height:13px; margin-inline-start:4px; vertical-align:-2px; background:var(--signal); animation:wt-blink 1s steps(1) infinite; }
+@keyframes wt-blink{ 50%{ opacity:0; } }
+html[lang="ar"] .wt-k{ font-family:var(--arabic); letter-spacing:0; }
+html[lang="ar"] .wt-idle{ font-family:var(--arabic); }
+.wire-node:focus-visible{ outline:2px solid var(--signal); outline-offset:2px; }
+@media (prefers-reduced-motion:reduce){ .wt-caret{ animation:none; } }
+.wire::before{   /* faint circuit dots behind the diagram */
+  content:'';
+  position:absolute;
+  inset:-30px -20px;
+  background-image:radial-gradient(rgba(142,155,255,.16) 1px, transparent 1.4px);
+  background-size:22px 22px;
+  -webkit-mask-image:radial-gradient(70% 60% at 50% 45%, #000, transparent);
+          mask-image:radial-gradient(70% 60% at 50% 45%, #000, transparent);
+  pointer-events:none;
+}
+.wire-cols{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:clamp(36px, 6vw, 72px);
+  align-items:start;
+}
+.wire-col{ padding:22px 18px 18px; container-type:inline-size; }
+.wire-bus{ display:none; }
+.hint-touch{ display:none; }
+@media (hover:none){ .hint-hover{ display:none; } .hint-touch{ display:inline; } }
+.wire-col[data-layer="api"]{ margin-top:46px; }
+.wire-col[data-layer="data"]{ margin-top:96px; }
+.wire-head{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin:0 4px 16px; }
+.wire-num{ font-family:var(--mono); font-size:11px; color:var(--ink-faint); }
+.wire-title{ font-family:var(--display); font-size:22px; font-weight:600; color:var(--ink); }
+.wire-sub{ font-family:var(--mono); font-size:11px; color:var(--signal); letter-spacing:.04em; margin-inline-start:auto; }
+.wire-list{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+.wire-node{
+  position:relative;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:10px;
+  padding:11px 14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:rgba(8,10,32,.75);
+  cursor:default;
+  transition:border-color .35s ease, background .35s ease, opacity .35s ease, transform .45s var(--ease-out), box-shadow .35s ease;
+}
+.wn-led{
+  width:7px; height:7px;
+  border-radius:50%;
+  background:var(--line-strong);
+  transition:background .35s ease, box-shadow .35s ease;
+}
+.wire-node.has-edge .wn-led{ background:rgba(142,155,255,.75); box-shadow:0 0 8px rgba(142,155,255,.6); }
+.wn-name{ font-size:14.5px; font-weight:600; color:var(--ink); }
+.wn-role{ font-family:var(--mono); font-size:11px; color:var(--ink-faint); text-align:end; white-space:nowrap; }
+/* a narrow column: the description drops under the name instead of spilling out */
+@container (max-width: 300px){
+  .wire-node{ grid-template-columns:auto 1fr; row-gap:2px; align-items:start; }
+  .wn-led{ margin-top:6px; }
+  .wn-role{ grid-column:2; text-align:start; white-space:normal; }
+}
+.wire-node[data-node="nest"]{ border-style:dashed; }
+.wire-node[data-node="nest"] .wn-name{ color:var(--ink-soft); }
+
+/* focus mode: one tool and everything it talks to */
+.wire.is-focus .wire-node{ opacity:.32; }
+.wire.is-focus .wire-node.is-on{
+  opacity:1;
+  border-color:rgba(142,155,255,.65);
+  background:rgba(27,31,82,.85);
+  box-shadow:0 0 0 1px rgba(142,155,255,.25), 0 10px 30px -12px rgba(142,155,255,.8);
+  transform:translateX(calc(3px * var(--dir)));
+}
+.wire.is-focus .wire-node.is-on .wn-led{ background:#fff; box-shadow:0 0 10px #c8ceff; }
+
+/* the diagram's lines and packets */
+.wire-svg{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; z-index:2; }
+.wire-edge{
+  fill:none;
+  stroke:url(#wireGrad);
+  stroke-width:1.4;
+  stroke-dasharray:1;
+  stroke-dashoffset:1;
+  transition:stroke-dashoffset 1.2s var(--ease-out), opacity .35s ease, stroke-width .35s ease;
+}
+.wire.is-drawn .wire-edge{ stroke-dashoffset:0; }
+.wire.is-focus .wire-edge{ opacity:.12; }
+.wire.is-focus .wire-edge.is-on{ opacity:1; stroke-width:2; stroke:#a9b3ff; }
+.wire-packet{ fill:#d9ddff; opacity:0; transition:opacity .6s ease; }
+.wire.is-drawn .wire-packet{ opacity:.95; }
+.wire.is-focus .wire-packet{ opacity:.15; }
+.wire.is-focus .wire-packet.is-on{ opacity:1; }
+
+/* ---------- delivery pipeline ---------- */
+.pipe{
+  position:relative;
+  margin-top:34px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px 22px 20px;
+  background:linear-gradient(180deg, rgba(20,23,62,.7), rgba(10,12,36,.7));
+  overflow:hidden;
+}
+.pipe-k{ display:flex; align-items:center; gap:10px; font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--signal); margin-bottom:16px; }
+.pipe-led{ position:relative; width:7px; height:7px; border-radius:50%; background:var(--live); box-shadow:0 0 8px rgba(74,222,154,.7); }
+.pipe-led::after{ content:''; position:absolute; inset:0; border-radius:50%; background:var(--live); animation:live-ping 2.4s cubic-bezier(.16,1,.3,1) infinite paused; }
+.wire.is-live .pipe-led::after{ animation-play-state:running; }
+.pipe-steps{ list-style:none; display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:16px; position:relative; z-index:1; }
+.pipe-steps li{ display:flex; flex-direction:column; gap:4px; padding-top:18px; position:relative; transition:opacity .4s ease; opacity:.45; }
+.pipe-steps li::before{   /* the stage marker on the track */
+  content:'';
+  position:absolute;
+  top:0; inset-inline-start:0;
+  width:11px; height:11px;
+  border-radius:50%;
+  border:2px solid var(--line-strong);
+  background:var(--paper);
+  transition:background .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+.pipe-steps li.done{ opacity:1; }
+.pipe-steps li.done::before{ background:var(--live); border-color:#bff5d9; box-shadow:0 0 12px rgba(74,222,154,.8); }
+.pipe-steps b{ font-size:14.5px; font-weight:600; color:var(--ink); }
+.pipe-steps span{ font-family:var(--mono); font-size:11px; color:var(--ink-faint); }
+.pipe-bar{ position:absolute; left:22px; right:22px; top:62px; height:2px; background:var(--line); border-radius:2px; }
+.pipe-bar i{
+  position:absolute; inset:0;
+  border-radius:inherit;
+  background:linear-gradient(90deg, rgba(74,222,154,.2), var(--live));
+  box-shadow:0 0 10px rgba(74,222,154,.7);
+  transform-origin:left;
+  transform:scaleX(var(--pipe, 1));
+  transition:transform .9s var(--ease-out), opacity .4s ease;
+}
+[dir="rtl"] .pipe-bar i{ transform-origin:right; background:linear-gradient(270deg, rgba(74,222,154,.2), var(--live)); }
+.pipe.is-reset .pipe-bar i{ opacity:0; transition:opacity .4s ease; }
+
+html[lang="ar"] .wire-sub,
+html[lang="ar"] .wn-role,
+html[lang="ar"] .pipe-k,
+html[lang="ar"] .pipe-steps span{ font-family:var(--arabic); letter-spacing:0; }
+html[lang="ar"] .wire-title{ font-family:var(--arabic); }
+
+/* layers arrive one after another: they sharpen out of a blur */
+@media (prefers-reduced-motion:no-preference){
+  .has-motion .wire-col{ opacity:0; transform:translateY(18px) scale(.97); filter:blur(8px); }
+  .has-motion .wire.is-in .wire-col{
+    opacity:1; transform:none; filter:none;
+    transition:opacity .8s ease, transform .9s var(--ease-out), filter .9s ease;
+  }
+  .has-motion .wire.is-in .wire-col[data-layer="api"]{ transition-delay:.15s; }
+  .has-motion .wire.is-in .wire-col[data-layer="data"]{ transition-delay:.3s; }
+  .has-motion .wire-node{ opacity:0; }
+  .has-motion .wire.is-in .wire-node{ opacity:1; transition-delay:calc(.35s + var(--n, 0) * 45ms); }
+  .has-motion .wire.is-in.is-focus .wire-node{ transition-delay:0s; }
+  .has-motion .wire.is-in.is-focus .wire-node:not(.is-on){ opacity:.32; }
+  .has-motion .pipe{ opacity:0; transform:translateY(14px); }
+  .has-motion .wire.is-in .pipe{ opacity:1; transform:none; transition:opacity .8s ease .55s, transform .9s var(--ease-out) .55s; }
+}
+
+/* phones: layers stack as compact chip grids, joined by a data bus */
+@media (max-width:860px){
+  .wire-cols{ grid-template-columns:1fr; gap:0; }
+  .wire-col[data-layer]{ margin-top:0; }
+  .wire-svg{ display:none; }
+  .wire-head{ margin-bottom:14px; }
+  .wire-list{ display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px; }
+  .wire-node{ grid-template-columns:auto 1fr; row-gap:3px; align-items:start; padding:10px 12px; }
+  .wn-led{ margin-top:6px; }
+  .wn-name{ font-size:14px; }
+  .wn-role{ grid-column:2; text-align:start; white-space:normal; font-size:10.5px; line-height:1.4; }
+  .wire.is-focus .wire-node.is-on{ transform:none; }
+
+  /* the bus: a line under the layer numbers, with a dot running down it */
+  .wire-bus{ display:block; position:relative; height:30px; }
+  .wire-bus::before{
+    content:'';
+    position:absolute;
+    inset-inline-start:27px;
+    top:0; bottom:0;
+    width:2px;
+    background:var(--line-strong);
+    opacity:.6;
+  }
+  .wire-bus i{
+    position:absolute;
+    inset-inline-start:25px;
+    top:0;
+    width:6px; height:6px;
+    border-radius:50%;
+    background:#d9ddff;
+    box-shadow:0 0 10px rgba(142,155,255,.9);
+    animation:bus 1.4s cubic-bezier(.45,.05,.35,1) infinite paused;
+  }
+  .wire.is-live .wire-bus i{ animation-play-state:running; }
+
+  /* pipeline: a vertical stepper whose segments fill as stages complete */
+  .pipe-bar{ display:none; }
+  .pipe-steps{ grid-template-columns:1fr; row-gap:16px; }
+  .pipe-steps li{ padding-top:0; padding-inline-start:26px; }
+  .pipe-steps li::before{ top:3px; }
+  .pipe-steps li:not(:last-child)::after{
+    content:'';
+    position:absolute;
+    inset-inline-start:4.5px;
+    top:16px; bottom:-15px;
+    width:2px;
+    background:var(--line);
+    transition:background .35s ease, box-shadow .35s ease;
+  }
+  .pipe-steps li.done:has(+ li.done)::after{ background:var(--live); box-shadow:0 0 8px rgba(74,222,154,.6); }
+}
+@media (min-width:600px) and (max-width:860px){
+  .wire-list{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+}
+@keyframes bus{ from{ transform:translateY(0); opacity:0; } 20%{ opacity:1; } 80%{ opacity:1; } to{ transform:translateY(24px); opacity:0; } }
+
+@media (prefers-reduced-motion:reduce){
+  .wire-bus i, .pipe-led::after{ animation:none; }
+  .wire-edge{ stroke-dashoffset:0; transition:none; }
+  .pipe-steps li{ opacity:1; }
+}
+
 @media (max-width:640px){
   .wrap{ padding-left:22px; padding-right:22px; }
   section{ padding:56px 0; }
@@ -2573,8 +2738,6 @@ html[lang="ar"] .manifest-v,
 html[lang="ar"] .tag,
 html[lang="ar"] .section-note,
 html[lang="ar"] .cred-k,
-html[lang="ar"] .stack-group-title,
-html[lang="ar"] .stack-item-note,
 html[lang="ar"] .nav-links a,
 html[lang="ar"] .avail,
 html[lang="ar"] .f-status,
@@ -2593,8 +2756,7 @@ html[lang="ar"] .xp-role em{ font-style:normal; }
 /* physical properties that must flip */
 [dir="rtl"] .manifest-v,
 [dir="rtl"] .section-note,
-[dir="rtl"] .cred-v,
-[dir="rtl"] .stack-item-note{ text-align:left; }
+[dir="rtl"] .cred-v{ text-align:left; }
 [dir="rtl"] .variant-btn + .variant-btn{ border-left:0; border-right:1px solid var(--line); }
 [dir="rtl"] .detail-close{ right:auto; left:18px; }
 [dir="rtl"] .hero-lede,
@@ -3049,36 +3211,79 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
       <span class="sh-idx" aria-hidden="true"><b>05</b> / 06</span>
     </div>
 
-    <h2 class="stitle m-title" style="margin-bottom:44px;" data-i18n="stitle_3">
+    <h2 class="stitle m-title" data-i18n="stitle_3">
       Tools organized by <em>what they do</em>
     </h2>
+    <p class="wire-lead" data-i18n="wire_lead_1">Each tool sits in the layer where it does its job. <span class="hint-hover">Hover</span><span class="hint-touch">Tap</span> one to trace what it talks to.</p>
 
-    <div class="stack-groups m-grid spot-grid">
-      <div class="stack-group">
-        <div class="stack-group-title" data-i18n="stack_group_title_1">Mobile</div>
-        <div class="stack-item"><span class="stack-item-name">Flutter</span><span class="stack-item-note" data-i18n="stack_item_note_1">Primary framework</span></div>
-        <div class="stack-item"><span class="stack-item-name">Dart</span><span class="stack-item-note" data-i18n="stack_item_note_2">Application logic</span></div>
-        <div class="stack-item"><span class="stack-item-name">BLoC / Cubit</span><span class="stack-item-note" data-i18n="stack_item_note_3">State management</span></div>
-        <div class="stack-item"><span class="stack-item-name">Clean Architecture</span><span class="stack-item-note" data-i18n="stack_item_note_4">App structure</span></div>
-        <div class="stack-item"><span class="stack-item-name">Hive</span><span class="stack-item-note" data-i18n="stack_item_note_14">Local caching</span></div>
+    <!-- the path being traced, spelled out; screen readers hear it too -->
+    <p class="wire-trace" aria-live="polite"><span class="wt-k" data-i18n="wt_k_1">trace</span><span class="wt-v"><span class="wt-idle" data-i18n="wt_idle_1">pick a tool to follow its data</span><span class="wt-path" id="wireTrace" hidden></span></span></p>
+
+    <div class="wire" id="wire">
+      <svg class="wire-svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="wireGrad" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#8e9bff" stop-opacity=".15"/>
+            <stop offset=".5" stop-color="#8e9bff" stop-opacity=".75"/>
+            <stop offset="1" stop-color="#8e9bff" stop-opacity=".15"/>
+          </linearGradient>
+          <filter id="wireGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2.4" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <g class="wire-edges"></g>
+        <g class="wire-packets" filter="url(#wireGlow)"></g>
+      </svg>
+
+      <div class="wire-cols">
+      <div class="wire-col holo" data-layer="app">
+        <span class="holo-corners" aria-hidden="true"></span>
+        <div class="wire-head"><span class="wire-num" aria-hidden="true">01</span><span class="wire-title" data-i18n="wire_t_1">App</span><span class="wire-sub" data-i18n="wire_s_1">what people touch</span></div>
+        <ul class="wire-list">
+          <li class="wire-node" tabindex="0" data-node="flutter"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">Flutter</span><span class="wn-role" data-i18n="wn_flutter">Android · Web</span></li>
+          <li class="wire-node" tabindex="0" data-node="dart"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">Dart</span><span class="wn-role" data-i18n="wn_dart">App logic</span></li>
+          <li class="wire-node" tabindex="0" data-node="bloc"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">BLoC / Cubit</span><span class="wn-role" data-i18n="wn_bloc">State</span></li>
+          <li class="wire-node" tabindex="0" data-node="clean"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">Clean Architecture</span><span class="wn-role" data-i18n="wn_clean">Structure</span></li>
+          <li class="wire-node" tabindex="0" data-node="hive"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">Hive</span><span class="wn-role" data-i18n="wn_hive">On-device cache</span></li>
+          <li class="wire-node" tabindex="0" data-node="next"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">Next.js</span><span class="wn-role" data-i18n="wn_next">Websites</span></li>
+          <li class="wire-node" tabindex="0" data-node="react"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">React</span><span class="wn-role" data-i18n="wn_react">Dashboards</span></li>
+        </ul>
+      </div>
+      <span class="wire-bus" aria-hidden="true"><i></i></span>
+      <div class="wire-col holo" data-layer="api">
+        <span class="holo-corners" aria-hidden="true"></span>
+        <div class="wire-head"><span class="wire-num" aria-hidden="true">02</span><span class="wire-title" data-i18n="wire_t_2">Backend</span><span class="wire-sub" data-i18n="wire_s_2">rules &amp; services</span></div>
+        <ul class="wire-list">
+          <li class="wire-node" tabindex="0" data-node="laravel"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">Laravel</span><span class="wn-role" data-i18n="wn_laravel">PHP APIs</span></li>
+          <li class="wire-node" tabindex="0" data-node="jwt"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">JWT Auth</span><span class="wn-role" data-i18n="wn_jwt">Access control</span></li>
+          <li class="wire-node" tabindex="0" data-node="rest"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">REST</span><span class="wn-role" data-i18n="wn_rest">Contracts</span></li>
+          <li class="wire-node" tabindex="0" data-node="firebase"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">Firebase</span><span class="wn-role" data-i18n="wn_firebase">FCM · Config</span></li>
+          <li class="wire-node" tabindex="0" data-node="supabase"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">Supabase</span><span class="wn-role" data-i18n="wn_supabase">Backend as a service</span></li>
+          <li class="wire-node" tabindex="0" data-node="nest"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">NestJS</span><span class="wn-role" data-i18n="wn_nest">Earlier backend</span></li>
+        </ul>
+      </div>
+      <span class="wire-bus" aria-hidden="true"><i></i></span>
+      <div class="wire-col holo" data-layer="data">
+        <span class="holo-corners" aria-hidden="true"></span>
+        <div class="wire-head"><span class="wire-num" aria-hidden="true">03</span><span class="wire-title" data-i18n="wire_t_3">Data</span><span class="wire-sub" data-i18n="wire_s_3">where it lives</span></div>
+        <ul class="wire-list">
+          <li class="wire-node" tabindex="0" data-node="mysql"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">MySQL</span><span class="wn-role" data-i18n="wn_mysql">Main database</span></li>
+          <li class="wire-node" tabindex="0" data-node="rtdb"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">Realtime DB</span><span class="wn-role" data-i18n="wn_rtdb">Study apps</span></li>
+          <li class="wire-node" tabindex="0" data-node="postgres"><span class="wn-led" aria-hidden="true"></span><span class="wn-name">PostgreSQL</span><span class="wn-role" data-i18n="wn_pg">NestJS · Supabase</span></li>
+        </ul>
+      </div>
       </div>
 
-      <div class="stack-group">
-        <div class="stack-group-title" data-i18n="stack_group_title_2">Backend &amp; Data</div>
-        <div class="stack-item"><span class="stack-item-name">Laravel</span><span class="stack-item-note" data-i18n="stack_item_note_7">PHP APIs</span></div>
-        <div class="stack-item"><span class="stack-item-name">MySQL</span><span class="stack-item-note" data-i18n="stack_item_note_8">Database design</span></div>
-        <div class="stack-item"><span class="stack-item-name">Firebase</span><span class="stack-item-note" data-i18n="stack_item_note_5">Auth · FCM · Config</span></div>
-        <div class="stack-item"><span class="stack-item-name">Supabase</span><span class="stack-item-note" data-i18n="stack_item_note_6">Database · Storage</span></div>
-        <div class="stack-item"><span class="stack-item-name">NestJS</span><span class="stack-item-note" data-i18n="stack_item_note_15">Earlier backend</span></div>
-      </div>
-
-      <div class="stack-group">
-        <div class="stack-group-title" data-i18n="stack_group_title_3">Web &amp; Delivery</div>
-        <div class="stack-item"><span class="stack-item-name">Next.js</span><span class="stack-item-note" data-i18n="stack_item_note_16">Client websites</span></div>
-        <div class="stack-item"><span class="stack-item-name">React</span><span class="stack-item-note" data-i18n="stack_item_note_17">Web dashboards</span></div>
-        <div class="stack-item"><span class="stack-item-name">Google Play</span><span class="stack-item-note" data-i18n="stack_item_note_12">Publishing</span></div>
-        <div class="stack-item"><span class="stack-item-name">JWT Auth</span><span class="stack-item-note" data-i18n="stack_item_note_10">Access control</span></div>
-        <div class="stack-item"><span class="stack-item-name">Testing</span><span class="stack-item-note" data-i18n="stack_item_note_18">Unit · Integration</span></div>
+      <div class="pipe" id="pipe">
+        <div class="pipe-k"><span class="pipe-led" aria-hidden="true"></span><span data-i18n="pipe_t_1">Delivery pipeline</span></div>
+        <ol class="pipe-steps">
+          <li><b>Git</b><span data-i18n="ps_1">commit &amp; review</span></li>
+          <li><b data-i18n="ps_2t">Tests</b><span data-i18n="ps_2">unit · integration</span></li>
+          <li><b data-i18n="ps_3t">Build</b><span data-i18n="ps_3">Android · Web</span></li>
+          <li><b>Google Play</b><span data-i18n="ps_4">publish · 5 apps live</span></li>
+        </ol>
+        <div class="pipe-bar" aria-hidden="true"><i></i></div>
       </div>
     </div>
   </div>
@@ -4011,7 +4216,7 @@ if (overlay) {
    snapshotted on load so switching back is lossless.
    --------------------------------------------------------------- */
 const AR = {
-  nav_1:"الأعمال", nav_2:"نبذة", nav_3:"الأدوات", nav_4:"مشاريع", nav_5:"تواصل", nav_6:"الخدمات", nav_7:"الخبرة",
+  nav_1:"الأعمال", nav_2:"نبذة", nav_5:"تواصل", nav_6:"الخدمات", nav_7:"الخبرة",
   avail_1:'<span class="avail-dot"></span> متاح للعمل الحر',
 
   eyebrow_1:"مطوّر Flutter · المنيا، مصر · متاح للعمل عن بُعد",
@@ -4030,20 +4235,12 @@ const AR = {
   apps_lead_1:"منصة تعليمية واحدة، صُمّمت لخمسة مدرّسين باحتياجات مختلفة، ومعها أعمال الويب والموبايل حولها. اسحب الحلقة أو اضغط على أي بطاقة لاستعراضها.",
   cine_details_1:"عرض التفاصيل",
 
-  platform_label_1:"منصة تعليمية للمدرّسين", platform_status_1:"منشور",
-  platform_desc_1:"تطبيق إدارة تعلّم بعلامة بيضاء للمدرّسين الخصوصيين، بـ <strong>Flutter</strong> وباك إند <strong>Laravel</strong> مشترك. بُني مرة واحدة، ثم أُعيدت علامته ونُشر لمدرّسَين مستقلَّين يدرّسان مادتين مختلفتين.",
-  platform_feature_1:"حضور بكود QR", platform_feature_2:"امتحانات مؤقّتة أونلاين",
-  platform_feature_3:"نتائج فورية",  platform_feature_4:"متابعة الاشتراكات",
-  shot_note_1:"لقطات من المتجر مباشرة", variant_label_1:"منشور باسم",
-  platform_store_btn_1:"افتح على Google Play ↗",
+  
 
-  platform_label_2:"منصة MN التعليمية", platform_status_2:"منشور",
-  platform_desc_2:"تطبيق مرافق لمقررات طلاب علوم الحاسب بـ<strong>جامعة المنيا</strong>، مبني بـ Flutter. قاعدة كود واحدة يُعاد استخدامها كل عام بمحتوى ذلك العام.",
-  platform_feature_5:"مكتبة مصادر المقرر", platform_feature_6:"تنقّل بسيط ومركّز",
-  platform_feature_7:"يعمل دون إنترنت",
-  shot_note_2:"لقطات من المتجر مباشرة", variant_label_2:"منشور باسم",
-  platform_store_btn_2:"افتح على Google Play ↗",
-  platform_shared_note_1:"4 تطبيقات منشورة على Google Play · أكثر من 600 تحميل · من قاعدتَي كود اثنتين",
+
+
+  
+
 
   tag_2:"نبذة", stitle_2:"من تطبيق مذاكرة إلى منصة <em>يعمل عليها مدرّسون</em>",
   about_p1:"مطوّر Flutter من المنيا، مصر، وطالب في السنة النهائية بكلية الحاسبات والذكاء الاصطناعي، جامعة المنيا الأهلية.",
@@ -4057,18 +4254,24 @@ const AR = {
   cred_k_3:"النشر",   cred_v_3:"Google Play<span>5 تطبيقات منشورة · أكثر من 800 تحميل</span>",
 
   tag_3:"الأدوات", stitle_3:"أدوات مرتّبة حسب <em>وظيفتها</em>",
-  stack_group_title_1:"الموبايل",
-  stack_item_note_1:"الإطار الأساسي", stack_item_note_2:"منطق التطبيق",
-  stack_item_note_3:"إدارة الحالة",   stack_item_note_4:"بنية التطبيق",
-  stack_item_note_14:"تخزين مؤقت محلي",
-  stack_group_title_2:"الباك إند والبيانات",
-  stack_item_note_7:"واجهات PHP", stack_item_note_8:"تصميم قواعد البيانات",
-  stack_item_note_5:"مصادقة · إشعارات · إعدادات", stack_item_note_6:"قاعدة بيانات · تخزين",
-  stack_item_note_15:"الباك إند السابق",
-  stack_group_title_3:"الويب والتسليم",
-  stack_item_note_16:"مواقع العملاء", stack_item_note_17:"لوحات تحكم ويب",
-  stack_item_note_12:"النشر", stack_item_note_10:"التحكّم بالصلاحيات",
-  stack_item_note_18:"اختبارات وحدة وتكامل",
+  wire_lead_1:'كل أداة في الطبقة التي تؤدي فيها عملها. <span class="hint-hover">مرّر المؤشر على</span><span class="hint-touch">اضغط على</span> أي أداة لتتبّع ما تتصل به.',
+  wire_t_1:"التطبيق", wire_s_1:"ما يلمسه المستخدم",
+  wire_t_2:"الباك إند", wire_s_2:"القواعد والخدمات",
+  wire_t_3:"البيانات", wire_s_3:"أين تُحفظ",
+  wn_flutter:"أندرويد · ويب", wn_dart:"منطق التطبيق", wn_bloc:"إدارة الحالة", wn_clean:"بنية التطبيق",
+  wn_next:"مواقع ويب", wn_react:"لوحات تحكم",
+  wn_laravel:"واجهات PHP", wn_rest:"عقود الواجهات", wn_jwt:"التحكّم بالصلاحيات", wn_nest:"الباك إند السابق",
+  wn_mysql:"قاعدة البيانات الرئيسية", wn_firebase:"إشعارات · إعدادات", wn_supabase:"باك إند جاهز كخدمة", wn_hive:"تخزين مؤقت على الجهاز",
+  wn_rtdb:"تطبيقات المذاكرة", wn_pg:"NestJS · Supabase",
+  pipe_t_1:"خط التسليم",
+  wt_k_1:"المسار", wt_idle_1:"اختر أداة لتتبّع بياناتها",
+  ps_1:"حفظ ومراجعة", ps_2t:"الاختبارات", ps_2:"وحدة · تكامل", ps_3t:"البناء", ps_3:"أندرويد · ويب", ps_4:"نشر · 5 تطبيقات منشورة",
+
+  
+
+  
+
+  
 
   tag_4:"الخدمات", stitle_4:"ماذا يمكنني <em>أن أبني لك</em>",
   svc_n_1:"الخدمة الأساسية", svc_t_1:"منصة تعليمية باسمك",
@@ -4096,7 +4299,6 @@ const AR = {
   xp_role_3:"تطبيقات مذاكرة MN — CS <em>· Flutter</em>",
   xp_3_1:"تطبيقان لكليتي على Google Play بأكثر من 600 تحميل: شروحات فيديو مختارة وملفات PDF وامتحانات سابقة واختبارات.",
   xp_3_2:"Firebase Crashlytics و Remote Config و Realtime Database. ومن هنا بدأت المنصة التعليمية.",
-
 
 
   tag_9:"تواصل", stitle_5:"عندك فكرة <em>تطبيق؟</em>",
@@ -4254,8 +4456,6 @@ const APPS_AR = {
   }
 
   document.querySelectorAll('.m-cred .cred-row').forEach((r, i) => r.style.setProperty('--i', i));
-  document.querySelectorAll('.stack-group').forEach((g) =>
-    g.querySelectorAll('.stack-item').forEach((it, j) => it.style.setProperty('--j', j)));
 
   const reveal = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
@@ -4635,6 +4835,12 @@ html[lang="ar"] .hero-note.drawn{
 
   if (reduce) return;
 
+  /* ---- ambient loops (marquee, aurora) run only while on screen ---- */
+  const liveLoop = new IntersectionObserver((entries) => {
+    entries.forEach((e) => e.target.classList.toggle('is-live', e.isIntersecting));
+  });
+  document.querySelectorAll('.tech-marquee, .aurora').forEach((el) => liveLoop.observe(el));
+
   /* ---- scan beam: once per section ---- */
   const scanIO = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
@@ -4766,6 +4972,185 @@ html[lang="ar"] .hero-note.drawn{
   [story, xpWrap].forEach((el) => el && liveIO.observe(el));
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Stack wiring: edges between the tools that actually talk, built
+   from the nodes' boxes (so it follows layout and RTL), packets
+   that run along them, focus-on-hover, and a pipeline that keeps
+   "shipping" while the section is on screen.
+   --------------------------------------------------------------- */
+(function () {
+  const wire = document.getElementById('wire');
+  if (!wire) return;
+  const svg = wire.querySelector('.wire-svg');
+  const gEdges = svg.querySelector('.wire-edges');
+  const gPackets = svg.querySelector('.wire-packets');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const NS = 'http://www.w3.org/2000/svg';
+
+  // who talks to whom (drawn); members only light up with their host
+  const EDGES = [
+    ['flutter', 'laravel'], ['flutter', 'firebase'], ['react', 'laravel'], ['next', 'supabase'],
+    ['laravel', 'mysql'], ['firebase', 'rtdb'], ['supabase', 'postgres'], ['nest', 'postgres'],
+  ];
+  const MEMBERS = { dart: 'flutter', bloc: 'flutter', clean: 'flutter', hive: 'flutter', rest: 'laravel', jwt: 'laravel' };
+
+  const nodes = {};
+  wire.querySelectorAll('.wire-node').forEach((el, i) => { nodes[el.dataset.node] = el; el.style.setProperty('--n', i); });
+  EDGES.forEach(([a, b]) => { nodes[a].classList.add('has-edge'); nodes[b].classList.add('has-edge'); });
+
+  let paths = [];
+  function build() {
+    gEdges.textContent = '';
+    gPackets.textContent = '';
+    paths = [];
+    if (getComputedStyle(svg).display === 'none') return;
+    const base = wire.getBoundingClientRect();
+    const rtl = document.documentElement.dir === 'rtl';
+    const box = (el) => { const r = el.getBoundingClientRect(); return { l: r.left - base.left, r: r.right - base.left, cy: r.top - base.top + r.height / 2 }; };
+    EDGES.forEach(([a, b], i) => {
+      const A = box(nodes[a]), B = box(nodes[b]);
+      // every edge joins neighbouring layers: leave from the side facing the target
+      const sx = rtl ? A.l : A.r, ex = rtl ? B.r : B.l;
+      const dx = (ex - sx) / 2;
+      const d = `M${sx.toFixed(1)},${A.cy.toFixed(1)} C${(sx + dx).toFixed(1)},${A.cy.toFixed(1)} ${(ex - dx).toFixed(1)},${B.cy.toFixed(1)} ${ex.toFixed(1)},${B.cy.toFixed(1)}`;
+      const path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('pathLength', '1');
+      path.setAttribute('class', 'wire-edge');
+      path.id = 'wedge' + i;
+      path.dataset.a = a; path.dataset.b = b;
+      path.style.transitionDelay = (0.5 + i * 0.09) + 's';
+      gEdges.appendChild(path);
+      paths.push(path);
+      if (reduce) return;
+      // two packets per edge, out of phase
+      for (let k = 0; k < 2; k++) {
+        const c = document.createElementNS(NS, 'circle');
+        c.setAttribute('r', k ? '1.8' : '2.6');
+        c.setAttribute('class', 'wire-packet');
+        c.dataset.a = a; c.dataset.b = b;
+        const m = document.createElementNS(NS, 'animateMotion');
+        const dur = 2.6 + (i % 4) * 0.45;
+        m.setAttribute('dur', dur + 's');
+        m.setAttribute('repeatCount', 'indefinite');
+        m.setAttribute('begin', (-(k * dur / 2) - i * 0.3).toFixed(2) + 's');
+        m.setAttribute('calcMode', 'spline');
+        m.setAttribute('keyTimes', '0;1');
+        m.setAttribute('keySplines', '.45 .05 .35 1');
+        const mp = document.createElementNS(NS, 'mpath');
+        mp.setAttribute('href', '#wedge' + i);
+        m.appendChild(mp);
+        c.appendChild(m);
+        gPackets.appendChild(c);
+      }
+    });
+  }
+
+  /* focus: a tool, its host, and everything wired to either */
+  function focus(id) {
+    if (!id) { wire.classList.remove('is-focus'); wire.querySelectorAll('.is-on').forEach((e) => e.classList.remove('is-on')); writeTrace(null); return; }
+    // the whole path through this tool: everything downstream of it and everything upstream
+    const start = MEMBERS[id] || id;
+    const walk = (from, fwd) => {
+      const seen = new Set([from]), queue = [from];
+      while (queue.length) {
+        const n = queue.shift();
+        EDGES.forEach(([a, b]) => {
+          const [src, dst] = fwd ? [a, b] : [b, a];
+          if (src === n && !seen.has(dst)) { seen.add(dst); queue.push(dst); }
+        });
+      }
+      return seen;
+    };
+    const on = new Set([id, ...walk(start, true), ...walk(start, false)]);
+    Object.entries(nodes).forEach(([k, el]) => el.classList.toggle('is-on', on.has(k)));
+    svg.querySelectorAll('[data-a]').forEach((el) => el.classList.toggle('is-on', on.has(el.dataset.a) && on.has(el.dataset.b)));
+    wire.classList.add('is-focus');
+    writeTrace(on);
+  }
+
+  /* the readout: lit tools, layer by layer, App → Backend → Data */
+  const traceEl = document.getElementById('wireTrace');
+  const idleEl = traceEl.previousElementSibling;   // translated by the language layer, never rewritten here
+  const LAYERS = ['app', 'api', 'data'];
+  const nameOf = (id) => nodes[id].querySelector('.wn-name').textContent;
+  function writeTrace(on) {
+    if (!on) { traceEl.hidden = true; traceEl.textContent = ''; idleEl.hidden = false; return; }
+    const hops = LAYERS
+      .map((layer) => Object.keys(nodes).filter((k) => on.has(k) && nodes[k].closest('.wire-col').dataset.layer === layer))
+      .filter((ids) => ids.length)
+      .map((ids) => ids.map((k) => '<b>' + nameOf(k) + '</b>').join(', '));
+    idleEl.hidden = true;
+    traceEl.hidden = false;
+    traceEl.innerHTML = hops.join('<i>→</i>') + '<span class="wt-caret" aria-hidden="true"></span>';
+  }
+  // mouse: hover traces the path; touch and pen: a tap toggles it; keyboard: focus traces it
+  let current = null, lastPointer = 'mouse', clearT = 0;
+  const set = (id) => { clearTimeout(clearT); if (id === current) return; current = id; focus(id); };
+  // leaving a tool waits a beat, so sliding to its neighbour across the gap does not blink
+  const clearSoon = () => { clearTimeout(clearT); clearT = setTimeout(() => { current = null; focus(null); }, 140); };
+  Object.entries(nodes).forEach(([id, el]) => {
+    el.addEventListener('pointerdown', (e) => { lastPointer = e.pointerType; });
+    el.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') set(id); });
+    el.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') clearSoon(); });
+    el.addEventListener('click', () => { if (lastPointer !== 'mouse') { if (current === id) { current = null; focus(null); } else set(id); } });
+    el.addEventListener('focus', () => set(id));
+    el.addEventListener('blur', clearSoon);
+    el.addEventListener('keydown', (e) => { if (e.key === 'Escape') { el.blur(); current = null; focus(null); } });
+  });
+  // a tap anywhere else lets go of the traced path
+  document.addEventListener('pointerdown', (e) => {
+    if (current && e.pointerType !== 'mouse' && !e.target.closest('.wire-node')) { current = null; focus(null); }
+  });
+
+  /* pipeline: stages complete one by one, then it ships again */
+  const pipe = document.getElementById('pipe');
+  const steps = [...pipe.querySelectorAll('.pipe-steps li')];
+  let stage = -1, timer = 0;
+  function tick() {
+    stage = (stage + 1) % (steps.length + 2);
+    if (stage === steps.length + 1) { pipe.classList.add('is-reset'); steps.forEach((s) => s.classList.remove('done')); pipe.style.setProperty('--pipe', 0); return; }
+    pipe.classList.remove('is-reset');
+    const upto = Math.min(stage, steps.length - 1);
+    steps.forEach((s, i) => s.classList.toggle('done', i <= upto));
+    pipe.style.setProperty('--pipe', (upto / (steps.length - 1)).toFixed(3));
+  }
+  if (reduce) { steps.forEach((s) => s.classList.add('done')); pipe.style.setProperty('--pipe', 1); }
+  else pipe.style.setProperty('--pipe', 0);
+
+  /* run only while on screen */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        if (!wire.classList.contains('is-in')) {
+          wire.classList.add('is-in');
+          // wire up only once the layers have landed, so lines meet the tools they connect
+          setTimeout(() => {
+            build();
+            requestAnimationFrame(() => requestAnimationFrame(() => wire.classList.add('is-drawn')));
+          }, reduce ? 0 : 1150);
+        }
+        wire.classList.add('is-live');
+        if (svg.unpauseAnimations) svg.unpauseAnimations();
+        if (!reduce && !timer) timer = setInterval(tick, 1100);
+      } else {
+        wire.classList.remove('is-live');
+        if (svg.pauseAnimations) svg.pauseAnimations();
+        clearInterval(timer); timer = 0;
+      }
+    });
+  }, { threshold: 0.15 });
+  io.observe(wire);
+
+  // layout or language changes move the boxes: rebuild the wires
+  let rb = 0;
+  const rebuild = () => { cancelAnimationFrame(rb); rb = requestAnimationFrame(() => { if (wire.classList.contains('is-drawn')) { build(); if (current) focus(current); } }); };
+  new ResizeObserver(rebuild).observe(wire);
+  new MutationObserver(rebuild).observe(document.documentElement, { attributes: true, attributeFilter: ['dir'] });
 })();
 </script>
 
