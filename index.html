@@ -1807,94 +1807,6 @@ hr.rule{
   margin:-20px 0 34px;
 }
 .contact-lead a{ color:var(--signal); text-underline-offset:3px; }
-.contact-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr); /* 6 cards -> two full rows, no empty cells */
-  gap:1px;
-  padding:1px;
-  background:var(--line);
-  border-radius:8px;
-  overflow:hidden;
-}
-
-.c-card{
-  background:var(--surface);
-  padding:28px 22px;
-  text-decoration:none;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  transition:background .3s ease;
-}
-
-a.c-card:hover{ background:var(--paper-dim); }
-
-.c-ico{
-  width:38px;height:38px;
-  border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--ink-soft);
-  border:1px solid var(--line);
-  background:var(--paper-dim);
-  transition:transform .45s var(--ease-out), color .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease;
-}
-
-.c-ico svg{
-  width:18px; height:18px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.6;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-
-/* keyboard focus gets the same state as hover; the ring sits inside the card
-   because the grid clips its edges and neighbouring cards paint over it */
-a.c-card:focus-visible{ outline:2px solid var(--signal); outline-offset:-2px; z-index:2; }
-
-a.c-card:hover .c-ico,
-a.c-card:focus-visible .c-ico{
-  transform:translateY(-2px);
-  color:#fff;
-  border-color:rgba(142,155,255,.55);
-  background:var(--signal-dim);
-  box-shadow:0 10px 22px -10px rgba(142,155,255,.6);
-}
-
-.c-arrow{
-  display:inline-block;
-  color:var(--ink-faint);
-  transition:transform .45s var(--ease-out), color .3s ease;
-}
-a.c-card:hover .c-arrow,
-a.c-card:focus-visible .c-arrow{ color:var(--signal); transform:translate(3px,-3px); }
-
-a.c-card .c-handle{ transition:color .3s ease; }
-a.c-card:hover .c-handle,
-a.c-card:focus-visible .c-handle{ color:var(--ink); }
-
-.c-name{
-  font-size:14.5px;
-  font-weight:600;
-  color:var(--ink);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.c-handle{
-  font-family:var(--mono);
-  font-size:12px;
-  color:var(--ink-soft);
-  margin-top:2px;
-}
-
-@media (max-width:860px){
-  .contact-grid{ grid-template-columns:1fr 1fr; }
-}
-@media (max-width:520px){
-  .contact-grid{ grid-template-columns:1fr; }
-}
 
 /* ============================================
    FOOTER
@@ -1987,34 +1899,6 @@ footer .wrap{
 }
 .m-title .wi{ display:inline-block; }
 
-/* spotlight (Contact): the grid lines light up around the cursor and the card under it glows */
-.spot-grid{ position:relative; isolation:isolate; }
-.spot-grid::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  z-index:0;
-  background:radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(142,155,255,.7), rgba(142,155,255,0) 65%);
-  opacity:0;
-  transition:opacity .5s ease;
-  pointer-events:none;
-}
-.spot-grid > *{ position:relative; z-index:1; }
-.spot-grid > *::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  z-index:0;
-  background:radial-gradient(300px circle at var(--mx, 50%) var(--my, 50%), rgba(142,155,255,.09), rgba(142,155,255,0) 70%);
-  opacity:0;
-  transition:opacity .5s ease;
-  pointer-events:none;
-}
-.spot-grid > * > *{ position:relative; z-index:1; }
-@media (hover:hover) and (pointer:fine){
-  .spot-grid:hover::before,
-  .spot-grid:hover > *::before{ opacity:1; }
-}
 
 @media (prefers-reduced-motion:no-preference){
 
@@ -2094,19 +1978,6 @@ footer .wrap{
   .has-motion .m-cred.is-in .cred-v{ animation-delay:calc(.18s + var(--stagger) + var(--i, 0) * var(--stagger) * 2); }
 
 
-  /* Contact: icons pop across the grid in a wave, each label follows its icon */
-  .has-motion .contact-grid .c-ico,
-  .has-motion .contact-grid .c-card > div:last-child{ opacity:0; }
-  .has-motion .contact-grid.is-in .c-ico{
-    opacity:1;
-    animation:m-pop .6s var(--ease-spring) backwards;
-    animation-delay:calc(.15s + var(--i, 0) * var(--stagger) * 1.5);
-  }
-  .has-motion .contact-grid.is-in .c-card > div:last-child{
-    opacity:1;
-    animation:m-rise var(--dur-reveal) var(--ease-out) backwards;
-    animation-delay:calc(.22s + var(--i, 0) * var(--stagger) * 1.5);
-  }
 
   /* footer: the rule opens from the centre, then the line of text fades up */
   .has-motion .m-foot::before{
@@ -2380,7 +2251,7 @@ footer .wrap{
 .aurora i{ animation-play-state:paused !important; }
 .aurora.is-live i{ animation-play-state:running !important; }
 #contact > .wrap{ position:relative; z-index:1; }
-.contact-cta{ display:flex; flex-wrap:wrap; gap:14px; margin:-6px 0 38px; }
+.contact-cta{ display:flex; flex-wrap:wrap; gap:12px; }
 .magnetic{ transform:translate(var(--mgx, 0px), var(--mgy, 0px)); transition:transform .5s var(--ease-out), background .15s, border-color .15s, box-shadow .3s; }
 .magnetic.is-pulled{ transition:transform .15s linear, background .15s, border-color .15s, box-shadow .3s; }
 .magnetic:hover{ transform:translate(var(--mgx, 0px), var(--mgy, 0px)); }
@@ -2689,6 +2560,233 @@ html[lang="ar"] .wire-title{ font-family:var(--arabic); }
   .pipe-steps li{ opacity:1; }
 }
 
+/* ============================================
+   CONTACT — a comms console: a radar that keeps
+   sweeping, the facts a client asks first, and the
+   channels as frequencies that connect one by one.
+   ============================================ */
+.cx{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:22px;
+  align-items:stretch;
+}
+.cx-console{ padding:28px 28px 26px; display:flex; flex-direction:column; gap:26px; justify-content:space-between; }
+.cx-top{ display:flex; gap:28px; align-items:center; }
+
+/* radar */
+.cx-radar{
+  position:relative;
+  flex-shrink:0;
+  width:168px; aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(142,155,255,.12), rgba(142,155,255,.02) 62%, transparent 70%);
+  box-shadow:inset 0 0 0 1px rgba(142,155,255,.22);
+  overflow:hidden;
+  isolation:isolate;
+}
+.cx-grid{
+  position:absolute; inset:0; border-radius:50%;
+  background:
+    radial-gradient(circle, transparent 32%, rgba(142,155,255,.18) 32.5%, transparent 33.5%),
+    radial-gradient(circle, transparent 64%, rgba(142,155,255,.14) 64.5%, transparent 65.5%),
+    linear-gradient(rgba(142,155,255,.14), rgba(142,155,255,.14)) 50% 0 / 1px 100% no-repeat,
+    linear-gradient(rgba(142,155,255,.14), rgba(142,155,255,.14)) 0 50% / 100% 1px no-repeat;
+}
+.cx-sweep{
+  position:absolute; inset:0; border-radius:50%;
+  background:conic-gradient(from 0deg, rgba(142,155,255,0) 0deg, rgba(142,155,255,0) 280deg, rgba(142,155,255,.45) 355deg, rgba(220,224,255,.9) 360deg);
+  animation:cx-spin 4s linear infinite paused;
+}
+.cx-ring{
+  position:absolute; inset:0; margin:auto;
+  width:100%; height:100%;
+  border-radius:50%;
+  border:1px solid rgba(142,155,255,.55);
+  transform:scale(.15);
+  opacity:0;
+  animation:cx-ring 3.6s cubic-bezier(.2,.6,.3,1) infinite paused;
+}
+.cx-ring:nth-child(2){ animation-delay:1.2s; }
+.cx-ring:nth-child(3){ animation-delay:2.4s; }
+.cx-core{
+  position:absolute; left:50%; top:50%;
+  width:12px; height:12px; margin:-6px 0 0 -6px;
+  border-radius:50%;
+  background:#eef0ff;
+  box-shadow:0 0 0 4px rgba(142,155,255,.25), 0 0 22px 4px rgba(142,155,255,.85);
+}
+.cx-blip{
+  position:absolute;
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--live);
+  box-shadow:0 0 10px var(--live);
+  opacity:0;
+  animation:cx-blip 4s ease-out infinite paused;
+}
+.cx-blip:nth-of-type(1){ left:70%; top:28%; animation-delay:.55s; }
+.cx-blip:nth-of-type(2){ left:24%; top:62%; animation-delay:2.1s; }
+.cx-blip:nth-of-type(3){ left:62%; top:76%; animation-delay:3.2s; }
+.cx.is-live .cx-sweep,
+.cx.is-live .cx-ring,
+.cx.is-live .cx-blip{ animation-play-state:running; }
+@keyframes cx-spin{ to{ transform:rotate(360deg); } }
+@keyframes cx-ring{ 0%{ transform:scale(.15); opacity:.9; } 100%{ transform:scale(1); opacity:0; } }
+@keyframes cx-blip{ 0%,100%{ opacity:0; transform:scale(.4); } 8%{ opacity:1; transform:scale(1.3); } 30%{ opacity:.6; transform:scale(1); } 60%{ opacity:0; } }
+
+/* the facts */
+.cx-info{ min-width:0; flex:1; }
+.cx-status{ display:flex; align-items:center; gap:10px; font-size:15px; font-weight:600; color:var(--ink); margin-bottom:16px; }
+.cx-meta{ display:flex; flex-direction:column; }
+.cx-meta div{ display:flex; justify-content:space-between; gap:14px; padding:9px 0; border-top:1px solid var(--line-soft); }
+.cx-meta dt{ font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); padding-top:2px; flex-shrink:0; }
+.cx-meta dd{ font-size:13.5px; color:var(--ink-soft); text-align:end; display:flex; align-items:center; gap:6px; justify-content:flex-end; }
+.cx-meta time{ font-family:var(--mono); color:var(--ink); font-variant-numeric:tabular-nums; direction:ltr; unicode-bidi:isolate; }
+.cx-pin svg{ width:13px; height:13px; fill:none; stroke:var(--signal); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; display:block; }
+
+/* channels */
+.cx-side{ display:flex; flex-direction:column; }
+.cx-k{ display:flex; justify-content:space-between; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--signal); margin:2px 4px 12px; }
+.cx-k-n{ color:var(--ink-faint); }
+.cx-channels{ list-style:none; display:flex; flex-direction:column; gap:10px; flex:1; }
+.cx-row{ position:relative; display:flex; gap:8px; flex:1; }
+.cx-ch{
+  position:relative;
+  flex:1;
+  display:grid;
+  grid-template-columns:auto 1fr auto auto;
+  align-items:center;
+  gap:14px;
+  padding:13px 16px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(10,12,36,.72);
+  text-decoration:none;
+  overflow:hidden;
+  isolation:isolate;
+  transition:border-color .35s ease, transform .45s var(--ease-out), box-shadow .35s ease;
+}
+/* light sweeps across the row from where reading starts */
+.cx-ch::after{
+  content:'';
+  position:absolute; inset:0;
+  z-index:-1;
+  background:linear-gradient(90deg, rgba(142,155,255,.16), rgba(142,155,255,.04) 60%, transparent);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .55s var(--ease-out);
+}
+[dir="rtl"] .cx-ch::after{ transform-origin:right; background:linear-gradient(270deg, rgba(142,155,255,.16), rgba(142,155,255,.04) 60%, transparent); }
+.cx-ch:hover,
+.cx-ch:focus-visible{ border-color:rgba(142,155,255,.55); transform:translateX(calc(4px * var(--dir))); box-shadow:0 14px 34px -18px rgba(142,155,255,.8); }
+.cx-ch:hover::after,
+.cx-ch:focus-visible::after{ transform:scaleX(1); }
+.cx-ch:focus-visible{ outline:2px solid var(--signal); outline-offset:2px; }
+.cx-ico{
+  width:38px; height:38px;
+  border-radius:10px;
+  display:grid; place-items:center;
+  border:1px solid var(--line);
+  background:var(--paper-dim);
+  color:var(--ink-soft);
+  transition:color .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease;
+}
+.cx-ico svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.cx-ch:hover .cx-ico,
+.cx-ch:focus-visible .cx-ico{ color:#fff; border-color:rgba(142,155,255,.6); background:var(--signal-dim); box-shadow:0 0 18px rgba(142,155,255,.5); }
+.cx-txt{ display:flex; flex-direction:column; gap:3px; min-width:0; }
+.cx-name{ font-size:14.5px; font-weight:600; color:var(--ink); }
+.cx-handle{ font-family:var(--mono); font-size:12px; color:var(--ink-soft); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; direction:ltr; unicode-bidi:isolate; text-align:start; }
+/* signal bars: still until you hover, then they read the line */
+.cx-bars{ display:flex; align-items:flex-end; gap:2px; height:14px; }
+.cx-bars i{ width:3px; border-radius:1px; background:var(--line-strong); transform-origin:bottom; transition:background .3s ease; }
+.cx-bars i:nth-child(1){ height:35%; } .cx-bars i:nth-child(2){ height:60%; } .cx-bars i:nth-child(3){ height:85%; } .cx-bars i:nth-child(4){ height:100%; }
+.cx-ch:hover .cx-bars i,
+.cx-ch:focus-visible .cx-bars i{ background:var(--signal); animation:cx-eq .9s ease-in-out infinite alternate; }
+.cx-ch:hover .cx-bars i:nth-child(2){ animation-delay:-.3s; }
+.cx-ch:hover .cx-bars i:nth-child(3){ animation-delay:-.6s; }
+.cx-ch:hover .cx-bars i:nth-child(4){ animation-delay:-.15s; }
+@keyframes cx-eq{ from{ transform:scaleY(.3); } to{ transform:scaleY(1); } }
+.cx-go{ color:var(--ink-faint); transition:transform .45s var(--ease-spring), color .3s ease; }
+.cx-ch:hover .cx-go,
+.cx-ch:focus-visible .cx-go{ color:var(--signal); transform:translate(calc(3px * var(--dir)), -3px); }
+[dir="rtl"] .cx-go{ display:inline-block; scale:-1 1; }
+/* copy email */
+.cx-copy{
+  flex-shrink:0;
+  font-family:var(--mono);
+  font-size:11.5px;
+  color:var(--ink-soft);
+  background:rgba(10,12,36,.72);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:0 14px;
+  min-width:74px;
+  cursor:pointer;
+  transition:color .3s ease, border-color .3s ease, background .3s ease;
+}
+.cx-copy:hover{ color:var(--ink); border-color:rgba(142,155,255,.55); }
+.cx-copy:focus-visible{ outline:2px solid var(--signal); outline-offset:2px; }
+.cx-copy-b{ display:none; }
+.cx-copy.is-done{ color:var(--live); border-color:rgba(74,222,154,.6); background:var(--live-bg); }
+.cx-copy.is-done .cx-copy-a{ display:none; }
+.cx-copy.is-done .cx-copy-b{ display:inline; }
+
+html[lang="ar"] .cx-meta dt,
+html[lang="ar"] .cx-k,
+html[lang="ar"] .cx-copy{ font-family:var(--arabic); letter-spacing:0; }
+
+/* entrance: the console lands, then each channel is "connected" by a scan line */
+@media (prefers-reduced-motion:no-preference){
+  .has-motion .cx-console{ opacity:0; transform:translateY(18px); }
+  .has-motion .cx.is-in .cx-console{ opacity:1; transform:none; transition:opacity .8s ease, transform .9s var(--ease-out); }
+  .has-motion .cx-k{ opacity:0; }
+  .has-motion .cx.is-in .cx-k{ opacity:1; transition:opacity .6s ease .2s; }
+  .has-motion .cx-row{ opacity:0; transform:translateX(calc(14px * var(--dir))); }
+  .has-motion .cx.is-in .cx-row{
+    opacity:1; transform:none;
+    transition:opacity .6s ease, transform .8s var(--ease-out);
+    transition-delay:calc(.3s + var(--i, 0) * .12s);
+  }
+  .has-motion .cx-row::before{
+    content:'';
+    position:absolute;
+    top:0; bottom:0;
+    inset-inline-start:0;
+    width:2px;
+    border-radius:2px;
+    background:#dfe3ff;
+    box-shadow:0 0 14px 2px rgba(142,155,255,.9);
+    opacity:0;
+    z-index:2;
+    pointer-events:none;
+  }
+  .has-motion .cx.is-in .cx-row::before{ animation:cx-connect .9s var(--ease-out) backwards; animation-delay:calc(.3s + var(--i, 0) * .12s); }
+}
+@keyframes cx-connect{
+  0%{ opacity:1; inset-inline-start:0; }
+  85%{ opacity:1; }
+  100%{ opacity:0; inset-inline-start:calc(100% - 2px); }
+}
+
+@media (max-width:980px){
+  .cx{ grid-template-columns:1fr; }
+}
+@media (max-width:560px){
+  .cx-console{ padding:22px 18px 20px; }
+  .cx-top{ flex-direction:column; align-items:stretch; gap:20px; }
+  .cx-radar{ width:132px; align-self:center; }
+  .cx-ch{ padding:12px 14px; gap:12px; }
+  .cx-bars{ display:none; }
+  .contact-cta .btn{ flex:1 1 auto; justify-content:center; }
+}
+@media (prefers-reduced-motion:reduce){
+  .cx-sweep, .cx-ring, .cx-blip{ animation:none !important; }
+  .cx-ring{ opacity:.25; transform:scale(.7); }
+  .cx-ch:hover .cx-bars i{ animation:none; }
+}
+
 @media (max-width:640px){
   .wrap{ padding-left:22px; padding-right:22px; }
   section{ padding:56px 0; }
@@ -2765,13 +2863,10 @@ html[lang="ar"] .xp-role em{ font-style:normal; }
 /* arrows point the other way when the text does */
 
 /* latin runs inside arabic text keep their own direction */
-html[lang="ar"] .c-handle,
 html[lang="ar"] .f-copy{ direction:ltr; unicode-bidi:isolate; }
-[dir="rtl"] .c-handle,
 [dir="rtl"] .f-copy{ text-align:right; }
 /* ...except the slots whose Arabic copy is Arabic prose */
-html[lang="ar"] .f-copy,
-html[lang="ar"] [data-i18n="c_handle_6"]{ direction:rtl; font-family:var(--arabic); }
+html[lang="ar"] .f-copy{ direction:rtl; font-family:var(--arabic); }
 
 /* ---- language toggle ---- */
 .lang-toggle{
@@ -3315,59 +3410,79 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
       Hiring? My CV is one click away.
     </p>
 
-    <div class="contact-cta">
-      <a class="btn btn-solid btn-glow magnetic" href="https://wa.me/201016513146?text=Hi%20Mina%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20like%20to%20talk%20about%20a%20mobile%20app%20project." target="_blank" rel="noopener"><span data-i18n="cta_wa_1">Message me on WhatsApp ↗</span></a>
-      <a class="btn btn-line magnetic" href="assets/Mina-Nabil-CV.pdf" download><span data-i18n="btn_cv_2">Download CV ↓</span></a>
-    </div>
-
-    <div class="contact-grid m-grid spot-grid">
-      <a href="https://wa.me/201016513146?text=Hi%20Mina%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20like%20to%20talk%20about%20a%20mobile%20app%20project." target="_blank" rel="noopener" class="c-card" aria-label="Message Mina Nabil on WhatsApp">
-        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
-        <div>
-          <div class="c-name" data-i18n="c_name_1">WhatsApp <span class="c-arrow" aria-hidden="true">↗</span></div>
-          <div class="c-handle" data-i18n="c_handle_1">+20 101 651 3146</div>
+    <div class="cx">
+      <div class="cx-console holo">
+        <span class="holo-corners" aria-hidden="true"></span>
+        <div class="cx-top">
+          <div class="cx-radar" aria-hidden="true">
+            <i class="cx-ring"></i><i class="cx-ring"></i><i class="cx-ring"></i>
+            <span class="cx-grid"></span>
+            <span class="cx-sweep"></span>
+            <span class="cx-blip"></span><span class="cx-blip"></span><span class="cx-blip"></span>
+            <span class="cx-core"></span>
+          </div>
+          <div class="cx-info">
+            <p class="cx-status"><span class="live-dot"></span><span data-i18n="cx_status_1">Open to freelance &amp; remote work</span></p>
+            <dl class="cx-meta">
+              <div><dt data-i18n="cx_k_1">Local time</dt><dd><time data-clock>--:--</time> <span data-i18n="cx_v_1">Minya, Egypt</span></dd></div>
+              <div><dt data-i18n="cx_k_2">Based in</dt><dd><span class="cx-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span><span data-i18n="cx_v_2">Minya · open to remote</span></dd></div>
+              <div><dt data-i18n="cx_k_3">Languages</dt><dd data-i18n="cx_v_3">Arabic · English</dd></div>
+            </dl>
+          </div>
         </div>
-      </a>
-
-      <a href="mailto:minanabil20303030@gmail.com?subject=Mobile%20app%20project" class="c-card" aria-label="Email Mina Nabil">
-        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-        <div>
-          <div class="c-name" data-i18n="c_name_2">Email</div>
-          <div class="c-handle" data-i18n="c_handle_2">minanabil20303030@gmail.com</div>
-        </div>
-      </a>
-
-      <a href="https://linkedin.com/in/mina-nabil-97bb1b300" target="_blank" rel="noopener" class="c-card" aria-label="LinkedIn">
-        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-        <div>
-          <div class="c-name" data-i18n="c_name_3">LinkedIn <span class="c-arrow" aria-hidden="true">↗</span></div>
-          <div class="c-handle" data-i18n="c_handle_3">mina-nabil-97bb1b300</div>
-        </div>
-      </a>
-
-      <a href="https://github.com/mina-nabil-dev" target="_blank" rel="noopener" class="c-card" aria-label="GitHub">
-        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
-        <div>
-          <div class="c-name" data-i18n="c_name_4">GitHub <span class="c-arrow" aria-hidden="true">↗</span></div>
-          <div class="c-handle" data-i18n="c_handle_4">@mina-nabil-dev</div>
-        </div>
-      </a>
-
-      <a href="https://www.facebook.com/profile.php?id=61550226644154" target="_blank" rel="noopener" class="c-card" aria-label="Facebook">
-        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
-        <div>
-          <div class="c-name" data-i18n="c_name_5">Facebook <span class="c-arrow" aria-hidden="true">↗</span></div>
-          <div class="c-handle" data-i18n="c_handle_5">Mina Nabil</div>
-        </div>
-      </a>
-
-      <div class="c-card" style="cursor:default;">
-        <div class="c-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <div>
-          <div class="c-name" data-i18n="c_name_6">Location</div>
-          <div class="c-handle" data-i18n="c_handle_6">Minya, Egypt · Remote</div>
+        <div class="contact-cta">
+          <a class="btn btn-solid btn-glow magnetic" href="https://wa.me/201016513146?text=Hi%20Mina%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20like%20to%20talk%20about%20a%20mobile%20app%20project." target="_blank" rel="noopener"><span data-i18n="cta_wa_1">Message me on WhatsApp ↗</span></a>
+          <a class="btn btn-line magnetic" href="assets/Mina-Nabil-CV.pdf" download><span data-i18n="btn_cv_2">Download CV ↓</span></a>
         </div>
       </div>
+
+      <div class="cx-side">
+        <p class="cx-k"><span data-i18n="cx_ch_1">Channels</span><span class="cx-k-n" aria-hidden="true">05</span></p>
+        <ul class="cx-channels">
+      <li class="cx-row">
+        <a class="cx-ch" href="https://wa.me/201016513146?text=Hi%20Mina%2C%20I%20saw%20your%20portfolio%20and%20I%27d%20like%20to%20talk%20about%20a%20mobile%20app%20project." target="_blank" rel="noopener">
+          <span class="cx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+          <span class="cx-txt"><span class="cx-name">WhatsApp</span><span class="cx-handle">+20 101 651 3146</span></span>
+          <span class="cx-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="cx-go" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li class="cx-row">
+        <a class="cx-ch" href="mailto:minanabil20303030@gmail.com?subject=Mobile%20app%20project">
+          <span class="cx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          <span class="cx-txt"><span class="cx-name" data-i18n="cx_mail_1">Email</span><span class="cx-handle">minanabil20303030@gmail.com</span></span>
+          <span class="cx-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="cx-go" aria-hidden="true">↗</span>
+        </a>
+        <button class="cx-copy" type="button" data-copy="minanabil20303030@gmail.com" aria-label="Copy email address"><span class="cx-copy-a" data-i18n="cx_copy_1">Copy</span><span class="cx-copy-b" data-i18n="cx_copied_1">Copied ✓</span></button>
+      </li>
+      <li class="cx-row">
+        <a class="cx-ch" href="https://linkedin.com/in/mina-nabil-97bb1b300" target="_blank" rel="noopener">
+          <span class="cx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>
+          <span class="cx-txt"><span class="cx-name">LinkedIn</span><span class="cx-handle">mina-nabil-97bb1b300</span></span>
+          <span class="cx-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="cx-go" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li class="cx-row">
+        <a class="cx-ch" href="https://github.com/mina-nabil-dev" target="_blank" rel="noopener">
+          <span class="cx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></span>
+          <span class="cx-txt"><span class="cx-name">GitHub</span><span class="cx-handle">@mina-nabil-dev</span></span>
+          <span class="cx-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="cx-go" aria-hidden="true">↗</span>
+        </a>
+      </li>
+      <li class="cx-row">
+        <a class="cx-ch" href="https://www.facebook.com/profile.php?id=61550226644154" target="_blank" rel="noopener">
+          <span class="cx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
+          <span class="cx-txt"><span class="cx-name">Facebook</span><span class="cx-handle">Mina Nabil</span></span>
+          <span class="cx-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="cx-go" aria-hidden="true">↗</span>
+        </a>
+      </li>
+        </ul>
+      </div>
+    </div>
     </div>
   </div>
 </section>
@@ -3403,7 +3518,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 <footer class="m-foot">
   <div class="wrap">
     <span class="f-copy" data-i18n="f_copy_1">© 2026 Mina Nabil — Flutter Developer</span>
-    <span class="f-clock"><span class="f-clock-k" data-i18n="f_clock_1">Minya, EG</span> <time id="fClock">--:--</time></span>
+    <span class="f-clock"><span class="f-clock-k" data-i18n="f_clock_1">Minya, EG</span> <time id="fClock" data-clock>--:--</time></span>
     <span class="f-status" data-i18n="f_status_1">
       <span class="live-dot"></span>
       Open to freelance &amp; remote collaboration
@@ -4304,8 +4419,10 @@ const AR = {
   tag_9:"تواصل", stitle_5:"عندك فكرة <em>تطبيق؟</em>",
   contact_lead_1:"أرسل لي فكرتك والموعد الذي تحتاجها فيه — واتساب أسرع طريقة للتواصل معي. تبحث عن موظف؟ سيرتي الذاتية على بُعد ضغطة.",
   cta_wa_1:"راسلني على واتساب ↗", btn_cv_2:"تحميل السيرة الذاتية ↓",
+  cx_status_1:"متاح للعمل الحر والعمل عن بُعد", cx_k_1:"الوقت المحلي", cx_v_1:"المنيا، مصر",
+  cx_k_2:"المقر", cx_v_2:"المنيا · متاح عن بُعد", cx_k_3:"اللغات", cx_v_3:"العربية · الإنجليزية",
+  cx_ch_1:"قنوات التواصل", cx_mail_1:"البريد", cx_copy_1:"نسخ", cx_copied_1:"تم النسخ ✓",
   f_clock_1:"المنيا، مصر", f_top_1:"↑ للأعلى",
-  c_name_2:"البريد", c_name_6:"الموقع", c_handle_6:"المنيا، مصر · عن بُعد",
 
   platform_store_btn_3:"افتح على Google Play ↗", btn_line_3:"إغلاق",
   f_copy_1:"© 2026 مينا نبيل — مطوّر Flutter",
@@ -4507,38 +4624,6 @@ const APPS_AR = {
   const hero = document.querySelector('.hero');
   if (hero) spy.observe(hero);   // back at the top, nothing is active
 
-  /* ---- Spotlight on the Contact grid (mouse only) ----
-     Reading a cell's rect after writing the grid's variables forced a style and
-     layout pass per cell (~8 recalcs a frame in tests/perf). Cell offsets inside
-     the grid are fixed while the pointer is over it, so they are read once on
-     entry; each frame is then one rect read followed by writes only. */
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('.spot-grid').forEach((grid) => {
-      const cells = [...grid.children];
-      let offsets = null, raf = 0, px = 0, py = 0;
-      const forget = () => { offsets = null; };
-      grid.addEventListener('pointerenter', forget);
-      window.addEventListener('resize', forget);
-      grid.addEventListener('pointermove', (e) => {
-        px = e.clientX; py = e.clientY;
-        if (raf) return;
-        raf = requestAnimationFrame(() => {
-          raf = 0;
-          // reads
-          if (!offsets) offsets = cells.map((c) => [c.offsetLeft, c.offsetTop]);
-          const g = grid.getBoundingClientRect();
-          const x = px - g.left, y = py - g.top;
-          // writes
-          grid.style.setProperty('--mx', `${x}px`);
-          grid.style.setProperty('--my', `${y}px`);
-          cells.forEach((c, i) => {
-            c.style.setProperty('--mx', `${x - offsets[i][0]}px`);
-            c.style.setProperty('--my', `${y - offsets[i][1]}px`);
-          });
-        });
-      });
-    });
-  }
 })();
 </script>
 
@@ -4823,10 +4908,10 @@ html[lang="ar"] .hero-note.drawn{
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   /* ---- footer clock: local time in Minya ---- */
-  const clock = document.getElementById('fClock');
-  if (clock) {
+  const clocks = document.querySelectorAll('[data-clock]');
+  if (clocks.length) {
     const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Cairo' });
-    const tick = () => { clock.textContent = fmt.format(new Date()); };
+    const tick = () => { const t = fmt.format(new Date()); clocks.forEach((c) => { c.textContent = t; }); };
     tick();
     setInterval(tick, 20000);
   }
@@ -5151,6 +5236,46 @@ html[lang="ar"] .hero-note.drawn{
   const rebuild = () => { cancelAnimationFrame(rb); rb = requestAnimationFrame(() => { if (wire.classList.contains('is-drawn')) { build(); if (current) focus(current); } }); };
   new ResizeObserver(rebuild).observe(wire);
   new MutationObserver(rebuild).observe(document.documentElement, { attributes: true, attributeFilter: ['dir'] });
+})();
+</script>
+
+<script>
+/* ---------------------------------------------------------------
+   Contact console: arrives once, radar runs only while on screen,
+   channels connect in sequence, and the email copies in one tap.
+   --------------------------------------------------------------- */
+(function () {
+  const cx = document.querySelector('.cx');
+  if (!cx) return;
+  cx.querySelectorAll('.cx-row').forEach((r, i) => r.style.setProperty('--i', i));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) cx.classList.add('is-in');
+      cx.classList.toggle('is-live', e.isIntersecting);
+    });
+  }, { threshold: 0.15 });
+  io.observe(cx);
+
+  cx.querySelectorAll('.cx-copy').forEach((btn) => {
+    let t = 0;
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy;
+      let ok = false;
+      try { await navigator.clipboard.writeText(text); ok = true; }
+      catch (err) {
+        // older browsers / insecure origins: copy through a hidden field
+        const f = document.createElement('textarea');
+        f.value = text; f.setAttribute('readonly', ''); f.style.position = 'fixed'; f.style.opacity = '0';
+        document.body.appendChild(f); f.select();
+        try { ok = document.execCommand('copy'); } catch (e2) {}
+        f.remove();
+      }
+      if (!ok) { window.location.href = 'mailto:' + text; return; }
+      btn.classList.add('is-done');
+      clearTimeout(t);
+      t = setTimeout(() => btn.classList.remove('is-done'), 1800);
+    });
+  });
 })();
 </script>
 
