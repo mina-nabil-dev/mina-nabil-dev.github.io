@@ -1231,6 +1231,15 @@ html[lang="ar"] .cine-cta--solid{ font-family:var(--arabic); letter-spacing:0; }
   .cine-dot{ width:20px; }
   .cine-dot.active::before{ width:14px; }
 }
+/* small phones: fourteen dots no longer fit beside the arrows, so they become a
+   segmented progress bar that fills the space between them */
+@media (max-width:420px){
+  .cine-nav{ grid-template-columns:auto minmax(0,1fr) auto; }
+  .cine-nav .cine-dots{ justify-self:stretch; min-width:0; gap:3px; }
+  .cine-dot{ flex:1 1 0; width:auto; min-width:0; }
+  .cine-dot::before{ width:100%; height:3px; }
+  .cine-dot.active::before{ width:100%; }
+}
 
 @media (prefers-reduced-motion:reduce){
   .mh-reflect,
@@ -2283,6 +2292,11 @@ html[lang="ar"] .f-clock,
 html[lang="ar"] .f-top{ font-family:var(--arabic); }
 /* buttons are mono with tracking in English; Arabic letters must stay joined */
 html[lang="ar"] .btn{ font-family:var(--arabic); letter-spacing:0; }
+html[lang="ar"] .platform-store-btn{ font-family:var(--arabic); letter-spacing:0; }
+/* the popup heading keeps clear of the close button in both directions; in Arabic the icon
+   is on the right, so titles of either script sit beside it there */
+.detail-heading{ padding-inline-end:36px; }
+html[dir="rtl"] .detail-heading .detail-title{ text-align:right; }
 
 /* ---------- reduced motion: show everything, move nothing ---------- */
 @media (prefers-reduced-motion:reduce){
@@ -2985,7 +2999,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
     <p class="cine-eyebrow reveal">
       <b data-i18n="tag_1">Featured Work</b>
       <span aria-hidden="true">·</span>
-      <span data-i18n="section_note_1">12 apps &amp; platforms · 360° interactive view</span>
+      <span data-i18n="section_note_1">14 apps &amp; platforms · 360° interactive view</span>
     </p>
 
     <h2 class="stitle reveal" id="workTitle" data-i18n="stitle_1">
@@ -3005,7 +3019,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
   </div>
 
   <div class="cine-info wrap">
-    <p class="cine-count" aria-hidden="true"><em id="cineCurrentNum">01</em> / <span id="cineTotalNum">12</span></p>
+    <p class="cine-count" aria-hidden="true"><em id="cineCurrentNum">01</em> / <span id="cineTotalNum">14</span></p>
     <p class="cine-active-title" id="cineActiveTitle" lang="ar" dir="rtl">يلا عربي</p>
     <p class="cine-active-sub" id="cineActiveSub">Tutor LMS platform · Flutter &amp; Laravel · Live</p>
 
@@ -3075,6 +3089,18 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
       <strong>Dave's Nashville Limo</strong>
       <p>Luxury limo booking website · Next.js &amp; Supabase · USA</p>
       <a href="https://davesnashvillelimo.com/" tabindex="-1" data-ar="الموقع">Website</a>
+    </li>
+    <li data-key="technova" data-img="assets/technova_final.webp" data-glow="#1e6bff" data-chip="Company" data-kind="Company website" data-stack="Next.js · EN / AR"
+        data-sub-ar="الموقع الرسمي للشركة · Next.js · عربي وإنجليزي">
+      <strong>Technova</strong>
+      <p>Official website for the startup I work with · Next.js · Live</p>
+      <a href="https://technova-teal.vercel.app/" tabindex="-1" data-ar="الموقع">Website</a>
+    </li>
+    <li data-key="fady" data-img="assets/fady_final.webp" data-glow="#2545e8" data-chip="Live" data-kind="Designer portfolio" data-stack="Website · EN / AR"
+        data-sub-ar="موقع شخصي لمصمم UI/UX · عربي وإنجليزي">
+      <strong>Fady Issac</strong>
+      <p>Portfolio website for a UI/UX designer · English &amp; Arabic · Live</p>
+      <a href="https://fady-issac.vercel.app/" tabindex="-1" data-ar="الموقع">Website</a>
     </li>
     <li data-key="talabat" data-img="assets/talabat_final.webp" data-glow="#ff8a1f" data-chip="Live" data-kind="Delivery app" data-stack="Next.js · Supabase · PWA"
         data-sub-ar="منصة توصيل محلية · Next.js و Supabase · منشور">
@@ -4150,6 +4176,26 @@ const APP_DATA = {
     desc: 'A US luxury transportation brand needed more than a fleet gallery: a three-step quote-request funnel that captures the trip, the route and the passenger, matched against real vehicle capacity.',
     features: ['Three-step quote request funnel', 'Point-to-point & hourly trip modes', 'Fleet catalog with passenger & luggage capacity', 'Airport, corporate & wedding service pages', 'WhatsApp hand-off with a pre-filled message', 'Light and dark theme'],
     store: 'https://davesnashvillelimo.com/'
+  },
+  technova: {
+    title: 'Technova',
+    img: 'assets/technova_final.webp',
+    status: 'live',
+    platform: 'Company website · Next.js',
+    stat: 'Software startup · Minya & Beni Suef',
+    desc: 'The official website for Technova, the startup I work with: what the team builds, the products it has shipped (including the tutor platforms on this page), and how a project moves from idea to launch.',
+    features: ['Showcase of real client products', 'Services: web, mobile, backend, UI/UX and QA', 'Industries: education, beauty, transportation', 'Four-step process: discover, design, develop, deploy', 'English and Arabic'],
+    store: 'https://technova-teal.vercel.app/'
+  },
+  fady: {
+    title: 'Fady Issac',
+    img: 'assets/fady_final.webp',
+    status: 'live',
+    platform: 'Portfolio website · English & Arabic',
+    stat: 'UI/UX designer & instructor · Cairo',
+    desc: 'A portfolio site for a UI/UX designer and instructor in Cairo: his story, services, work history and tools, built to read the same way in English and Arabic.',
+    features: ['English and Arabic with a full right-to-left layout', 'Services, experience timeline and tools sections', 'Page description and structured data for search engines', 'Responsive from phone to desktop', 'Every contact route in one place'],
+    store: 'https://fady-issac.vercel.app/'
   }
 };
 
@@ -4345,7 +4391,7 @@ const AR = {
   manifest_k_3:"منشور",     manifest_v_3:"5 على Google Play",
   manifest_k_4:"المعمارية", manifest_v_4:"Clean · BLoC/Cubit",
 
-  tag_1:"أعمال منشورة", section_note_1:"12 تطبيقًا ومنصات · عرض تفاعلي 360°",
+  tag_1:"أعمال منشورة", section_note_1:"14 تطبيقًا ومنصة · عرض تفاعلي 360°",
   stitle_1:"بُنيت مرة، <em>وصُمّمت لكل عميل</em>",
   apps_lead_1:"منصة تعليمية واحدة، صُمّمت لخمسة مدرّسين باحتياجات مختلفة، ومعها أعمال الويب والموبايل حولها. اسحب الحلقة أو اضغط على أي بطاقة لاستعراضها.",
   cine_details_1:"عرض التفاصيل",
@@ -4466,7 +4512,13 @@ const APPS_AR = {
     features:["بنية موقع تتبع الطريقة التعليمية","مسارات للثالث الإعدادي والأول والثالث الثانوي","فيديوهات وامتحانات وحلول خطوة بخطوة","واجبات ومتابعة للأداء","واجهة عربية بالكامل"] },
   daveslimo:{ platform:"موقع حجز · Next.js و Supabase", stat:"نقل فاخر · ناشفيل، أمريكا",
     desc:"علامة أمريكية للنقل الفاخر كانت تحتاج أكثر من معرض للسيارات: مسار طلب عرض سعر من ثلاث خطوات يجمع الرحلة والمسار والراكب، ويطابق الطلب مع سعة المركبات الحقيقية.",
-    features:["مسار طلب عرض سعر من ثلاث خطوات","رحلات من نقطة لنقطة أو بالساعة","كتالوج أسطول بسعة الركاب والحقائب","صفحات للمطار والشركات والأفراح","تحويل لواتساب برسالة جاهزة","وضع فاتح وداكن"] }
+    features:["مسار طلب عرض سعر من ثلاث خطوات","رحلات من نقطة لنقطة أو بالساعة","كتالوج أسطول بسعة الركاب والحقائب","صفحات للمطار والشركات والأفراح","تحويل لواتساب برسالة جاهزة","وضع فاتح وداكن"] },
+  technova:{ platform:"موقع شركة · Next.js", stat:"شركة برمجيات ناشئة · المنيا وبني سويف",
+    desc:"الموقع الرسمي لـ Technova، الشركة الناشئة التي أعمل معها: ما يبنيه الفريق، والمنتجات التي أطلقها (ومنها المنصات التعليمية في هذه الصفحة)، وكيف ينتقل المشروع من الفكرة إلى الإطلاق.",
+    features:["عرض لمنتجات حقيقية لعملاء","الخدمات: ويب وموبايل وباك إند وتصميم واختبار","المجالات: التعليم والتجميل والنقل","أربع خطوات: اكتشاف، تصميم، تطوير، إطلاق","العربية والإنجليزية"] },
+  fady:{ platform:"موقع شخصي · عربي وإنجليزي", stat:"مصمم ومدرّب UI/UX · القاهرة",
+    desc:"موقع شخصي لمصمم ومدرّب UI/UX من القاهرة: قصته وخدماته وخبراته وأدواته، ويُقرأ بالطريقة نفسها بالعربية والإنجليزية.",
+    features:["العربية والإنجليزية بتخطيط كامل من اليمين لليسار","أقسام للخدمات والخبرة والأدوات","وصف للصفحة وبيانات منظّمة لمحركات البحث","متجاوب من الموبايل إلى الكمبيوتر","كل طرق التواصل في مكان واحد"] }
 };
 
 (function () {
