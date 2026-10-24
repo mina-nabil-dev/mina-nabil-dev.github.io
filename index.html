@@ -3097,6 +3097,12 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
       <p>Official website for the startup I work with · Next.js · Live</p>
       <a href="https://technova-teal.vercel.app/" tabindex="-1" data-ar="الموقع">Website</a>
     </li>
+    <li data-key="technovabot" data-img="assets/technovabot_final.webp" data-glow="#5b6cff" data-chip="Live" data-kind="AI chatbot · Live" data-stack="Laravel · Gemini · Meta API"
+        data-sub-ar="بوت رد آلي بالعربي · واتساب وماسنجر وإنستجرام وتليجرام">
+      <strong>TechNova Bot</strong>
+      <p>AI customer-reply bot for WhatsApp, Messenger, Instagram &amp; Telegram · Live</p>
+      <a href="https://technova-bot.vercel.app/" tabindex="-1" data-ar="الموقع">Website</a>
+    </li>
     <li data-key="fady" data-img="assets/fady_final.webp" data-glow="#2545e8" data-chip="Live" data-kind="Designer portfolio" data-stack="Website · EN / AR"
         data-sub-ar="موقع شخصي لمصمم UI/UX · عربي وإنجليزي">
       <strong>Fady Issac</strong>
@@ -3107,7 +3113,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
         data-sub-ar="منصة توصيل محلية · Next.js و Supabase · منشور">
       <strong lang="ar" dir="rtl">طلبات نزلة عبيد</strong>
       <p>Local delivery marketplace · Next.js &amp; Supabase · Live</p>
-      <a href="https://talabat-nazlet-obaid.vercel.app/" tabindex="-1" data-ar="الموقع">Website</a>
+      <a href="https://nazlet-obaid.com/" tabindex="-1" data-ar="الموقع">Website</a>
     </li>
     <li data-key="keyframes" data-img="assets/keyframes_final.webp" data-glow="#b981ff" data-chip="Live" data-kind="Motion UI marketplace" data-stack="Next.js · Three.js · Postgres"
         data-sub-ar="متجر مكونات واجهات متحركة · Next.js و WebGL · منشور">
@@ -4126,7 +4132,7 @@ const APP_DATA = {
     stat: 'Local delivery · Nazlet Obaid',
     desc: 'A delivery marketplace for the village of Nazlet Obaid: customers order from several local shops — groceries, pharmacy and more — and everything arrives together in one bag, with cash on delivery.',
     features: ['Orders from several shops in one delivery', 'Nearby stores with live opening hours', 'Product and shop search', 'Delivery from 25 EGP, cash on delivery', 'Installable app with a download page', 'Arabic-first RTL interface'],
-    store: 'https://talabat-nazlet-obaid.vercel.app/'
+    store: 'https://nazlet-obaid.com/'
   },
   keyframes: {
     title: 'Keyframes UI',
@@ -4187,6 +4193,16 @@ const APP_DATA = {
     desc: 'The official website for Technova, the startup I work with: what the team builds, the products it has shipped (including the tutor platforms on this page), and how a project moves from idea to launch.',
     features: ['Showcase of real client products', 'Services: web, mobile, backend, UI/UX and QA', 'Industries: education, beauty, transportation', 'Four-step process: discover, design, develop, deploy', 'English and Arabic'],
     store: 'https://technova-teal.vercel.app/'
+  },
+  technovabot: {
+    title: 'TechNova Bot',
+    img: 'assets/technovabot_final.webp',
+    status: 'live',
+    platform: 'AI chatbot · Laravel & Gemini',
+    stat: 'WhatsApp · Messenger · Instagram · Telegram',
+    desc: 'A bot that answers a business’s customers in Egyptian Arabic within seconds on WhatsApp, Messenger, Instagram and Telegram. It replies from the owner’s own questions, answers and business details, and hands any conversation that needs a person to the team in one shared inbox.',
+    features: ['One bot across four messaging channels', 'Replies in Egyptian Arabic from the business’s own answers', 'Hand-off to a human with one shared inbox', 'Complaints and images go straight to staff', 'Meta Graph API and Telegram Bot API webhooks', 'Setup, monthly plans and pricing in EGP'],
+    store: 'https://technova-bot.vercel.app/'
   },
   fady: {
     title: 'Fady Issac',
@@ -4517,6 +4533,9 @@ const APPS_AR = {
   technova:{ platform:"موقع شركة · Next.js", stat:"شركة برمجيات ناشئة · المنيا وبني سويف",
     desc:"الموقع الرسمي لـ Technova، الشركة الناشئة التي أعمل معها: ما يبنيه الفريق، والمنتجات التي أطلقها (ومنها المنصات التعليمية في هذه الصفحة)، وكيف ينتقل المشروع من الفكرة إلى الإطلاق.",
     features:["عرض لمنتجات حقيقية لعملاء","الخدمات: ويب وموبايل وباك إند وتصميم واختبار","المجالات: التعليم والتجميل والنقل","أربع خطوات: اكتشاف، تصميم، تطوير، إطلاق","العربية والإنجليزية"] },
+  technovabot:{ platform:"بوت رد آلي · Laravel و Gemini", stat:"واتساب · ماسنجر · إنستجرام · تليجرام",
+    desc:"بوت يرد على عملاء أي نشاط باللهجة المصرية في ثوانٍ على واتساب وماسنجر وإنستجرام وتليجرام. يرد من أسئلة صاحب النشاط وإجاباته ومعلوماته، ويحوّل أي محادثة تحتاج إنسانًا إلى الفريق في صندوق رسائل واحد.",
+    features:["بوت واحد على أربع قنوات مراسلة","ردود باللهجة المصرية من إجابات النشاط نفسه","تحويل للموظف في صندوق رسائل مشترك","الشكاوى والصور تُحوَّل إلى الموظف مباشرة","ربط مباشر مع Meta Graph API و Telegram Bot API","تجهيز واشتراك شهري بأسعار بالجنيه"] },
   fady:{ platform:"موقع شخصي · عربي وإنجليزي", stat:"مصمم ومدرّب UI/UX · القاهرة",
     desc:"موقع شخصي لمصمم ومدرّب UI/UX من القاهرة: قصته وخدماته وخبراته وأدواته، ويُقرأ بالطريقة نفسها بالعربية والإنجليزية.",
     features:["العربية والإنجليزية بتخطيط كامل من اليمين لليسار","أقسام للخدمات والخبرة والأدوات","وصف للصفحة وبيانات منظّمة لمحركات البحث","متجاوب من الموبايل إلى الكمبيوتر","كل طرق التواصل في مكان واحد"] }
