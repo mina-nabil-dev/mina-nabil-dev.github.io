@@ -3000,7 +3000,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
     <p class="cine-eyebrow reveal">
       <b data-i18n="tag_1">Featured Work</b>
       <span aria-hidden="true">·</span>
-      <span data-i18n="section_note_1">14 apps &amp; platforms · 360° interactive view</span>
+      <span data-i18n="section_note_1">15 apps &amp; platforms · 360° interactive view</span>
     </p>
 
     <h2 class="stitle reveal" id="workTitle" data-i18n="stitle_1">
@@ -3020,7 +3020,7 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
   </div>
 
   <div class="cine-info wrap">
-    <p class="cine-count" aria-hidden="true"><em id="cineCurrentNum">01</em> / <span id="cineTotalNum">14</span></p>
+    <p class="cine-count" aria-hidden="true"><em id="cineCurrentNum">01</em> / <span id="cineTotalNum">15</span></p>
     <p class="cine-active-title" id="cineActiveTitle" lang="ar" dir="rtl">يلا عربي</p>
     <p class="cine-active-sub" id="cineActiveSub">Tutor LMS platform · Flutter &amp; Laravel · Live</p>
 
@@ -3043,6 +3043,12 @@ html[lang="ar"] .lang-toggle{ font-family:var(--mono); }
 
   <!-- Project list: the single source for the ring, and what screen readers and search engines read. -->
   <ul class="mh-sr" id="cineList">
+    <li data-key="rayyan" data-img="assets/rayyan_legal_final.webp" data-glow="#d4af37" data-chip="Website" data-kind="Legal &amp; financial consultancy" data-stack="Arabic RTL · Responsive website"
+        data-sub-ar="موقع للاستشارات القانونية والمالية · عربي ومتجاوب">
+      <strong lang="ar" dir="rtl">الريان للاستشارات</strong>
+      <p>Legal &amp; financial consultancy website · Live</p>
+      <a href="https://mohamy-now.vercel.app/" tabindex="-1" data-ar="الموقع">Website</a>
+    </li>
     <li data-key="yalla" data-img="assets/yalla_final.webp" data-glow="#f2711c" data-chip="Live" data-kind="Tutor LMS · Live" data-stack="Flutter · Laravel · BLoC"
         data-sub-ar="منصة تعليمية للمدرّسين · Flutter و Laravel · منشور">
       <strong lang="ar" dir="rtl">يلا عربي</strong>
@@ -4064,6 +4070,16 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 /* ---- App detail data ---- */
 const APP_DATA = {
+  rayyan: {
+    title: 'الريان للاستشارات القانونية والمالية',
+    img: 'assets/rayyan_legal_final.webp',
+    status: 'live',
+    platform: 'Legal & financial consultancy website · Arabic RTL',
+    stat: 'Responsive website · Egypt',
+    desc: 'A professional website for Al Rayyan Legal & Financial Consultancy, presenting Dr. Hany El-Rayyan’s legal and financial advisory services, academic background, areas of specialization, and consultation process. The site brings the service information and direct WhatsApp contact into one clear Arabic-first experience.',
+    features: ['Legal consultations and contract review', 'Financial advisory and corporate governance', 'Criminal law and international relations', 'Academic teaching, lectures and research support', 'Clear four-step consultation process', 'Direct WhatsApp contact and FAQ section'],
+    store: 'https://mohamy-now.vercel.app/'
+  },
   yalla: {
     title: 'يلا عربي',
     img: 'assets/yalla_final.webp',
@@ -4408,7 +4424,7 @@ const AR = {
   manifest_k_3:"منشور",     manifest_v_3:"5 على Google Play",
   manifest_k_4:"المعمارية", manifest_v_4:"Clean · BLoC/Cubit",
 
-  tag_1:"أعمال منشورة", section_note_1:"14 تطبيقًا ومنصة · عرض تفاعلي 360°",
+  tag_1:"أعمال منشورة", section_note_1:"15 مشروعًا ومنصة · عرض تفاعلي 360°",
   stitle_1:"بُنيت مرة، <em>وصُمّمت لكل عميل</em>",
   apps_lead_1:"منصة تعليمية واحدة، صُمّمت لخمسة مدرّسين باحتياجات مختلفة، ومعها أعمال الويب والموبايل حولها. اسحب الحلقة أو اضغط على أي بطاقة لاستعراضها.",
   cine_details_1:"عرض التفاصيل",
@@ -4494,6 +4510,9 @@ const AR = {
 
 /* Arabic copy for the project modal (mirrors the APP_DATA object above). */
 const APPS_AR = {
+  rayyan:{ platform:"موقع للاستشارات القانونية والمالية · عربي RTL", stat:"موقع متجاوب · مصر",
+    desc:"موقع احترافي للريان للاستشارات القانونية والمالية، يعرض خدمات الدكتور هاني الريان وخلفيته الأكاديمية ومجالات تخصصه وآلية طلب الاستشارة. يجمع الموقع معلومات الخدمات ووسيلة التواصل المباشر عبر واتساب في تجربة عربية واضحة.",
+    features:["الاستشارات القانونية ومراجعة العقود","الاستشارات المالية وحوكمة الشركات","القانون الجنائي والعلاقات الدولية","التدريس الأكاديمي والمحاضرات ودعم الأبحاث","آلية واضحة للاستشارة في أربع خطوات","تواصل مباشر عبر واتساب وقسم للأسئلة الشائعة"] },
   yalla:{ platform:"المنصة المشتركة · الإصدار A", stat:"مدرّس لغة عربية · نحو 130 طالبًا",
     desc:"النسخة الأساسية من منصتي، صُمّمت لمدرّس لغة عربية احتاج الدروس والامتحانات والاشتراكات في تطبيق واحد بدل مجموعات واتساب. واجهة Flutter وباك إند Laravel، ويستخدمها نحو 130 طالبًا.",
     features:["حضور بكود QR","النتائج والدرجات فورًا","متابعة الاشتراكات","إشعارات فورية"] },
